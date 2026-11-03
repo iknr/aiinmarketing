@@ -293,7 +293,9 @@ test('bad origin / referer rules', async () => {
     assert.strictEqual(r.status, 400, JSON.stringify(headers));
     assert.deepStrictEqual(r.body, bad);
   }
-  assert.strictEqual(calls.length, 0);
+  // no Unqualified stage in this mock: abuse records are skipped, never created as New leads, no task
+  assert.strictEqual(leadPosts(calls).length, 0);
+  assert(!calls.some((c) => c.url.endsWith('/api/v2/tasks')));
   assert.strictEqual((await call(handler, { body: uniq(11), headers: { origin: undefined, referer: 'https://www.aiinmarketing.in/x' } })).status, 200);
   assert.strictEqual((await call(handler, { body: uniq(12), headers: { origin: 'https://www.aiinmarketing.in' } })).status, 200);
   process.env.VERCEL_ENV = 'preview';
@@ -355,6 +357,220 @@ test('GET and other methods: 405 JSON', async () => {
     assert.deepStrictEqual(r.body, { success: false, data: { message: 'Method not allowed.' } });
   }
   assert.strictEqual(calls.length, 0);
+});
+
+
+// ------------------------------------------------------------ v2: failure task, abuse, IP/geo, IST, labels
+const taskCalls = (calls) => calls.filter((c) => c.url.endsWith('/api/v2/tasks'));
+const abuseLeads = (calls) => leadPosts(calls).filter((c) => String(c.body.title || '').startsWith('ABUSE: '));
+const STAGES_U = { items: [...STAGES.items, { id: 'lstg_unq', label: 'Unqualified', type: 'x', position: 9 }] };
+const abuseRoute = (extra = {}) => (url, init, calls) =>
+  url.endsWith('/leads/stages') ? resp(200, STAGES_U) : okRoute(extra)(url, init, calls);
+const setupAbuse = (extra = {}, env = {}) => setup({ env: { HEFFL_API_KEY: FAKE_KEY, ...env }, route: abuseRoute(extra) });
+
+test('A) 400 from Heffl -> one HIGH todo task "Lead capture failed", no webhook, visitor sees success', async () => {
+  const { handler, calls } = setupAbuse({ lead: () => resp(400, { code: 'BAD_REQUEST', message: 'Invalid mobile' }) }, { LEAD_WEBHOOK_URL: 'https://hook.test/x' });
+  const r = await call(handler);
+  assert.deepStrictEqual(r.body, SUCCESS);
+  const t = taskCalls(calls);
+  assert.strictEqual(t.length, 1);
+  assert.strictEqual(t[0].body.title, 'Lead capture failed: Asha Verma, +919876543210, magnet-syllabus');
+  assert.strictEqual(t[0].body.type, 'todo');
+  assert.strictEqual(t[0].body.priority, 'HIGH');
+  assert(Math.abs(Date.parse(t[0].body.dueDate) - Date.now()) < 5000, 'due today');
+  assert(!('entityId' in t[0].body));
+  assert(t[0].body.description.includes('asha@example.com'));
+  assert(!calls.some((c) => c.url === 'https://hook.test/x'));
+  assert(!logs.some(([, m]) => m.includes('"lead_crm_failed"')));
+});
+
+test('A) failure task also failing -> webhook + lead_crm_failed fallback kept', async () => {
+  const { handler, calls } = setupAbuse({ lead: () => resp(422, { code: 'X' }), task: () => resp(500, {}) }, { LEAD_WEBHOOK_URL: 'https://hook.test/x' });
+  const r = await call(handler);
+  assert.deepStrictEqual(r.body, SUCCESS);
+  assert.strictEqual(taskCalls(calls).length, 1);
+  assert.strictEqual(calls.filter((c) => c.url === 'https://hook.test/x').length, 1);
+  assert(logs.some(([l, m]) => l === 'error' && m.includes('"lead_crm_failed"')));
+});
+
+test('A) no failure task for unreachable Heffl, 401/403/429, 5xx', async () => {
+  for (const lead of [() => resp(401, {}), () => resp(403, {}), () => resp(429, {}, { 'ratelimit-reset': '30' }), () => resp(503, {})]) {
+    const { handler, calls } = setupAbuse({ lead });
+    await call(handler);
+    assert.strictEqual(taskCalls(calls).length, 0);
+    assert(logs.some(([, m]) => m.includes('"lead_crm_failed"')));
+  }
+  const s = setup({ env: { HEFFL_API_KEY: FAKE_KEY, HEFFL_TIMEOUT_MS: '300' }, route: (url, init) => (url.includes('heffl.com') ? 'hang' : okRoute()(url, init)) });
+  await call(s.handler);
+  assert.strictEqual(taskCalls(s.calls).length, 0);
+});
+
+test('B) repeat within 60 s -> Unqualified lead "ABUSE: repeat_within_60s", no task, same response', async () => {
+  const { handler, calls } = setupAbuse();
+  await call(handler);
+  const r = await call(handler, { headers: { 'x-real-ip': '203.0.113.9', 'x-vercel-ip-country': 'IN', 'x-vercel-ip-country-region': 'KL', 'x-vercel-ip-city': 'Kochi' } });
+  assert.deepStrictEqual(r.body, SUCCESS);
+  assert.strictEqual(r.status, 200);
+  const a = abuseLeads(calls);
+  assert.strictEqual(a.length, 1);
+  assert.strictEqual(a[0].body.stageId, 'lstg_unq');
+  assert.notStrictEqual(a[0].body.stageId, 'lstg_new');
+  assert.strictEqual(a[0].body.title, 'ABUSE: repeat_within_60s | IP 203.0.113.9, Kochi, KL, IN | magnet-syllabus');
+  assert.strictEqual(taskCalls(calls).length, 1, 'only the first, real lead has its follow-up task');
+});
+
+test('B) repeat abuse record falls back to contact-in-title when Heffl rejects the duplicate contact', async () => {
+  let n = 0;
+  const { handler, calls } = setupAbuse({ lead: () => (++n === 2 ? resp(409, { code: 'CONFLICT' }) : resp(200, { id: 'ld_' + n })) });
+  await call(handler);
+  await call(handler);
+  const a = abuseLeads(calls);
+  assert.strictEqual(a.length, 2, 'first attempt (duplicate) + retry without contact');
+  assert.deepStrictEqual(Object.keys(a[0].body).sort(), ['email', 'mobile', 'name', 'sourceId', 'stageId', 'title']);
+  assert.deepStrictEqual(Object.keys(a[1].body).sort(), ['name', 'sourceId', 'stageId', 'title']);
+  assert(a[1].body.title.startsWith('ABUSE: repeat_within_60s | asha@example.com +919876543210'));
+  assert.strictEqual(a[1].body.stageId, 'lstg_unq');
+});
+
+test('B) bad_origin and rate_limit records; responses unchanged (400 / 429)', async () => {
+  const { handler, calls } = setupAbuse();
+  const r1 = await call(handler, { headers: { origin: 'https://evil.example' } });
+  assert.strictEqual(r1.status, 400);
+  for (let i = 1; i <= 5; i++) await call(handler, { body: uniq(300 + i), ip: '7.7.7.7' });
+  const r2 = await call(handler, { body: uniq(306), ip: '7.7.7.7' });
+  assert.strictEqual(r2.status, 429);
+  assert.deepStrictEqual(r2.body, { success: false, data: { message: 'Too many submissions. Please try again in a few minutes.' } });
+  const titles = abuseLeads(calls).map((c) => c.body.title.split(' | ')[0]);
+  assert.deepStrictEqual(titles, ['ABUSE: bad_origin', 'ABUSE: rate_limit']);
+  for (const c of abuseLeads(calls)) assert.strictEqual(c.body.stageId, 'lstg_unq');
+  assert.strictEqual(taskCalls(calls).length, 5, 'tasks only for the 5 real leads');
+});
+
+test('B) bot_user_agent: flagged for automation UAs, silent success; normal browsers and missing UA are not', async () => {
+  const { handler, calls } = setupAbuse();
+  const uas = ['curl/8.4.0', 'python-requests/2.31', 'Mozilla/5.0 (X11; Linux x86_64) HeadlessChrome/120.0 Safari/537.36', 'Go-http-client/2.0'];
+  for (let i = 0; i < uas.length; i++) {
+    const r = await call(handler, { body: uniq(400 + i), headers: { 'user-agent': uas[i] } });
+    assert.deepStrictEqual(r.body, SUCCESS);
+  }
+  assert.strictEqual(abuseLeads(calls).length, 4);
+  assert(abuseLeads(calls).every((c) => c.body.title.startsWith('ABUSE: bot_user_agent')));
+  assert.strictEqual(taskCalls(calls).length, 0);
+  const ok = 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Version/17.0 Mobile/15E148 Safari/604.1';
+  await call(handler, { body: uniq(410), headers: { 'user-agent': ok } });
+  await call(handler, { body: uniq(411) });
+  assert.strictEqual(abuseLeads(calls).length, 4);
+  assert.strictEqual(taskCalls(calls).length, 2);
+});
+
+test('B) abuse records: capped at 20 per hour (then only logged), invalid input skipped, no key -> no Heffl call', async () => {
+  const { handler, calls } = setupAbuse();
+  for (let i = 0; i < 25; i++) await call(handler, { body: uniq(500 + i), headers: { origin: 'https://evil.example' } });
+  assert.strictEqual(abuseLeads(calls).length, 20);
+  assert(logs.some(([, m]) => m.includes('abuse_record_skipped') && m.includes('hourly cap')));
+  const before = calls.length;
+  for (const patch of [{ 'form_fields[name]': 'A' }, { 'form_fields[phone]': '123' }, { 'form_fields[email]': 'nope' }]) {
+    const r = await call(handler, { body: { ...GOOD, ...patch }, headers: { origin: 'https://evil.example' } });
+    assert.strictEqual(r.status, 400);
+  }
+  assert.strictEqual(calls.length, before, 'invalid input never reaches Heffl');
+  const s = setup({ route: okRoute() });
+  await call(s.handler, { headers: { origin: 'https://evil.example' } });
+  assert.strictEqual(s.calls.length, 0);
+});
+
+test('B) no Unqualified stage in Heffl: nothing created (never falls back to New)', async () => {
+  const { handler, calls } = setup({ env: { HEFFL_API_KEY: FAKE_KEY }, route: okRoute() });
+  await call(handler, { headers: { origin: 'https://evil.example' } });
+  assert.strictEqual(leadPosts(calls).length, 0);
+  assert(logs.some(([, m]) => m.includes('abuse_record_skipped')));
+});
+
+test('C) IP/geo capture: task text, structured log, never in the response', async () => {
+  const { handler, calls } = setupAbuse({ lead: () => resp(500, {}) });
+  const h = { 'x-real-ip': '203.0.113.7', 'x-vercel-ip-country': 'in', 'x-vercel-ip-country-region': 'KL', 'x-vercel-ip-city': 'Thiruvananthapuram%20North' };
+  const r = await call(handler, { headers: h });
+  assert(!JSON.stringify(r).includes('203.0.113.7'));
+  const f = JSON.parse(logs.find(([, m]) => m.includes('"lead_crm_failed"'))[1]);
+  assert.deepStrictEqual([f.ip, f.country, f.region, f.city, f.abuse], ['203.0.113.7', 'IN', 'KL', 'Thiruvananthapuram North', null]);
+  assert.strictEqual(f.lead.ip, '203.0.113.7');
+  const ok = setupAbuse();
+  await call(ok.handler, { headers: h });
+  const d = taskCalls(ok.calls)[0].body.description;
+  assert(d.includes('IP address: 203.0.113.7') && d.includes('Approximate location: Thiruvananthapuram North, KL, IN'));
+  // custom fields mode carries them too
+  const cf = setupAbuse({ lead: () => resp(200, { id: 'ld_9', customFields: { a: 1 } }) }, { HEFFL_USE_CUSTOM_FIELDS: 'true' });
+  await call(cf.handler, { headers: h });
+  const b = leadPosts(cf.calls)[0].body;
+  assert.deepStrictEqual([b.cf_ip_address, b.cf_country, b.cf_region, b.cf_city], ['203.0.113.7', 'IN', 'KL', 'Thiruvananthapuram North']);
+});
+
+test('C) IP header parsing: order, hops, IPv6, garbage, missing', async () => {
+  const seen = async (headers, socket) => {
+    const { handler } = setup({ env: { HEFFL_API_KEY: FAKE_KEY }, route: okRoute() });
+    const req = { method: 'POST', body: GOOD, headers: { origin: 'https://aiinmarketing.in', 'x-vercel-ip-city': '%E0%A4', ...headers }, socket };
+    // run twice: the abuse log of a rejected-origin copy exposes the parsed ip without any Heffl state
+    logs.length = 0;
+    await new Promise((resolve) => handler({ ...req, headers: { ...req.headers, origin: 'https://evil.example' } }, { setHeader() {}, status() { return this; }, json: resolve }));
+    return JSON.parse(logs.find(([, m]) => m.includes('abuse_flagged'))[1]);
+  };
+  assert.strictEqual((await seen({ 'x-real-ip': '1.1.1.1', 'x-forwarded-for': '2.2.2.2' })).ip, '1.1.1.1', 'x-real-ip first');
+  assert.strictEqual((await seen({ 'x-forwarded-for': ' 2.2.2.2 , 3.3.3.3, 4.4.4.4' })).ip, '2.2.2.2', 'first of several hops, trimmed');
+  assert.strictEqual((await seen({ 'x-real-ip': '2001:db8::1' })).ip, '2001:db8::1', 'IPv6');
+  assert.strictEqual((await seen({ 'x-forwarded-for': '2001:db8::ff00:42:8329, 1.2.3.4' })).ip, '2001:db8::ff00:42:8329');
+  assert.strictEqual((await seen({ 'x-real-ip': 'garbage', 'x-forwarded-for': '5.5.5.5' })).ip, '5.5.5.5', 'invalid x-real-ip falls through');
+  assert.strictEqual((await seen({ 'x-real-ip': '999.1.1.1', 'x-forwarded-for': 'not-an-ip, 6.6.6.6' })).ip, '', 'garbage only');
+  assert.strictEqual((await seen({ 'x-real-ip': '1'.repeat(50) })).ip, '', 'over 45 chars');
+  assert.strictEqual((await seen({ 'x-forwarded-for': '<script>alert(1)</script>' })).ip, '');
+  assert.strictEqual((await seen({})).ip, '', 'missing headers');
+  assert.strictEqual((await seen({}, { remoteAddress: '9.9.9.9' })).ip, '9.9.9.9', 'socket fallback');
+  const g = await seen({ 'x-vercel-ip-country': 'IND', 'x-vercel-ip-country-region': 'K<L>' });
+  assert.deepStrictEqual([g.country, g.region, g.city], ['', 'KL', '%E0%A4'], 'bad country dropped, region sanitised, undecodable city kept raw');
+});
+
+test('D) submission time is shown in IST (task text), ISO UTC stays in logs', async () => {
+  const realNow = Date.now;
+  Date.now = () => Date.parse('2026-11-03T20:45:00Z'); // 4 Nov 2026, 2:15 AM IST
+  try {
+    const ok = setupAbuse();
+    await call(ok.handler);
+    assert(taskCalls(ok.calls)[0].body.description.includes('Submitted: 4 Nov 2026, 2:15 AM IST'));
+    const bad = setupAbuse({ lead: () => resp(500, {}) });
+    await call(bad.handler);
+    assert.strictEqual(JSON.parse(logs.find(([, m]) => m.includes('"lead_crm_failed"'))[1]).lead.receivedAt, '2026-11-03T20:45:00.000Z');
+    Date.now = () => Date.parse('2026-12-31T18:30:00Z'); // 1 Jan 2027, 12:00 AM IST
+    const ny = setupAbuse();
+    await call(ny.handler, { body: uniq(600) });
+    assert(taskCalls(ny.calls)[0].body.description.includes('Submitted: 1 Jan 2027, 12:00 AM IST'));
+    Date.now = () => Date.parse('2026-11-04T07:30:00Z'); // 1:00 PM IST
+    const pm = setupAbuse();
+    await call(pm.handler, { body: uniq(601) });
+    assert(taskCalls(pm.calls)[0].body.description.includes('Submitted: 4 Nov 2026, 1:00 PM IST'));
+  } finally {
+    Date.now = realNow;
+  }
+});
+
+test('D) friendly labels in task title and text; unknown names fall back to the raw value', async () => {
+  const cases = [
+    [{ form_name: 'dm_by_adsmentor_apply', 'form_fields[source]': undefined }, 'Apply form'],
+    [{ form_name: 'magnet_syllabus', 'form_fields[source]': undefined }, 'Free guide: 12-week syllabus'],
+    [{ form_name: 'magnet_checklist', 'form_fields[source]': undefined }, 'Free guide: 5-question course checklist'],
+    [{ form_name: 'magnet_ad_account', 'form_fields[source]': undefined }, 'Free guide: ad account ownership checklist'],
+    [{ form_name: 'magnet_brochure', 'form_fields[source]': undefined }, 'Brochure download'],
+    [{ form_name: 'magnet_syllabus', 'form_fields[source]': 'magnet-rtcros-prompt-guide' }, 'Free guide: RTCROS prompt guide'],
+    [{ form_name: 'x', 'form_fields[source]': 'magnet-meta-mcp-cli-sop' }, 'Free guide: Meta Ads MCP and CLI SOP'],
+    [{ form_name: 'mystery_form', 'form_fields[source]': undefined }, 'mystery_form'],
+    [{ form_name: 'mystery_form', 'form_fields[source]': 'new-source' }, 'new-source'],
+  ];
+  let n = 700;
+  for (const [patch, label] of cases) {
+    const { handler, calls } = setupAbuse();
+    await call(handler, { body: { ...uniq(n++), ...patch } });
+    const t = taskCalls(calls)[0].body;
+    assert.strictEqual(t.title, `Follow up: Asha Verma (working professional, via ${label})`);
+    assert(t.description.includes(`Form: ${label}`));
+  }
 });
 
 (async () => {

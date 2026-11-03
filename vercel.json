@@ -76,5 +76,5 @@
       "destination": "/blogs/:slug",
       "permanent": true
     }
-  ],
+  ]
 }

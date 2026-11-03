@@ -227,3 +227,6 @@ html, body { overflow-x: clip; }
 .aimb-tcard { height: 100%; }
 .aimb-tlogos { min-height: 64px; align-content: flex-start; }
 .aimb-tli { margin-top: auto; display: inline-block; padding-top: 4px; }
+
+/* featured tag on the blog index */
+.aimb-featured-tag { display: inline-block; margin-right: 8px; padding: 3px 10px; font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #ffd43b; background: #111827; border-radius: 999px; vertical-align: middle; }

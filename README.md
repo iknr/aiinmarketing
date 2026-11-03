@@ -24,10 +24,10 @@ Set `LEAD_WEBHOOK_URL` in the Vercel project settings to forward form submission
 
 The login page never checks or stores credentials; every attempt shows the standard error.
 
-## Analytics: Google Tag Manager GTM-M3H6S33J
+## Analytics: Google Tag Manager GTM-NPKP66BD
 
 - Every HTML page must contain the GTM snippet (loader in `<head>`, noscript iframe after `<body>`).
-- `scripts/inject-gtm.js` enforces this (it is NOT wired as a Vercel `buildCommand`: that makes Vercel require a `public` output dir and fails the deploy, so run it by hand and commit the result).
-- After adding any new `.html` page (blog posts, landing pages), always run `node scripts/inject-gtm.js` and commit the result.
+- `scripts/inject-gtm.js` enforces this automatically at deploy time: `vercel.json` sets `"buildCommand": "node scripts/inject-gtm.js"` and `"outputDirectory": "."`, so any new `.html` page gets the snippet during the Vercel build.
+- Still run `node scripts/inject-gtm.js` locally after adding a page and commit the result, so the repository files match what is served.
 - Never remove the snippet. Do not add a second GTM or duplicate GA4/Clarity tags in page code (GA4, Microsoft Clarity and Search Console are configured inside GTM).
 - Events pushed to the dataLayer (by `wp-content/plugins/elementor/assets/js/aim-track.js`): `apply_click`, `lead_submit`, `guide_download`, `buy_click`.

@@ -3,7 +3,7 @@
  * Adds to EVERY .html file in the repo (any folder, including future pages): dataLayer/gtag stub + GTM loader in <head>, the GTM noscript iframe after <body>, and the event helper aim-track.js. Never fails the build. */
 const fs = require('fs');
 const path = require('path');
-const GTM_ID = 'GTM-M3H6S33J';
+const GTM_ID = 'GTM-NPKP66BD';
 const ROOT = path.resolve(__dirname, '..');
 const SKIP = new Set(['node_modules', '.git', '.vercel', '.next']);
 const HEAD = `

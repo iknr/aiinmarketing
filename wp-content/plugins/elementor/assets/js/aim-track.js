@@ -1,5 +1,5 @@
 /*! AIM event helper: pushes conversion events to the GTM dataLayer.
- *  Events: lead_submit (apply / contact forms), guide_download (free guides), apply_click, buy_click (Amazon). */
+ *  Events: lead_submit (apply / contact forms), guide_download (free guides), apply_click, buy_click (Amazon), track_click (three-track links). */
 (function () {
   'use strict';
   window.dataLayer = window.dataLayer || [];
@@ -7,6 +7,8 @@
   document.addEventListener('click', function (e) {
     var a = e.target.closest && e.target.closest('a');
     if (!a) return;
+    var tk = a.getAttribute('data-track');
+    if (tk) push({ event: 'track_click', track: tk, location: a.getAttribute('data-track-loc') || '', page_path: location.pathname });
     var href = a.getAttribute('href') || '';
     if (href.indexOf('#elementor-action') === 0) push({ event: 'apply_click', link_text: (a.textContent || '').trim().slice(0, 60), page_path: location.pathname });
     else if (/amazon\./i.test(href)) push({ event: 'buy_click', link_url: href, page_path: location.pathname });

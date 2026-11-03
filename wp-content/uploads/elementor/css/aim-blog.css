@@ -286,3 +286,4 @@ a.aimb-pill:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px;
 .aimb-aphoto--ring { border: 0; border-radius: 0; background: transparent; object-fit: contain; box-shadow: none; }
 .aimb-aband .aimb-aphoto--ring.aimb-aphoto--xl { box-shadow: none; width: 190px; height: 190px; }
 @media (max-width: 640px) { .aimb-aband .aimb-aphoto--ring.aimb-aphoto--xl { width: 150px; height: 150px; } }
+.aimb-pubcard--media { grid-template-columns: minmax(0, 1fr); margin-top: 14px; }

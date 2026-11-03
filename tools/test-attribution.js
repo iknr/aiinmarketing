@@ -68,7 +68,7 @@ function expectAttr(b, { attribution = 'last', ref = 'www.google.com' } = {}) {
   assert.strictEqual(b.get('form_fields[utm_content]'), 'ad1');
   assert.strictEqual(b.get('form_fields[click_id]'), 'gclid:abc123');
   assert.strictEqual(b.get('form_fields[referrer_host]'), ref);
-  assert.strictEqual(b.get('form_fields[landing_path]'), '/about.html');
+  assert(/^\/about(\.html)?$/.test(b.get('form_fields[landing_path]'))); // live site serves clean URLs
   assert.strictEqual(b.get('form_fields[attribution]'), attribution);
 }
 
@@ -113,7 +113,7 @@ test('first touch is used when the last touch has no campaign data; direct other
   assert.strictEqual(b2.get('form_fields[attribution]'), 'direct');
   assert.strictEqual(b2.get('form_fields[utm_source]'), '');
   assert.strictEqual(b2.get('form_fields[click_id]'), '');
-  assert.strictEqual(b2.get('form_fields[landing_path]'), '/index.html');
+  assert(/^\/(index(\.html)?)?$/.test(b2.get('form_fields[landing_path]')));
   assert.deepStrictEqual(d.problems.concat(problems), []);
   await d.ctx.close();
 });

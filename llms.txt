@@ -22,6 +22,7 @@ AIM teaches marketing by doing: learners build a live WordPress site, connect Cl
 - [About AIM](https://aiinmarketing.in/about): Who runs AIM, why it exists and who it is for.
 - [Blog index](https://aiinmarketing.in/blogs): All guides, newest first.
 - [Privacy policy](https://aiinmarketing.in/privacy-policy): How AIM collects, uses and protects personal information.
+- [Terms and refund policy](https://aiinmarketing.in/terms): Flat ₹5,999 fee, pay after the onboarding call, 7-day money-back guarantee, no job guarantee.
 
 ## Guides
 - [A Prompt Framework for Marketers: RTCROS, With Examples You Can Copy](https://aiinmarketing.in/blogs/rtcros-prompt-framework-for-marketers): Learn RTCROS, a six-part prompt framework (Role, Task, Context, Rules, Output format, Style) with marketing examples, plus a free branded PDF guide.

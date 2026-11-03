@@ -553,7 +553,7 @@ Imagine a marketer called Meera who joins a small D2C brand. Before AI, her week
 - **Give examples.** Show AI two or three pieces you like and ask it to match the style. 
 - **Work in small steps.** Ask for an outline, approve it, then ask for the draft. You stay in control and waste less time. 
 - **Check facts and numbers.** AI can sound sure and be wrong. Always verify claims, prices and data before they go public. 
-- **Keep a prompt library.** When something works, save it. Over a few months this becomes your own toolkit, and it is one of the most valuable assets you build.  
+- **Keep a prompt library.** When something works, save it. Over a few months this becomes your own toolkit, and it is one of the most valuable assets you build. Our [RTCROS prompt framework](https://aiinmarketing.in/blogs/rtcros-prompt-framework-for-marketers) gives every saved prompt a simple structure.  
 
 ## Where vibe marketing helps most 
  
@@ -736,7 +736,7 @@ Platforms suggest changes and sometimes auto-apply them, such as broader matchin
 - List your conversion events and ask: does each one represent real business value? 
 - Send back qualified leads, purchases or revenue, not only clicks and form fills. 
 - Plan creative as a test with clearly different angles, each with a written hypothesis. 
-- Let AI help you inspect the account for waste, and approve every change yourself. 
+- Let AI help you inspect the account for waste, and approve every change yourself. Our [Meta Ads MCP and CLI usage SOP](https://aiinmarketing.in/blogs/meta-ads-mcp-and-cli-sop) shows a safe way to do this with Meta's official tools. 
 - Set guardrails: budget caps, exclusions and brand rules.  
 
 This is what the ads module and the [Performance and Growth specialisation](https://aiinmarketing.in/#tracks) at AIM are built around: working inside the ad platforms with AI as your assistant and you in charge of the result. 
@@ -950,7 +950,7 @@ A regular chatbot answers a question. An agent takes a goal, breaks it into step
 - **Choose one boring, repeatable task.** Boring tasks are the best teachers. 
 - **Write the steps as if for a new colleague.** What does done look like? Where does the data live? 
 - **Give read-only access first.** Let it look before it can change anything. 
-- **Add an approval step.** Anything that spends money, publishes or messages a customer should wait for your yes. 
+- **Add an approval step.** Anything that spends money, publishes or messages a customer should wait for your yes. For Meta ads, our [Meta Ads MCP and CLI usage SOP](https://aiinmarketing.in/blogs/meta-ads-mcp-and-cli-sop) shows one way to set that up. 
 - **Review the first ten runs.** Note mistakes, improve instructions and only then widen the task.  
 
 ## What can go wrong, and how to prevent it 
@@ -1021,7 +1021,7 @@ Ask AI why conversions dropped and you get a fluent, plausible answer. It may re
 
 ## 5. Automation that spends money on its own 
 
-Agents and rules can scale or pause campaigns. Without limits, a small error becomes an expensive one. *Easy fix:* budget caps, approval steps for spend changes and logs you actually read. 
+Agents and rules can scale or pause campaigns. Without limits, a small error becomes an expensive one. *Easy fix:* budget caps, approval steps for spend changes and logs you actually read.  For a concrete setup with Meta's official tools, see our [Meta Ads MCP and CLI usage SOP](https://aiinmarketing.in/blogs/meta-ads-mcp-and-cli-sop).
 
 ## 6. Skills that quietly fade 
 
@@ -1093,3 +1093,428 @@ Yes. Platforms judge the ad, not who wrote it. Review every ad against policy be
 ### How do I avoid sameness in AI ad copy?
 
 Add real customer language, specific proof and different angles, then edit in the brand voice.
+
+---
+
+# A Prompt Framework for Marketers: RTCROS, With Examples You Can Copy
+
+URL: https://aiinmarketing.in/blogs/rtcros-prompt-framework-for-marketers
+Author: Kailas Nath R
+Published: 2026-11-04
+Summary: Learn RTCROS, a six-part prompt framework (Role, Task, Context, Rules, Output format, Style) with marketing examples, plus a free branded PDF guide.
+
+Most marketers do not get poor results from AI because the tool is weak. They get them because the prompt reads like a text to a friend: "write an ad for my class". This guide gives you a six-part prompt framework for marketers, RTCROS, with copy-ready examples for ads, SEO, WhatsApp follow-ups and weekly reports.
+
+**Key takeaways**
+
+- RTCROS stands for Role, Task, Context, Rules, Output format and Style. It is a checklist you run before you press enter, not a magic formula.
+- RTCROS is our own working checklist, not an industry standard. Other frameworks, such as CO-STAR from GovTech Singapore, cover similar ground, and the guide shows how they map to each other.
+- Anthropic's own prompting guide gives a simple test: show your prompt to a colleague with no background and see if they would be confused. If they would be, the AI will be too.
+- Four ready prompts are included for Meta ad review, an SEO brief, a WhatsApp follow-up and a weekly numbers read, each with the six parts labelled.
+- A free 3-page PDF with the template, the examples and a checklist is below, branded for AIM by Adsmentor.
+
+## Why most prompts disappoint
+
+Picture a new intern on day one. You say, "Write an ad for my yoga class." They would have questions: for whom, where will it run, what is the offer, what is the budget, what can we not say? An AI tool cannot ask those questions unless you invite it to, so it guesses, and guesses sound generic.
+
+Anthropic, the company behind Claude, describes a useful check in its [prompting best practices](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices). Its "key test" is to show your prompt to a colleague with minimal context on the task and ask them to follow it. In the guide's words, if they would be confused, Claude will be too. That one test explains most weak AI output in marketing.
+
+A framework turns the test into a habit. You do not need to memorise theory. You need six boxes you fill in every time.
+
+## RTCROS in one minute
+
+RTCROS is the checklist we teach at AIM. To be clear about its status: it is not a published standard, and it is not tied to one tool. You will meet other acronyms with similar letters online, and the order of the letters matters far less than covering the six jobs.
+
+| Letter | Question it answers | Weak version | Stronger version |
+|---|---|---|---|
+| **R**ole | Who should the AI act as? | (nothing) | "You are a senior performance marketer who coaches beginners." |
+| **T**ask | What exactly is the job? | "Help with my ad" | "Review the Meta ad below and find its three weakest points." |
+| **C**ontext | What does it need to know that it cannot guess? | (nothing) | "Weekend yoga workshop, Pune, working women 28 to 40, goal 50 sign-ups." |
+| **R**ules | What must it do, and never do? | (nothing) | "Do not invent statistics. Flag any claim that could break ad policy." |
+| **O**utput format | What shape should the answer take? | "Give me ideas" | "A table: issue, why it matters, one fix." |
+| **S**tyle | How should it sound? | (nothing) | "Plain English, warm, under 150 words, no jargon." |
+
+Read down the "weak" column and you will see most of the prompts you have written so far. The good news is that the fix costs about two minutes.
+
+## The six parts, one by one
+
+### Role: point the AI at the right kind of thinking
+
+A role is a short sentence that focuses the answer. Anthropic's guide says setting a role in the system prompt focuses the model's behaviour and tone, and that even a single sentence makes a difference. For marketers, think of the person you would hire for the job: a copywriter for Indian D2C brands, an SEO editor, a CRM specialist. Name the helper and, if it matters, who the answer is for: "explain to a shop owner with no marketing background".
+
+### Task: one verb, one deliverable
+
+Good tasks start with a verb and name the thing you will receive: "Rewrite", "Review", "List", "Compare", "Draft three versions". If you want two jobs done, make two prompts or number the steps. A prompt that asks for strategy, copy and a report in one go gets a little of each and not enough of any.
+
+### Context: the facts it cannot guess
+
+Context is where your knowledge enters. Include the business, the audience, the goal, the numbers you already have, the offer, the channel and what you tried before. Paste real text, for example last month's best ad, instead of describing it. Leave out private data you should not share, such as customer phone numbers.
+
+### Rules: fences, not decoration
+
+Rules are the do and do-not list. Useful rules for marketers include: use only the facts I gave you, do not invent numbers or testimonials, keep claims inside advertising policy, avoid words I have banned, ask me a question if something is missing. A rule that says "ask me before guessing" prevents many confident mistakes.
+
+### Output format: decide the shape before you read it
+
+Ask for the format you will actually use: a table you can paste into a sheet, five options numbered, a headline under 40 characters, a checklist. If the output will go into another tool, say so. Anthropic's guide also suggests using XML-style tags such as <context> and <input> when a prompt mixes instructions with pasted material, because wrapping each type of content in its own tag reduces misinterpretation.
+
+### Style: voice and reading level
+
+Style is the sound of the answer: warm or formal, plain English or Hinglish, short sentences, no jargon, the brand's voice. Pasting two or three samples of your brand's writing and saying "match this voice" is more reliable than adjectives alone. The same guide notes that a few well-crafted examples, known as few-shot or multishot prompting, improve accuracy and consistency.
+
+## One prompt, built step by step
+
+Here is the idea in action. The scenario is an example brief we made up for teaching, not a real client: a weekend yoga workshop in Pune for working women.
+
+**Version 1:** "Write a Facebook ad for my yoga workshop."
+
+The result is predictable: "Unlock your inner peace!" Now add the six parts.
+
+> **Role:** You are a senior performance copywriter who writes Meta ads for Indian small businesses.
+>
+> **Task:** Write three versions of primary text for a Facebook and Instagram feed ad.
+>
+> **Context:** A two-day weekend yoga workshop in Pune, fee ₹499, for working women aged 28 to 40 who feel stiff after desk jobs. Goal: 50 sign-ups in ten days. Trainer has taught for 8 years.
+>
+> **Rules:** Use only the facts above. Do not promise medical results. Do not use the words "miracle" or "cure". If a fact is missing, ask me before guessing.
+>
+> **Output format:** Three versions, each with a headline under 40 characters and primary text under 125 characters, in a table.
+>
+> **Style:** Warm, plain English, speak to one woman, no jargon.
+
+The second prompt is longer, but you will spend less time editing, and the answer will contain things you can check against your facts. Notice the rule "if a fact is missing, ask me". It turns the AI from a guesser into a collaborator.
+
+## Four copy-ready prompts for everyday marketing work
+
+Swap the details in brackets for your own. Each one carries all six parts. Read the answers critically: the framework improves the first draft, it does not replace your judgement.
+
+### 1. Review a Meta ad before it goes live
+
+> **Role:** You are a paid social reviewer who checks ads the way a strict client would.
+>
+> **Task:** Review the ad copy below and list the three weakest points.
+>
+> **Context:** [Business, audience, offer, goal, budget]. The ad copy is inside the tags: <ad>paste copy here</ad>.
+>
+> **Rules:** Do not rewrite the ad. Ask me one question per weak point. Flag any claim that could break Meta ad policy.
+>
+> **Output format:** A table with three columns: weak point, why it matters, question for me.
+>
+> **Style:** Direct and kind, under 150 words.
+
+### 2. Draft an SEO content brief
+
+> **Role:** You are an SEO editor who writes briefs for freelance writers.
+>
+> **Task:** Create a content brief for a blog post targeting the phrase [keyword].
+>
+> **Context:** The reader is [who], the site sells [what], and the post should lead to [action]. Our three closest competitors' headings are inside <competitors>paste headings here</competitors>.
+>
+> **Rules:** Do not invent statistics or studies. Suggest sections that answer real questions, not stuffing. Mark anything that needs a source.
+>
+> **Output format:** Working title, search intent in one line, an outline with H2 headings, five FAQs, a list of facts that need a source.
+>
+> **Style:** Plain English a junior writer can follow.
+
+### 3. Write a WhatsApp follow-up for new leads
+
+> **Role:** You are a friendly CRM specialist for a small business.
+>
+> **Task:** Draft a three-message WhatsApp follow-up for someone who enquired and has not replied.
+>
+> **Context:** [Product or service], enquiry came from [source], typical question is [question]. Messages go out on day 1, day 3 and day 7.
+>
+> **Rules:** No pressure language. Do not mention discounts I have not approved. Each message must give one useful fact and one easy next step.
+>
+> **Output format:** Three numbered messages, each under 50 words.
+>
+> **Style:** Warm and conversational, English with simple Hindi words only if I ask.
+
+### 4. Read your weekly numbers
+
+> **Role:** You are a marketing analyst who explains numbers to non-experts.
+>
+> **Task:** Read the table below and tell me what changed this week and what to check first.
+>
+> **Context:** Goal is [goal]. Spend, clicks and leads for this week and last week are inside <data>paste table here</data>.
+>
+> **Rules:** Use only the numbers provided. Separate what the data shows from what you are guessing. Suggest checks, not conclusions.
+>
+> **Output format:** Three bullets for what changed, then a "check first" list of three items.
+>
+> **Style:** Short sentences, no jargon.
+
+For a deeper example of RTCROS applied to a high-stakes setting, see our [Meta Ads MCP and CLI usage SOP](https://aiinmarketing.in/blogs/meta-ads-mcp-and-cli-sop), where the Rules section is what keeps an AI agent from spending money without approval.
+
+## Other prompt structures worth knowing
+
+RTCROS is one of several ways to organise a prompt. Knowing a second one helps you see what each leaves out.
+
+**CO-STAR.** GovTech Singapore's guidance, described on the [tech.gov.sg](https://www.tech.gov.sg/media/technews/mastering-the-art-of-prompt-engineering-with-empower) site (3 April 2025), lists six components: Context, Objective, Style, Tone, Audience and Response. GovTech says its officers follow the framework in its Prompt Engineering Playbook. Here is how the two map:
+
+| RTCROS | CO-STAR | Difference worth noticing |
+|---|---|---|
+| Role | (not a separate part) | RTCROS names who the AI is. |
+| Task | Objective | Same job: say what you want. |
+| Context | Context | Same job: background the AI cannot guess. |
+| Rules | (not a separate part) | RTCROS adds do and do-not fences. |
+| Output format | Response | Same job: define the shape of the answer. |
+| Style | Style and Tone | CO-STAR splits voice into two. |
+| (not a separate part) | Audience | In RTCROS, put the audience inside Context or Role. |
+
+If you write for different readers all day, borrow CO-STAR's Audience line and add it to your Context. If you run an agent that can take actions, keep RTCROS's Rules.
+
+**Examples, tags and steps.** Three techniques from Anthropic's guide work with any framework. Give a few examples of the voice or format you want. Wrap pasted material in tags so the AI can tell your instructions from your data. And split a big job into stages, where the output of one prompt becomes the input of the next. Anthropic's prompt engineering overview lists "clarity and examples", "XML structuring", "role prompting", "thinking" and "prompt chaining" among its techniques.
+
+Our view: pick one framework, use it for two weeks and keep a note of which prompts worked. A framework you use beats a better one you forget.
+
+## Common mistakes and quick fixes
+
+- **Pasting too little context.** Fix: paste the real offer, the real audience and one example of work you like.
+- **Asking for everything at once.** Fix: break it into steps and approve each one.
+- **No rules.** Fix: add "use only the facts above" and "ask me if something is missing".
+- **Accepting the first answer.** Fix: ask "what is the weakest part of this answer?" and fix it.
+- **Believing confident numbers.** Fix: ask for the source or say "mark anything you cannot support". Check facts before anything is published.
+- **Sharing private data.** Fix: remove names, phone numbers and client details first. Our post on [AI advertising mistakes](https://aiinmarketing.in/blogs/ai-advertising-problems-nobody-posts-about) covers data slips and unchecked claims in more detail.
+
+## What to do this week
+
+1. Pick one task you repeat weekly, such as ad review or a report summary.
+2. Write it as an RTCROS prompt and save it in a notes app or sheet.
+3. Run it on a real example and mark what you had to fix by hand.
+4. Turn each fix into a Rule or a Context line, then run it again.
+5. After a week you will have one reliable prompt. After a month you will have a library. That is the habit behind [vibe marketing](https://aiinmarketing.in/blogs/what-is-vibe-marketing), and the first step before you hand repeat work to an [AI agent](https://aiinmarketing.in/blogs/agentic-ai-marketing-work-competitors-hand-to-agents).
+
+If you are a fresher, keep your best three prompts and their before-and-after outputs in a simple portfolio page. It shows an interviewer how you think, which a certificate cannot.
+
+## How we teach prompting at AIM
+
+In AIM we do not teach prompts as tricks to memorise. Learners use the same checklist on real tasks across the modules: SEO briefs, social content, automations and ad analysis, and trainers review the work and point out weak prompts. We have not tested RTCROS in a controlled study, so we describe it as a practical habit that works for us, not as a proven method. If you are comparing courses, our guide to [questions to ask before paying for an AI marketing course](https://aiinmarketing.in/blogs/ai-in-marketing-course-what-to-look-for) is a good starting list.
+
+## Frequently asked questions
+
+### What is RTCROS in prompt writing?
+
+RTCROS is a six-part checklist for writing prompts: Role, Task, Context, Rules, Output format and Style. It is a practical habit we teach at AIM, not an official industry standard.
+
+### Is RTCROS better than CO-STAR?
+
+Neither is proven better. CO-STAR, described by GovTech Singapore, adds an Audience part and splits style and tone. RTCROS adds a Role and a Rules part. Pick one, use it for two weeks and keep what works.
+
+### Can I use RTCROS with ChatGPT, Claude and Gemini?
+
+Yes. The six parts are plain language, so they work in any chat-based AI tool. Test each tool with the same prompt because outputs differ.
+
+### How long should a prompt be?
+
+As long as it needs to pass the colleague test: would someone with no background understand the job? For most marketing tasks that is six short lines, plus any pasted material.
+
+### Do I need to know coding to write good prompts?
+
+No. You need clear thinking about the task, the audience and the rules. Basic marketing knowledge helps you judge whether the answer is good.
+
+## Sources and how we checked them
+
+Every source below was opened for this guide. Where a figure or quotation is used, it is attributed in the text.
+
+- [Prompting best practices](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices), Anthropic documentation, read 3 November 2026. Used for the colleague test, role, examples and XML tag guidance.
+- [Prompt engineering overview](https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview), Anthropic documentation, read 3 November 2026. Used for the list of techniques.
+- [Mastering the art of prompt engineering with Empower](https://www.tech.gov.sg/media/technews/mastering-the-art-of-prompt-engineering-with-empower), GovTech Singapore, 3 April 2025. Used for the six CO-STAR components.
+
+**How we checked this.** The RTCROS framework itself is our own teaching checklist, so no outside source supports it as a standard. We searched for it by name and found only promotional pages that use a similar acronym with different letters, so we make no claim about its origin. The four marketing prompts are examples we wrote; the yoga workshop is a made-up brief for teaching. Tools change quickly, so test every prompt on your own account and data.
+
+---
+
+# Meta Ads MCP and CLI: A Step-by-Step Usage SOP for Marketers
+
+URL: https://aiinmarketing.in/blogs/meta-ads-mcp-and-cli-sop
+Author: Kailas Nath R
+Published: 2026-11-04
+Summary: A step-by-step SOP for using Meta's official Ads MCP server and CLI safely: access, read-only audits, paused drafts and approvals, plus a free PDF.
+
+Meta now offers an official Ads MCP server and a command-line tool, so an AI assistant can read your campaign data and even create ads. That is powerful and a little scary, because one careless prompt can touch real money. This guide is a plain-language SOP for Meta Ads MCP and the Ads CLI: who should have access, what to try first, and where a human must say yes.
+
+**Key takeaways**
+
+- Meta's Ads MCP server is Meta-hosted at https://mcp.facebook.com/ads and works with MCP-compatible AI tools. The Ads CLI is a terminal tool that wraps the Marketing API. Both are described in Meta's developer documentation.
+- According to Meta's documentation, write tools create campaigns, ad sets and ads in a paused state, and activating them requires confirmation in your AI client. Treat that as a safety net, not as your only control.
+- The safest order is: read-only audit, then proposals, then paused drafts, then a human activates. Never go straight to creating live ads.
+- The SOP uses RTCROS prompts, so the Rules part tells the AI what it must not do, such as calling any create or activate tool during an audit.
+- A free 3-page SOP document with a prerequisites checklist, five phases, prompts and a sign-off log is below, branded for AIM by Adsmentor.
+
+## What Meta Ads MCP and the Ads CLI are
+
+Two tools, one idea: let software talk to your Meta ad account in a controlled way.
+
+**The Ads MCP server.** MCP stands for Model Context Protocol, an open way for AI assistants to use outside tools. Meta's developer documentation describes its Ads MCP server as a Meta-hosted server that lets you manage Meta ads from an AI agent, using "structured, permission-scoped tools". The address is https://mcp.facebook.com/ads. The documentation lists categories such as reporting, ad creation and management, catalogs, signals and datasets, A/B tests and conversion lift studies, help and troubleshooting, and activity logs.
+
+**The Ads CLI.** CLI means command-line interface, a tool you run by typing commands. Meta's documentation says the Ads CLI wraps the Meta Marketing API so you can create campaigns, manage catalogs and Meta Pixels, and query performance insights. Commands follow a noun-verb pattern, for example meta ads campaign list.
+
+You do not need to be a developer to use the MCP route, because you talk to an AI assistant. The CLI suits people who are comfortable in a terminal or who want repeatable scripts. Meta's overview pages we read do not label either tool as beta, though some third-party guides do, so check Meta's current documentation before you rely on either one.
+
+## Which one should you use?
+
+| Question | Ads MCP server | Ads CLI |
+|---|---|---|
+| Where does it run? | On Meta's hosted server, called by your AI client | On your computer or a server you control |
+| How do you use it? | Talk to an AI assistant that supports MCP | Type commands or script them |
+| Best first job | Reading and explaining performance | Repeatable lists, reports and structured creation |
+| Sign-in | OAuth, user token or system user token (per Meta's docs) | System user access token (per Meta's docs) |
+| Our advice | Start here, read-only | Add later for repeat tasks |
+
+The row on sign-in matters. Meta's MCP "Get started" page lists three authentication methods: OAuth, a user access token and a system user access token. For system users it says only Employee-role tokens work: "Admin-role system user access tokens can't access the ads MCP server." The CLI "Get started" page says the CLI requires a system user access token for programmatic access.
+
+## Before you connect anything: the ownership check
+
+Most disasters here are not technical. They come from access nobody can trace. Before anyone connects an AI tool to an ad account, confirm four things:
+
+1. **The business owns the ad account.** If a freelancer created it under their own profile, fix that first. Our case study on [who really owns your ad account](https://aiinmarketing.in/blogs/who-owns-your-ad-account-case-study) shows how expensive this gets.
+2. **Access is least-privilege.** Give the AI connection only the permissions the job needs. For reporting, that means the read option, not management. Meta's MCP page names `ads_read` and `ads_management` among its scopes but does not label them read-only or read-write, so confirm what each allows with Meta before you rely on it.
+3. **You know who the system user is.** For the CLI, Meta's setup creates a system user in Business Settings and assigns it to the app and each ad account. Write down who created it and who can revoke it.
+4. **Tokens are secrets.** The CLI reads an access token from environment variables or a .env file. Keep that file out of version control and never paste a token into a chat.
+
+## The SOP: five phases from read-only to live
+
+The rule behind the whole procedure: the AI proposes, a human decides, and money moves only after a human says so.
+
+### Phase 0: Set up access (30 minutes)
+
+For the MCP route, Meta's documentation gives this command for Claude Code: claude mcp add --transport http --client-id <META_APP_ID> meta-ads https://mcp.facebook.com/ads. A Meta developer app is optional according to the page; without one, Meta points to a separate setup in its help centre. For the CLI route, Meta lists Homebrew (brew tap facebook/fb, brew trust facebook/fb, brew install facebook/fb/meta-ads) or pip install meta-ads, then a system user token. Run meta auth status to confirm the setup and meta ads adaccount list to find your account.
+
+Official documentation and some third-party guides disagree on the CLI package name and sign-in method. We follow Meta's developer documentation. Check the page again on the day you install, because tools like this change quickly.
+
+### Phase 1: Read-only audit
+
+Ask the AI to read, never to change. Meta's reporting tools include ads_get_ad_entities (campaigns, ad sets and ads with spend, impressions, CTR, CPC, CPM and conversions), ads_insights_performance_trend, ads_insights_anomaly_signal and ads_get_opportunity_score. Here is an RTCROS prompt for it. The account details are an example brief, not a real client.
+
+> **Role:** You are a senior paid social analyst who explains findings to a business owner.
+>
+> **Task:** Audit the last 30 days of this Meta ad account and tell me what is working, what is wasting money and what to check first.
+>
+> **Context:** Online saree store in Pune, goal is purchases at a return on ad spend above 3. Monthly budget about ₹60,000. Use the ad account I connected.
+>
+> **Rules:** Read-only. Do not call any tool that creates, updates, activates or deletes anything. Use only data returned by the tools. If a number is missing, say so. Do not guess reasons; list them as hypotheses.
+>
+> **Output format:** Three sections: working, wasting money, check first. Add a table of top five campaigns by spend with spend, purchases and return on ad spend.
+>
+> **Style:** Plain English, short sentences, no jargon.
+
+### Phase 2: Check what changed and who changed it
+
+Many bad weeks start with a change nobody remembers. Meta's activity logs tool, ads_account_get_activity_logs, retrieves log entries for an ad account and can be narrowed by object, time window, event category or user. Ask for the last two weeks of changes before you decide why performance moved. If the log shows edits by someone who should not have access, fix access before you fix ads.
+
+### Phase 3: Ask for proposals, not actions
+
+Now ask the AI to propose structural changes, such as a new ad set or a different audience, in words. You approve or reject each one. Keep the Rules strict:
+
+> **Role:** You are a media planner proposing changes for approval.
+>
+> **Task:** Propose up to three changes for next week and explain the expected benefit and the risk of each.
+>
+> **Context:** Use the audit from phase 1 and the activity log from phase 2.
+>
+> **Rules:** Do not execute anything. State which tool or command each change would need. Mark anything that restarts learning or changes budget.
+>
+> **Output format:** A numbered list with: change, reason, risk, tool needed.
+>
+> **Style:** Short and specific.
+
+### Phase 4: Create drafts, always paused
+
+Only after you approve a proposal should the AI create anything. Meta's documentation for the MCP creation tools (ads_create_campaign, ads_create_ad_set, ads_create_ad) says write tools create entities in a paused state and that your AI client asks for confirmation before activation. Its ads_activate_entity tool switches a paused campaign, ad set or ad to active, which starts spending budget. The CLI tutorial likewise says everything is created in PAUSED status by default, so nothing spends until you activate each level.
+
+> **Role:** You are an assistant that prepares campaign drafts for a human to review.
+>
+> **Task:** Create the approved campaign as a draft.
+>
+> **Context:** Approved change number 2 from phase 3: [paste the approved change, objective, budget and audience].
+>
+> **Rules:** Create everything paused. Show me the exact tool call or command before you run it and wait for me to type APPROVE. Never call an activate tool or set any status to active. If any detail is unclear, ask.
+>
+> **Output format:** After creating, list each object with its name, ID and status.
+>
+> **Style:** Concise.
+
+A units check before real budgets. Meta's CLI tutorial uses --daily-budget 5000 in its example but does not explain the unit on the page we read. Test on a practice account and confirm in the command reference how budget values are interpreted before you enter a real amount.
+
+### Phase 5: Review, activate by hand, then log
+
+A human opens the draft in Ads Manager, checks the creative, audience, placements, budget and links, and then activates in order: campaign, ad set, ad. The CLI tutorial gives the same order. Record who approved it, when and why in your sign-off log. A week later, run the phase 1 audit again to compare.
+
+## Safety rules we would add to any team
+
+- **Separate reading from writing.** Use a read-only connection for audits, and a separate connection for creation that few people can use.
+- **Be careful with --force and --no-input.** Meta's tutorial notes these flags suppress prompts, so a script can delete resources with no confirmation. It also says deleting a campaign deletes its ad sets and ads. Never put delete commands in an automated job until you have tested them on dummy data.
+- **Use the official server.** Third-party Meta ads servers exist. Because they would hold the keys to your ad account, evaluate them like any vendor with account access, and prefer the official route.
+- **Keep a human on money.** Do not use an AI loop for anything time-critical, and do not let it activate spend by itself.
+- **Check logs weekly.** Use the activity log to catch unplanned changes.
+- **Protect secrets.** Keep tokens and the .env file out of shared folders and out of chats.
+
+## A short command cheat sheet from Meta's documentation
+
+These commands come from the Ads CLI pages. Replace values in angle brackets.
+
+| Job | Command |
+|---|---|
+| Check setup | meta auth status |
+| List ad accounts | meta ads adaccount list |
+| List campaigns | meta ads campaign list |
+| Get performance | meta ads insights get --fields spend,impressions,ctr,cpc |
+| List campaigns as JSON | meta --output json ads campaign list |
+| Activate (human step) | meta ads campaign update <CAMPAIGN_ID> --status ACTIVE |
+
+Global options such as --output go before the subcommand, and the documentation lists exit codes from 0 for success to 5 for not found. Settings resolve in this order: command-line flags, then environment variables, then the project .env file.
+
+## What this does not do for you
+
+The tools give an AI assistant access. They do not supply strategy, creative taste or judgement about your customers, and they do not make a weak offer perform. They also do not remove your responsibility for what runs: the advertiser is still accountable for claims and policy. The most useful AI help we see in ad accounts is investigation and reporting, which is the work phases 1 and 2 cover. Our guide on [staying in control as ad accounts automate](https://aiinmarketing.in/blogs/ad-accounts-run-themselves) explains which decisions should stay with you, and our list of [AI advertising mistakes](https://aiinmarketing.in/blogs/ai-advertising-problems-nobody-posts-about) includes automation that spends without approval.
+
+## What to do this week
+
+1. Check ownership of your ad account and list who has access today.
+2. Read Meta's MCP "Get started" page and decide whether you need the MCP route, the CLI route or neither yet.
+3. Connect read-only and run the phase 1 audit on a practice or low-spend account.
+4. Save the RTCROS prompts from this guide in your notes. If prompt writing is new to you, start with our [RTCROS prompt guide](https://aiinmarketing.in/blogs/rtcros-prompt-framework-for-marketers).
+5. Write your sign-off log: date, person, change, reason and result.
+
+If you are a fresher or career switcher, a documented SOP like this one is a strong portfolio piece. It shows you can use AI tools and respect client money.
+
+## Where AIM fits
+
+In AIM, learners work in real ad platforms and practise reading, proposing and reviewing before they spend. Trainers review the work, and portfolio ad spend is included so you practise on real campaigns. We do not promise jobs. We teach a working method, and this SOP is the way we think about AI in an ad account: the AI can help, the person decides.
+
+## Frequently asked questions
+
+### What is the Meta Ads MCP server?
+
+It is a Meta-hosted Model Context Protocol server at https://mcp.facebook.com/ads that lets an MCP-compatible AI assistant read and manage Meta ad data through permission-scoped tools, according to Meta's developer documentation.
+
+### What is the difference between Meta Ads MCP and the Ads CLI?
+
+The MCP server lets an AI assistant use Meta ad tools through conversation. The CLI is a terminal tool where you or a script type commands. Meta's documentation describes both as ways to work with the Marketing API.
+
+### Will the AI spend my money without asking?
+
+Meta's documentation says write tools create campaigns, ad sets and ads in a paused state and that your AI client asks for confirmation before activation. Still, add your own rule: a human activates every ad.
+
+### Do I need to know coding to use Meta Ads MCP?
+
+Not for the MCP route, since you talk to an AI assistant, though setup involves OAuth or tokens. The CLI is comfortable only if you can work in a terminal.
+
+### Is it safe to connect an AI tool to my ad account?
+
+It can be if you follow least privilege, start read-only, keep tokens secret, review the activity log and keep human approval on spend. Use the official server rather than unknown third-party ones.
+
+## Sources and how we checked them
+
+Every source below was opened for this guide. Quotations and tool names are attributed to the page that states them.
+
+- [Ads MCP server overview](https://developers.facebook.com/documentation/ads-commerce/ads-ai-connectors/ads-mcp-server/ads-mcp-server-overview), Meta for Developers, read 3 November 2026. Server address, tool categories and "permission-scoped" wording.
+- [Ads MCP server: get started](https://developers.facebook.com/documentation/ads-commerce/ads-ai-connectors/ads-mcp-server/ads-mcp-server-get-started), Meta for Developers, read 3 November 2026. Authentication methods, scopes and the Claude Code command.
+- [Ads MCP server: ad creation and management tools](https://developers.facebook.com/documentation/ads-commerce/ads-ai-connectors/ads-mcp-server/ads-mcp-server-tools-ad-creation-and-management), Meta for Developers, read 3 November 2026. Tool names and the paused-state statement.
+- [Ads MCP server: comprehensive reporting tools](https://developers.facebook.com/documentation/ads-commerce/ads-ai-connectors/ads-mcp-server/ads-mcp-server-tools-comprehensive-reporting), Meta for Developers, read 3 November 2026. Reporting tool names.
+- [Ads MCP server: activity logs](https://developers.facebook.com/documentation/ads-commerce/ads-ai-connectors/ads-mcp-server/ads-mcp-server-tools-activity-logs), Meta for Developers, read 3 November 2026. Activity log tool.
+- [Ads CLI overview](https://developers.facebook.com/documentation/ads-commerce/ads-ai-connectors/ads-cli/ads-cli-overview), [get started](https://developers.facebook.com/documentation/ads-commerce/ads-ai-connectors/ads-cli/setup/get-started), [configuration](https://developers.facebook.com/documentation/ads-commerce/ads-ai-connectors/ads-cli/setup/configuration), [command reference](https://developers.facebook.com/documentation/ads-commerce/ads-ai-connectors/ads-cli/command-reference) and [tutorials and recipes](https://developers.facebook.com/documentation/ads-commerce/ads-ai-connectors/ads-cli/tutorials-and-recipes), Meta for Developers, read 3 November 2026. Install, authentication, commands, flags, exit codes and paused defaults.
+- [Meta Ads CLI and MCP guide](https://mcp.directory/blog/meta-ads-cli-mcp), mcp.directory, updated May 2026. Third-party guide, read for comparison only; where it differs from Meta's documentation (package name and sign-in method), we used Meta's pages.
+
+**How we checked this.** We did not run these tools against a live ad account for this guide, so every command and behaviour is as documented by Meta on the date above. Meta did not state a beta label on the pages we read, and we could not confirm a launch date from Meta's own pages, so we make no claim about either. The saree store is a made-up brief for teaching.

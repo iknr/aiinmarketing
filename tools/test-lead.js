@@ -104,7 +104,7 @@ test('valid submission: headers, URLs, body, +91, task with context, lookups cac
   assert(due > 23.9 * 3600e3 && due < 24.1 * 3600e3, 'due in ~1 day');
   assert(task.body.description.includes('Page: https://aiinmarketing.in/index'));
   assert(!task.body.description.includes('x=1'), 'query stripped from page');
-  assert(task.body.description.includes('utm_source=meta') && task.body.description.includes('utm_campaign=nov'));
+  assert(task.body.description.includes('Campaign / UTM: meta / - / nov / - / -; click id present: no; referrer: -; first landing: -; attribution: last'));
   // second submission: lookups come from cache
   await call(handler, { body: uniq(2) });
   assert.strictEqual(calls.filter((c) => c.url.endsWith('/leads/sources')).length, 1);
@@ -130,7 +130,7 @@ test('custom fields mode: cf_* sent, no task when Heffl echoes them', async () =
   assert.strictEqual(b.cf_current_situation, 'working professional');
   assert.strictEqual(b.cf_form_source, 'magnet-syllabus');
   assert.strictEqual(b.cf_page_url, 'https://aiinmarketing.in/index');
-  assert.strictEqual(b.cf_campaign_utm, 'utm_source=meta | utm_campaign=nov');
+  assert.strictEqual(b.cf_campaign_utm, 'meta / - / nov / - / -; click id present: no; referrer: -; first landing: -; attribution: last');
   assert(!calls.some((c) => c.url.endsWith('/api/v2/tasks')));
 });
 
@@ -415,7 +415,7 @@ test('B) repeat within 60 s -> Unqualified lead "ABUSE: repeat_within_60s", no t
   assert.strictEqual(a.length, 1);
   assert.strictEqual(a[0].body.stageId, 'lstg_unq');
   assert.notStrictEqual(a[0].body.stageId, 'lstg_new');
-  assert.strictEqual(a[0].body.title, 'ABUSE: repeat_within_60s | IP 203.0.113.9, Kochi, KL, IN | magnet-syllabus');
+  assert.strictEqual(a[0].body.title, 'ABUSE: repeat_within_60s | IP 203.0.113.9 | IN, KL, Kochi | src=meta cmp=nov');
   assert.strictEqual(taskCalls(calls).length, 1, 'only the first, real lead has its follow-up task');
 });
 
@@ -428,7 +428,7 @@ test('B) repeat abuse record falls back to contact-in-title when Heffl rejects t
   assert.strictEqual(a.length, 2, 'first attempt (duplicate) + retry without contact');
   assert.deepStrictEqual(Object.keys(a[0].body).sort(), ['email', 'mobile', 'name', 'sourceId', 'stageId', 'title']);
   assert.deepStrictEqual(Object.keys(a[1].body).sort(), ['name', 'sourceId', 'stageId', 'title']);
-  assert(a[1].body.title.startsWith('ABUSE: repeat_within_60s | asha@example.com +919876543210'));
+  assert(a[1].body.title.startsWith('ABUSE: repeat_within_60s | IP ') && a[1].body.title.includes('| asha@example.com +919876543210 |'));
   assert.strictEqual(a[1].body.stageId, 'lstg_unq');
 });
 
@@ -571,6 +571,136 @@ test('D) friendly labels in task title and text; unknown names fall back to the 
     assert.strictEqual(t.title, `Follow up: Asha Verma (working professional, via ${label})`);
     assert(t.description.includes(`Form: ${label}`));
   }
+});
+
+// ------------------------------------------------------------ attribution (UTM / click id / referrer / landing path)
+const ATTR_BODY = {
+  'form_fields[utm_source]': 'google',
+  'form_fields[utm_medium]': 'cpc',
+  'form_fields[utm_campaign]': 'spring',
+  'form_fields[utm_term]': 'ai marketing course',
+  'form_fields[utm_content]': 'ad-a',
+  'form_fields[click_id]': 'gclid:ABCDEF123456XYZ',
+  'form_fields[referrer_host]': 'www.google.com',
+  'form_fields[landing_path]': '/blog/post',
+  'form_fields[attribution]': 'first',
+};
+const H = { 'x-real-ip': '203.0.113.50', 'x-vercel-ip-country': 'IN', 'x-vercel-ip-country-region': 'KL', 'x-vercel-ip-city': 'Kochi' };
+const wholeLogs = () => logs.map(([, m]) => m).join('\n');
+
+test('E) real lead: follow-up task carries the full campaign line; click id value never in Heffl text or logs', async () => {
+  const { handler, calls } = setupAbuse();
+  await call(handler, { body: { ...GOOD, ...ATTR_BODY } });
+  const d = taskCalls(calls)[0].body.description;
+  assert(d.includes('Campaign / UTM: google / cpc / spring / ai marketing course / ad-a; click id present: yes; referrer: www.google.com; first landing: /blog/post; attribution: first'));
+  assert(!JSON.stringify(calls).includes('ABCDEF123456XYZ'));
+  assert(!wholeLogs().includes('ABCDEF123456XYZ'));
+});
+
+test('E) sanitisation and caps of attribution fields; own host dropped; bad attribution value ignored', async () => {
+  const { handler, calls } = setupAbuse();
+  await call(handler, { body: { ...GOOD, 'form_fields[utm_source]': '<script>alert(1)</script>\u0001x'.padEnd(300, 'y'), 'form_fields[referrer_host]': 'www.aiinmarketing.in', 'form_fields[attribution]': 'weird', 'form_fields[landing_path]': 'no-slash', 'form_fields[click_id]': 'evil:123', referer: 'https://aiinmarketing.in/' } });
+  const d = taskCalls(calls)[0].body.description;
+  const line = d.split('\n').find((l) => l.startsWith('Campaign / UTM:'));
+  assert(!/[<>\u0001]/.test(line));
+  assert(line.split(' / ')[0].length <= 'Campaign / UTM: '.length + 120 + 3);
+  assert(line.includes('click id present: no; referrer: -; first landing: -; attribution: last'));
+});
+
+test('E) referer fallback: utm_* and click ids parsed from the Referer URL when the fields are missing', async () => {
+  const { handler, calls } = setupAbuse();
+  await call(handler, { body: { ...GOOD, referer: 'https://aiinmarketing.in/p?utm_source=meta&utm_medium=social&utm_campaign=c1&fbclid=FB1234567890' } });
+  const d = taskCalls(calls)[0].body.description;
+  assert(d.includes('Campaign / UTM: meta / social / c1 / - / -; click id present: yes; referrer: -; first landing: -; attribution: last'));
+  assert(!JSON.stringify(calls).includes('FB1234567890'));
+  // fields win over the referer
+  const b = setupAbuse();
+  await call(b.handler, { body: { ...uniq(801), 'form_fields[utm_source]': 'fromfield', referer: 'https://aiinmarketing.in/?utm_source=fromreferer' } });
+  assert(taskCalls(b.calls)[0].body.description.includes('Campaign / UTM: fromfield /'));
+  // no data at all -> direct
+  const c = setupAbuse();
+  await call(c.handler, { body: { ...uniq(802), referer: 'https://aiinmarketing.in/' } });
+  assert(taskCalls(c.calls)[0].body.description.includes('Campaign / UTM: - / - / - / - / -; click id present: no; referrer: -; first landing: -; attribution: direct'));
+});
+
+test('E) abuse title: exact format, empty parts omitted', async () => {
+  const { handler, calls } = setupAbuse();
+  await call(handler, { body: { ...GOOD, ...ATTR_BODY, referer: 'https://aiinmarketing.in/' }, headers: { ...H, origin: 'https://evil.example' } });
+  const a = abuseLeads(calls);
+  assert.strictEqual(a.length, 1);
+  assert.strictEqual(a[0].body.title, 'ABUSE: bad_origin | IP 203.0.113.50 | IN, KL, Kochi | src=google med=cpc cmp=spring | ref=www.google.com | term=ai marketing course content=ad-a click=gclid | land=/blog/post');
+  assert.strictEqual(a[0].body.stageId, 'lstg_unq');
+  const b = setupAbuse();
+  await call(b.handler, { headers: { 'x-real-ip': '198.51.100.4', origin: 'https://evil.example' }, body: { ...GOOD, referer: 'https://evil.example/' } });
+  assert.strictEqual(abuseLeads(b.calls)[0].body.title, 'ABUSE: bad_origin | IP 198.51.100.4');
+});
+
+test('E) abuse title is cut from the right at 190 chars; type and IP always survive', async () => {
+  const { handler, calls } = setupAbuse();
+  const long = 'z'.repeat(120);
+  await call(handler, { body: { ...GOOD, ...ATTR_BODY, 'form_fields[utm_source]': long, 'form_fields[utm_medium]': long, 'form_fields[utm_campaign]': long, 'form_fields[referrer_host]': 'a.example' }, headers: { ...H, origin: 'https://evil.example' } });
+  const t = abuseLeads(calls)[0].body.title;
+  assert.strictEqual(t.length, 190);
+  assert(t.startsWith('ABUSE: bad_origin | IP 203.0.113.50 | IN, KL, Kochi | src=zzz'));
+  // the duplicate-contact retry keeps the same cap and the leading parts
+  let n = 0;
+  const d = setupAbuse({ lead: () => (++n === 1 ? resp(409, {}) : resp(200, { id: 'ld_x' })) });
+  await call(d.handler, { body: { ...GOOD, ...ATTR_BODY, 'form_fields[utm_source]': long, 'form_fields[utm_medium]': long }, headers: { ...H, origin: 'https://evil.example' } });
+  const t2 = abuseLeads(d.calls)[1].body.title;
+  assert(t2.length <= 190 && t2.startsWith('ABUSE: bad_origin | IP 203.0.113.50 | asha@example.com +919876543210 |'));
+});
+
+test('E) abuse records carry IP and UTM for bad_origin, rate_limit, repeat_within_60s and bot_user_agent (and logs)', async () => {
+  const { handler, calls } = setupAbuse();
+  const full = { ...ATTR_BODY };
+  await call(handler, { body: { ...uniq(900), ...full }, headers: { ...H, origin: 'https://evil.example' } });
+  for (let i = 1; i <= 5; i++) await call(handler, { body: { ...uniq(910 + i), ...full }, ip: '9.9.9.9', headers: { 'x-real-ip': '9.9.9.9' } });
+  await call(handler, { body: { ...uniq(920), ...full }, headers: { 'x-real-ip': '9.9.9.9' } }); // rate limited
+  await call(handler, { body: { ...uniq(930), ...full }, headers: H });
+  await call(handler, { body: { ...uniq(930), ...full }, headers: H }); // repeat
+  await call(handler, { body: { ...uniq(940), ...full }, headers: { ...H, 'user-agent': 'curl/8.4.0' } });
+  const types = abuseLeads(calls).map((c) => c.body.title.split(' | ')[0]);
+  assert.deepStrictEqual(types, ['ABUSE: bad_origin', 'ABUSE: rate_limit', 'ABUSE: repeat_within_60s', 'ABUSE: bot_user_agent']);
+  const ips = ['203.0.113.50', '9.9.9.9', '203.0.113.50', '203.0.113.50'];
+  abuseLeads(calls).forEach((c, i) => {
+    assert(c.body.title.includes(` | IP ${ips[i]}`), c.body.title);
+    assert(c.body.title.includes('src=google med=cpc cmp=spring'), c.body.title);
+    assert(!c.body.title.includes('ABCDEF123456XYZ'));
+  });
+  const flagged = logs.filter(([, m]) => m.includes('"abuse_flagged"')).map(([, m]) => JSON.parse(m));
+  assert.strictEqual(flagged.length, 4);
+  for (const f of flagged) {
+    assert(f.ip && f.campaign.utm_source === 'google' && f.campaign.utm_campaign === 'spring');
+    assert.strictEqual(f.campaign.click, 'gclid:ABCDEF');
+  }
+  assert.strictEqual(flagged[0].country, 'IN');
+  assert(!wholeLogs().includes('ABCDEF123456XYZ'), 'click id value redacted to type + first 6 chars');
+});
+
+test('E) abuse records without any UTM (bots) still carry IP and geo; rejected requests log IP too', async () => {
+  const { handler, calls } = setupAbuse();
+  await call(handler, { body: { ...GOOD, referer: 'https://aiinmarketing.in/' }, headers: { ...H, 'user-agent': 'python-requests/2.31' } });
+  assert.strictEqual(abuseLeads(calls)[0].body.title, 'ABUSE: bot_user_agent | IP 203.0.113.50 | IN, KL, Kochi');
+  // bad origin, even with invalid input: nothing sent to Heffl, but IP/geo/campaign are logged
+  logs.length = 0;
+  const r = await call(handler, { body: { 'form_fields[name]': 'x', ...ATTR_BODY }, headers: { ...H, origin: 'https://evil.example' } });
+  assert.strictEqual(r.status, 400);
+  const rej = logs.map(([, m]) => m).filter((m) => m.includes('"request_rejected"')).map((m) => JSON.parse(m));
+  assert.deepStrictEqual(rej.map((x) => x.reason), ['bad_origin']);
+  await call(handler, { body: { 'form_fields[name]': 'x', ...ATTR_BODY }, headers: H });
+  const rej2 = logs.map(([, m]) => m).filter((m) => m.includes('"request_rejected"')).map((m) => JSON.parse(m));
+  assert.deepStrictEqual(rej2.map((x) => x.reason), ['bad_origin', 'invalid_input']);
+  assert(rej2.every((x) => x.ip === '203.0.113.50' && x.city === 'Kochi' && x.campaign.utm_source === 'google'));
+  assert(!wholeLogs().includes('ABCDEF123456XYZ'));
+});
+
+test('E) click id redaction: type + first 6 chars only, in every log line and Heffl payload', async () => {
+  const { handler, calls } = setupAbuse({ lead: () => resp(500, {}) });
+  await call(handler, { body: { ...GOOD, 'form_fields[click_id]': 'msclkid:SECRETVALUE99' } });
+  const all = wholeLogs() + JSON.stringify(calls);
+  assert(!all.includes('SECRETVALUE99'));
+  assert(all.includes('msclkid:SECRET'));
+  assert(!all.includes('SECRETV'), 'only 6 characters');
 });
 
 (async () => {

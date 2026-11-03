@@ -22,7 +22,8 @@ const BODY = `
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_ID}" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 `;
-const TRACK = '<script id="aim-track-js" src="/wp-content/plugins/elementor/assets/js/aim-track.js?ver=1.0.0" defer></script>\n';
+const TRACK_VER = '1.1.0';
+const TRACK = `<script id="aim-track-js" src="/wp-content/plugins/elementor/assets/js/aim-track.js?ver=${TRACK_VER}" defer></script>\n`;
 function walk(dir, out) {
   for (const name of fs.readdirSync(dir, { withFileTypes: true })) {
     if (name.isDirectory()) { if (!SKIP.has(name.name)) walk(path.join(dir, name.name), out); }
@@ -36,6 +37,7 @@ try {
     let h = fs.readFileSync(f, 'utf8'), o = h;
     if (!h.includes('googletagmanager.com/gtm.js?id=' + GTM_ID)) h = h.replace(/<head[^>]*>/i, (m) => m + HEAD);
     if (!h.includes('googletagmanager.com/ns.html?id=' + GTM_ID)) h = h.replace(/<body[^>]*>/i, (m) => m + BODY);
+    h = h.replace(/(aim-track\.js\?ver=)[\w.-]+/g, (m, a) => a + TRACK_VER);
     if (!h.includes('id="aim-track-js"')) h = h.replace(/<\/body>/i, TRACK + '</body>');
     if (h !== o) { fs.writeFileSync(f, h); changed++; }
   }

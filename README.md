@@ -34,7 +34,14 @@ Beyond creating leads, `api/lead.js` records flagged submissions as `ABUSE: <typ
 times in IST and uses friendly form names. Create the `Unqualified` stage in Heffl. Details: CLAUDE.md. `privacy-policy.html` describes this.
 
 No secrets belong in the repository. Setup checklist, key rotation and behaviour: see CLAUDE.md, "Lead capture: Heffl CRM".
-Run `node tools/test-lead.js` to test the function offline.
+Attribution: `aim-track.js` remembers where a visitor came from (UTM tags, gclid/fbclid/msclkid, referrer host, landing path;
+first touch in `localStorage['aim_attr_first']` for 30 days, last touch in `sessionStorage['aim_attr_last']`) and adds hidden
+`form_fields[utm_*]`, `click_id`, `referrer_host`, `landing_path`, `attribution` inputs on submit (last touch wins when it has
+campaign data, else first touch, else `direct`). Real leads get a `Campaign / UTM:` line in the follow-up task; abuse records
+carry IP, location and UTM in the lead title (`ABUSE: <type> | IP <ip> | <CC>, <region>, <city> | src= med= cmp= | ref=`).
+Click id values are never logged in full. Details: CLAUDE.md.
+
+Run `node tools/test-lead.js` to test the function offline and `node tools/test-attribution.js` (Playwright, form POSTs mocked) for the browser side.
 
 The login page never checks or stores credentials; every attempt shows the standard error.
 

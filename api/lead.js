@@ -166,18 +166,105 @@ function rateLimited(ip, now) {
   return false;
 }
 
+const UTM_KEYS = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+const CLICK_TYPES = ['gclid', 'fbclid', 'msclkid'];
+const ATTR_MAX = 120;
+const TITLE_MAX = 190; // Heffl documents no maximum for the lead title; keep it short
+
+/** Attribution text from the browser: control characters and angle brackets removed, whitespace collapsed, capped. */
+function cleanAttr(value, max) {
+  return String(typeof value === 'string' ? value : '')
+    .replace(/[\u0000-\u001f\u007f-\u009f\u2028\u2029<>]/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, max || ATTR_MAX);
+}
+
 function parsePage(referer) {
-  const out = { pageUrl: '', utm: {} };
+  const out = { pageUrl: '', utm: {}, clicks: {} };
   try {
     const u = new URL(referer);
     out.pageUrl = (u.origin + u.pathname).slice(0, 200);
     for (const [k, v] of u.searchParams) {
-      if (/^utm_[a-z_]{1,20}$/i.test(k)) out.utm[k.toLowerCase()] = clean(v, 100);
+      const key = k.toLowerCase();
+      if (UTM_KEYS.includes(key)) out.utm[key] = cleanAttr(v);
+      else if (CLICK_TYPES.includes(key)) out.clicks[key] = cleanAttr(v);
     }
   } catch (e) {
     /* referer missing or not a URL */
   }
   return out;
+}
+
+/**
+ * Campaign data of one submission. The browser (aim-track.js) sends form_fields[utm_*], [click_id], [referrer_host],
+ * [landing_path] and [attribution]; anything missing falls back to the UTM and click ids in the Referer URL.
+ * The full click id is kept only in `clickValue` for the type/first-6 redaction; it is never logged or sent to Heffl.
+ */
+function buildAttribution(body, page) {
+  const f = (k) => (typeof body[`form_fields[${k}]`] === 'string' ? cleanAttr(body[`form_fields[${k}]`]) : '');
+  const a = {};
+  for (const k of UTM_KEYS) a[k] = f(k) || (page.utm[k] || '');
+  let clickType = '';
+  let clickValue = '';
+  const m = /^(gclid|fbclid|msclkid):(.+)$/i.exec(f('click_id'));
+  if (m) {
+    clickType = m[1].toLowerCase();
+    clickValue = m[2];
+  } else {
+    clickType = CLICK_TYPES.find((t) => page.clicks[t]) || '';
+    clickValue = clickType ? page.clicks[clickType] : '';
+  }
+  a.clickType = clickType;
+  a.clickPrefix = clickValue.slice(0, 6); // log/Heffl text: type + first 6 characters only
+  a.hasClick = Boolean(clickValue);
+  let host = f('referrer_host').toLowerCase();
+  if (!/^[a-z0-9.-]{1,120}$/.test(host) || ALLOWED_HOSTS.includes(host)) host = '';
+  a.referrerHost = host;
+  const land = f('landing_path');
+  a.landingPath = land.startsWith('/') ? land : '';
+  const has = UTM_KEYS.some((k) => a[k]) || a.hasClick;
+  const given = f('attribution').toLowerCase();
+  a.attribution = ['first', 'last', 'direct'].includes(given) ? given : has ? 'last' : 'direct';
+  return a;
+}
+
+/** Redacted, structured form for logs: never the full click id. */
+function attrLog(a) {
+  return {
+    utm_source: a.utm_source,
+    utm_medium: a.utm_medium,
+    utm_campaign: a.utm_campaign,
+    utm_term: a.utm_term,
+    utm_content: a.utm_content,
+    click: a.hasClick ? `${a.clickType}:${a.clickPrefix}` : '',
+    referrer: a.referrerHost,
+    landing: a.landingPath,
+    attribution: a.attribution,
+  };
+}
+
+function utmSummary(a) {
+  return UTM_KEYS.map((k) => a[k] || '-').join(' / ');
+}
+
+/** Lead title of an abuse record: type and IP first, the rest is cut from the right at TITLE_MAX. */
+function abuseTitle(type, ctx, contact) {
+  const a = ctx.attr;
+  const place = [ctx.country, ctx.region, ctx.city].filter(Boolean).join(', ');
+  const src = [a.utm_source && `src=${a.utm_source}`, a.utm_medium && `med=${a.utm_medium}`, a.utm_campaign && `cmp=${a.utm_campaign}`].filter(Boolean).join(' ');
+  const more = [a.utm_term && `term=${a.utm_term}`, a.utm_content && `content=${a.utm_content}`, a.hasClick && `click=${a.clickType}`].filter(Boolean).join(' ');
+  const parts = [
+    `ABUSE: ${type}`,
+    ctx.ip ? `IP ${ctx.ip}` : '',
+    contact || '',
+    place,
+    src,
+    a.referrerHost ? `ref=${a.referrerHost}` : '',
+    more,
+    a.landingPath ? `land=${a.landingPath}` : '',
+  ].filter(Boolean);
+  return clean(parts.join(' | '), TITLE_MAX);
 }
 
 // ------------------------------------------------------------ Heffl client
@@ -299,14 +386,15 @@ function recover(record, info, meta) {
 }
 
 function contextText(ctx) {
-  const utm = Object.entries(ctx.utm).map(([k, v]) => `${k}=${v}`).join(', ');
+  const a = ctx.attr;
+  const campaign = `${utmSummary(a)}; click id present: ${a.hasClick ? 'yes' : 'no'}; referrer: ${a.referrerHost || '-'}; first landing: ${a.landingPath || '-'}; attribution: ${a.attribution}`;
   return [
     `Current situation: ${ctx.situation || '-'}`,
     `Form: ${friendlyLabel(ctx.formSource, ctx.form)}`,
     `Form source (raw): ${ctx.formSource || '-'}`,
     `Form name (raw): ${ctx.form || '-'}`,
     `Page: ${ctx.pageUrl || '-'}`,
-    `Campaign / UTM: ${utm || '-'}`,
+    `Campaign / UTM: ${campaign}`,
     `Submitted: ${formatIST(ctx.receivedAt)}`,
     `IP address: ${ctx.ip || '-'}`,
     `Approximate location: ${geoText(ctx)}`,
@@ -332,7 +420,7 @@ async function sendToHeffl(person, ctx) {
         cf_current_situation: clean(ctx.situation, 100),
         cf_form_source: clean(ctx.formSource, 100),
         cf_page_url: clean(ctx.pageUrl, 200),
-        cf_campaign_utm: clean(Object.entries(ctx.utm).map(([k, v]) => `${k}=${v}`).join(' | '), 300),
+        cf_campaign_utm: clean(`${utmSummary(ctx.attr)}; click id present: ${ctx.attr.hasClick ? 'yes' : 'no'}; referrer: ${ctx.attr.referrerHost || '-'}; first landing: ${ctx.attr.landingPath || '-'}; attribution: ${ctx.attr.attribution}`, 300),
         cf_ip_address: ctx.ip || '',
         cf_country: ctx.country || '',
         cf_region: ctx.region || '',
@@ -416,7 +504,7 @@ async function sendToHeffl(person, ctx) {
 async function recordAbuse(type, person, ctx) {
   try {
     const now = Date.now();
-    console.warn(JSON.stringify({ event: 'abuse_flagged', abuse: type, ip: ctx.ip, country: ctx.country, region: ctx.region, city: ctx.city }));
+    console.warn(JSON.stringify({ event: 'abuse_flagged', abuse: type, ip: ctx.ip, country: ctx.country, region: ctx.region, city: ctx.city, campaign: attrLog(ctx.attr) }));
     if (!process.env.HEFFL_API_KEY) return;
     abuseStamps = abuseStamps.filter((t) => now - t < 60 * 60 * 1000);
     if (abuseStamps.length >= ABUSE_MAX_PER_HOUR) {
@@ -430,14 +518,12 @@ async function recordAbuse(type, person, ctx) {
       console.warn(JSON.stringify({ event: 'abuse_record_skipped', reason: `stage "${ABUSE_STAGE_NAME}" not found`, abuse: type }));
       return;
     }
-    const where = `IP ${ctx.ip || '-'}, ${geoText(ctx)}`;
     const base = { name: person.name, sourceId: refs.sourceId, stageId: refs.unqualifiedId };
     if (!base.sourceId) delete base.sourceId;
-    const label = friendlyLabel(ctx.formSource, ctx.form);
     let r = await hefflRetry(
       `${HEFFL_V1}/leads`,
       'POST',
-      { ...base, mobile: person.mobile, email: person.email, title: clean(`ABUSE: ${type} | ${where} | ${label}`, 200) },
+      { ...base, mobile: person.mobile, email: person.email, title: abuseTitle(type, ctx) },
       deadline
     );
     if (isDuplicate(r)) {
@@ -445,7 +531,7 @@ async function recordAbuse(type, person, ctx) {
       r = await hefflRetry(
         `${HEFFL_V1}/leads`,
         'POST',
-        { ...base, title: clean(`ABUSE: ${type} | ${person.email} ${person.mobile} | ${where} | ${label}`, 250) },
+        { ...base, title: abuseTitle(type, ctx, `${person.email} ${person.mobile}`) },
         deadline
       );
     }
@@ -475,11 +561,13 @@ module.exports = async function handler(req, res) {
 
   const now = Date.now();
   const page = parsePage(String(body.referer || ''));
+  const attr = buildAttribution(body, page);
   const record = {
     ...lead,
     phone,
     form: String(body.form_name || '').slice(0, 80),
     page: String(body.referer || '').slice(0, 300),
+    campaign: attrLog(attr),
     receivedAt: new Date(now).toISOString(),
     ip: geo.ip,
     country: geo.country,
@@ -492,7 +580,7 @@ module.exports = async function handler(req, res) {
     formSource: clean(lead.source, 100),
     form: clean(record.form, 80),
     pageUrl: page.pageUrl,
-    utm: page.utm,
+    attr,
     receivedAt: record.receivedAt,
     ...geo,
   };
@@ -503,11 +591,17 @@ module.exports = async function handler(req, res) {
     return recordAbuse(type, person, ctx);
   };
 
+  const rejected = (reason) =>
+    console.warn(JSON.stringify({ event: 'request_rejected', reason, ip: geo.ip, country: geo.country, region: geo.region, city: geo.city, campaign: attrLog(attr) }));
   if (!originOk(req)) {
+    rejected('bad_origin');
     if (valid) await flag('bad_origin');
     return json(res, 400, BAD);
   }
-  if (!valid) return json(res, 400, BAD);
+  if (!valid) {
+    rejected('invalid_input');
+    return json(res, 400, BAD);
+  }
 
   // Obvious automation: acknowledge like a normal submission, keep a record.
   if (BOT_UA.test(String(req.headers['user-agent'] || ''))) {
@@ -530,7 +624,7 @@ module.exports = async function handler(req, res) {
   recent.set(repeatKey, now);
 
   if (process.env.HEFFL_API_KEY) {
-    const meta = { ip: geo.ip, country: geo.country, region: geo.region, city: geo.city, abuse: null };
+    const meta = { ip: geo.ip, country: geo.country, region: geo.region, city: geo.city, abuse: null, campaign: attrLog(attr) };
     try {
       const result = await sendToHeffl(person, ctx);
       if (result.taskCreated) {

@@ -230,3 +230,55 @@ html, body { overflow-x: clip; }
 
 /* featured tag on the blog index */
 .aimb-featured-tag { display: inline-block; margin-right: 8px; padding: 3px 10px; font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #ffd43b; background: #111827; border-radius: 999px; vertical-align: middle; }
+
+/* ===== Author briefs, pills and author profile pages (new classes only) ===== */
+.aimb-fw > .aimb-authors, .aimb-fw > .aimb-aprof { max-width: var(--wrap); }
+.aimb-authors { margin-top: 48px; padding-top: 8px; border-top: 1px solid var(--line); }
+.aimb-authors > h2 { margin: 24px 0 14px; font-size: 24px; }
+.aimb-agrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; align-items: stretch; }
+.aimb-acard { display: flex; flex-direction: column; gap: 12px; min-width: 0; padding: 18px; background: #fff; border: 1px solid var(--line); border-top: 4px solid var(--yel); border-radius: 16px; }
+.aimb-ahead { display: flex; align-items: flex-start; gap: 14px; min-width: 0; }
+.aimb-aphoto { flex: none; display: block; width: 72px; height: 72px; border-radius: 50%; object-fit: cover; background: #e7e1d4; border: 3px solid var(--yel); }
+.aimb-atext { min-width: 0; }
+.aimb-article .aimb-aname { margin: 0 0 4px; font-size: 19px; line-height: 1.3; font-weight: 800; }
+.aimb-aname a { color: var(--ink); text-decoration-color: var(--yel); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.aimb-article .aimb-abrief { margin: 0; font-size: 15px; line-height: 1.55; color: var(--soft); }
+.aimb-pills { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
+.aimb-acard .aimb-pills:last-child { margin-top: auto; }
+.aimb-pill { box-sizing: border-box; display: inline-flex; align-items: center; justify-content: center; min-height: 40px; max-width: 100%; padding: 6px 14px; font-size: 14px; line-height: 1.25; font-weight: 700; color: var(--ink); text-align: center; text-decoration: none; background: #fff; border: 2px solid var(--ink); border-radius: 999px; }
+.aimb-pill--role { background: #fff4c2; border-color: transparent; font-weight: 600; }
+a.aimb-pill { color: var(--blue); transition: background-color .12s; }
+a.aimb-pill:hover { background: #eef4ff; }
+a.aimb-pill:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+.aimb-pill--lg { min-height: 44px; padding: 8px 18px; font-size: 15px; }
+.aimb-pills--lg { gap: 10px; }
+@media (max-width: 760px) { .aimb-agrid { grid-template-columns: 1fr; } }
+@media (max-width: 640px) { .aimb-pill { min-height: 44px; } .aimb-acard { padding: 16px; } }
+
+/* author profile page */
+.aimb-aband { display: flex; align-items: center; gap: clamp(20px, 4vw, 48px); }
+.aimb-aband .aimb-aphoto--xl { width: 168px; height: 168px; border-width: 5px; box-shadow: 0 0 0 2px var(--ink), 0 18px 40px -22px rgba(15,27,61,.55); }
+.aimb-aband .aimb-pills { margin-top: 12px; }
+.aimb-aband h1 { margin-bottom: 12px; }
+.aimb-aprof h2 { margin-top: 48px; }
+.aimb-pubcard { display: grid; grid-template-columns: 120px minmax(0, 1fr); gap: 20px; align-items: start; padding: 18px; background: #fff; border: 1px solid var(--line); border-radius: 16px; }
+.aimb-pubcard img { display: block; width: 120px; height: auto; border-radius: 8px; border: 1px solid var(--line); }
+.aimb-pubcard h3 { margin: 0 0 4px; font-size: 20px; line-height: 1.3; }
+.aimb-article .aimb-pubcard p { margin: 0 0 12px; font-size: 16px; line-height: 1.55; color: var(--soft); }
+.aimb-article .aimb-pubcard .aimb-pubco { margin: 0 0 8px; font-weight: 700; color: var(--ink); }
+.aimb-artgrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; margin: 0; padding: 0; list-style: none; }
+.aimb-artgrid li { margin: 0; }
+.aimb-artgrid a { display: block; height: 100%; box-sizing: border-box; padding: 14px 16px; color: var(--ink); text-decoration: none; background: #fff; border: 1px solid var(--line); border-radius: 14px; }
+.aimb-artgrid a:hover { border-color: var(--ink); }
+.aimb-artgrid a:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+.aimb-artgrid b { display: block; font-size: 16px; line-height: 1.35; color: var(--blue); }
+.aimb-artgrid span { display: block; margin-top: 4px; font-size: 14px; line-height: 1.5; color: var(--soft); }
+.aimb-partaim { padding: 18px 20px; background: var(--alt); border: 1px solid var(--line); border-radius: 16px; }
+.aimb-article .aimb-partaim p { margin: 0 0 10px; font-size: 16px; }
+@media (max-width: 640px) {
+  .aimb-aband { flex-direction: column; align-items: flex-start; }
+  .aimb-aband .aimb-aphoto--xl { width: 132px; height: 132px; }
+  .aimb-pubcard { grid-template-columns: 96px minmax(0, 1fr); gap: 14px; }
+  .aimb-pubcard img { width: 96px; }
+  .aimb-artgrid { grid-template-columns: 1fr; }
+}

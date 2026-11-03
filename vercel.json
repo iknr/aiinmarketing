@@ -77,5 +77,4 @@
       "permanent": true
     }
   ],
-  "buildCommand": "node scripts/inject-gtm.js"
 }

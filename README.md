@@ -19,8 +19,16 @@ vercel.json                                       rewrites and headers
 npx vercel --prod
 ```
 
-Set `LEAD_WEBHOOK_URL` in the Vercel project settings to forward form submissions
-(Zapier, Make, Google Apps Script, a CRM). Without it, leads are only written to the function logs.
+Form submissions go to the Heffl CRM through `api/lead.js`. Vercel environment variables:
+
+- `HEFFL_API_KEY` (required for Heffl; Production and Preview; mark Sensitive). Without it leads are only logged.
+- `HEFFL_LEAD_SOURCE_NAME` (optional, default `Website`) and `HEFFL_LEAD_STAGE_NAME` (optional, default `New`).
+- `HEFFL_USE_CUSTOM_FIELDS` (optional, `true` after creating the Heffl custom fields described in CLAUDE.md).
+- `LEAD_WEBHOOK_URL` (optional). Fallback that receives leads Heffl could not store; without `HEFFL_API_KEY`
+  it receives every lead (Zapier, Make, Google Apps Script).
+
+No secrets belong in the repository. Setup checklist, key rotation and behaviour: see CLAUDE.md, "Lead capture: Heffl CRM".
+Run `node tools/test-lead.js` to test the function offline.
 
 The login page never checks or stores credentials; every attempt shows the standard error.
 

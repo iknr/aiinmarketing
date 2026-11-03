@@ -17,3 +17,7 @@ Every blog post is credited to both authors. Profile pages: `/author/kailasnathr
 - Article JSON-LD `author` is an array of both Persons (`name`, `url` = author page, `sameAs` = LinkedIn, plus GitHub for Kailas).
 - New posts must also be added to the "Articles by" grid on both author pages, to `sitemap.xml` and to `llms.txt`.
 - Use `aim-blog.css?ver=2.2.0` or later in posts and author pages. Author photos live in `wp-content/uploads/2026/11/authors/`.
+
+## Program brochure
+
+- `wp-content/uploads/2026/11/guides/aim-program-brochure.pdf` (gated on the home page, `#brochure`) is a PDF rebuilt from a script, not hand-edited. Rebuild it and its cover thumbnail whenever the price, guarantee, tracks, trainers or the fee comparison table change.

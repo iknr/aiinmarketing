@@ -111,3 +111,14 @@ html,body{overflow-x:clip}
  .elementor-622 .am-lp .amx-hero h1{font-size:30px!important;line-height:37px!important}
 }
 .e-form__buttons .amx-gline{margin-top:18px}
+
+/* Home brochure band */
+.aimp-brochure{padding-top:0}
+.aimp-brochure .aimp-lead{margin-top:0;display:grid;grid-template-columns:minmax(0,200px) minmax(0,1fr) minmax(0,340px);gap:clamp(20px,3vw,40px);align-items:center}
+.aimp-brochure .aimp-head{text-align:left;margin:0}
+.aimp-brochure .aimp-head h2{margin:8px 0 10px}
+.aimp-brochure-cover{display:block;width:100%;height:auto;border-radius:10px;box-shadow:0 0 0 3px #ffd43b,0 14px 30px rgba(0,0,0,.35)}
+.aimp-brochure .aimp-mag{margin:0}
+html{scroll-padding-top:80px}
+@media(max-width:1000px){.aimp-brochure .aimp-lead{grid-template-columns:minmax(0,150px) minmax(0,1fr)}.aimp-brochure .aimp-mag{grid-column:1/-1}}
+@media(max-width:640px){.aimp-brochure .aimp-lead{grid-template-columns:1fr;justify-items:start}.aimp-brochure-cover{max-width:160px}.aimp-brochure .aimp-mag{width:100%}}

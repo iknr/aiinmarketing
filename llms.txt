@@ -51,3 +51,4 @@ AIM teaches marketing by doing: learners build a live WordPress site, connect Cl
 - [Full text of the key pages and guides](https://aiinmarketing.in/llms-full.txt): every guide as plain Markdown, for retrieval and summarisation
 - [Sitemap](https://aiinmarketing.in/sitemap.xml)
 - [Free guides](https://aiinmarketing.in/blogs/best-digital-marketing-courses-india-2026-how-to-choose#programs-blog): 12-week syllabus, 5-question course checklist and ad account ownership checklist (PDF, free with sign-up)
+- [Program brochure (PDF, free with sign-up)](https://aiinmarketing.in/#brochure): 10-page overview of the AIM program, fee, tracks, trainers and comparison

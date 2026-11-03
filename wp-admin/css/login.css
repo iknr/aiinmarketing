@@ -1,0 +1,100 @@
+/* wp-admin login screen styles */
+
+html { background: #f0f0f1; min-height: 100%; }
+
+body {
+  margin: 0;
+  min-height: 100%;
+  background: #f0f0f1;
+  color: #3c434a;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+a { color: #2271b1; transition-property: border, background, color; transition-duration: .05s; transition-timing-function: ease-in-out; }
+a:hover, a:active { color: #135e96; }
+a:focus { color: #043959; box-shadow: 0 0 0 1px #4f94d4, 0 0 2px 1px rgba(79, 148, 212, .8); outline: 2px solid transparent; }
+
+[hidden] { display: none !important; }
+
+#login { width: 320px; max-width: 100%; padding: 5% 0 0; margin: auto; box-sizing: border-box; }
+
+/* logo */
+.login h1 { margin: 0 0 24px; text-align: center; }
+.login h1 a {
+  display: block;
+  width: 84px; height: 84px; margin: 0 auto;
+  overflow: hidden; text-indent: -9999px; outline: 0;
+  background: url("/wp-admin/images/wordpress-logo.png") center / 84px no-repeat;
+}
+
+/* card */
+.login form {
+  margin-top: 20px; margin-left: 0;
+  padding: 26px 24px 34px;
+  background: #fff;
+  border: 1px solid #c3c4c7;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .04);
+  font-weight: 400;
+  overflow: hidden;
+}
+.login label { display: inline-block; margin-bottom: 3px; font-size: 14px; line-height: 1.5; color: #1d2327; vertical-align: middle; }
+.login form p { margin: 0 0 16px; }
+.login form .forgetmenot { float: left; margin: 0; font-weight: 400; }
+.login form .forgetmenot label { margin: 0; font-size: 12px; }
+
+.login input.input, .login input[type="text"], .login input[type="password"] {
+  display: block; width: 100%; height: 40px; margin: 2px 6px 16px 0;
+  padding: 0 8px; box-sizing: border-box;
+  font-size: 24px; line-height: 1.33333333; color: #2c3338;
+  background: #fff; border: 1px solid #8c8f94; border-radius: 4px; box-shadow: 0 0 0 transparent;
+  outline: 0;
+}
+.login input.input:focus { border-color: #2271b1; box-shadow: 0 0 0 1px #2271b1; }
+.login input[type="checkbox"] { width: 16px; height: 16px; margin: -4px 4px 0 0; border: 1px solid #8c8f94; border-radius: 4px; vertical-align: middle; }
+
+/* password field + eye */
+.wp-pwd { position: relative; }
+.wp-pwd input.password-input { padding-right: 40px; }
+.wp-pwd .button.wp-hide-pw {
+  position: absolute; top: 2px; right: 0; width: 40px; height: 40px; min-height: 40px;
+  padding: 0; margin: 0; background: transparent; border: 0; box-shadow: none; color: #2271b1; cursor: pointer;
+}
+.wp-pwd .button.wp-hide-pw:hover { color: #135e96; }
+.wp-pwd .button.wp-hide-pw:focus { box-shadow: 0 0 0 1px #2271b1; outline: 2px solid transparent; }
+.wp-pwd .button.wp-hide-pw svg { display: block; margin: auto; }
+
+/* submit */
+.login .submit { margin: 0; }
+.login .button-primary {
+  float: right; min-height: 32px; padding: 0 12px; margin: 0;
+  font-size: 13px; line-height: 2.30769231; color: #fff;
+  background: #2271b1; border: 1px solid #2271b1; border-radius: 3px;
+  cursor: pointer; white-space: nowrap; box-sizing: border-box;
+}
+.login .button-primary:hover { background: #135e96; border-color: #135e96; }
+.login .button-primary:focus { box-shadow: 0 0 0 1px #fff, 0 0 0 3px #2271b1; outline: 2px solid transparent; outline-offset: 0; }
+.login .button-primary[disabled] { color: #a7aaad; background: #f6f7f7; border-color: #dcdcde; cursor: default; }
+
+/* notices */
+.login .message, .login #login_error {
+  margin: 20px 0 0; padding: 12px 12px 12px 14px;
+  background: #fff; border: 1px solid #c3c4c7; border-left-width: 4px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, .04); word-wrap: break-word;
+  font-size: 13px; line-height: 1.54;
+}
+.login .message { border-left-color: #72aee6; }
+.login #login_error { border-left-color: #d63638; }
+.login #login_error + form, .login .message + form { margin-top: 16px; }
+
+/* links under the card */
+.login #nav, .login #backtoblog { margin: 24px 0 0; padding: 0 24px; font-size: 13px; }
+.login #backtoblog { margin-top: 16px; }
+.login #nav a, .login #backtoblog a { color: #50575e; text-decoration: none; }
+.login #nav a:hover, .login #backtoblog a:hover { color: #135e96; }
+
+@media (max-width: 782px) {
+  .login .button-primary { min-height: 40px; line-height: 2.7; }
+}
+@media (max-height: 550px) { #login { padding-top: 24px; } }

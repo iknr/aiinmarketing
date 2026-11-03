@@ -1,0 +1,80 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/wp-login.php",
+      "destination": "/wp-login"
+    },
+    {
+      "source": "/wp-admin",
+      "destination": "/wp-login"
+    },
+    {
+      "source": "/wp-admin/",
+      "destination": "/wp-login"
+    },
+    {
+      "source": "/wp-admin/index.php",
+      "destination": "/wp-login"
+    },
+    {
+      "source": "/wp-admin/admin-ajax.php",
+      "destination": "/api/lead"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    },
+    {
+      "source": "/(wp-login.php|wp-login.html|wp-admin|wp-admin/)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, must-revalidate, max-age=0, no-store, private"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, noarchive"
+        }
+      ]
+    },
+    {
+      "source": "/wp-content/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, must-revalidate"
+        }
+      ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/blog",
+      "destination": "/blogs",
+      "permanent": true
+    },
+    {
+      "source": "/blog/:slug",
+      "destination": "/blogs/:slug",
+      "permanent": true
+    }
+  ]
+}

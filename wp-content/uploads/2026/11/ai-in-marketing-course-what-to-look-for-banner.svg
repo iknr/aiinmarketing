@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Animated banner: a checklist ticking off what to look for in an AI marketing course">
+<title>Animated banner: a checklist ticking off what to look for in an AI marketing course</title>
+<style>
+text{font-family:'Plus Jakarta Sans','Segoe UI',Arial,sans-serif;}
+.f{font-weight:800}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes bob2{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+@keyframes twinkle{0%,100%{opacity:.15;transform:scale(.6)}50%{opacity:1;transform:scale(1)}}
+@keyframes wave{0%,55%,100%{transform:rotate(0)}65%{transform:rotate(-18deg)}75%{transform:rotate(8deg)}85%{transform:rotate(-14deg)}}
+@keyframes blink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}
+@keyframes dots{0%,80%,100%{transform:translateY(0);opacity:.4}40%{transform:translateY(-7px);opacity:1}}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes rise{0%{transform:scaleY(.15)}60%,100%{transform:scaleY(1)}}
+@keyframes slide{0%,20%{transform:translateX(0)}45%,100%{transform:translateX(34px)}}
+@keyframes pop{0%{opacity:0;transform:translateY(16px) scale(.9)}12%,88%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-6px)}}
+@keyframes scan{0%{transform:translateY(-80px)}100%{transform:translateY(90px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes climb{0%,100%{transform:translate(0,0)}50%{transform:translate(0,-12px)}}
+@keyframes click{0%,55%{transform:translate(0,0) scale(1)}65%{transform:translate(-6px,-6px) scale(.85)}75%,100%{transform:translate(0,0) scale(1)}}
+@keyframes fadeout{0%,50%{opacity:1}70%,100%{opacity:.15}}
+@keyframes type{from{width:0}to{width:310px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+
+</style>
+<defs>
+<pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="#fff" stroke-opacity=".06"/></pattern>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0f1b3d"/><stop offset="1" stop-color="#14286b"/></linearGradient>
+</defs>
+<rect width="1200" height="630" fill="url(#bg)"/><rect width="1200" height="630" fill="url(#grid)"/>
+<circle cx="1060" cy="70" r="230" fill="#0b4fd6" opacity=".35"/><circle cx="90" cy="590" r="170" fill="#ffd43b" opacity=".13"/>
+<g transform="translate(48 44)"><rect width="92" height="46" rx="12" fill="#ffd43b" stroke="#fff" stroke-width="3"/><text x="46" y="34" text-anchor="middle" class="f" font-size="30" fill="#0f1b3d">AIM</text></g>
+<text x="154" y="62" font-size="15" font-weight="700" fill="#c9d4f2" letter-spacing="1.2">AI IN MARKETING</text>
+<text x="154" y="84" font-size="14" font-weight="700" fill="#ffd43b">by Adsmentor</text>
+
+<path d="M200 161 l2.6 6 6.4.5-4.9 4.2 1.5 6.3-5.6-3.4-5.6 3.4 1.5-6.3-4.9-4.2 6.4-.5z" fill="#ffd43b" style="transform-origin:200px 170px;animation:twinkle 2.6s ease-in-out infinite;animation-delay:0s"/><path d="M420 111 l2.6 6 6.4.5-4.9 4.2 1.5 6.3-5.6-3.4-5.6 3.4 1.5-6.3-4.9-4.2 6.4-.5z" fill="#ffd43b" style="transform-origin:420px 120px;animation:twinkle 3s ease-in-out infinite;animation-delay:0.7s"/><path d="M1130 121 l2.6 6 6.4.5-4.9 4.2 1.5 6.3-5.6-3.4-5.6 3.4 1.5-6.3-4.9-4.2 6.4-.5z" fill="#ffd43b" style="transform-origin:1130px 130px;animation:twinkle 2.2s ease-in-out infinite;animation-delay:1.2s"/><path d="M1140 531 l2.6 6 6.4.5-4.9 4.2 1.5 6.3-5.6-3.4-5.6 3.4 1.5-6.3-4.9-4.2 6.4-.5z" fill="#ffd43b" style="transform-origin:1140px 540px;animation:twinkle 3.1s ease-in-out infinite;animation-delay:0.4s"/>
+<g style="transform-origin:300px 300px;animation:bob 3.6s ease-in-out infinite"><circle cx="290" cy="270" r="110" fill="#fff" stroke="#ffd43b" stroke-width="16" opacity=".95"/><circle cx="290" cy="270" r="84" fill="#0b4fd6" opacity=".18"/><line x1="370" y1="350" x2="450" y2="430" stroke="#ffd43b" stroke-width="22" stroke-linecap="round"/><text x="290" y="296" text-anchor="middle" font-size="84" class="f" fill="#0f1b3d">?</text></g>
+<rect x="560" y="150" width="540" height="50" rx="12" fill="#fff" stroke="#0f1b3d" stroke-width="3"/><text x="650" y="183" font-size="22" font-weight="700" fill="#0f1b3d">AI in every module</text><circle cx="600" cy="175" r="16" fill="#ffd43b" stroke="#0f1b3d" stroke-width="3"/><path d="M591 175 l7 8 13-16" fill="none" stroke="#0f1b3d" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="40" stroke-dashoffset="40" style="animation:draw .5s ease-out forwards;animation-delay:0.6s"/><rect x="560" y="212" width="540" height="50" rx="12" fill="#fff" stroke="#0f1b3d" stroke-width="3"/><text x="650" y="245" font-size="22" font-weight="700" fill="#0f1b3d">You work inside the tools</text><circle cx="600" cy="237" r="16" fill="#ffd43b" stroke="#0f1b3d" stroke-width="3"/><path d="M591 237 l7 8 13-16" fill="none" stroke="#0f1b3d" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="40" stroke-dashoffset="40" style="animation:draw .5s ease-out forwards;animation-delay:1.2999999999999998s"/><rect x="560" y="274" width="540" height="50" rx="12" fill="#fff" stroke="#0f1b3d" stroke-width="3"/><text x="650" y="307" font-size="22" font-weight="700" fill="#0f1b3d">Real briefs, real client work</text><circle cx="600" cy="299" r="16" fill="#ffd43b" stroke="#0f1b3d" stroke-width="3"/><path d="M591 299 l7 8 13-16" fill="none" stroke="#0f1b3d" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="40" stroke-dashoffset="40" style="animation:draw .5s ease-out forwards;animation-delay:2.0s"/><rect x="560" y="336" width="540" height="50" rx="12" fill="#fff" stroke="#0f1b3d" stroke-width="3"/><text x="650" y="369" font-size="22" font-weight="700" fill="#0f1b3d">Trainers you can verify</text><circle cx="600" cy="361" r="16" fill="#ffd43b" stroke="#0f1b3d" stroke-width="3"/><path d="M591 361 l7 8 13-16" fill="none" stroke="#0f1b3d" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="40" stroke-dashoffset="40" style="animation:draw .5s ease-out forwards;animation-delay:2.6999999999999997s"/><rect x="560" y="398" width="540" height="50" rx="12" fill="#fff" stroke="#0f1b3d" stroke-width="3"/><text x="650" y="431" font-size="22" font-weight="700" fill="#0f1b3d">Clear, flat pricing</text><circle cx="600" cy="423" r="16" fill="#ffd43b" stroke="#0f1b3d" stroke-width="3"/><path d="M591 423 l7 8 13-16" fill="none" stroke="#0f1b3d" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="40" stroke-dashoffset="40" style="animation:draw .5s ease-out forwards;animation-delay:3.4s"/>
+<g style="animation:bob2 3s ease-in-out infinite"><rect x="860" y="470" width="240" height="64" rx="32" fill="#ffd43b" stroke="#0f1b3d" stroke-width="3"/><text x="980" y="512" text-anchor="middle" font-size="26" class="f" fill="#0f1b3d">Save your money</text></g>
+<text x="60" y="520" font-size="58" class="f" fill="#fff">Ask these first.</text><text x="60" y="582" font-size="58" class="f" fill="#ffd43b">Pay once, wisely.</text>
+</svg>

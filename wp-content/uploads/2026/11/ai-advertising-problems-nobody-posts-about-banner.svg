@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Animated banner: a shield scanning an ad for mistakes, with warning signs and a checklist">
+<title>Animated banner: a shield scanning an ad for mistakes, with warning signs and a checklist</title>
+<style>
+text{font-family:'Plus Jakarta Sans','Segoe UI',Arial,sans-serif;}
+.f{font-weight:800}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes bob2{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+@keyframes twinkle{0%,100%{opacity:.15;transform:scale(.6)}50%{opacity:1;transform:scale(1)}}
+@keyframes wave{0%,55%,100%{transform:rotate(0)}65%{transform:rotate(-18deg)}75%{transform:rotate(8deg)}85%{transform:rotate(-14deg)}}
+@keyframes blink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}
+@keyframes dots{0%,80%,100%{transform:translateY(0);opacity:.4}40%{transform:translateY(-7px);opacity:1}}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes rise{0%{transform:scaleY(.15)}60%,100%{transform:scaleY(1)}}
+@keyframes slide{0%,20%{transform:translateX(0)}45%,100%{transform:translateX(34px)}}
+@keyframes pop{0%{opacity:0;transform:translateY(16px) scale(.9)}12%,88%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-6px)}}
+@keyframes scan{0%{transform:translateY(-80px)}100%{transform:translateY(90px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes climb{0%,100%{transform:translate(0,0)}50%{transform:translate(0,-12px)}}
+@keyframes click{0%,55%{transform:translate(0,0) scale(1)}65%{transform:translate(-6px,-6px) scale(.85)}75%,100%{transform:translate(0,0) scale(1)}}
+@keyframes fadeout{0%,50%{opacity:1}70%,100%{opacity:.15}}
+@keyframes type{from{width:0}to{width:310px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+
+</style>
+<defs>
+<pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="#fff" stroke-opacity=".06"/></pattern>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0f1b3d"/><stop offset="1" stop-color="#14286b"/></linearGradient>
+</defs>
+<rect width="1200" height="630" fill="url(#bg)"/><rect width="1200" height="630" fill="url(#grid)"/>
+<circle cx="1060" cy="70" r="230" fill="#0b4fd6" opacity=".35"/><circle cx="90" cy="590" r="170" fill="#ffd43b" opacity=".13"/>
+<g transform="translate(48 44)"><rect width="92" height="46" rx="12" fill="#ffd43b" stroke="#fff" stroke-width="3"/><text x="46" y="34" text-anchor="middle" class="f" font-size="30" fill="#0f1b3d">AIM</text></g>
+<text x="154" y="62" font-size="15" font-weight="700" fill="#c9d4f2" letter-spacing="1.2">AI IN MARKETING</text>
+<text x="154" y="84" font-size="14" font-weight="700" fill="#ffd43b">by Adsmentor</text>
+
+<path d="M170 191 l2.6 6 6.4.5-4.9 4.2 1.5 6.3-5.6-3.4-5.6 3.4 1.5-6.3-4.9-4.2 6.4-.5z" fill="#ffd43b" style="transform-origin:170px 200px;animation:twinkle 2.5s ease-in-out infinite;animation-delay:0s"/><path d="M1110 121 l2.6 6 6.4.5-4.9 4.2 1.5 6.3-5.6-3.4-5.6 3.4 1.5-6.3-4.9-4.2 6.4-.5z" fill="#ffd43b" style="transform-origin:1110px 130px;animation:twinkle 3s ease-in-out infinite;animation-delay:0.7s"/><path d="M1150 491 l2.6 6 6.4.5-4.9 4.2 1.5 6.3-5.6-3.4-5.6 3.4 1.5-6.3-4.9-4.2 6.4-.5z" fill="#ffd43b" style="transform-origin:1150px 500px;animation:twinkle 2.4s ease-in-out infinite;animation-delay:1.1s"/>
+<g transform="translate(250 128) scale(.84)"><path d="M180 0 L340 60 V190 C340 290 270 350 180 390 C90 350 20 290 20 190 V60 Z" fill="#fff" stroke="#0f1b3d" stroke-width="5" style="transform-origin:180px 200px;animation:pulse 3s ease-in-out infinite"/>
+<clipPath id="sh"><path d="M180 0 L340 60 V190 C340 290 270 350 180 390 C90 350 20 290 20 190 V60 Z"/></clipPath>
+<g clip-path="url(#sh)"><rect x="0" y="180" width="360" height="26" fill="#0b4fd6" opacity=".35" style="animation:scan 2.6s ease-in-out infinite alternate"/></g>
+<path d="M110 200 l52 56 100-112" fill="none" stroke="#0b4fd6" stroke-width="26" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="320" stroke-dashoffset="320" style="animation:draw 1.4s ease-out forwards;animation-delay:.4s"/></g>
+<g style="animation:bob 3.2s ease-in-out infinite"><path d="M700 170 l60 104 h-120z" fill="#ffd43b" stroke="#0f1b3d" stroke-width="4" stroke-linejoin="round"/><text x="700" y="252" text-anchor="middle" font-size="46" class="f" fill="#0f1b3d">!</text></g>
+<g style="animation:bob2 3.8s ease-in-out infinite"><rect x="800" y="200" width="320" height="56" rx="14" fill="#fff" stroke="#0f1b3d" stroke-width="3"/><text x="822" y="236" font-size="20" font-weight="700" fill="#0f1b3d">Wrong claim caught</text><circle cx="1088" cy="228" r="14" fill="#ffd43b"/></g>
+<g style="animation:bob 3.8s ease-in-out infinite;animation-delay:.6s"><rect x="700" y="290" width="360" height="56" rx="14" fill="#fff" stroke="#0f1b3d" stroke-width="3"/><text x="722" y="326" font-size="20" font-weight="700" fill="#0f1b3d">Customer data kept private</text><circle cx="1030" cy="318" r="14" fill="#ffd43b"/></g>
+<g style="animation:bob2 3.8s ease-in-out infinite;animation-delay:1.1s"><rect x="780" y="380" width="340" height="56" rx="14" fill="#fff" stroke="#0f1b3d" stroke-width="3"/><text x="802" y="416" font-size="20" font-weight="700" fill="#0f1b3d">Human approved the spend</text><circle cx="1088" cy="408" r="14" fill="#ffd43b"/></g>
+<text x="60" y="520" font-size="58" class="f" fill="#fff">Avoid the mistakes</text><text x="60" y="582" font-size="58" class="f" fill="#ffd43b">that cost you a client.</text>
+</svg>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width">
+	<title>Log In &lsaquo; AIM &#8212; WordPress</title>
+	<meta name="robots" content="max-image-preview:large, noindex, noarchive">
+	<meta name="referrer" content="strict-origin-when-cross-origin">
+	<link rel="stylesheet" id="dashicons-css" href="/wp-admin/css/login.css?ver=6.8.3" media="all">
+</head>
+<body class="login no-js login-action-login wp-core-ui locale-en-us">
+<script>document.body.className = document.body.className.replace('no-js', 'js');</script>
+
+<div id="login">
+	<h1 class="wp-login-logo" role="presentation"><a href="https://wordpress.org/">Powered by WordPress</a></h1>
+
+	<!-- shown after a failed attempt -->
+	<div id="login_error" class="notice notice-error" role="alert" hidden></div>
+	<p class="message" id="login_message" hidden></p>
+
+	<!-- wp-login.php?action=login -->
+	<form name="loginform" id="loginform" action="/wp-login.php" method="post" novalidate>
+		<p>
+			<label for="user_login">Username or Email Address</label>
+			<input type="text" name="log" id="user_login" class="input" value="" size="20" autocapitalize="off" autocomplete="username" required="required">
+		</p>
+
+		<div class="user-pass-wrap">
+			<label for="user_pass">Password</label>
+			<div class="wp-pwd">
+				<input type="password" name="pwd" id="user_pass" class="input password-input" value="" size="20" autocomplete="current-password" spellcheck="false" required="required">
+				<button type="button" class="button button-secondary wp-hide-pw hide-if-no-js" data-toggle="0" aria-label="Show password">
+					<svg class="dashicons-visibility" viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><path fill="currentColor" d="M10 4C5 4 1.7 8.3 1 10c.7 1.7 4 6 9 6s8.3-4.3 9-6c-.7-1.7-4-6-9-6zm0 10a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm0-6.2a2.2 2.2 0 1 0 0 4.4 2.2 2.2 0 0 0 0-4.4z"/></svg>
+				</button>
+			</div>
+		</div>
+
+		<p class="forgetmenot"><input name="rememberme" type="checkbox" id="rememberme" value="forever"> <label for="rememberme">Remember Me</label></p>
+		<p class="submit">
+			<input type="submit" name="wp-submit" id="wp-submit" class="button button-primary button-large" value="Log In">
+			<input type="hidden" name="redirect_to" value="/wp-admin/">
+			<input type="hidden" name="testcookie" value="1">
+		</p>
+	</form>
+
+	<!-- wp-login.php?action=lostpassword -->
+	<form name="lostpasswordform" id="lostpasswordform" action="/wp-login.php?action=lostpassword" method="post" novalidate hidden>
+		<p>
+			<label for="lost_user_login">Username or Email Address</label>
+			<input type="text" name="user_login" id="lost_user_login" class="input" value="" size="20" autocapitalize="off" autocomplete="username" required="required">
+		</p>
+		<p class="submit">
+			<input type="submit" name="wp-submit" id="lost-submit" class="button button-primary button-large" value="Get New Password">
+		</p>
+	</form>
+
+	<p id="nav">
+		<a id="nav-lost" href="/wp-login.php?action=lostpassword">Lost your password?</a>
+		<a id="nav-login" href="/wp-login.php" hidden>Log in</a>
+	</p>
+	<p id="backtoblog"><a href="/">&larr; Go to AIM</a></p>
+</div>
+
+<script src="/wp-admin/js/login.js?ver=6.8.3"></script>
+</body>
+</html>

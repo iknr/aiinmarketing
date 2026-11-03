@@ -1,0 +1,46 @@
+/*!
+ * Elementor frontend base styles (container, widget and form primitives).
+ * Only the pieces used by page 622 are included.
+ */
+
+.elementor { -webkit-text-size-adjust: 100%; }
+.elementor *, .elementor *::before, .elementor *::after { box-sizing: border-box; }
+
+/* Flexbox container (.e-con) */
+.e-con { --padding-top: 0; --padding-right: 0; --padding-bottom: 0; --padding-left: 0;
+  position: relative; display: flex; flex-direction: column; width: 100%; max-width: 100%; min-width: 0;
+  margin: 0 auto; padding: 0; }
+.e-con.e-flex > .elementor-element { width: 100%; }
+.e-con-boxed > .elementor-widget, .e-con > .elementor-widget { max-width: 100%; }
+
+/* Widgets */
+.elementor-widget { position: relative; }
+.elementor-widget-container { width: 100%; }
+.elementor-widget:not(:last-child) { margin-block-end: 0; }
+.elementor-widget-html .elementor-widget-container > :first-child { margin-top: 0; }
+
+/* Form widget */
+.elementor-form-fields-wrapper { display: flex; flex-wrap: wrap; }
+.elementor-field-group { position: relative; display: flex; flex-wrap: wrap; align-items: center; width: 100%; }
+.elementor-field-group > * { width: 100%; }
+.elementor-col-100 { width: 100%; }
+.elementor-field-textual { display: block; width: 100%; max-width: 100%; }
+.elementor-field-type-hidden { display: none; }
+.elementor-labels-above .elementor-field-label { display: block; }
+.elementor-button { display: inline-flex; align-items: center; justify-content: center; text-align: center; line-height: 1; }
+.elementor-button-content-wrapper { display: flex; justify-content: center; align-items: center; }
+.elementor-message { margin: 12px 0 0; font-size: 14px; line-height: 1.4; }
+.elementor-message[hidden] { display: none; }
+.elementor-message-success { color: #0b996e; font-weight: 600; }
+.elementor-message-danger { color: #d33; }
+.elementor-form.elementor-form-submitting .elementor-button { opacity: .65; pointer-events: none; }
+
+/* Popup modal (<dialog>) */
+.elementor-popup-modal { width: min(480px, calc(100vw - 24px)); max-height: calc(100vh - 24px); padding: 0; border: 0;
+  background: transparent; overflow: visible; }
+.elementor-popup-modal::backdrop { background: rgba(0, 5, 20, .72); backdrop-filter: blur(3px); }
+.elementor-popup-modal .dialog-widget-content { position: relative; max-height: calc(100vh - 24px); overflow: auto; border-radius: 22px; }
+.elementor-popup-modal .dialog-close-button { position: absolute; top: 10px; right: 12px; z-index: 2; width: 36px; height: 36px;
+  border: 0; border-radius: 50%; background: #eef2f8; color: #22262e; font-size: 24px; line-height: 1; cursor: pointer; }
+.elementor-popup-modal .dialog-close-button:hover { background: #dbe6fd; }
+.elementor-popup-modal .elementor-widget-form { margin: 0; box-shadow: none; }

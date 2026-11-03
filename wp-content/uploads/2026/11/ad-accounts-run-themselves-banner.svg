@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Animated banner: an ad dashboard on autopilot with rising bars and an auto switch">
+<title>Animated banner: an ad dashboard on autopilot with rising bars and an auto switch</title>
+<style>
+text{font-family:'Plus Jakarta Sans','Segoe UI',Arial,sans-serif;}
+.f{font-weight:800}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes bob2{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+@keyframes twinkle{0%,100%{opacity:.15;transform:scale(.6)}50%{opacity:1;transform:scale(1)}}
+@keyframes wave{0%,55%,100%{transform:rotate(0)}65%{transform:rotate(-18deg)}75%{transform:rotate(8deg)}85%{transform:rotate(-14deg)}}
+@keyframes blink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.1)}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.18)}}
+@keyframes dots{0%,80%,100%{transform:translateY(0);opacity:.4}40%{transform:translateY(-7px);opacity:1}}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes rise{0%{transform:scaleY(.15)}60%,100%{transform:scaleY(1)}}
+@keyframes slide{0%,20%{transform:translateX(0)}45%,100%{transform:translateX(34px)}}
+@keyframes pop{0%{opacity:0;transform:translateY(16px) scale(.9)}12%,88%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-6px)}}
+@keyframes scan{0%{transform:translateY(-80px)}100%{transform:translateY(90px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes climb{0%,100%{transform:translate(0,0)}50%{transform:translate(0,-12px)}}
+@keyframes click{0%,55%{transform:translate(0,0) scale(1)}65%{transform:translate(-6px,-6px) scale(.85)}75%,100%{transform:translate(0,0) scale(1)}}
+@keyframes fadeout{0%,50%{opacity:1}70%,100%{opacity:.15}}
+@keyframes type{from{width:0}to{width:310px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+
+</style>
+<defs>
+<pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="#fff" stroke-opacity=".06"/></pattern>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0f1b3d"/><stop offset="1" stop-color="#14286b"/></linearGradient>
+</defs>
+<rect width="1200" height="630" fill="url(#bg)"/><rect width="1200" height="630" fill="url(#grid)"/>
+<circle cx="1060" cy="70" r="230" fill="#0b4fd6" opacity=".35"/><circle cx="90" cy="590" r="170" fill="#ffd43b" opacity=".13"/>
+<g transform="translate(48 44)"><rect width="92" height="46" rx="12" fill="#ffd43b" stroke="#fff" stroke-width="3"/><text x="46" y="34" text-anchor="middle" class="f" font-size="30" fill="#0f1b3d">AIM</text></g>
+<text x="154" y="62" font-size="15" font-weight="700" fill="#c9d4f2" letter-spacing="1.2">AI IN MARKETING</text>
+<text x="154" y="84" font-size="14" font-weight="700" fill="#ffd43b">by Adsmentor</text>
+
+<path d="M180 151 l2.6 6 6.4.5-4.9 4.2 1.5 6.3-5.6-3.4-5.6 3.4 1.5-6.3-4.9-4.2 6.4-.5z" fill="#ffd43b" style="transform-origin:180px 160px;animation:twinkle 2.5s ease-in-out infinite;animation-delay:0s"/><path d="M470 101 l2.6 6 6.4.5-4.9 4.2 1.5 6.3-5.6-3.4-5.6 3.4 1.5-6.3-4.9-4.2 6.4-.5z" fill="#ffd43b" style="transform-origin:470px 110px;animation:twinkle 3s ease-in-out infinite;animation-delay:0.5s"/><path d="M1130 141 l2.6 6 6.4.5-4.9 4.2 1.5 6.3-5.6-3.4-5.6 3.4 1.5-6.3-4.9-4.2 6.4-.5z" fill="#ffd43b" style="transform-origin:1130px 150px;animation:twinkle 2.3s ease-in-out infinite;animation-delay:1s"/><path d="M1150 511 l2.6 6 6.4.5-4.9 4.2 1.5 6.3-5.6-3.4-5.6 3.4 1.5-6.3-4.9-4.2 6.4-.5z" fill="#ffd43b" style="transform-origin:1150px 520px;animation:twinkle 3s ease-in-out infinite;animation-delay:0.2s"/>
+<g transform="translate(140 170)"><rect width="320" height="150" rx="22" fill="#fff" stroke="#0f1b3d" stroke-width="4"/><text x="34" y="56" font-size="24" font-weight="800" fill="#0f1b3d">AUTO</text><text x="34" y="96" font-size="17" font-weight="700" fill="#4b5563">Campaigns on autopilot</text>
+<rect x="206" y="34" width="84" height="44" rx="22" fill="#0b4fd6" stroke="#0f1b3d" stroke-width="3"/><circle cx="228" cy="56" r="17" fill="#ffd43b" stroke="#0f1b3d" stroke-width="3" style="animation:slide 3.2s ease-in-out infinite alternate"/>
+<text x="34" y="132" font-size="16" font-weight="700" fill="#0b4fd6">You: set the goal and guardrails</text></g>
+<g transform="translate(180 322)"><circle cx="70" cy="70" r="56" fill="#ffd43b" stroke="#fff" stroke-width="5" style="transform-origin:70px 70px;animation:pulse 2s ease-in-out infinite"/><path d="M70 36l10 22 24 2-18 16 6 24-22-13-22 13 6-24-18-16 24-2z" fill="#0f1b3d"/></g>
+<g><rect x="560" y="130" width="560" height="320" rx="24" fill="#fff" fill-opacity=".97" stroke="#0f1b3d" stroke-width="4"/><rect x="590" y="330" width="42" height="90" rx="8" fill="#0b4fd6" stroke="#0f1b3d" stroke-width="3" style="transform-origin:611px 420px;animation:rise 2.8s ease-out infinite;animation-delay:0.0s"/><rect x="654" y="280" width="42" height="140" rx="8" fill="#0b4fd6" stroke="#0f1b3d" stroke-width="3" style="transform-origin:675px 420px;animation:rise 2.8s ease-out infinite;animation-delay:0.18s"/><rect x="718" y="310" width="42" height="110" rx="8" fill="#0b4fd6" stroke="#0f1b3d" stroke-width="3" style="transform-origin:739px 420px;animation:rise 2.8s ease-out infinite;animation-delay:0.36s"/><rect x="782" y="230" width="42" height="190" rx="8" fill="#0b4fd6" stroke="#0f1b3d" stroke-width="3" style="transform-origin:803px 420px;animation:rise 2.8s ease-out infinite;animation-delay:0.54s"/><rect x="846" y="260" width="42" height="160" rx="8" fill="#0b4fd6" stroke="#0f1b3d" stroke-width="3" style="transform-origin:867px 420px;animation:rise 2.8s ease-out infinite;animation-delay:0.72s"/><rect x="910" y="190" width="42" height="230" rx="8" fill="#ffd43b" stroke="#0f1b3d" stroke-width="3" style="transform-origin:931px 420px;animation:rise 2.8s ease-out infinite;animation-delay:0.8999999999999999s"/><rect x="974" y="150" width="42" height="270" rx="8" fill="#ffd43b" stroke="#0f1b3d" stroke-width="3" style="transform-origin:995px 420px;animation:rise 2.8s ease-out infinite;animation-delay:1.08s"/>
+<path d="M590 380 C 700 340, 760 330, 840 280 S 980 190, 1060 150" fill="none" stroke="#e5484d" stroke-width="6" stroke-linecap="round" stroke-dasharray="560" stroke-dashoffset="560" style="animation:draw 3s ease-out infinite alternate"/></g>
+<text x="60" y="520" font-size="58" class="f" fill="#fff">Ads run themselves.</text><text x="60" y="582" font-size="58" class="f" fill="#ffd43b">Stay the one who matters.</text>
+</svg>

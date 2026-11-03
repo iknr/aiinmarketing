@@ -10,6 +10,7 @@ AIM teaches marketing by doing: learners build a live WordPress site, connect Cl
 - Duration: 12-week path; core modules in weeks 1 to 4, specialisations in weeks 5 to 8, then a 1-month agency internship
 - Curriculum: 9 modules, all taught to every learner. Core: web development with WordPress, WordPress MCP and vibe coding; SEO and AI search; social media, content and automations; ads on Facebook, Instagram, LinkedIn, Snapchat and X; media planning. Specialisations: AI Generalist, Marktech, Branding and Content, Performance and Growth
 - Fee: ₹5,999 flat, all-inclusive, one public price. Payment is requested only after an onboarding call
+- Guarantee: 7-day money-back guarantee. If AIM is not right for you, tell us within 7 days of your first live class and the program fee is refunded
 - Included: training, all four specialisations, agency internship with certificate, portfolio website with domain and hosting, CV rewrite and mock interviews, pro tools in month 2 (Claude, Semrush, Google AI Pro, Canva Pro, Ubersuggest, SpyFu) and ad spend for portfolio campaigns
 - Tracks: freelancer track, agency track and job track, all using the same nine modules and the same Rs 5,999 fee
 - Trainers: Kautilya Roshan, Sumit Chaudhari, Kailas Nath R and Ankita Kumari, with public LinkedIn profiles and a combined ₹9 Cr+ in media spend managed

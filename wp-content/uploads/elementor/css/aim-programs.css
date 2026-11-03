@@ -50,7 +50,7 @@ html,body{overflow-x:clip}
 @media(max-width:640px){.amx-moreguides ul{columns:1}}
 
 /* ---- three tracks: hero pills, strip, section ---- */
-.elementor-622 .am-lp .amx-paths{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin-top:20px}
+.elementor-622 .am-lp .amx-paths{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin-top:14px;margin-bottom:2px}
 .elementor-622 .am-lp .amx-paths-label{font-size:13px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--pk-blue);margin-right:2px}
 .elementor-622 .am-lp .amx-path{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;font-size:14px;line-height:20px;font-weight:800;color:var(--pk-ink);text-decoration:none;background:#fff;border:2px solid var(--pk-ink);border-radius:999px;box-shadow:2px 2px 0 var(--pk-ink);transition:transform .15s ease,box-shadow .15s ease}
 .elementor-622 .am-lp .amx-path:hover,.elementor-622 .am-lp .amx-path:focus-visible{transform:translate(-1px,-1px);box-shadow:3px 3px 0 var(--pk-ink)}
@@ -76,10 +76,38 @@ html,body{overflow-x:clip}
 .am-lp .amx-trackcta p{margin:0;font-weight:700;font-size:17px;color:var(--ink,#0b0d12);flex:1 1 320px}
 #track-freelancer,#track-agency,#track-job{scroll-margin-top:90px}
 @media(max-width:640px){
- .elementor-622 .am-lp .amx-paths{gap:8px}
- .elementor-622 .am-lp .amx-paths-label{flex:0 0 100%}
- .elementor-622 .am-lp .amx-path{padding:7px 12px;font-size:13.5px}
+ .elementor-622 .am-lp .amx-paths{gap:4px 6px;margin-top:10px}
+ .elementor-622 .am-lp .amx-paths-label{flex:0 0 100%;font-size:11px;line-height:14px;margin:0 0 2px}
+ .elementor-622 .am-lp .amx-paths{flex-wrap:wrap}
+ .elementor-622 .am-lp .amx-path{padding:5px 10px;gap:6px;font-size:13px;line-height:18px;box-shadow:1px 1px 0 var(--pk-ink);white-space:nowrap}
+ .elementor-622 .am-lp .amx-path i{width:8px;height:8px}
+ .elementor-622 .am-lp .amx-pt{display:none}
  .elementor-622 .am-lp .amx-trackstrip-in,.elementor-622 .am-lp .amx-trackstrip ul{flex-direction:column;align-items:flex-start;gap:6px}
  .am-lp .amx-trackcta .am-btn{width:100%}
 }
 @media(prefers-reduced-motion:reduce){.elementor-622 .am-lp .amx-trackstrip{animation:none}.elementor-622 .am-lp .amx-path{transition:none}}
+
+/* 7-day money-back guarantee */
+.amx-gi{flex:none;display:inline-block;vertical-align:-3px}
+.elementor-622 .am-lp .amx-gchip{display:inline-flex;align-items:center;gap:6px;margin:0 8px 4px 0;padding:3px 10px 3px 8px;font-size:13px;line-height:18px;font-weight:800;color:var(--pk-blue);background:#eef3ff;border:1.5px solid var(--pk-blue);border-radius:999px;vertical-align:top}
+.elementor-622 .am-lp .amx-receipt li.amx-r-guar>span{display:inline-flex;align-items:center;gap:8px}
+.elementor-622 .am-lp .amx-receipt li.amx-r-guar b{font-weight:800;color:var(--pk-ink)}
+.elementor-622 .am-lp .amx-guarbox{margin-top:18px;padding:14px 16px;background:#eef3ff;border:1.5px solid var(--pk-blue);border-radius:14px}
+.elementor-622 .am-lp .amx-guarbox .amx-gh{display:flex;align-items:center;gap:8px}
+.elementor-622 .am-lp .amx-guarbox h3{margin:0;font-size:17px;line-height:24px;color:var(--pk-blue)}
+.elementor-622 .am-lp .amx-guarbox p{margin:8px 0 0;font-size:15px;line-height:22px;color:var(--pk-ink)}
+.amx-gline{display:flex;align-items:center;gap:6px;margin:12px 0 0;font-size:13.5px;line-height:19px;font-weight:700;color:#0b4fd6}
+.aim-wait-card .amx-gline{margin-top:16px}
+.aim-wait-card .amx-gline+.aim-wait-cta{margin-top:12px}
+.elementor-622 .am-lp .amx-pl{display:inline}
+@media(min-width:641px) and (max-width:1180px){
+ .elementor-622 .am-lp .amx-paths{gap:6px}
+ .elementor-622 .am-lp .amx-paths-label{font-size:12px;margin-right:0}
+ .elementor-622 .am-lp .amx-path{padding:6px 11px;font-size:13px;gap:6px}
+}
+@media(max-width:380px){
+ .elementor-622 .am-lp .amx-hero{padding-top:36px}
+ .elementor-622 .am-lp .amx-sticker{font-size:13px;padding:6px 12px;margin-bottom:12px}
+ .elementor-622 .am-lp .amx-hero h1{font-size:30px!important;line-height:37px!important}
+}
+.e-form__buttons .amx-gline{margin-top:18px}

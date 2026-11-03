@@ -76,5 +76,6 @@
       "destination": "/blogs/:slug",
       "permanent": true
     }
-  ]
+  ],
+  "buildCommand": "node scripts/inject-gtm.js"
 }

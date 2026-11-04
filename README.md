@@ -1,5 +1,7 @@
 # Ads Mentor landing page
 
+> **Several sessions edit this repo at once. Read "Concurrency and protected features (read first)" at the top of CLAUDE.md.** Push only with `bash scripts/publish.sh`; `scripts/guard.js` runs in the Vercel build and fails the deployment if a protected security, tracking, privacy or CRM feature is missing (owner emergency override: `GUARD_SOFT=1`). After a deploy run `node scripts/live-check.js`.
+
 Static build of the Elementor page (post 622), laid out like a WordPress install so it is easy to follow.
 
 ```

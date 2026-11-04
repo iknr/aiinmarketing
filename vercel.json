@@ -2,7 +2,7 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
   "trailingSlash": false,
-  "buildCommand": "node scripts/inject-gtm.js",
+  "buildCommand": "node scripts/inject-gtm.js && node scripts/guard.js",
   "outputDirectory": ".",
   "rewrites": [
     {

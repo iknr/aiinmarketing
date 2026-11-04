@@ -1,5 +1,31 @@
 # CLAUDE.md
 
+## Concurrency and protected features (read first)
+
+Several Claude sessions work on this repository at the same time (daily content session, SEO, design, security / CRM). The rules below bind every session. The build guard enforces them: a commit that drops a protected feature FAILS the Vercel build and production keeps serving the last good deployment.
+
+1. **Always start by fetching and rebasing onto `origin/main`** (`git fetch origin main && git rebase origin/main`), and rebase again immediately before pushing.
+2. **Publish only through `bash scripts/publish.sh`.** It fetches, refuses uncommitted changes, rebases (stops on conflict and lists the files), runs `scripts/inject-gtm.js`, `scripts/guard.js`, `tools/test-lead.js` (and the attribution browser test when Playwright exists), then pushes without force and retries up to 3 times if another session pushed first. Never `git push --force`, `--force-with-lease`, or `git reset --hard` over unpushed work.
+3. **Change only the files your task needs, with minimal edits.** Never regenerate or overwrite a whole shared file (`index.html`, `api/lead.js`, `aim-track.js`, `aim-magnet.js`, `frontend.js`, `privacy-policy.html`, `vercel.json`, `robots.txt`, `sitemap.xml`, `llms*.txt`, `blogs/index.html`, CSS files) from a stale template or an old copy. When creating a blog post, copy the shell from the NEWEST published post on `origin/main`, not from memory or an older post.
+4. **Security, privacy, tracking and CRM features are PROTECTED**: IP and location capture, origin check and rate limiting, abuse records, UTM attribution, GTM and the event script, privacy-policy wording, the decoy login handling, redirects, headers, author and schema blocks. They have priority over content or design changes and must never be removed, weakened or bypassed. If a requested change would conflict, keep the protected feature and tell the owner.
+5. **Adding a protected feature?** In the same commit add its invariant to `INVARIANTS` in `scripts/guard.js` (id, title, owner-facing `why`, `check`) plus a test, raise `MIN_LEAD_TESTS` if you added lead tests, and update the list below. The guard is what stops later sessions from dropping it.
+6. **If the guard fails, fix the cause.** Never disable or loosen a check, and never set `GUARD_SOFT` to get a deploy through. Only the owner may set `GUARD_SOFT=1` in Vercel (Settings > Environment Variables) in an emergency when the guard blocks something legitimate: the guard then prints the same violations as warnings and exits 0. Remove the variable afterwards.
+7. **Never redeploy an older deployment from Vercel** (it rolls the site back and drops newer features). To roll forward, push a new commit.
+8. **After pushing**, wait for the Vercel production deployment of YOUR commit to be READY, confirm `aiinmarketing.in` and `www.aiinmarketing.in` are aliased to it, and run `node scripts/live-check.js` (must print `LIVE CHECK OK`). If the deployment ERRORs because of the guard, read the build log and fix forward.
+9. **If a protected feature is already missing on main**, restore it from git history (`git log -S'<feature string>' -- <file>`) in a new commit, via `publish.sh`, and tell the owner.
+10. **Content session checklist** before publishing a post: rebase, `bash scripts/publish.sh`, confirm the guard passes (it checks the author block, byline, schema, SEO lengths, Sources section, sitemap, `blogs/index.html`, `llms.txt`, author pages, GTM, price and guarantee wording). New posts need a "Sources" section (`<h2 id="sources">`); only the nine posts listed in `NO_SOURCES_GRANDFATHERED` in `scripts/guard.js` are exempt.
+
+Protected invariants (each is an entry in `INVARIANTS` in `scripts/guard.js`; run `node scripts/guard.js`): `lead-endpoint-source` (origin allow-list, rate limit, repeat suppression, abuse records in Unqualified with IP + geo + UTM in the title, IP from x-real-ip then x-forwarded-for, Vercel geo headers, failure task, IST time, friendly form names, AbortController timeout, key only from `process.env`); `lead-tests` (`tools/test-lead.js` passes, at least `MIN_LEAD_TESTS` checks); `gtm-and-track-on-every-page` (GTM once as loader and noscript, old container nowhere, one `aim-track.js` at the current `TRACK_VER`, UTF-8, one canonical); `attribution-script` (UTM, click id, referrer, first/last touch storage, capture-phase submit listener, dataLayer events, forms still posting to `/wp-admin/admin-ajax.php`); `privacy-policy` (IP address, approximate location, Clarity, Google Analytics, Tag Manager, Heffl, campaign sentence, no-sale sentence, effective date); `vercel-config` (redirects, decoy-login and form rewrites, headers, `buildCommand` = inject-gtm then guard, `outputDirectory`); `robots-sitemap-login` (robots groups, sitemap lists exactly the public pages, no wp-login in sitemap or links, noindex on the decoy login); `blog-posts` (both authors, one authors block, Article + FAQPage JSON-LD, title/description lengths, Sources, magnet form hidden fields, listed in sitemap, blog index, `llms.txt` and both author pages; author pages with ProfilePage); `content-consistency` (only Rs 5,999, 7-day money-back wording, "Adsmentor" spelling, no placeholders); `secret-hygiene` (no keys or tokens, no tracked `.env`).
+
+Tools: `node scripts/guard.js` (the build guard, runs in the Vercel build right after `inject-gtm`, no network, about 2 s), `node scripts/guard-selftest.js` (copies the repo and proves the guard fails after 12 kinds of regression; run it after changing `guard.js`), `bash scripts/publish.sh` (the only push route), `node scripts/live-check.js [baseUrl]` (post-deploy check of the live site, creates no leads).
+
+### Recovery: something was overwritten
+
+1. Find when it disappeared: `git log -S'<feature string>' --oneline -- <file>` (the last commit that touched the string either added or removed it; `git show <sha> -- <file>` shows which).
+2. Restore only that section in a NEW commit on top of current main (`git show <good-sha>:<file>` to read the old text; edit the current file in place, do not overwrite it with the old copy). Never force-push or reset.
+3. Run `bash scripts/publish.sh`, wait for the production deployment to be READY and aliased, then `node scripts/live-check.js`.
+4. Tell the owner what was lost and when. If the guard did not catch it, add an invariant for it (rule 5).
+
 ## Analytics: Google Tag Manager GTM-NPKP66BD
 
 - Every HTML page must contain the GTM snippet (loader in `<head>`, noscript iframe after `<body>`).
@@ -55,7 +81,7 @@ Owner checklist:
 
 Several Claude sessions work on this repository at the same time (content desk, design, security / lead capture). The owner's rule: security and lead-capture work (`api/lead.js`, IP and abuse rules, attribution in `aim-track.js`, privacy sentence, GTM) has PRIORITY and must survive every other update, and every other update must survive too.
 
-Every session, before every push:
+Every session, before every push (use `bash scripts/publish.sh`, which does all of this; the build guard `scripts/guard.js` now enforces it on Vercel):
 1. Commit your own work, then `git fetch origin main` and `git rebase origin/main` (or `git pull --rebase origin main`). Never `git push --force` / `--force-with-lease` to main, never `git reset --hard origin/main` over your own unpushed work, never overwrite a file wholesale with an older copy (copy-pasting a whole page from an old checkout drops newer changes: edit in place).
 2. Resolve conflicts by keeping BOTH sides. For `api/lead.js`, `aim-track.js`, `scripts/inject-gtm.js`, `privacy-policy.html`, `CLAUDE.md`, `README.md`, `tools/test-lead.js` the protected (security) version wins any real conflict.
 3. Run `node scripts/inject-gtm.js` and `node tools/verify-protected.js`. If it reports a problem, a protected change is missing: restore it from git history (`git log -p -- <file>`), re-apply your change on top, run it again, then push.

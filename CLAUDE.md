@@ -50,6 +50,18 @@ Owner checklist:
 2. Live test: open https://aiinmarketing.in, submit one form with an obviously labelled test (name `ZZ TEST - delete me`, your own phone/email). Check the lead appears in Heffl (stage New, source Website) together with its follow-up task or custom fields, and that Vercel > Logs shows no `lead_crm_failed`. Then delete the test lead (and its task) in Heffl. Heffl has "Allow duplicate leads" off, so repeat tests need a different email and phone.
 3. Rotate the key: create a new key in Heffl (Settings > Developer), update `HEFFL_API_KEY` in Vercel, redeploy, submit one test lead, then delete the old key in Heffl.
 
+## Parallel sessions (content, design, security): nothing may overwrite anything
+
+Several Claude sessions work on this repository at the same time (content desk, design, security / lead capture). The owner's rule: security and lead-capture work (`api/lead.js`, IP and abuse rules, attribution in `aim-track.js`, privacy sentence, GTM) has PRIORITY and must survive every other update, and every other update must survive too.
+
+Every session, before every push:
+1. Commit your own work, then `git fetch origin main` and `git rebase origin/main` (or `git pull --rebase origin main`). Never `git push --force` / `--force-with-lease` to main, never `git reset --hard origin/main` over your own unpushed work, never overwrite a file wholesale with an older copy (copy-pasting a whole page from an old checkout drops newer changes: edit in place).
+2. Resolve conflicts by keeping BOTH sides. For `api/lead.js`, `aim-track.js`, `scripts/inject-gtm.js`, `privacy-policy.html`, `CLAUDE.md`, `README.md`, `tools/test-lead.js` the protected (security) version wins any real conflict.
+3. Run `node scripts/inject-gtm.js` and `node tools/verify-protected.js`. If it reports a problem, a protected change is missing: restore it from git history (`git log -p -- <file>`), re-apply your change on top, run it again, then push.
+4. After pushing, `git fetch` again and re-run `node tools/verify-protected.js` against `origin/main`; if the content you pushed removed a protected change, fix it immediately in a new commit (never by force).
+5. New blog posts and pages need nothing special for the security features: the Vercel build injects GTM and `aim-track.js` at the current version, and the lead endpoint is not part of the page. Do not copy old inline form scripts into new pages.
+
+
 ## Authors
 
 Every blog post is credited to both authors. Profile pages: `/author/kailasnathr` (Kailas Nath R) and `/author/kautilyaroshan` (Kautilya Roshan). The content desk must follow this for all future posts:

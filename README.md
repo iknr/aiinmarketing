@@ -28,7 +28,7 @@ Form submissions go to the Heffl CRM through `api/lead.js`. Vercel environment v
   it receives every lead (Zapier, Make, Google Apps Script).
 
 Beyond creating leads, `api/lead.js` records flagged submissions as `ABUSE: <type>` leads in the Heffl stage `Unqualified`
-(`bad_origin`, `rate_limit`, `repeat_within_60s`, `bot_user_agent`; max 20 per hour per instance, no task), creates a HIGH
+(`bad_origin`, `rate_limit`, `repeat_within_60s`, `bot_user_agent`, `same_ip_multiple`; max 20 per hour per instance, no task), creates a HIGH
 "Lead capture failed" task when Heffl rejects a lead, stores the visitor IP and approximate location (from Vercel headers
 `x-real-ip` / `x-forwarded-for`, `x-vercel-ip-country`, `-country-region`, `-city`; server side only) with the lead, shows
 times in IST and uses friendly form names. Create the `Unqualified` stage in Heffl. Details: CLAUDE.md. `privacy-policy.html` describes this.

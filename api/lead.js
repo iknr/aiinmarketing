@@ -31,6 +31,7 @@ const ALLOWED_HOSTS = ['aiinmarketing.in', 'www.aiinmarketing.in'];
 const RATE_MAX = 5;
 const RATE_WINDOW_MS = 10 * 60 * 1000;
 const REPEAT_WINDOW_MS = 60 * 1000;
+const IP_IDENTITY_MAX = 2; // different email+phone pairs per IP per RATE_WINDOW_MS that still count as normal (shared Wi-Fi, family); the next one is flagged
 const ABUSE_STAGE_NAME = 'Unqualified';
 const ABUSE_MAX_PER_HOUR = 20;
 const ABUSE_BUDGET_MS = 3000;
@@ -52,6 +53,7 @@ const SOURCE_LABELS = {
 // Module-scope state (best effort: per warm serverless instance only).
 const rate = new Map(); // ip -> [timestamps]
 const recent = new Map(); // email|phone -> timestamp
+const ipIdentities = new Map(); // ip -> Map(email|phone -> timestamp) of distinct details seen from that IP
 let abuseStamps = []; // timestamps of abuse records sent to Heffl (cap per hour)
 let refCache = null; // { at, ok, key, sourceId, stageId, unqualifiedId }
 
@@ -622,6 +624,21 @@ module.exports = async function handler(req, res) {
     return json(res, 429, { success: false, data: { message: 'Too many submissions. Please try again in a few minutes.' } });
   }
   recent.set(repeatKey, now);
+
+  // Same IP, different details again and again: looks like spam. Acknowledge like a normal submission, keep an
+  // abuse record (with the details they typed and the IP) instead of a real lead.
+  if (geo.ip) {
+    prune(ipIdentities, RATE_WINDOW_MS, now);
+    const seen = new Map([...(ipIdentities.get(geo.ip) || [])].filter(([, t]) => now - t < RATE_WINDOW_MS));
+    const fresh = !seen.has(repeatKey);
+    if (fresh && seen.size >= IP_IDENTITY_MAX) {
+      ipIdentities.set(geo.ip, seen);
+      await flag('same_ip_multiple');
+      return json(res, 200, ok200);
+    }
+    seen.set(repeatKey, now);
+    ipIdentities.set(geo.ip, seen);
+  }
 
   if (process.env.HEFFL_API_KEY) {
     const meta = { ip: geo.ip, country: geo.country, region: geo.region, city: geo.city, abuse: null, campaign: attrLog(attr) };

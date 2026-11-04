@@ -387,6 +387,28 @@ function recover(record, info, meta) {
     .finally(() => clearTimeout(timer));
 }
 
+/**
+ * Heffl lead custom fields (HEFFL_USE_CUSTOM_FIELDS=true, columns created by the owner in Heffl: Settings > Custom
+ * fields > Leads). Key = cf_ + label lowercased with underscores. Empty values are omitted. null when switched off.
+ */
+function customFields(ctx, abuseType) {
+  if (process.env.HEFFL_USE_CUSTOM_FIELDS !== 'true') return null;
+  const a = ctx.attr;
+  const all = {
+    cf_current_situation: clean(ctx.situation, 100),
+    cf_form: friendlyLabel(ctx.formSource, ctx.form),
+    cf_form_source: clean(ctx.formSource, 100),
+    cf_page_url: clean(ctx.pageUrl, 200),
+    cf_campaign_utm: clean(`${utmSummary(a)}; click id present: ${a.hasClick ? 'yes' : 'no'}; referrer: ${a.referrerHost || '-'}; first landing: ${a.landingPath || '-'}; attribution: ${a.attribution}`, 300),
+    cf_ip_address: ctx.ip || '',
+    cf_country: ctx.country || '',
+    cf_region: ctx.region || '',
+    cf_city: ctx.city || '',
+    cf_abuse_type: abuseType || '',
+  };
+  return Object.fromEntries(Object.entries(all).filter(([, v]) => v));
+}
+
 function contextText(ctx) {
   const a = ctx.attr;
   const campaign = `${utmSummary(a)}; click id present: ${a.hasClick ? 'yes' : 'no'}; referrer: ${a.referrerHost || '-'}; first landing: ${a.landingPath || '-'}; attribution: ${a.attribution}`;
@@ -416,19 +438,7 @@ async function sendToHeffl(person, ctx) {
   if (refs.stageId) payload.stageId = refs.stageId;
 
   // (a) custom fields on the lead (documented: v1 intro "Custom fields", cf_ + snake_case label)
-  const useCf = process.env.HEFFL_USE_CUSTOM_FIELDS === 'true';
-  const cf = useCf
-    ? {
-        cf_current_situation: clean(ctx.situation, 100),
-        cf_form_source: clean(ctx.formSource, 100),
-        cf_page_url: clean(ctx.pageUrl, 200),
-        cf_campaign_utm: clean(`${utmSummary(ctx.attr)}; click id present: ${ctx.attr.hasClick ? 'yes' : 'no'}; referrer: ${ctx.attr.referrerHost || '-'}; first landing: ${ctx.attr.landingPath || '-'}; attribution: ${ctx.attr.attribution}`, 300),
-        cf_ip_address: ctx.ip || '',
-        cf_country: ctx.country || '',
-        cf_region: ctx.region || '',
-        cf_city: ctx.city || '',
-      }
-    : null;
+  const cf = customFields(ctx);
 
   let r = await hefflRetry(`${HEFFL_V1}/leads`, 'POST', cf ? { ...payload, ...cf } : payload, deadline);
   let cfSaved = false;
@@ -532,14 +542,24 @@ async function recordAbuse(type, person, ctx, record) {
     const base = { name: person.name, sourceId: refs.sourceId, stageId: refs.unqualifiedId };
     if (!base.sourceId) delete base.sourceId;
     const typed = `phone=${person.mobile || '-'} email=${person.email || '-'}`;
+    const cf = customFields(ctx, type) || {};
+    // One create call; when Heffl rejects the custom-field keys (column not created yet) it is repeated without them.
+    const create = async (body) => {
+      let res = await hefflRetry(`${HEFFL_V1}/leads`, 'POST', { ...body, ...cf }, deadline);
+      if (Object.keys(cf).length && !res.ok && !isDuplicate(res) && res.status === 400) {
+        console.warn(JSON.stringify({ event: 'heffl_custom_fields_rejected', abuse: type, note: 'abuse record created without cf_* keys' }));
+        res = await hefflRetry(`${HEFFL_V1}/leads`, 'POST', body, deadline);
+      }
+      return res;
+    };
     let r;
     if (person.raw) {
-      r = await hefflRetry(`${HEFFL_V1}/leads`, 'POST', { ...base, title: abuseTitle(type, ctx, typed) }, deadline);
+      r = await create({ ...base, title: abuseTitle(type, ctx, typed) });
     } else {
-      r = await hefflRetry(`${HEFFL_V1}/leads`, 'POST', { ...base, mobile: person.mobile, email: person.email, title: abuseTitle(type, ctx) }, deadline);
+      r = await create({ ...base, mobile: person.mobile, email: person.email, title: abuseTitle(type, ctx) });
       if (isDuplicate(r)) {
         // Heffl does not allow duplicate contacts: keep the record, carry the contact in the title instead.
-        r = await hefflRetry(`${HEFFL_V1}/leads`, 'POST', { ...base, title: abuseTitle(type, ctx, `${person.email} ${person.mobile}`) }, deadline);
+        r = await create({ ...base, title: abuseTitle(type, ctx, `${person.email} ${person.mobile}`) });
       }
     }
     if (!r.ok) {

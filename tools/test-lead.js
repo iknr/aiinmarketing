@@ -812,6 +812,33 @@ test('G) no data lost: hourly cap, missing Unqualified stage, Heffl rejection or
   assert(logs.some(([, m]) => m.includes('"lead_crm_failed"') && m.includes('u1201@example.com')));
 });
 
+test('H) custom-field columns: abuse and real leads carry Form, IP, location, situation, page, campaign (and Abuse type)', async () => {
+  const h = { 'x-real-ip': '198.51.100.70', 'x-vercel-ip-country': 'IN', 'x-vercel-ip-country-region': 'GA', 'x-vercel-ip-city': 'Madgaon' };
+  const a = setupAbuse({ lead: () => resp(200, { id: 'ld_cf' }) }, { HEFFL_USE_CUSTOM_FIELDS: 'true' });
+  await call(a.handler, { body: { ...GOOD, ...ATTR_BODY }, headers: { ...h, 'user-agent': 'curl/8.4.0' } });
+  const b = abuseLeads(a.calls)[0].body;
+  assert.strictEqual(b.cf_abuse_type, 'bot_user_agent');
+  assert.strictEqual(b.cf_form, 'magnet-syllabus');
+  assert.deepStrictEqual([b.cf_ip_address, b.cf_country, b.cf_region, b.cf_city], ['198.51.100.70', 'IN', 'GA', 'Madgaon']);
+  assert.strictEqual(b.cf_current_situation, 'working professional');
+  assert(b.cf_campaign_utm.startsWith('google / cpc / spring'));
+  assert(!JSON.stringify(a.calls).includes('ABCDEF123456XYZ'));
+  // real lead: Form column too, never an Abuse type
+  const r = setupAbuse({ lead: () => resp(200, { id: 'ld_cf', customFields: { x: 1 } }) }, { HEFFL_USE_CUSTOM_FIELDS: 'true' });
+  await call(r.handler, { headers: h });
+  const rb = leadPosts(r.calls)[0].body;
+  assert.strictEqual(rb.cf_form, 'magnet-syllabus');
+  assert(!('cf_abuse_type' in rb));
+  // columns not created in Heffl yet (400): the abuse record is still stored, without cf_* keys
+  let n = 0;
+  const m = setupAbuse({ lead: () => (++n === 1 ? resp(400, { code: 'BAD_REQUEST', message: 'unknown field' }) : resp(200, { id: 'ld_ok' })) }, { HEFFL_USE_CUSTOM_FIELDS: 'true' });
+  await call(m.handler, { headers: { ...h, 'user-agent': 'curl/8.4.0' } });
+  const posts = abuseLeads(m.calls);
+  assert.strictEqual(posts.length, 2);
+  assert(!Object.keys(posts[1].body).some((k) => k.startsWith('cf_')));
+  assert.strictEqual(abuseTasks(m.calls).length, 1, 'the context task is still created');
+});
+
 (async () => {
   let failed = 0;
   for (const [name, fn] of tests) {

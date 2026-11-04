@@ -34,7 +34,7 @@ const REPEAT_WINDOW_MS = 60 * 1000;
 const IP_IDENTITY_MAX = 1; // different email+phone pairs per IP per RATE_WINDOW_MS that count as normal; every further different pair is flagged as same_ip_multiple
 const ABUSE_STAGE_NAME = 'Unqualified';
 const ABUSE_MAX_PER_HOUR = 20;
-const ABUSE_BUDGET_MS = 3000;
+const ABUSE_BUDGET_MS = 5000;
 // Obvious automation only. A missing User-Agent is not flagged.
 const BOT_UA = /HeadlessChrome|PhantomJS|python-requests|python-urllib|aiohttp|^curl\/|\bcurl\/|^wget|Go-http-client|node-fetch|undici|axios\/|okhttp|libwww-perl|scrapy|java\/|httpclient|\bbot\b|spider|crawler/i;
 
@@ -440,9 +440,14 @@ async function sendToHeffl(person, ctx) {
     cfSaved = Boolean(saved && typeof saved === 'object' && Object.keys(saved).length);
   }
 
+  let duplicate = false;
   if (isDuplicate(r)) {
-    console.log(JSON.stringify({ event: 'duplicate_lead', status: r.status }));
-    return { ok: true, duplicate: true };
+    // Heffl refuses a second lead with the same phone/email. Never drop it: store the person again WITHOUT the
+    // contact fields, with the contact in the title, so the team still sees the new enquiry and its follow-up task.
+    console.log(JSON.stringify({ event: 'duplicate_lead', status: r.status, note: 'stored again without contact fields' }));
+    duplicate = true;
+    const { mobile, email, ...rest } = payload;
+    r = await hefflRetry(`${HEFFL_V1}/leads`, 'POST', { ...rest, title: clean(`Repeat enquiry (contact already in Heffl): ${person.email} ${person.mobile}`, TITLE_MAX) }, deadline);
   }
   if (!r.ok) {
     const info = failureInfo(r);
@@ -470,7 +475,7 @@ async function sendToHeffl(person, ctx) {
   }
 
   const leadId = r.data && (r.data.id || (r.data.data && r.data.data.id));
-  if (cfSaved) return { ok: true };
+  if (cfSaved && !duplicate) return { ok: true };
 
   // (b) follow-up task linked to the lead carrying the context (v2 POST /tasks, entity "leads", entityId "ld_…")
   if (!leadId) {
@@ -483,7 +488,7 @@ async function sendToHeffl(person, ctx) {
     'POST',
     {
       title,
-      description: contextText(ctx),
+      description: (duplicate ? `Repeat enquiry: this phone/email already exists in Heffl.\nMobile (typed): ${person.mobile}\nEmail (typed): ${person.email}\n` : '') + contextText(ctx),
       type: 'call',
       priority: 'MEDIUM',
       dueDate: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
@@ -540,6 +545,35 @@ async function recordAbuse(type, person, ctx, record) {
     if (!r.ok) {
       console.error(JSON.stringify({ event: 'abuse_record_failed', abuse: type, ...failureInfo(r) }));
       await fallback('abuse_record_failed', failureInfo(r));
+      return;
+    }
+    // The lead record has no place for the IP, the form details or the campaign (and when the contact was a duplicate
+    // it has no phone/email either), so they go into a low-priority task linked to the abuse lead.
+    const leadId = r.data && (r.data.id || (r.data.data && r.data.data.id));
+    if (!leadId) return await fallback('abuse_no_lead_id');
+    const t = await hefflRetry(
+      `${HEFFL_V2}/tasks`,
+      'POST',
+      {
+        title: clean(`ABUSE: ${type} - ${person.name}`, 200),
+        description: [
+          `Flagged as abuse: ${type}. Review before calling; move to New if this is a genuine person.`,
+          `Name: ${person.name}`,
+          `Mobile (typed): ${person.mobile || '-'}`,
+          `Email (typed): ${person.email || '-'}`,
+          contextText(ctx),
+        ].join('\n'),
+        type: 'todo',
+        priority: 'LOW',
+        dueDate: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
+        entity: 'leads',
+        entityId: leadId,
+      },
+      deadline
+    );
+    if (!t.ok) {
+      console.error(JSON.stringify({ event: 'abuse_context_task_failed', abuse: type, ...failureInfo(t) }));
+      await fallback('abuse_task_failed', failureInfo(t));
     }
   } catch (err) {
     console.error(JSON.stringify({ event: 'abuse_record_failed', abuse: type, error: err && err.name }));

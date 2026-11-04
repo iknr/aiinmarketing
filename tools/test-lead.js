@@ -245,16 +245,41 @@ test('429 with reset hint >= 2 s: no retry, treated as failure', async () => {
   assert.strictEqual(JSON.parse(logs.find(([, m]) => m.includes('lead_crm_failed'))[1]).status, 429);
 });
 
-test('duplicate (409 and 400 duplicate message): logged as duplicate_lead, success, no retry, no task', async () => {
+test('duplicate contact (409 / 400 duplicate message): NOT dropped; stored again without contact fields, contact in the title, follow-up task kept', async () => {
   for (const dup of [() => resp(409, { code: 'CONFLICT' }), () => resp(400, { code: 'BAD_REQUEST', message: 'Lead already exists with this email' })]) {
-    const { handler, calls } = setup({ env: { HEFFL_API_KEY: FAKE_KEY, LEAD_WEBHOOK_URL: 'https://hook.test/x' }, route: okRoute({ lead: dup }) });
+    let n = 0;
+    const { handler, calls } = setup({ env: { HEFFL_API_KEY: FAKE_KEY, LEAD_WEBHOOK_URL: 'https://hook.test/x' }, route: okRoute({ lead: () => (++n === 1 ? dup() : resp(200, { id: 'ld_rep' })) }) });
     const r = await call(handler);
     assert.deepStrictEqual(r.body, SUCCESS);
-    assert.strictEqual(leadPosts(calls).length, 1);
+    const posts = leadPosts(calls);
+    assert.strictEqual(posts.length, 2);
+    assert(!('mobile' in posts[1].body) && !('email' in posts[1].body));
+    assert.strictEqual(posts[1].body.title, 'Repeat enquiry (contact already in Heffl): asha@example.com +919876543210');
+    assert.strictEqual(posts[1].body.stageId, 'lstg_new');
+    const t = followTasks(calls)[0].body;
+    assert.strictEqual(t.entityId, 'ld_rep');
+    assert(t.description.startsWith('Repeat enquiry:') && t.description.includes('Mobile (typed): +919876543210') && t.description.includes('IP address:'));
     assert(logs.some(([, m]) => m.includes('duplicate_lead')));
     assert(!logs.some(([, m]) => m.includes('lead_crm_failed')));
-    assert(!calls.some((c) => c.url.endsWith('/tasks') || c.url === 'https://hook.test/x'));
   }
+});
+
+test('G) every abuse record gets a low-priority task linked to the lead with IP, typed details and context', async () => {
+  const { handler, calls } = setupAbuse();
+  await call(handler, { body: { ...GOOD, ...ATTR_BODY }, headers: { 'x-real-ip': '198.51.100.60', 'x-vercel-ip-country': 'IN', 'x-vercel-ip-country-region': 'GA', 'x-vercel-ip-city': 'Madgaon', 'user-agent': 'curl/8.4.0' } });
+  const t = abuseTasks(calls);
+  assert.strictEqual(t.length, 1);
+  assert.strictEqual(t[0].body.title, 'ABUSE: bot_user_agent - Asha Verma');
+  assert.strictEqual(t[0].body.priority, 'LOW');
+  assert.deepStrictEqual([t[0].body.entity, t[0].body.entityId], ['leads', 'ld_1']);
+  const d = t[0].body.description;
+  for (const x of ['Mobile (typed): +919876543210', 'Email (typed): asha@example.com', 'IP address: 198.51.100.60', 'Approximate location: Madgaon, GA, IN', 'Current situation: working professional', 'Campaign / UTM: google / cpc / spring']) assert(d.includes(x), x);
+  assert(!d.includes('ABCDEF123456XYZ'));
+  // duplicate contact on an abuse record: still a task with the typed contact
+  let n = 0;
+  const dup = setupAbuse({ lead: () => (++n === 1 ? resp(409, {}) : resp(200, { id: 'ld_d' })) });
+  await call(dup.handler, { headers: { 'user-agent': 'curl/8.4.0', 'x-real-ip': '198.51.100.61' } });
+  assert(abuseTasks(dup.calls)[0].body.description.includes('Email (typed): asha@example.com'));
 });
 
 test('Heffl 500 without LEAD_WEBHOOK_URL: success + structured log only', async () => {
@@ -363,6 +388,8 @@ test('GET and other methods: 405 JSON', async () => {
 
 // ------------------------------------------------------------ v2: failure task, abuse, IP/geo, IST, labels
 const taskCalls = (calls) => calls.filter((c) => c.url.endsWith('/api/v2/tasks'));
+const followTasks = (calls) => taskCalls(calls).filter((c) => c.body.title.startsWith('Follow up:'));
+const abuseTasks = (calls) => taskCalls(calls).filter((c) => c.body.title.startsWith('ABUSE:'));
 const abuseLeads = (calls) => leadPosts(calls).filter((c) => String(c.body.title || '').startsWith('ABUSE: '));
 const STAGES_U = { items: [...STAGES.items, { id: 'lstg_unq', label: 'Unqualified', type: 'x', position: 9 }] };
 const abuseRoute = (extra = {}) => (url, init, calls) =>
@@ -417,7 +444,7 @@ test('B) repeat within 60 s -> Unqualified lead "ABUSE: repeat_within_60s", no t
   assert.strictEqual(a[0].body.stageId, 'lstg_unq');
   assert.notStrictEqual(a[0].body.stageId, 'lstg_new');
   assert.strictEqual(a[0].body.title, 'ABUSE: repeat_within_60s | IP 203.0.113.9 | IN, KL, Kochi | src=meta cmp=nov');
-  assert.strictEqual(taskCalls(calls).length, 1, 'only the first, real lead has its follow-up task');
+  assert.strictEqual(followTasks(calls).length, 1, 'only the first, real lead has its follow-up task');
 });
 
 test('B) repeat abuse record falls back to contact-in-title when Heffl rejects the duplicate contact', async () => {
@@ -444,7 +471,7 @@ test('B) bad_origin and rate_limit records; responses unchanged (400 / 429)', as
   const titles = abuseLeads(calls).map((c) => c.body.title.split(' | ')[0]);
   assert.deepStrictEqual(titles, ['ABUSE: bad_origin', 'ABUSE: same_ip_multiple', 'ABUSE: same_ip_multiple', 'ABUSE: same_ip_multiple', 'ABUSE: same_ip_multiple', 'ABUSE: rate_limit']);
   for (const c of abuseLeads(calls)) assert.strictEqual(c.body.stageId, 'lstg_unq');
-  assert.strictEqual(taskCalls(calls).length, 1, 'task only for the real lead');
+  assert.strictEqual(followTasks(calls).length, 1, 'task only for the real lead');
 });
 
 test('B) bot_user_agent: flagged for automation UAs, silent success; normal browsers and missing UA are not', async () => {
@@ -456,12 +483,12 @@ test('B) bot_user_agent: flagged for automation UAs, silent success; normal brow
   }
   assert.strictEqual(abuseLeads(calls).length, 4);
   assert(abuseLeads(calls).every((c) => c.body.title.startsWith('ABUSE: bot_user_agent')));
-  assert.strictEqual(taskCalls(calls).length, 0);
+  assert.strictEqual(followTasks(calls).length, 0);
   const ok = 'Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 Version/17.0 Mobile/15E148 Safari/604.1';
   await call(handler, { body: uniq(410), headers: { 'user-agent': ok } });
   await call(handler, { body: uniq(411) });
   assert.strictEqual(abuseLeads(calls).length, 4);
-  assert.strictEqual(taskCalls(calls).length, 2);
+  assert.strictEqual(followTasks(calls).length, 2);
 });
 
 test('B) abuse records: capped at 20 per hour (then only logged), invalid input skipped, no key -> no Heffl call', async () => {
@@ -711,7 +738,7 @@ test('F) same IP, different details: the 2nd+ different person is stored in Unqu
   for (let i = 1; i <= 2; i++) r.push(await call(handler, { body: { ...uniq(1000 + i), 'form_fields[name]': `Person ${i}`, ...ATTR_BODY }, headers: h }));
   assert(r.every((x) => x.status === 200 && JSON.stringify(x.body) === JSON.stringify(SUCCESS)));
   assert.strictEqual(leadPosts(calls).length, 2, 'nothing lost: both stored');
-  assert.strictEqual(taskCalls(calls).length, 1, 'the first person is a normal lead with a task');
+  assert.strictEqual(followTasks(calls).length, 1, 'the first person is a normal lead with a task');
   const a = abuseLeads(calls);
   assert.strictEqual(a.length, 1);
   assert.strictEqual(a[0].body.stageId, 'lstg_unq');
@@ -733,7 +760,7 @@ test('F) same_ip_multiple: other IPs, the same person again and the 10-minute wi
     Date.now = realNow;
   }
   assert.strictEqual(abuseLeads(calls).length, 0);
-  assert.strictEqual(taskCalls(calls).length, 3);
+  assert.strictEqual(followTasks(calls).length, 3);
   await call(handler, { body: uniq(1014), headers: h });
   assert.strictEqual(abuseLeads(calls).length, 1, 'a different person within 10 minutes of the previous one from the same IP');
 });

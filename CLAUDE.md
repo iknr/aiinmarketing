@@ -91,7 +91,7 @@ Every session, before every push (use `bash scripts/publish.sh`, which does all 
 
 ## Authors
 
-Every blog post is credited to both authors. Profile pages: `/author/kailasnathr` (Kailas Nath R) and `/author/kautilyaroshan` (Kautilya Roshan). The content desk must follow this for all future posts:
+Every blog post is credited to both authors. Roles (owner rule): Kailas Nath R is the AUTHOR and Kautilya Roshan is the CO-AUTHOR. Never describe Kailas as "co-author": his card line reads "Author of The Ad Account Nobody Shows You" and his meta/description text says "author of", while Kautilya's says "Co-author of ..."; in `llms-full.txt` each entry has `Author: Kailas Nath R` and `Co-author: Kautilya Roshan`. Profile pages: `/author/kailasnathr` (Kailas Nath R) and `/author/kautilyaroshan` (Kautilya Roshan). The content desk must follow this for all future posts:
 
 - Byline under the H1: `By <a href="/author/kailasnathr" rel="author">Kailas Nath R</a> and <a href="/author/kautilyaroshan" rel="author">Kautilya Roshan</a> &middot; <time ...>`.
 - Exactly one `<section class="aimb-authors" aria-label="About the authors">` (H2 `id="about-the-authors"`), placed after the closing CTA aside and before the `aimb-more-posts` list. Copy the markup from any existing post (two `aimb-acard` cards with role pills, LinkedIn, GitHub for Kailas, Book on Amazon and Full profile pills). Do not add a second "About the authors" section.

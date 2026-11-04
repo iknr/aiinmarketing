@@ -40,6 +40,7 @@ Use the Apply button on https://aiinmarketing.in/ or email contact@adsmentor.in.
 
 URL: https://aiinmarketing.in/blogs/best-digital-marketing-courses-india-2026-how-to-choose
 Author: Kailas Nath R
+Co-author: Kautilya Roshan
 Published: 2026-11-03
 Summary: Best digital marketing course in India 2026: fees, syllabus and AI and vibe marketing compared, plus a 5-question checklist. Learn live online from any city.
 
@@ -250,6 +251,7 @@ Common roles include digital marketing executive, SEO specialist, performance ma
 
 URL: https://aiinmarketing.in/blogs/who-owns-your-ad-account-case-study
 Author: Kailas Nath R
+Co-author: Kautilya Roshan
 Published: 2026-11-03
 Summary: One setup shortcut cost a founder six months of ad data. See how ad account ownership goes wrong and the 30-minute fix that protects your audiences and pixel.
 
@@ -382,6 +384,7 @@ Give the lowest level that lets them do their job. Keep ownership and billing wi
 
 URL: https://aiinmarketing.in/blogs/the-ad-account-nobody-shows-you-book
 Author: Kailas Nath R
+Co-author: Kautilya Roshan
 Published: 2026-11-03
 Summary: A hands-on social ads book for Meta, LinkedIn, TikTok, Snapchat and X: 160+ real screenshots, 75 SOPs and Indian rules. See what is inside and who it is for.
 
@@ -503,6 +506,7 @@ On Amazon India, using the button at the top of this page.
 
 URL: https://aiinmarketing.in/blogs/what-is-vibe-marketing
 Author: Kailas Nath R
+Co-author: Kautilya Roshan
 Published: 2026-11-03
 Summary: Vibe marketing means telling AI what you want and finishing websites, ads and reports in a fraction of the time. What it is, what it is not, and how to start.
 
@@ -606,6 +610,7 @@ You can see useful results in the first week. Becoming reliable at it takes a fe
 
 URL: https://aiinmarketing.in/blogs/ai-in-marketing-course-what-to-look-for
 Author: Kailas Nath R
+Co-author: Kautilya Roshan
 Published: 2026-11-03
 Summary: Choosing an AI marketing course? Ask these seven questions on tools, projects, trainers, internship and price to avoid paying for a certificate with no skills.
 
@@ -706,6 +711,7 @@ Only after you have seen the syllabus, spoken to the team and understood the ref
 
 URL: https://aiinmarketing.in/blogs/ad-accounts-run-themselves
 Author: Kailas Nath R
+Co-author: Kautilya Roshan
 Published: 2026-11-03
 Summary: Meta Advantage+ and Google Performance Max now automate targeting. Learn the three levers that still belong to you and a two-hour weekly routine to manage them.
 
@@ -810,6 +816,7 @@ With the right foundations and supervised practice, yes. Start with small budget
 
 URL: https://aiinmarketing.in/blogs/zero-click-ai-search-and-ads
 Author: Kailas Nath R
+Co-author: Kautilya Roshan
 Published: 2026-11-03
 Summary: More searches end with an AI answer and no click. Seven practical ways to stay visible, how ads fit in, and how to measure leads when clicks fall.
 
@@ -898,6 +905,7 @@ Not automatically. Focus ads on high-intent searches and brand terms, and make s
 
 URL: https://aiinmarketing.in/blogs/agentic-ai-marketing-work-competitors-hand-to-agents
 Author: Kailas Nath R
+Co-author: Kautilya Roshan
 Published: 2026-11-03
 Summary: AI agents can handle reporting, lead replies and site checks while you do better work. Five tasks to automate first and how to set up a safe first workflow.
 
@@ -996,6 +1004,7 @@ Pick a repeatable task you do every week, such as reporting or lead replies, and
 
 URL: https://aiinmarketing.in/blogs/ai-advertising-problems-nobody-posts-about
 Author: Kailas Nath R
+Co-author: Kautilya Roshan
 Published: 2026-11-03
 Summary: Wrong claims, same-looking ads, data slips and unchecked automation: six quiet AI advertising mistakes, real scenarios, simple fixes and a checklist.
 
@@ -1105,6 +1114,7 @@ Add real customer language, specific proof and different angles, then edit in th
 
 URL: https://aiinmarketing.in/blogs/rtcros-prompt-framework-for-marketers
 Author: Kailas Nath R
+Co-author: Kautilya Roshan
 Published: 2026-11-04
 Summary: Learn RTCROS, a six-part prompt framework (Role, Task, Context, Rules, Output format, Style) with marketing examples, plus a free branded PDF guide.
 
@@ -1334,6 +1344,7 @@ Every source below was opened for this guide. Where a figure or quotation is use
 
 URL: https://aiinmarketing.in/blogs/meta-ads-mcp-and-cli-sop
 Author: Kailas Nath R
+Co-author: Kautilya Roshan
 Published: 2026-11-04
 Summary: A step-by-step SOP for using Meta's official Ads MCP server and CLI safely: access, read-only audits, paused drafts and approvals, plus a free PDF.
 
@@ -1529,7 +1540,8 @@ Every source below was opened for this guide. Quotations and tool names are attr
 # Duolingo's AI-First Memo, 18 Months On: What Its Own Filings Show
 
 URL: https://aiinmarketing.in/blogs/duolingo-ai-first-case-study-18-months-on
-Authors: Kailas Nath R and Kautilya Roshan
+Author: Kailas Nath R
+Co-author: Kautilya Roshan
 Published: 2026-11-04
 Summary: What happened after Duolingo's April 2025 AI-first memo, from its own SEC letters: output, users, costs and trust, plus a free AI announcement checklist.
 

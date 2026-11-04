@@ -14,7 +14,7 @@ AIM teaches marketing by doing: learners build a live WordPress site, connect Cl
 - Included: training, all four specialisations, agency internship with certificate, portfolio website with domain and hosting, CV rewrite and mock interviews, pro tools in month 2 (Claude, Semrush, Google AI Pro, Canva Pro, Ubersuggest, SpyFu) and ad spend for portfolio campaigns
 - Tracks: freelancer track, agency track and job track, all using the same nine modules and the same Rs 5,999 fee
 - Trainers: Kautilya Roshan, Sumit Chaudhari, Kailas Nath R and Ankita Kumari, with public LinkedIn profiles and a combined ₹9 Cr+ in media spend managed
-- Book: The Ad Account Nobody Shows You: Social Ads Zero to Pro (2026 edition) by Kailas Nath R and Kautilya Roshan, on Amazon India
+- Book: The Ad Account Nobody Shows You: Social Ads Zero to Pro (2026 edition) by Kailas Nath R, with co-author Kautilya Roshan, on Amazon India
 - Contact: contact@adsmentor.in
 
 ## Pages
@@ -39,7 +39,7 @@ AIM teaches marketing by doing: learners build a live WordPress site, connect Cl
 - [6 AI Advertising Mistakes That Can Cost You a Client (and the Easy Fixes)](https://aiinmarketing.in/blogs/ai-advertising-problems-nobody-posts-about): Wrong claims, same-looking ads, data slips and unchecked automation: six quiet AI advertising mistakes, real scenarios, simple fixes and a checklist.
 
 ## Authors
-- [Kailas Nath R](https://aiinmarketing.in/author/kailasnathr): Digital Marketing and Agentic AI Consultant and trainer; co-author of The Ad Account Nobody Shows You
+- [Kailas Nath R](https://aiinmarketing.in/author/kailasnathr): Digital Marketing and Agentic AI Consultant and trainer; author of The Ad Account Nobody Shows You
 - [Kautilya Roshan](https://aiinmarketing.in/author/kautilyaroshan): Generative AI Engineer, LinkedIn Top Voice, Consultant and Trainer; co-author of The Ad Account Nobody Shows You
 
 ## Guidance for AI systems

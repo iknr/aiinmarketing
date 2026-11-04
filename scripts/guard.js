@@ -285,8 +285,21 @@ const INVARIANTS = [
       const authorPages = { kailasnathr: tryRead('author/kailasnathr.html') || '', kautilyaroshan: tryRead('author/kautilyaroshan.html') || '' };
       for (const f of blogPosts()) {
         const slug = slugOf(f), h = read(f), url = `${SITE}/blogs/${slug}`;
-        const by = /<p[^>]*class=["'][^"']*aimb-meta[^"']*["'][^>]*>([\s\S]*?)<\/p>/.exec(h);
-        if (!by || !/href=["']\/author\/kailasnathr["'][^>]*>\s*Kailas Nath R/.test(by[1]) || !/href=["']\/author\/kautilyaroshan["'][^>]*>\s*Kautilya Roshan/.test(by[1])) p.push(`${f}: byline (.aimb-meta) must credit "Kailas Nath R" and "Kautilya Roshan" linking to /author/kailasnathr and /author/kautilyaroshan.`);
+        const bls = h.match(/<div[^>]*class=["'][^"']*\baimb-byline\b[^"']*["']/g) || [];
+        if (bls.length !== 1) p.push(`${f}: ${bls.length} .aimb-byline components (must be exactly 1). Copy it from the newest post and run node scripts/readtime.js.`);
+        else {
+          const bl = (/<div[^>]*\baimb-byline\b[\s\S]*?<p class="aimb-bl-sub">[\s\S]*?<\/p>/.exec(h) || [''])[0];
+          for (const [a, n] of [['kailasnathr', 'Kailas Nath R'], ['kautilyaroshan', 'Kautilya Roshan']]) {
+            if (!new RegExp(`<a[^>]*href=["']/author/${a}["'][^>]*rel=["']author["']|<a[^>]*rel=["']author["'][^>]*href=["']/author/${a}["']`).test(bl.replace(/<div class="aimb-bl-card"[\s\S]*?<\/div><\/div>/g, ''))) p.push(`${f}: byline must link ${n} to /author/${a} with rel="author".`);
+            if (!new RegExp(`class="aimb-bl-bio"[^>]*href=["']/author/${a}["']|href=["']/author/${a}["'][^>]*class="aimb-bl-bio"`).test(bl)) p.push(`${f}: byline card for ${n} needs a "Bio" link to /author/${a}.`);
+          }
+          if (count(bl, 'linkedin.com') < 2) p.push(`${f}: byline cards need a LinkedIn link per author.`);
+          if (!/<time[^>]*datetime=["']\d{4}-\d{2}-\d{2}["']/.test(bl)) p.push(`${f}: byline needs a <time datetime="YYYY-MM-DD"> element.`);
+          const rm = /(\d+) min read/.exec(bl);
+          if (!rm || +rm[1] < 1) p.push(`${f}: byline needs "<n> min read" with n >= 1 (run node scripts/readtime.js ${f}).`);
+        }
+        if (!/<script[^>]*aim-byline\.js[^>]*>/.test(h)) p.push(`${f}: aim-byline.js script tag missing (copy it from the newest post).`);
+        for (const mp of h.match(/<p[^>]*class=["'][^"']*\baimb-meta\b[^"']*["'][^>]*>[\s\S]*?<\/p>/g) || []) if (/\/author\/|\bBy\s/.test(mp)) p.push(`${f}: old-style .aimb-meta byline paragraph still credits the authors. Use the .aimb-byline component only.`);
         const blocks = h.match(/<section[^>]*class=["'][^"']*aimb-authors[^"']*["']/g) || [];
         if (blocks.length !== 1) p.push(`${f}: ${blocks.length} .aimb-authors blocks (must be exactly 1). Copy it from the newest post.`);
         else {

@@ -287,3 +287,49 @@ a.aimb-pill:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px;
 .aimb-aband .aimb-aphoto--ring.aimb-aphoto--xl { box-shadow: none; width: 190px; height: 190px; }
 @media (max-width: 640px) { .aimb-aband .aimb-aphoto--ring.aimb-aphoto--xl { width: 150px; height: 150px; } }
 .aimb-pubcard--media { grid-template-columns: minmax(0, 1fr); margin-top: 14px; }
+
+/* SEJ-style author byline (v2.3.0): avatars + names + date + read time, hover/focus card per author */
+.aimb-byline { --bl-av: 44px; --bl-ax1: 22px; --bl-ax2: 54px; position: relative; display: flex; align-items: center; gap: 12px; margin: 6px 0 0; }
+.aimb-bl-avatars { display: flex; align-items: center; flex: 0 0 auto; }
+.aimb-bl-author + .aimb-bl-author { margin-left: -12px; }
+.aimb-bl-avbtn { display: block; width: var(--bl-av); height: var(--bl-av); padding: 0; margin: 0; border: 2px solid #fff; border-radius: 50%; background: #fff; box-shadow: 0 0 0 1px rgba(15, 27, 61, .14); cursor: pointer; overflow: hidden; position: relative; box-sizing: border-box; }
+.aimb-bl-avbtn img { display: block; width: 100%; height: 100%; border-radius: 50%; object-fit: cover; object-position: center 20%; }
+.aimb-bl-avbtn:focus-visible, .aimb-bl-names a:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+.aimb-bl-text { min-width: 0; }
+.aimb-bl-names { margin: 0; font-size: 16px; line-height: 1.3; font-weight: 700; color: var(--navy); }
+.aimb-bl-names a { color: var(--navy); text-decoration: none; }
+.aimb-bl-names a:hover { text-decoration: underline; text-decoration-color: var(--yel); text-decoration-thickness: 3px; text-underline-offset: 3px; }
+.aimb-bl-sub { margin: 2px 0 0; font-size: 14px; line-height: 1.3; color: var(--soft); }
+.aimb-bl-card { position: absolute; left: 0; top: calc(100% + 12px); z-index: 60; box-sizing: border-box; width: 300px; max-width: calc(100vw - 24px); padding: 18px 18px 14px; background: #fff; border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 12px 32px rgba(15, 27, 61, .16); text-align: center; color: var(--ink); opacity: 0; visibility: hidden; pointer-events: none; transform: translateY(4px); transition: opacity .15s ease .12s, transform .15s ease .12s, visibility 0s linear .27s; }
+.aimb-bl-card::before { content: ""; position: absolute; top: -7px; left: calc(var(--bl-ax1) - 7px); width: 12px; height: 12px; background: #fff; border-left: 1px solid var(--line); border-top: 1px solid var(--line); transform: rotate(45deg); }
+.aimb-bl-author:nth-child(2) .aimb-bl-card::before { left: calc(var(--bl-ax2) - 7px); }
+.aimb-bl-cphoto { display: block; width: 64px; height: 64px; margin: 0 auto 8px; border-radius: 50%; object-fit: cover; object-position: center 20%; border: 2px solid var(--yel); box-sizing: border-box; }
+.aimb-bl-cname { margin: 0; font-size: 17px; font-weight: 800; color: var(--navy); }
+.aimb-bl-role { margin: 4px 0 0; font-size: 14px; line-height: 1.4; color: var(--soft); }
+.aimb-bl-divider { border: 0; border-top: 1px solid var(--line); margin: 12px 0 10px; }
+.aimb-bl-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; text-align: left; font-size: 14px; }
+.aimb-bl-row + .aimb-bl-row { margin-top: 10px; }
+.aimb-bl-row b { color: var(--navy); font-weight: 700; }
+.aimb-bl-bio { display: inline-flex; align-items: center; gap: 4px; color: var(--blue); font-weight: 700; text-decoration: none; }
+.aimb-bl-bio:hover { text-decoration: underline; }
+.aimb-bl-arrow { width: 14px; height: 14px; flex: 0 0 auto; }
+.aimb-bl-icons { display: flex; align-items: center; gap: 8px; }
+.aimb-bl-icons a { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; color: var(--navy); background: var(--alt); border: 1px solid var(--line); }
+.aimb-bl-icons a:hover { background: var(--yel); }
+.aimb-bl-icons svg { width: 16px; height: 16px; fill: currentColor; }
+.aimb-bl-card a:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
+.aimb-bl-avbtn[aria-expanded="true"] + .aimb-bl-card,
+.aimb-bl-author:has(.aimb-bl-card :focus-visible) .aimb-bl-card,
+.aimb-bl-author:has(.aimb-bl-avbtn:focus-visible) .aimb-bl-card,
+.aimb-byline:has(.aimb-bl-names a[data-a="kailas"]:focus-visible) .aimb-bl-author[data-a="kailas"] .aimb-bl-card,
+.aimb-byline:has(.aimb-bl-names a[data-a="kautilya"]:focus-visible) .aimb-bl-author[data-a="kautilya"] .aimb-bl-card { opacity: 1; visibility: visible; pointer-events: auto; transform: none; transition-delay: 0s; z-index: 61; }
+@media (hover: hover) {
+  .aimb-bl-author:hover .aimb-bl-card,
+  .aimb-byline:has(.aimb-bl-names a[data-a="kailas"]:hover) .aimb-bl-author[data-a="kailas"] .aimb-bl-card,
+  .aimb-byline:has(.aimb-bl-names a[data-a="kautilya"]:hover) .aimb-bl-author[data-a="kautilya"] .aimb-bl-card { opacity: 1; visibility: visible; pointer-events: auto; transform: none; transition-delay: 0s; z-index: 61; }
+}
+.aimb-byline.is-dismissed .aimb-bl-card { opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
+@media (prefers-reduced-motion: reduce) { .aimb-bl-card { transition: visibility 0s linear .12s; transform: none; } }
+@media (max-width: 480px) { .aimb-byline { --bl-av: 40px; --bl-ax1: 20px; --bl-ax2: 48px; gap: 10px; } .aimb-bl-names { font-size: 15px; } .aimb-bl-sub { font-size: 13px; } }
+.aimb-booklink { color: var(--blue); text-decoration: underline; text-underline-offset: 2px; }
+.aimb-booklink:hover { color: var(--navy); }

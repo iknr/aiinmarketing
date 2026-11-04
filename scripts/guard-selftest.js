@@ -39,6 +39,9 @@ const MUTATIONS = [
   ['add a sitemap entry for /wp-login', (d) => edit(d, 'sitemap.xml', (s) => s.replace('</urlset>', '<url><loc>https://aiinmarketing.in/wp-login</loc></url></urlset>'))],
   ['remove the guard from vercel.json buildCommand', (d) => edit(d, 'vercel.json', (s) => s.replace(' && node scripts/guard.js', ''))],
   ['commit a Heffl-style API key literal', (d) => fs.writeFileSync(path.join(d, 'api', 'oops.js'), "const headers = { 'x-api" + "-key': '" + 'hk_live_' + '9f8a7b6c5d4e3f2a1b0c9d8e7f6a5b4c' + "' };\n")],
+  ['remove the byline component from a blog post', (d) => edit(d, 'blogs/what-is-vibe-marketing.html', (s) => s.replace(/<div class="aimb-byline">[\s\S]*?<p class="aimb-bl-sub">[\s\S]*?<\/p><\/div>/, '<p class="aimb-meta">By <a href="/author/kailasnathr" rel="author">Kailas Nath R</a> and <a href="/author/kautilyaroshan" rel="author">Kautilya Roshan</a></p>'))],
+  ['strip the read time from a byline', (d) => edit(d, 'blogs/what-is-vibe-marketing.html', (s) => s.replace(/\d+ min read/, 'quick read'))],
+  ['drop the aim-byline.js script tag from a post', (d) => edit(d, 'blogs/what-is-vibe-marketing.html', (s) => s.replace(/<script id="aim-byline-js"[^>]*><\/script>/, ''))],
   ['drop a blog post from llms.txt', (d) => edit(d, 'llms.txt', (s) => s.split('https://aiinmarketing.in/blogs/what-is-vibe-marketing').join('https://aiinmarketing.in/blogs/gone'))],
 ];
 

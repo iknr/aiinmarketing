@@ -48,6 +48,7 @@ const FORM_LABELS = {
 const SOURCE_LABELS = {
   'magnet-rtcros-prompt-guide': 'Free guide: RTCROS prompt guide',
   'magnet-meta-mcp-cli-sop': 'Free guide: Meta Ads MCP and CLI SOP',
+  'magnet-ai-announcement-checklist': 'Free guide: AI announcement checklist',
 };
 
 // Module-scope state (best effort: per warm serverless instance only).

@@ -571,7 +571,7 @@ Imagine a marketer called Meera who joins a small D2C brand. Before AI, her week
 - **Posting the first draft.** AI drafts are a starting point. Your editing is what makes the work yours. 
 - **Collecting tools instead of finishing projects.** Pick two tools and build something real with them before you try a third. 
 - **Skipping the basics.** Vibe marketing makes good marketers faster. If you do not understand what a good ad or page looks like, AI cannot supply that for you. 
-- **Hiding it.** Teams that talk openly about how they use AI learn faster and avoid mistakes together.  
+- **Hiding it.** Teams that talk openly about how they use AI learn faster and avoid mistakes together. The Duolingo AI-first memo and its aftermath, covered in our [case study of what happened next](https://aiinmarketing.in/blogs/duolingo-ai-first-case-study-18-months-on), shows what the opposite looks like.  
 
 ## How to learn vibe marketing properly 
 
@@ -1071,6 +1071,8 @@ A junior marketer pasted a customer list into a public AI tool to "clean it up".
 - Proof that data is handled carefully. 
 - Work that carries the brand's personality.  
 
+How you announce your use of AI matters as much as how you use it. Duolingo's 2025 memo is the best-documented example, and our [Duolingo AI-first case study](https://aiinmarketing.in/blogs/duolingo-ai-first-case-study-18-months-on) lays out the timeline and the numbers.
+
 ## Keeping your own skills sharp 
 
 The sixth mistake on this list, skills fading, is the most personal. When AI writes every first draft, you can lose the muscle of writing, analysing and spotting weak ideas. Two habits help: do a small task by hand each week, and always write down why you chose one option over another. Judgement stays strong when you keep using it. 
@@ -1521,3 +1523,200 @@ Every source below was opened for this guide. Quotations and tool names are attr
 - [Meta Ads CLI and MCP guide](https://mcp.directory/blog/meta-ads-cli-mcp), mcp.directory, updated May 2026. Third-party guide, read for comparison only; where it differs from Meta's documentation (package name and sign-in method), we used Meta's pages.
 
 **How we checked this.** We did not run these tools against a live ad account for this guide, so every command and behaviour is as documented by Meta on the date above. Meta did not state a beta label on the pages we read, and we could not confirm a launch date from Meta's own pages, so we make no claim about either. The saree store is a made-up brief for teaching.
+
+---
+
+# Duolingo's AI-First Memo, 18 Months On: What Its Own Filings Show
+
+URL: https://aiinmarketing.in/blogs/duolingo-ai-first-case-study-18-months-on
+Authors: Kailas Nath R and Kautilya Roshan
+Published: 2026-11-04
+Summary: What happened after Duolingo's April 2025 AI-first memo, from its own SEC letters: output, users, costs and trust, plus a free AI announcement checklist.
+
+In April 2025 one all-hands email ended with Duolingo wiping its TikTok and Instagram posts. Eighteen months later, Duolingo's own shareholder letters let us check what followed the Duolingo AI-first memo: how much more content it makes, what AI costs it, whether users kept coming and what it says about trust. This case study separates what the filings prove from what they do not, and turns it into steps for marketers and small business owners.
+
+**Key takeaways**
+
+- On 28 April 2025 Duolingo's CEO told staff the company would be "AI-first" and would "gradually stop using contractors to do work that AI can handle". The backlash was about people, not about the technology.
+- Duolingo's Q1 2026 letter says it published 20,500 course units in one quarter, against 7,100 per quarter in 2025 and 1,800 per quarter in 2024, and credits AI tools for the change.
+- Daily users kept growing in the company's own numbers: 50.5 million in Q3 2025 and 64.9 million in Q3 2026. The letters do not credit or blame the memo for that, and neither should we.
+- The company's own explanations point to monetisation friction and a quieter brand voice as reasons growth slowed in 2025, which is a lesson in itself: sentiment and sales are separate ledgers.
+- Before you announce AI to a team, freelancers or customers, run the four-audience check below. A free 3-page checklist is included.
+
+## The short version
+
+Duolingo told its staff on 28 April 2025 that it would be "AI-first". People heard "the company will replace its workers with AI". The CEO later said he had not given enough context. Since then its shareholder letters show three things at once: AI really did multiply Duolingo's content output, users kept growing, and the company chose to spend part of its growth budget on trust and word of mouth.
+
+None of that proves the memo helped or hurt. What it gives you is a rare, well-documented example of a brand announcing AI in public, which is exactly the decision many small businesses and agencies are making now, with far less scrutiny.
+
+## Timeline: April 2025 to November 2026
+
+| Date | What happened | Source |
+|---|---|---|
+| 28 April 2025 | CEO Luis von Ahn emails staff, and the memo is posted on Duolingo's LinkedIn page. | [Snopes via Yahoo](https://www.yahoo.com/news/fact-check-duolingo-said-become-100000452.html), 6 May 2025 |
+| 30 April 2025 | Duolingo announces 148 new courses made with generative AI. | [TechCrunch](https://techcrunch.com/2025/04/30/duolingo-launches-148-courses-created-with-ai-after-sharing-plans-to-replace-contractors-with-ai/), 30 April 2025 |
+| By 22 May 2025 | Duolingo has wiped its TikTok and Instagram posts. | [YPulse](https://www.ypulse.com/newsfeed/2025/05/22/duolingo-deleted-their-instagram-and-tiktok-posts-after-getting-backlash-over-ai/), 22 May 2025 |
+| 23 May 2025 | The CEO posts a clarification on LinkedIn. | [Entrepreneur](https://www.entrepreneur.com/business-news/duolingo-ceo-clarifies-ai-stance-after-backlash-read-memo/492141), 23 May 2025 |
+| 6 August 2025 | On the earnings call he says he "didn't give enough context". | [TechCrunch](https://techcrunch.com/2025/08/07/the-backlash-against-duolingo-going-ai-first-didnt-even-matter/), 7 August 2025 |
+| November 2025 | Q3 letter: daily users 50.5 million, up 36 percent. | [Duolingo Q3 2025 letter](https://www.sec.gov/Archives/edgar/data/1562088/000162828025049514/q3fy25duolingo9-30x25share.htm), SEC |
+| February 2026 | Q4 letter sets a 100 million daily user goal for 2028 and a shift towards the free experience. | [Duolingo Q4 2025 letter](https://www.sec.gov/Archives/edgar/data/1562088/000162828026012246/q4fy25duolingo12-31x25shar.htm), SEC |
+| May 2026 | Q1 letter reports 20,500 course units in a quarter. | [Duolingo Q1 2026 letter](https://www.sec.gov/Archives/edgar/data/0001562088/000162828026029790/q1fy26duolingo3-31x26share.htm), SEC |
+| 3 November 2026 | Q3 letter: daily users 64.9 million, up 29 percent. | [Duolingo Q3 2026 letter](https://www.sec.gov/Archives/edgar/data/0001562088/000162828026069474/q3fy26duolingo9-30x26share.htm), SEC |
+
+The dates in the first five rows come from press reports. The 6 August 2025 earnings call date is inferred from TechCrunch's report published on 7 August. For the last four rows the company's own letters are the source, which makes them the strongest evidence in this story.
+
+## What the memo actually promised
+
+Snopes reproduced the key lines of the all-hands email in its fact check. According to that fact check, the memo said:
+
+> "Duolingo is going to be AI-first."
+>
+> "We'll gradually stop using contractors to do work that AI can handle"
+>
+> "AI use will be part of what we look for in hiring"
+>
+> "AI use will be part of what we evaluate in performance reviews"
+>
+> "Headcount will only be given if a team cannot automate more of their work"
+
+Fortune, reporting on the memo on 30 April 2025, quoted a line about trade-offs: the company would rather "take occasional small hits on quality than move slowly and miss the moment". The same report says the memo's reason for the change was to overcome human limits in producing the large volume of content Duolingo needs.
+
+Read it as an employee or a freelance translator and one line stands out: the contractor line. Read it as an investor and a different line stands out: the output. A single message is read by several audiences at once, and each one hears the part that affects them.
+
+## The backlash and the clarification
+
+Two days after the memo, TechCrunch reported the 148 new courses. It also repeated Duolingo's own contrast: developing its first 100 courses "took about 12 years", while nearly 150 more arrived in about a year. The proof of benefit was real. It just landed next to a sentence about contractors.
+
+In May, according to YPulse (which credits Ad Age), Duolingo removed all of its posts from TikTok and Instagram. We could not open the Ad Age or Fast Company reports, and published follower-loss figures differ between outlets, so we leave them out.
+
+On 23 May, Entrepreneur published the CEO's LinkedIn clarification. He wrote: "One of the most important things leaders can do is provide clarity." And: "When I released my AI memo a few weeks ago, I didn't do that well." He added: "To be clear: I do not see AI as replacing what our employees do", and said the company was "continuing to hire at the same speed as before". PR Daily reported on 28 May that Duolingo also promised workshops, advisory councils and time for staff to experiment.
+
+Fortune quoted him again on 18 August 2025, citing a New York Times interview: "This was on me. I did not give enough context", and "We've never laid off any full-time employees. We don't plan to." We did not open the Times interview itself, so treat these as Fortune's reporting of it.
+
+Notice the order: the proof came first, the reassurance came about four weeks later, and the specifics (hiring, training, workshops) came last. Most small businesses can reverse that order.
+
+## What the filings show: the scoreboard
+
+Shareholder letters are the safest numbers in this story because the company files them with the US securities regulator. We opened four of them and checked every number below against the letter named. Here is what they say, with the letter named in each row.
+
+| Measure | What the letter says | Letter |
+|---|---|---|
+| Content output | 1,800 course units per quarter in 2024, 7,100 per quarter in 2025, 20,500 in Q1 2026, "by investing in AI tools" | Q1 2026 |
+| Daily users | 50.5 million in Q3 2025, up 36 percent | Q3 2025 |
+| Daily users | 64.9 million in Q3 2026, up 29 percent, after 23 percent in Q2 | Q3 2026 |
+| Paid subscribers | 13.1 million in Q3 2026, up 14 percent | Q3 2026 |
+| Revenue | $309.0 million in Q3 2026, up 14 percent | Q3 2026 |
+| Gross margin | Q3 2025 fell about 40 basis points "as a result of increases in generative AI and hosting costs" | Q3 2025 |
+| Gross margin | Q1 2026 rose to 73.0%, "driven primarily by continued reductions in per-unit AI costs" | Q1 2026 |
+| Gross margin outlook | About 69% for the rest of 2026 (February), then 72.0% expected for Q4 (November) | Q4 2025, Q3 2026 |
+
+Three observations a marketer can use.
+
+**AI scale is real, and so is the bill.** The same letters that celebrate faster content creation also list AI as a cost. Gross margin moved with AI use and AI unit costs. If you add AI to your service, price for the cost you will actually carry.
+
+**Output is not quality.** The Q1 2026 letter says automation also lets Duolingo push changes across many courses at once and improve quality more consistently. That is the company's claim. We did not test the courses, and it adds that this is "already improving engagement among new users".
+
+**Users kept coming.** Daily users rose from 50.5 million to 64.9 million between the Q3 2025 and Q3 2026 letters. TechCrunch's August 2025 headline said the backlash "didn't even matter" for the business, and the later numbers fit that. They do not prove it, as the next section explains.
+
+## What these numbers do not prove
+
+It is tempting to read the user growth as proof that the backlash was noise. We would not. The company's letters give other explanations.
+
+- The Q4 2025 letter says: "we believe that this extra friction is part of the reason our DAU growth has slowed", meaning ads and subscription upsells. Duolingo decided to "prioritize user growth over monetization", estimating more than $50 million of foregone bookings, or about 5 points of bookings growth.
+- The Q3 2025 letter says growth was slower than the quarter before "in part because we posted less 'unhinged' content on our English-speaking social media accounts as we listened to community feedback and prioritized building long-term brand sentiment". It adds that the company later "started posting more unhinged content" and saw a significant increase in impressions.
+- The Q3 2026 letter says the company "laid out a plan to prioritize teaching better and user growth, knowing it would take time to see results".
+
+So the honest reading is this. The company did change its brand behaviour after the backlash, and it did choose to trade some revenue for goodwill and growth. It never says in these letters that the memo caused any of it. One company, one period, many moving parts: this is a case study, not an experiment.
+
+## Five lessons for marketers and small business owners
+
+**1. Treat an AI announcement as four conversations.** Your team, your freelancers, your customers and the public each need different first sentences. The memo's reader list was long; the message was one paragraph.
+
+**2. Lead with the people line.** If the work of freelancers or staff changes, say what stays, what changes and by when, before you talk about speed. Duolingo's clearest reassurance (hiring, training, no layoffs of full-time staff) arrived last.
+
+**3. Put your clarification on a calendar.** The CEO's own words were that leaders should "provide clarity". Decide in advance when you will follow up (see the 30-day plan in the checklist), and put one named person in charge of the answers.
+
+**4. Match your response to your brand's character.** A playful brand that goes quiet sends a message too. Duolingo's own letter says it later went back to posting more of its playful content and saw impressions rise. Decide beforehand whether your usual voice still fits a serious moment.
+
+**5. Track sentiment next to sales.** Duolingo's letters talk about brand sentiment and word of mouth in the same breath as bookings. For a small business that can be as simple as tracking replies, comments, reviews and unsubscribes after an announcement, week by week.
+
+Our post on [AI advertising mistakes](https://aiinmarketing.in/blogs/ai-advertising-problems-nobody-posts-about) covers the client side of disclosure in more detail, and our guide to [vibe marketing](https://aiinmarketing.in/blogs/what-is-vibe-marketing) explains why teams that talk openly about how they use AI learn faster.
+
+## If you run a small business or freelance in India
+
+You do not need a memo. You need a plain statement, once, in the right order.
+
+- **Freelance designers, writers and video editors you use:** tell them first, privately. Say which tasks AI will help with, which work stays with them, and when you will review that. A short, early message is kinder than a surprise in an invoice cycle.
+- **Clients:** say what AI does in your process and who checks it. Many clients value that honesty, as we note in our guide on [handing work to AI agents](https://aiinmarketing.in/blogs/agentic-ai-marketing-work-competitors-hand-to-agents).
+- **Customers:** if AI writes anything customers read, such as replies, descriptions or ads, a human should approve it before it goes out.
+- **Freshers and career switchers:** a one-page note on how you use AI, what you check and what you never delegate is a stronger interview exhibit than "I know ChatGPT".
+
+## The ten-minute test before you post
+
+Answer each question in writing before you announce a change in how you use AI:
+
+1. Who is affected, by name or by group?
+2. What will not change for each of them?
+3. What will change, and by what date?
+4. Who will answer questions, and where?
+5. What proof can I show that quality is protected?
+6. Would I be comfortable if this message were posted publicly tomorrow?
+7. Which sentence will a worried person read first?
+8. Have I told the most affected people before everyone else?
+9. When will I follow up, and what will I report?
+10. Which numbers will I watch for 30 days?
+
+The PDF below puts this into a one-page planner with a statement template.
+
+## What to do this week
+
+1. List everyone affected by how you use AI today.
+2. Write the 120-word statement from the checklist, and read it aloud as a freelancer would hear it.
+3. Tell the most affected person privately before you tell anyone else.
+4. Put the follow-up dates in your calendar.
+5. Choose three numbers (replies, reviews, unsubscribes) and note where they are today.
+
+## How we think about this at AIM
+
+In AIM we teach learners to use AI in real marketing work and to be open about it: which tasks AI did, what a person checked and what was changed. We learned from cases like this one that the technology is rarely the hard part. If you are weighing training options, our list of [questions to ask before paying for an AI marketing course](https://aiinmarketing.in/blogs/ai-in-marketing-course-what-to-look-for) is a good place to start.
+
+## Frequently asked questions
+
+### What did the Duolingo AI-first memo say?
+
+According to Snopes, the 28 April 2025 all-hands email said Duolingo would be "AI-first", would "gradually stop using contractors to do work that AI can handle", and that AI use would be part of hiring and performance reviews. Headcount would only be given if a team could not automate more of its work.
+
+### Did Duolingo lay off employees because of AI?
+
+In an interview reported by Fortune on 18 August 2025, CEO Luis von Ahn said, "We've never laid off any full-time employees. We don't plan to." He said the contractor force goes up and down with needs. We did not open the original interview.
+
+### Did the backlash hurt Duolingo's business?
+
+Duolingo's own letters show daily users rising from 50.5 million in Q3 2025 to 64.9 million in Q3 2026. The letters give other reasons for slower growth in 2025, such as monetisation friction and posting less playful social content, and they do not link the memo to results. One company over one period cannot prove cause and effect.
+
+### How much more content does Duolingo make with AI?
+
+The Q1 2026 letter says Duolingo published 20,500 course units in the quarter, up from 7,100 per quarter in 2025 and 1,800 per quarter in 2024, and credits investment in AI tools. We did not independently test the content.
+
+### Should a small business tell customers it uses AI?
+
+In our view yes, plainly and once: say what AI helps with and who checks it. Tell the people most affected, such as freelancers, before you tell everyone else.
+
+## Sources and how we checked them
+
+Every source below was opened for this case study. Quotations and numbers are attributed in the text to the page that states them.
+
+- [Duolingo Q3 2025 shareholder letter](https://www.sec.gov/Archives/edgar/data/1562088/000162828025049514/q3fy25duolingo9-30x25share.htm), SEC filing, November 2025. Daily users, "unhinged" content passage, generative AI cost note.
+- [Duolingo Q4 and full-year 2025 shareholder letter](https://www.sec.gov/Archives/edgar/data/1562088/000162828026012246/q4fy25duolingo12-31x25shar.htm), SEC filing, February 2026. Friction trade-off, word of mouth, 2028 goal and 2026 outlook.
+- [Duolingo Q1 2026 shareholder letter](https://www.sec.gov/Archives/edgar/data/0001562088/000162828026029790/q1fy26duolingo3-31x26share.htm), SEC filing, May 2026. Course units, revenue and gross margin.
+- [Duolingo Q3 2026 shareholder letter](https://www.sec.gov/Archives/edgar/data/0001562088/000162828026069474/q3fy26duolingo9-30x26share.htm), SEC filing, 3 November 2026. Daily users, subscribers, revenue and strategy.
+- [Fact check: Duolingo said it would become AI-first](https://www.yahoo.com/news/fact-check-duolingo-said-become-100000452.html), Snopes via Yahoo, 6 May 2025. Memo quotations and date.
+- [Duolingo launches 148 courses created with AI](https://techcrunch.com/2025/04/30/duolingo-launches-148-courses-created-with-ai-after-sharing-plans-to-replace-contractors-with-ai/), TechCrunch, 30 April 2025.
+- [Duolingo CEO says getting rid of contract employees](https://www.fortune.com/article/duolingo-ceo-says-getting-rid-of-contract-employees-replacing-them-with-ai), Fortune, 30 April 2025. Quality trade-off line.
+- [Duolingo deleted their Instagram and TikTok posts](https://www.ypulse.com/newsfeed/2025/05/22/duolingo-deleted-their-instagram-and-tiktok-posts-after-getting-backlash-over-ai/), YPulse, 22 May 2025. Posts removed (credited there to Ad Age).
+- [Duolingo CEO clarifies AI stance after backlash: read the memo](https://www.entrepreneur.com/business-news/duolingo-ceo-clarifies-ai-stance-after-backlash-read-memo/492141), Entrepreneur, 23 May 2025.
+- [The Scoop: Duolingo CEO walks back AI-first memo](https://www.prdaily.com/the-scoop-duolingo-ceo-walks-back-ai-first-memo/), PR Daily, 28 May 2025.
+- [The backlash against Duolingo going AI-first didn't even matter](https://techcrunch.com/2025/08/07/the-backlash-against-duolingo-going-ai-first-didnt-even-matter/), TechCrunch, 7 August 2025.
+- [Duolingo CEO admits controversial AI memo did not give enough context](https://fortune.com/2025/08/18/duolingo-ceo-admits-controversial-ai-memo-did-not-give-enough-context-insists-company-never-laid-off-full-time-employees), Fortune, 18 August 2025.
+
+**What we tested and what we did not.** We opened each source above and read the passages we quote. We compared numbers across four shareholder letters and checked every figure in the scoreboard against the letter named. We did not test Duolingo's product or courses, did not open the New York Times interview, the original LinkedIn post, or the Ad Age and Fast Company reports (they block automated access), and did not use follower-loss numbers because outlets disagree. The memo date is from Snopes; Morning Brew's report suggests the email went out a day later, so treat the day as approximate. The article says nothing about causes that the sources do not state.

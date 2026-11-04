@@ -371,6 +371,49 @@ const INVARIANTS = [
     },
   },
   {
+    id: 'images-and-author-portraits',
+    title: 'Every local image reference resolves, and both author pop-out portraits are valid 256x256 WebP used by both author pages',
+    why: 'A missing image shows a broken picture to visitors. The two author portraits (transparent pop-out cut-outs approved by the owner) must stay valid 256x256 WebP files and stay on both author pages (visible photo, og:image and JSON-LD image).',
+    check() {
+      const p = [];
+      const webpSize = (b) => {
+        if (b.length < 30 || b.toString('latin1', 0, 4) !== 'RIFF' || b.toString('latin1', 8, 12) !== 'WEBP') return null;
+        const t = b.toString('latin1', 12, 16);
+        if (t === 'VP8X') return [1 + b.readUIntLE(24, 3), 1 + b.readUIntLE(27, 3)];
+        if (t === 'VP8 ') return [b.readUInt16LE(26) & 0x3fff, b.readUInt16LE(28) & 0x3fff];
+        if (t === 'VP8L' && b[20] === 0x2f) { const v = b.readUInt32LE(21); return [1 + (v & 0x3fff), 1 + ((v >> 14) & 0x3fff)]; }
+        return null;
+      };
+      const AUTH = 'wp-content/uploads/2026/11/authors/';
+      const PORTRAITS = { 'kailas-nath-r.webp': 'author/kailasnathr.html', 'kautilya-roshan.webp': 'author/kautilyaroshan.html' };
+      for (const [file, page] of Object.entries(PORTRAITS)) {
+        let buf = null; try { buf = fs.readFileSync(abs(AUTH + file)); } catch (e) { /* missing */ }
+        if (!buf) { p.push(`${AUTH + file} is missing. Restore it from git history; it is the approved author portrait.`); continue; }
+        const sz = webpSize(buf);
+        if (!sz || sz[0] !== 256 || sz[1] !== 256) p.push(`${AUTH + file} is not a valid 256x256 WebP (found ${sz ? sz.join('x') : 'not WebP'}). Restore the approved file from git history.`);
+        const h = tryRead(page);
+        if (h === null) { p.push(`${page} is missing.`); continue; }
+        if (!h.includes('/' + AUTH + file + '"')) p.push(`${page}: the visible photo must use /${AUTH + file}.`);
+        if (!h.includes('https://aiinmarketing.in/' + AUTH + file)) p.push(`${page}: og:image / JSON-LD image must use https://aiinmarketing.in/${AUTH + file}.`);
+      }
+      for (const f of publicHtml()) {
+        const h = fs.readFileSync(abs(f), 'utf8');
+        const urls = new Set();
+        for (const m of h.matchAll(/<img\b[^>]*?\ssrc=["']([^"']+)["']/gi)) urls.add(m[1]);
+        for (const m of h.matchAll(/<meta\b[^>]*(?:og:image|twitter:image)[^>]*content=["']([^"']+)["']/gi)) urls.add(m[1]);
+        for (let u of urls) {
+          if (/^(data:|blob:|#)/i.test(u)) continue;
+          if (/^https?:\/\//i.test(u)) { if (!u.startsWith(SITE + '/')) continue; u = u.slice(SITE.length); }
+          else if (u.startsWith('//')) continue;
+          u = decodeURIComponent(u.split(/[?#]/)[0]);
+          const target = u.startsWith('/') ? u.slice(1) : path.posix.join(path.posix.dirname(f), u);
+          if (!fs.existsSync(abs(target))) p.push(`${f}: image ${u} does not exist in the repo.`);
+        }
+      }
+      return p;
+    },
+  },
+  {
     id: 'secret-hygiene',
     title: 'No API keys / tokens in the repo and no tracked .env file',
     why: 'The Heffl key lives only in Vercel environment variables. A key committed to GitHub must be treated as leaked.',

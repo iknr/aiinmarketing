@@ -2764,3 +2764,8 @@ html {
   font-size: 13.5px;
   color: var(--pk-soft);
 }
+
+/* trainer pop-out portraits: transparent cut-outs, no circular crop (head and laptop break out above the blue disc) */
+.am-tr-photo img.is-popout { width: 124px; height: 124px; border-radius: 0; object-fit: contain; background: transparent; margin-top: -14px; }
+.am-tr-photo:has(img.is-popout) .am-tr-yrs { right: -2px; top: -2px; }
+@media (max-width: 640px) { .am-tr-photo img.is-popout { width: 104px; height: 104px; } }

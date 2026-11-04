@@ -308,7 +308,7 @@ test('rate limit: 6th submission from one IP in 10 minutes gets 429, other IPs u
   const r = await call(handler, { body: uniq(106), ip: '9.9.9.9, 8.8.8.8' });
   assert.strictEqual(r.status, 429);
   assert.strictEqual(r.body.success, false);
-  assert.strictEqual(leadPosts(calls).length, 5, 'nobody is blocked: all 5 are stored as leads');
+  assert.strictEqual(leadPosts(calls).length, 2, 'real leads; the 3rd to 5th are abuse records (no Unqualified stage in this mock: logged in full instead)');
   assert.strictEqual((await call(handler, { body: uniq(107), ip: '9.9.9.10' })).status, 200);
   // spoofed long header is capped, first value used
   assert.strictEqual((await call(handler, { body: uniq(108), ip: 'a'.repeat(500) })).status, 200);
@@ -338,7 +338,8 @@ test('invalid input keeps the existing 400s', async () => {
     assert.deepStrictEqual(r.body, bad);
   }
   assert.strictEqual((await call(handler, { body: null })).status, 400);
-  assert.strictEqual(calls.length, 0);
+  assert.strictEqual(leadPosts(calls).length, 0, 'no Unqualified stage in this mock: nothing created, never a New lead');
+  assert(logs.some(([, m]) => m.includes('"lead_crm_failed"') && m.includes('unqualified_stage_missing') && m.includes('12345')), 'typed details kept in the log');
 });
 
 test('control characters stripped and lengths capped before Heffl', async () => {
@@ -442,8 +443,8 @@ test('B) bad_origin and rate_limit records; responses unchanged (400 / 429)', as
   assert.deepStrictEqual(r2.body, { success: false, data: { message: 'Too many submissions. Please try again in a few minutes.' } });
   const titles = abuseLeads(calls).map((c) => c.body.title.split(' | ')[0]);
   assert.deepStrictEqual(titles, ['ABUSE: bad_origin', 'ABUSE: same_ip_multiple', 'ABUSE: same_ip_multiple', 'ABUSE: same_ip_multiple', 'ABUSE: rate_limit']);
-  for (const c of abuseLeads(calls)) assert.strictEqual(c.body.stageId, c.body.title.includes('same_ip_multiple') ? 'lstg_new' : 'lstg_unq');
-  assert.strictEqual(taskCalls(calls).length, 5, 'a task for each of the 5 stored leads');
+  for (const c of abuseLeads(calls)) assert.strictEqual(c.body.stageId, 'lstg_unq');
+  assert.strictEqual(taskCalls(calls).length, 2, 'tasks only for the 2 real leads');
 });
 
 test('B) bot_user_agent: flagged for automation UAs, silent success; normal browsers and missing UA are not', async () => {
@@ -703,26 +704,19 @@ test('E) click id redaction: type + first 6 chars only, in every log line and He
   assert(!all.includes('SECRETV'), 'only 6 characters');
 });
 
-test('F) same IP, different details: nobody is blocked; 3rd+ is stored as a normal lead marked ABUSE with details and IP', async () => {
+test('F) same IP, different details: 3rd+ is stored in Unqualified as ABUSE: same_ip_multiple with all details and the IP; visitor sees success', async () => {
   const { handler, calls } = setupAbuse();
   const h = { 'x-real-ip': '198.51.100.77', 'x-vercel-ip-country': 'IN', 'x-vercel-ip-country-region': 'KL', 'x-vercel-ip-city': 'Kochi' };
   const r = [];
   for (let i = 1; i <= 3; i++) r.push(await call(handler, { body: { ...uniq(1000 + i), 'form_fields[name]': `Person ${i}`, ...ATTR_BODY }, headers: h }));
   assert(r.every((x) => x.status === 200 && JSON.stringify(x.body) === JSON.stringify(SUCCESS)));
-  const leads = leadPosts(calls);
-  assert.strictEqual(leads.length, 3, 'all three stored');
-  assert(leads.every((c) => c.body.stageId === 'lstg_new'), 'real New leads, not Unqualified');
-  assert(!leads[0].body.title && !leads[1].body.title, 'first two are unmarked');
-  assert.strictEqual(leads[2].body.title, 'ABUSE: same_ip_multiple | IP 198.51.100.77 | IN, KL, Kochi | src=google med=cpc cmp=spring | ref=www.google.com | term=ai marketing course content=ad-a click=gclid | land=/blog/post');
-  assert.deepStrictEqual([leads[2].body.name, leads[2].body.email, leads[2].body.mobile], ['Person 3', 'u1003@example.com', '+919000001003']);
-  const tasks = taskCalls(calls).map((c) => c.body);
-  assert.strictEqual(tasks.length, 3);
-  assert(!tasks[1].title.includes('ABUSE'));
-  assert(tasks[2].title.startsWith('[ABUSE: same_ip_multiple] Follow up: Person 3'));
-  assert(tasks[2].description.startsWith('ABUSE FLAG: same_ip_multiple') && tasks[2].description.includes('IP address: 198.51.100.77'));
-  const flagged = logs.map(([, m]) => m).filter((m) => m.includes('"abuse_flagged"')).map((m) => JSON.parse(m));
-  assert.strictEqual(flagged.length, 1);
-  assert.strictEqual(flagged[0].ip, '198.51.100.77');
+  assert.strictEqual(leadPosts(calls).length, 3, 'nothing lost: all three stored');
+  assert.strictEqual(taskCalls(calls).length, 2);
+  const a = abuseLeads(calls);
+  assert.strictEqual(a.length, 1);
+  assert.strictEqual(a[0].body.stageId, 'lstg_unq');
+  assert.strictEqual(a[0].body.title, 'ABUSE: same_ip_multiple | IP 198.51.100.77 | IN, KL, Kochi | src=google med=cpc cmp=spring | ref=www.google.com | term=ai marketing course content=ad-a click=gclid | land=/blog/post');
+  assert.deepStrictEqual([a[0].body.name, a[0].body.email, a[0].body.mobile], ['Person 3', 'u1003@example.com', '+919000001003']);
 });
 
 test('F) same_ip_multiple: other IPs and the 10-minute window are independent', async () => {
@@ -743,11 +737,51 @@ test('F) same_ip_multiple: other IPs and the 10-minute window are independent', 
   assert.strictEqual(taskCalls(calls).length, 4);
 });
 
-test('F) custom-fields mode: the marked title is sent with the lead', async () => {
-  const { handler, calls } = setupAbuse({ lead: () => resp(200, { id: 'ld_9', customFields: { a: 1 } }) }, { HEFFL_USE_CUSTOM_FIELDS: 'true' });
-  const h = { 'x-real-ip': '198.51.100.81' };
-  for (let i = 1; i <= 3; i++) await call(handler, { body: uniq(1030 + i), headers: h });
-  assert(leadPosts(calls)[2].body.title.startsWith('ABUSE: same_ip_multiple | IP 198.51.100.81'));
+test('G) no data lost: invalid details are stored too (typed phone/email in the title), still a 400 for the visitor', async () => {
+  const { handler, calls } = setupAbuse();
+  const r = await call(handler, { body: { ...GOOD, 'form_fields[phone]': '12345', 'form_fields[name]': 'Bad Phone' }, headers: { 'x-real-ip': '198.51.100.90' } });
+  assert.strictEqual(r.status, 400);
+  const a = abuseLeads(calls);
+  assert.strictEqual(a.length, 1);
+  assert.strictEqual(a[0].body.stageId, 'lstg_unq');
+  assert.strictEqual(a[0].body.name, 'Bad Phone');
+  assert(!('mobile' in a[0].body) && !('email' in a[0].body));
+  assert(a[0].body.title.startsWith('ABUSE: invalid_input | IP 198.51.100.90 | phone=12345 email=asha@example.com'));
+  // nothing typed at all: nothing to keep
+  const n = setupAbuse();
+  await call(n.handler, { body: { form_name: 'x' } });
+  assert.strictEqual(leadPosts(n.calls).length, 0);
+  // bad origin with invalid details is kept as well
+  const o = setupAbuse();
+  await call(o.handler, { body: { ...GOOD, 'form_fields[email]': 'nope' }, headers: { origin: 'https://evil.example' } });
+  assert(abuseLeads(o.calls)[0].body.title.startsWith('ABUSE: bad_origin | IP '));
+  assert(abuseLeads(o.calls)[0].body.title.includes('email=nope'));
+});
+
+test('G) no data lost: hourly cap, missing Unqualified stage, Heffl rejection or no key -> full record logged and sent to the webhook', async () => {
+  const hook = { posts: [] };
+  const route = (url, init, calls) => {
+    if (url === 'https://hook.test/x') { hook.posts.push(JSON.parse(init.body)); return resp(200, {}); }
+    return abuseRoute()(url, init, calls);
+  };
+  // hourly cap
+  let s = setup({ env: { HEFFL_API_KEY: FAKE_KEY, LEAD_WEBHOOK_URL: 'https://hook.test/x' }, route });
+  for (let i = 0; i < 22; i++) await call(s.handler, { body: uniq(1100 + i), headers: { origin: 'https://evil.example' } });
+  assert.strictEqual(abuseLeads(s.calls).length, 20);
+  assert.strictEqual(hook.posts.length, 2, 'the 2 over the cap still reach the webhook with their details');
+  assert(hook.posts.every((p) => p.email && p.phone && p.abuse === 'bad_origin'));
+  // Heffl rejects the abuse record
+  hook.posts.length = 0;
+  s = setup({ env: { HEFFL_API_KEY: FAKE_KEY, LEAD_WEBHOOK_URL: 'https://hook.test/x' }, route: (u, i, c) => (u.endsWith('/api/v1/leads') ? resp(500, {}) : route(u, i, c)) });
+  await call(s.handler, { body: uniq(1200), headers: { origin: 'https://evil.example' } });
+  assert.strictEqual(hook.posts.length, 1);
+  assert.strictEqual(hook.posts[0].email, 'u1200@example.com');
+  // no key at all
+  hook.posts.length = 0;
+  s = setup({ env: { LEAD_WEBHOOK_URL: 'https://hook.test/x' }, route });
+  await call(s.handler, { body: uniq(1201), headers: { origin: 'https://evil.example' } });
+  assert.strictEqual(hook.posts.length, 1);
+  assert(logs.some(([, m]) => m.includes('"lead_crm_failed"') && m.includes('u1201@example.com')));
 });
 
 (async () => {

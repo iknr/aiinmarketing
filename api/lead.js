@@ -391,7 +391,6 @@ function contextText(ctx) {
   const a = ctx.attr;
   const campaign = `${utmSummary(a)}; click id present: ${a.hasClick ? 'yes' : 'no'}; referrer: ${a.referrerHost || '-'}; first landing: ${a.landingPath || '-'}; attribution: ${a.attribution}`;
   return [
-    ...(ctx.abuse ? [`ABUSE FLAG: ${ctx.abuse} (several different people submitted from the same IP ${ctx.ip || '-'} within 10 minutes). The lead is stored normally; please check before calling.`] : []),
     `Current situation: ${ctx.situation || '-'}`,
     `Form: ${friendlyLabel(ctx.formSource, ctx.form)}`,
     `Form source (raw): ${ctx.formSource || '-'}`,
@@ -415,7 +414,6 @@ async function sendToHeffl(person, ctx) {
   const payload = { name: person.name, mobile: person.mobile, email: person.email };
   if (refs.sourceId) payload.sourceId = refs.sourceId;
   if (refs.stageId) payload.stageId = refs.stageId;
-  if (ctx.abuse) payload.title = abuseTitle(ctx.abuse, ctx);
 
   // (a) custom fields on the lead (documented: v1 intro "Custom fields", cf_ + snake_case label)
   const useCf = process.env.HEFFL_USE_CUSTOM_FIELDS === 'true';
@@ -479,7 +477,7 @@ async function sendToHeffl(person, ctx) {
     console.warn(JSON.stringify({ event: 'lead_context_lost', reason: 'no lead id in response', context: ctx }));
     return { ok: true };
   }
-  const title = clean(`${ctx.abuse ? `[ABUSE: ${ctx.abuse}] ` : ''}Follow up: ${person.name} (${ctx.situation || 'n/a'}, via ${friendlyLabel(ctx.formSource, ctx.form)})`, 200);
+  const title = clean(`Follow up: ${person.name} (${ctx.situation || 'n/a'}, via ${friendlyLabel(ctx.formSource, ctx.form)})`, 200);
   const t = await hefflRetry(
     `${HEFFL_V2}/tasks`,
     'POST',
@@ -501,47 +499,51 @@ async function sendToHeffl(person, ctx) {
 }
 
 /**
- * Records a flagged (but otherwise valid) submission in Heffl as a lead in the "Unqualified" stage, with
- * "ABUSE: <type>" at the start of the title. No task, never the "New" stage, at most ABUSE_MAX_PER_HOUR per hour
- * per warm instance (beyond that only logged). Never throws.
+ * Stores a flagged submission so that no contact details are ever lost. Normally a Heffl lead in the "Unqualified"
+ * stage with "ABUSE: <type>" at the start of the title, no task, never "New". A person with `raw: true` (details that
+ * failed validation) is stored with the typed phone/email in the title instead of the contact fields.
+ * Whenever Heffl cannot take it (no key, hourly cap, stage missing, rejection, error) the full record is logged as
+ * lead_crm_failed and posted to LEAD_WEBHOOK_URL. Never throws.
  */
-async function recordAbuse(type, person, ctx) {
+async function recordAbuse(type, person, ctx, record) {
+  const meta = { ip: ctx.ip, country: ctx.country, region: ctx.region, city: ctx.city, abuse: type, campaign: attrLog(ctx.attr) };
+  const fallback = (code, extra) => recover(record, { status: null, code, ...extra }, meta);
   try {
     const now = Date.now();
-    console.warn(JSON.stringify({ event: 'abuse_flagged', abuse: type, ip: ctx.ip, country: ctx.country, region: ctx.region, city: ctx.city, campaign: attrLog(ctx.attr) }));
-    if (!process.env.HEFFL_API_KEY) return;
+    console.warn(JSON.stringify({ event: 'abuse_flagged', ...meta }));
+    if (!process.env.HEFFL_API_KEY) return await fallback('no_heffl_key');
     abuseStamps = abuseStamps.filter((t) => now - t < 60 * 60 * 1000);
     if (abuseStamps.length >= ABUSE_MAX_PER_HOUR) {
       console.warn(JSON.stringify({ event: 'abuse_record_skipped', reason: 'hourly cap', abuse: type }));
-      return;
+      return await fallback('abuse_hourly_cap');
     }
     abuseStamps.push(now);
     const deadline = now + ABUSE_BUDGET_MS;
     const refs = await lookupRefs(deadline);
     if (!refs.unqualifiedId) {
       console.warn(JSON.stringify({ event: 'abuse_record_skipped', reason: `stage "${ABUSE_STAGE_NAME}" not found`, abuse: type }));
-      return;
+      return await fallback('unqualified_stage_missing');
     }
     const base = { name: person.name, sourceId: refs.sourceId, stageId: refs.unqualifiedId };
     if (!base.sourceId) delete base.sourceId;
-    let r = await hefflRetry(
-      `${HEFFL_V1}/leads`,
-      'POST',
-      { ...base, mobile: person.mobile, email: person.email, title: abuseTitle(type, ctx) },
-      deadline
-    );
-    if (isDuplicate(r)) {
-      // Heffl does not allow duplicate contacts: keep the record, carry the contact in the title instead.
-      r = await hefflRetry(
-        `${HEFFL_V1}/leads`,
-        'POST',
-        { ...base, title: abuseTitle(type, ctx, `${person.email} ${person.mobile}`) },
-        deadline
-      );
+    const typed = `phone=${person.mobile || '-'} email=${person.email || '-'}`;
+    let r;
+    if (person.raw) {
+      r = await hefflRetry(`${HEFFL_V1}/leads`, 'POST', { ...base, title: abuseTitle(type, ctx, typed) }, deadline);
+    } else {
+      r = await hefflRetry(`${HEFFL_V1}/leads`, 'POST', { ...base, mobile: person.mobile, email: person.email, title: abuseTitle(type, ctx) }, deadline);
+      if (isDuplicate(r)) {
+        // Heffl does not allow duplicate contacts: keep the record, carry the contact in the title instead.
+        r = await hefflRetry(`${HEFFL_V1}/leads`, 'POST', { ...base, title: abuseTitle(type, ctx, `${person.email} ${person.mobile}`) }, deadline);
+      }
     }
-    if (!r.ok) console.error(JSON.stringify({ event: 'abuse_record_failed', abuse: type, ...failureInfo(r) }));
+    if (!r.ok) {
+      console.error(JSON.stringify({ event: 'abuse_record_failed', abuse: type, ...failureInfo(r) }));
+      await fallback('abuse_record_failed', failureInfo(r));
+    }
   } catch (err) {
     console.error(JSON.stringify({ event: 'abuse_record_failed', abuse: type, error: err && err.name }));
+    await fallback('abuse_exception', { error: err && err.name });
   }
 }
 
@@ -590,20 +592,27 @@ module.exports = async function handler(req, res) {
   };
   const person = valid ? { name: clean(lead.name, 100), email: clean(lead.email, 120), mobile: `+91${phone}` } : null;
   const ok200 = { success: true, data: { message: 'Your submission was successful.' } };
+  // Details that failed validation are still kept (typed phone/email go into the title of the abuse record).
+  const typedPerson =
+    person ||
+    (lead.name || lead.phone || lead.email
+      ? { name: clean(lead.name, 100) || 'Unknown', email: clean(lead.email, 120), mobile: clean(lead.phone, 40), raw: true }
+      : null);
   const flag = (type) => {
     record.abuse = type;
-    return recordAbuse(type, person, ctx);
+    return typedPerson ? recordAbuse(type, typedPerson, ctx, record) : Promise.resolve();
   };
 
   const rejected = (reason) =>
     console.warn(JSON.stringify({ event: 'request_rejected', reason, ip: geo.ip, country: geo.country, region: geo.region, city: geo.city, campaign: attrLog(attr) }));
   if (!originOk(req)) {
     rejected('bad_origin');
-    if (valid) await flag('bad_origin');
+    await flag('bad_origin');
     return json(res, 400, BAD);
   }
   if (!valid) {
     rejected('invalid_input');
+    await flag('invalid_input');
     return json(res, 400, BAD);
   }
 
@@ -627,22 +636,22 @@ module.exports = async function handler(req, res) {
   }
   recent.set(repeatKey, now);
 
-  // Same IP, different details again and again: looks like spam, but nobody is blocked. The lead is stored normally
-  // (New stage, follow-up task) and marked as abuse in its title, task title and task text, with the IP.
+  // Same IP, different details again and again: looks like spam. Nobody is turned away: the visitor sees the normal
+  // success message and the full details are stored in Heffl in "Unqualified" as ABUSE: same_ip_multiple.
   if (geo.ip) {
     prune(ipIdentities, RATE_WINDOW_MS, now);
     const seen = new Map([...(ipIdentities.get(geo.ip) || [])].filter(([, t]) => now - t < RATE_WINDOW_MS));
-    if (!seen.has(repeatKey) && seen.size >= IP_IDENTITY_MAX) {
-      ctx.abuse = 'same_ip_multiple';
-      record.abuse = ctx.abuse;
-      console.warn(JSON.stringify({ event: 'abuse_flagged', abuse: ctx.abuse, ip: geo.ip, country: geo.country, region: geo.region, city: geo.city, campaign: attrLog(attr), note: 'stored as a normal lead, marked ABUSE' }));
-    }
+    const flagged = !seen.has(repeatKey) && seen.size >= IP_IDENTITY_MAX;
     seen.set(repeatKey, now);
     ipIdentities.set(geo.ip, seen);
+    if (flagged) {
+      await flag('same_ip_multiple');
+      return json(res, 200, ok200);
+    }
   }
 
   if (process.env.HEFFL_API_KEY) {
-    const meta = { ip: geo.ip, country: geo.country, region: geo.region, city: geo.city, abuse: ctx.abuse || null, campaign: attrLog(attr) };
+    const meta = { ip: geo.ip, country: geo.country, region: geo.region, city: geo.city, abuse: null, campaign: attrLog(attr) };
     try {
       const result = await sendToHeffl(person, ctx);
       if (result.taskCreated) {

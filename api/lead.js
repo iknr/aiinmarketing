@@ -391,6 +391,7 @@ function contextText(ctx) {
   const a = ctx.attr;
   const campaign = `${utmSummary(a)}; click id present: ${a.hasClick ? 'yes' : 'no'}; referrer: ${a.referrerHost || '-'}; first landing: ${a.landingPath || '-'}; attribution: ${a.attribution}`;
   return [
+    ...(ctx.abuse ? [`ABUSE FLAG: ${ctx.abuse} (several different people submitted from the same IP ${ctx.ip || '-'} within 10 minutes). The lead is stored normally; please check before calling.`] : []),
     `Current situation: ${ctx.situation || '-'}`,
     `Form: ${friendlyLabel(ctx.formSource, ctx.form)}`,
     `Form source (raw): ${ctx.formSource || '-'}`,
@@ -414,6 +415,7 @@ async function sendToHeffl(person, ctx) {
   const payload = { name: person.name, mobile: person.mobile, email: person.email };
   if (refs.sourceId) payload.sourceId = refs.sourceId;
   if (refs.stageId) payload.stageId = refs.stageId;
+  if (ctx.abuse) payload.title = abuseTitle(ctx.abuse, ctx);
 
   // (a) custom fields on the lead (documented: v1 intro "Custom fields", cf_ + snake_case label)
   const useCf = process.env.HEFFL_USE_CUSTOM_FIELDS === 'true';
@@ -477,7 +479,7 @@ async function sendToHeffl(person, ctx) {
     console.warn(JSON.stringify({ event: 'lead_context_lost', reason: 'no lead id in response', context: ctx }));
     return { ok: true };
   }
-  const title = clean(`Follow up: ${person.name} (${ctx.situation || 'n/a'}, via ${friendlyLabel(ctx.formSource, ctx.form)})`, 200);
+  const title = clean(`${ctx.abuse ? `[ABUSE: ${ctx.abuse}] ` : ''}Follow up: ${person.name} (${ctx.situation || 'n/a'}, via ${friendlyLabel(ctx.formSource, ctx.form)})`, 200);
   const t = await hefflRetry(
     `${HEFFL_V2}/tasks`,
     'POST',
@@ -625,23 +627,22 @@ module.exports = async function handler(req, res) {
   }
   recent.set(repeatKey, now);
 
-  // Same IP, different details again and again: looks like spam. Acknowledge like a normal submission, keep an
-  // abuse record (with the details they typed and the IP) instead of a real lead.
+  // Same IP, different details again and again: looks like spam, but nobody is blocked. The lead is stored normally
+  // (New stage, follow-up task) and marked as abuse in its title, task title and task text, with the IP.
   if (geo.ip) {
     prune(ipIdentities, RATE_WINDOW_MS, now);
     const seen = new Map([...(ipIdentities.get(geo.ip) || [])].filter(([, t]) => now - t < RATE_WINDOW_MS));
-    const fresh = !seen.has(repeatKey);
-    if (fresh && seen.size >= IP_IDENTITY_MAX) {
-      ipIdentities.set(geo.ip, seen);
-      await flag('same_ip_multiple');
-      return json(res, 200, ok200);
+    if (!seen.has(repeatKey) && seen.size >= IP_IDENTITY_MAX) {
+      ctx.abuse = 'same_ip_multiple';
+      record.abuse = ctx.abuse;
+      console.warn(JSON.stringify({ event: 'abuse_flagged', abuse: ctx.abuse, ip: geo.ip, country: geo.country, region: geo.region, city: geo.city, campaign: attrLog(attr), note: 'stored as a normal lead, marked ABUSE' }));
     }
     seen.set(repeatKey, now);
     ipIdentities.set(geo.ip, seen);
   }
 
   if (process.env.HEFFL_API_KEY) {
-    const meta = { ip: geo.ip, country: geo.country, region: geo.region, city: geo.city, abuse: null, campaign: attrLog(attr) };
+    const meta = { ip: geo.ip, country: geo.country, region: geo.region, city: geo.city, abuse: ctx.abuse || null, campaign: attrLog(attr) };
     try {
       const result = await sendToHeffl(person, ctx);
       if (result.taskCreated) {

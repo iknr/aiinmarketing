@@ -308,7 +308,7 @@ test('rate limit: 6th submission from one IP in 10 minutes gets 429, other IPs u
   const r = await call(handler, { body: uniq(106), ip: '9.9.9.9, 8.8.8.8' });
   assert.strictEqual(r.status, 429);
   assert.strictEqual(r.body.success, false);
-  assert.strictEqual(leadPosts(calls).length, 2, 'the 3rd to 5th different identity from one IP are same_ip_multiple, not real leads');
+  assert.strictEqual(leadPosts(calls).length, 5, 'nobody is blocked: all 5 are stored as leads');
   assert.strictEqual((await call(handler, { body: uniq(107), ip: '9.9.9.10' })).status, 200);
   // spoofed long header is capped, first value used
   assert.strictEqual((await call(handler, { body: uniq(108), ip: 'a'.repeat(500) })).status, 200);
@@ -442,8 +442,8 @@ test('B) bad_origin and rate_limit records; responses unchanged (400 / 429)', as
   assert.deepStrictEqual(r2.body, { success: false, data: { message: 'Too many submissions. Please try again in a few minutes.' } });
   const titles = abuseLeads(calls).map((c) => c.body.title.split(' | ')[0]);
   assert.deepStrictEqual(titles, ['ABUSE: bad_origin', 'ABUSE: same_ip_multiple', 'ABUSE: same_ip_multiple', 'ABUSE: same_ip_multiple', 'ABUSE: rate_limit']);
-  for (const c of abuseLeads(calls)) assert.strictEqual(c.body.stageId, 'lstg_unq');
-  assert.strictEqual(taskCalls(calls).length, 2, 'tasks only for the 2 real leads');
+  for (const c of abuseLeads(calls)) assert.strictEqual(c.body.stageId, c.body.title.includes('same_ip_multiple') ? 'lstg_new' : 'lstg_unq');
+  assert.strictEqual(taskCalls(calls).length, 5, 'a task for each of the 5 stored leads');
 });
 
 test('B) bot_user_agent: flagged for automation UAs, silent success; normal browsers and missing UA are not', async () => {
@@ -703,33 +703,35 @@ test('E) click id redaction: type + first 6 chars only, in every log line and He
   assert(!all.includes('SECRETV'), 'only 6 characters');
 });
 
-test('F) same IP, different details: 3rd distinct email+phone within 10 min is an abuse record with the typed details and the IP', async () => {
+test('F) same IP, different details: nobody is blocked; 3rd+ is stored as a normal lead marked ABUSE with details and IP', async () => {
   const { handler, calls } = setupAbuse();
   const h = { 'x-real-ip': '198.51.100.77', 'x-vercel-ip-country': 'IN', 'x-vercel-ip-country-region': 'KL', 'x-vercel-ip-city': 'Kochi' };
   const r = [];
   for (let i = 1; i <= 3; i++) r.push(await call(handler, { body: { ...uniq(1000 + i), 'form_fields[name]': `Person ${i}`, ...ATTR_BODY }, headers: h }));
-  assert(r.every((x) => x.status === 200 && JSON.stringify(x.body) === JSON.stringify(SUCCESS)), 'visitor always sees success');
-  assert.strictEqual(taskCalls(calls).length, 2, 'two real leads with follow-up tasks');
-  const a = abuseLeads(calls);
-  assert.strictEqual(a.length, 1);
-  assert.strictEqual(a[0].body.title, 'ABUSE: same_ip_multiple | IP 198.51.100.77 | IN, KL, Kochi | src=google med=cpc cmp=spring | ref=www.google.com | term=ai marketing course content=ad-a click=gclid | land=/blog/post');
-  assert.strictEqual(a[0].body.stageId, 'lstg_unq');
-  assert.deepStrictEqual([a[0].body.name, a[0].body.email, a[0].body.mobile], ['Person 3', 'u1003@example.com', '+919000001003'], 'details they typed are on the abuse lead');
+  assert(r.every((x) => x.status === 200 && JSON.stringify(x.body) === JSON.stringify(SUCCESS)));
+  const leads = leadPosts(calls);
+  assert.strictEqual(leads.length, 3, 'all three stored');
+  assert(leads.every((c) => c.body.stageId === 'lstg_new'), 'real New leads, not Unqualified');
+  assert(!leads[0].body.title && !leads[1].body.title, 'first two are unmarked');
+  assert.strictEqual(leads[2].body.title, 'ABUSE: same_ip_multiple | IP 198.51.100.77 | IN, KL, Kochi | src=google med=cpc cmp=spring | ref=www.google.com | term=ai marketing course content=ad-a click=gclid | land=/blog/post');
+  assert.deepStrictEqual([leads[2].body.name, leads[2].body.email, leads[2].body.mobile], ['Person 3', 'u1003@example.com', '+919000001003']);
+  const tasks = taskCalls(calls).map((c) => c.body);
+  assert.strictEqual(tasks.length, 3);
+  assert(!tasks[1].title.includes('ABUSE'));
+  assert(tasks[2].title.startsWith('[ABUSE: same_ip_multiple] Follow up: Person 3'));
+  assert(tasks[2].description.startsWith('ABUSE FLAG: same_ip_multiple') && tasks[2].description.includes('IP address: 198.51.100.77'));
   const flagged = logs.map(([, m]) => m).filter((m) => m.includes('"abuse_flagged"')).map((m) => JSON.parse(m));
-  assert.strictEqual(flagged[0].abuse, 'same_ip_multiple');
+  assert.strictEqual(flagged.length, 1);
   assert.strictEqual(flagged[0].ip, '198.51.100.77');
 });
 
-test('F) same_ip_multiple: same details again is not counted, other IPs and the 10-minute window are independent, no IP -> not applied', async () => {
+test('F) same_ip_multiple: other IPs and the 10-minute window are independent', async () => {
   const { handler, calls } = setupAbuse();
   const h = { 'x-real-ip': '198.51.100.78' };
   await call(handler, { body: uniq(1010), headers: h });
   await call(handler, { body: uniq(1011), headers: h });
-  // third identity from ANOTHER IP is a normal lead
   await call(handler, { body: uniq(1012), headers: { 'x-real-ip': '198.51.100.79' } });
   assert.strictEqual(abuseLeads(calls).length, 0);
-  assert.strictEqual(taskCalls(calls).length, 3);
-  // after 10 minutes the old identities no longer count
   const realNow = Date.now;
   Date.now = () => realNow() + 11 * 60 * 1000;
   try {
@@ -741,14 +743,11 @@ test('F) same_ip_multiple: same details again is not counted, other IPs and the 
   assert.strictEqual(taskCalls(calls).length, 4);
 });
 
-test('F) same_ip_multiple abuse lead falls back to details-in-title when Heffl rejects the duplicate contact', async () => {
-  let n = 0;
-  const { handler, calls } = setupAbuse({ lead: () => (++n === 3 ? resp(409, { code: 'CONFLICT' }) : resp(200, { id: 'ld_' + n })) });
-  const h = { 'x-real-ip': '198.51.100.80' };
-  for (let i = 1; i <= 3; i++) await call(handler, { body: uniq(1020 + i), headers: h });
-  const a = abuseLeads(calls);
-  assert.strictEqual(a.length, 2);
-  assert(a[1].body.title.startsWith('ABUSE: same_ip_multiple | IP 198.51.100.80 | u1023@example.com +919000001023'));
+test('F) custom-fields mode: the marked title is sent with the lead', async () => {
+  const { handler, calls } = setupAbuse({ lead: () => resp(200, { id: 'ld_9', customFields: { a: 1 } }) }, { HEFFL_USE_CUSTOM_FIELDS: 'true' });
+  const h = { 'x-real-ip': '198.51.100.81' };
+  for (let i = 1; i <= 3; i++) await call(handler, { body: uniq(1030 + i), headers: h });
+  assert(leadPosts(calls)[2].body.title.startsWith('ABUSE: same_ip_multiple | IP 198.51.100.81'));
 });
 
 (async () => {

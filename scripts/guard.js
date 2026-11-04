@@ -22,7 +22,7 @@ const ROOT = path.resolve(__dirname, '..');
 const GTM_ID = 'GTM-NPKP66BD';
 const OLD_GTM_ID = 'GTM-M3H6S33J';
 const SITE = 'https://aiinmarketing.in';
-const MIN_LEAD_TESTS = 48; // tools/test-lead.js must pass at least this many checks. RAISE when you add tests, never lower.
+const MIN_LEAD_TESTS = 50; // tools/test-lead.js must pass at least this many checks. RAISE when you add tests, never lower.
 const SKIP_DIRS = new Set(['node_modules', '.git', '.vercel', '.next']);
 // Posts published before the "Sources" rule. Do not add to this list: new posts need a Sources section.
 const NO_SOURCES_GRANDFATHERED = new Set([
@@ -122,7 +122,7 @@ const INVARIANTS = [
       const ok = (out.match(/^ok\s+-/gm) || []).length;
       const sum = /(\d+)\/(\d+) passed/.exec(out);
       const p = [];
-      if (r.status !== 0) p.push('tools/test-lead.js failed:\n    ' + out.split('\n').filter((l) => /FAIL|Error|assert|not ok/i.test(l)).slice(0, 8).join('\n    ') + '\n    Fix api/lead.js (not the test) unless the behaviour change is intended and documented in CLAUDE.md.');
+      if (r.status !== 0) p.push('tools/test-lead.js failed:\n    ' + out.split('\n').filter((l) => /^\s*FAIL\b|AssertionError|not ok/.test(l)).slice(0, 8).join('\n    ') + '\n    Fix api/lead.js (not the test) unless the behaviour change is intended and documented in CLAUDE.md.');
       const total = sum ? +sum[2] : ok;
       if (total < MIN_LEAD_TESTS) p.push(`tools/test-lead.js has ${total} checks, minimum is ${MIN_LEAD_TESTS} (MIN_LEAD_TESTS in scripts/guard.js). Tests were deleted: restore them.`);
       return p;

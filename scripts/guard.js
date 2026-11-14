@@ -350,14 +350,15 @@ const INVARIANTS = [
   },
   {
     id: 'content-consistency',
-    title: 'One program price (Rs 5,999), 7-day guarantee wording, "Adsmentor" spelling, no placeholders',
+    title: 'Two plan prices (Rs 5,999 without tool access, Rs 9,999 with tool access), 7-day guarantee wording, "Adsmentor" spelling, no placeholders',
     why: 'The price and guarantee are legal/commercial promises shown on many pages and in llms files; a stale price or placeholder text published by mistake is costly.',
     check() {
       const p = [];
       const texts = [...htmlFiles(), 'llms.txt', 'llms-full.txt'].filter(exists).map((f) => [f, f.endsWith('.html') ? visibleText(read(f)) : read(f)]);
       const bad = /(?<![\d,])(?:₹|Rs\.?|INR)\s?(2,?999|3,?999|4,?999)(?!\d)/g;
       for (const [f, t] of texts) {
-        for (const m of t.matchAll(bad)) p.push(`${f}: "${m[0]}" looks like a program price. The only AIM price is Rs 5,999.`);
+        for (const m of t.matchAll(bad)) p.push(`${f}: "${m[0]}" looks like a program price. The only AIM prices are Rs 5,999 (without tool access) and Rs 9,999 (with tool access).`);
+        if (/all-inclusive|one flat (?:fee|₹|&#8377;|Rs)|no other (?:public )?price tier/i.test(t) && !/(do not|don't) call either plan all-inclusive/i.test(t)) p.push(`${f}: the old single-price wording ("all-inclusive", "one flat fee", "no other price tier") is back. AIM has two plans.`);
         if (/Ads Mentor/.test(t)) p.push(`${f}: "Ads Mentor" must be spelled "Adsmentor".`);
         if (/lorem ipsum|\bTODO\b|\bXXX+\b|\bFIXME\b|\[placeholder\]/i.test(t.replace(/\bxxx@/gi, ''))) p.push(`${f}: placeholder text (lorem ipsum / TODO / XXX / FIXME) found.`);
       }
@@ -365,6 +366,7 @@ const INVARIANTS = [
       for (const f of ['index.html', 'terms.html', 'llms.txt', 'llms-full.txt']) {
         if (T[f] === undefined) { p.push(`${f}: file missing.`); continue; }
         if (!/(₹|Rs\.?)\s?5,999/.test(T[f])) p.push(`${f}: the program fee "Rs 5,999" is not stated.`);
+        if (!/(₹|Rs\.?)\s?9,999/.test(T[f])) p.push(`${f}: the tool-access fee "Rs 9,999" is not stated.`);
         if (!/7[- ]day money[- ]back/i.test(T[f])) p.push(`${f}: the "7-day money-back guarantee" wording is missing.`);
       }
       return p;

@@ -2,15 +2,15 @@
 
 Source: https://aiinmarketing.in | Updated: 2026-11-03 | Summary version: https://aiinmarketing.in/llms.txt
 
-AIM is a live online, AI-first digital marketing program in India by Adsmentor. Nine modules, four specialisations, a one-month agency internship and a single flat fee of ₹5,999.
+AIM is a live online, AI-first digital marketing program in India by Adsmentor. Nine modules, four specialisations, a one-month agency internship and two plans, ₹5,999 and ₹9,999 with tool access.
 
 ## Frequently asked questions
 
 ### How much does AIM cost?
-One flat ₹5,999, all-inclusive. You pay only after your onboarding call, once your questions are answered.
+₹5,999 without tool access, or ₹9,999 with tool access. You pay only after your onboarding call, once your questions are answered.
 
 ### What is included in the fee?
-Live training across nine modules, all four specialisations, a one-month agency internship with certificate, a portfolio website with domain and hosting, a CV rewrite with mock interviews, pro tools in month 2 and ad spend for portfolio campaigns.
+Live training across nine modules, all four specialisations, a one-month agency internship with certificate, a portfolio website with domain and hosting, a CV rewrite with mock interviews. The ₹9,999 plan adds tool access.
 
 ### Is there a refund if it is not right for me?
 Yes. We offer a 7-day money-back guarantee. If AIM is not right for you, tell us within 7 days of your first live class and we will refund your program fee.
@@ -18,14 +18,14 @@ Yes. We offer a 7-day money-back guarantee. If AIM is not right for you, tell us
 ### Is it online?
 Yes. Classes are live online, so you can join from any city in India.
 
-### Which pro tools are included?
-Claude, Semrush, Google AI Pro, Canva Pro, Ubersuggest and SpyFu, provided in month 2 while learners build their specialisation projects.
+### Which tools are included?
+Only the ₹9,999 plan includes tool access: Claude, Semrush, Gemini Pro, Google AI Pro, Ahrefs, SpyFu, Ubersuggest and Canva. The ₹5,999 plan has no tool access.
 
 ### Is a job guaranteed?
 No. AIM does not promise placements. Learners finish with a live portfolio, real client work through the internship, a certificate from the agency and interview preparation.
 
 ### Who is it for?
-Freshers, career switchers, working professionals and small business owners who want practical AI-first marketing skills. AIM has three tracks: freelancers, agencies (join or run one) and job seekers. All three use the same nine modules and the same Rs 5,999 fee.
+Freshers, career switchers, working professionals and small business owners who want practical AI-first marketing skills. AIM has three tracks: freelancers, agencies (join or run one) and job seekers. All three use the same nine modules and the same two fees (Rs 5,999, or Rs 9,999 with tool access).
 
 ### Who teaches?
 Kautilya Roshan (advertising), [Sumit Chaudhari](https://www.linkedin.com/in/sumitchaudhari2405/) (performance and growth), Kailas Nath R (digital marketing and agentic AI consultant at Big Stone Agency) and [Ankita Kumari](https://www.linkedin.com/in/ankita-kumari-0510/) (retention and CRM). Their LinkedIn profiles are public.
@@ -53,14 +53,14 @@ Looking for the best digital marketing course in India? The honest answer is tha
 - **Do not pay for a syllabus. Pay for what you can do.** Ask whether you will work inside the tools, on real briefs, with real work to show. 
 - **AI belongs in every module,** not in one chapter at the end. Companies now use it in ads, content, SEO, conversion and lead handling. 
 - **Fees vary hugely for similar promises.** Listed fees below range from about ₹18,000 to over ₹3 lakh. 
-- **AIM is a flat ₹5,999,** with the [agency internship](https://aiinmarketing.in/#bonus), a portfolio site with domain and hosting, and [pro tools](https://aiinmarketing.in/#curriculum) in month 2 and ad spend for your portfolio included. 
+- **AIM is ₹5,999 without tool access or ₹9,999 with it,** and both include the [agency internship](https://aiinmarketing.in/#bonus) and a portfolio site with domain and hosting. 
 - **Live online,** so you can learn from any city in India while you study or work.  
 
 ## Digital marketing course fees compared 
 
 Here is how popular programs list their fees today. These are programs in Bangalore and online. AIM is live online, so location does not limit you. 
 | Provider | Program in the listing | Listed fee | Compared with AIM’s fee |
-| AIM (us) | AI in all 9 modules, 1-month agency internship, tool costs and portfolio ad spend included | ₹5,999 flat, all-inclusive | Baseline |
+| AIM (us) | AI in all 9 modules, 1-month agency internship, tool access in the ₹9,999 plan | ₹5,999, or ₹9,999 with tools | Baseline |
 | Digital Academy 360 | Bangalore programs | ₹1,35,000 to ₹3,30,000 | about 22× to 55× |
 | Kraftshala | Online, placement-linked | ₹1,93,520 incl. GST | about 32× |
 | Bluetick Academy | PCP ₹50,150, PGCP ₹89,680, ELEVATE ₹1,35,000 | ₹50,150 to ₹1,35,000 incl. GST | about 8× to 22× |
@@ -84,7 +84,7 @@ Companies now use AI in ads, content, SEO, conversion and lead handling. If AI i
 
 ### 2. Do you work inside the tools, and how many people share each login? 
 
-This is the question almost nobody asks and it changes everything. In our experience, many programs give no tool access at all. Where access is offered, one login shared by 10 to 20 learners, or a handful of accounts for a batch of 40, is a common pattern. With numbers like that you wait for a turn, get locked out mid-task and end up watching someone else click. Ask for the exact number of learners per login. AIM includes pro tools in month 2 and ad spend for your portfolio, Claude, Semrush, Google AI Pro, Canva Pro, Ubersuggest and SpyFu, in small groups so you are doing the work, not queueing for it. 
+This is the question almost nobody asks and it changes everything. In our experience, many programs give no tool access at all. Where access is offered, one login shared by 10 to 20 learners, or a handful of accounts for a batch of 40, is a common pattern. With numbers like that you wait for a turn, get locked out mid-task and end up watching someone else click. Ask for the exact number of learners per login. The AIM ₹9,999 plan includes access to Claude, Semrush, Gemini Pro, Google AI Pro, Ahrefs, SpyFu, Ubersuggest and Canva, in small groups so you are doing the work, not queueing for it. 
 
 ### 3. Is there real client work? 
 
@@ -125,8 +125,8 @@ If a syllabus says only “AI tools” and “prompt engineering”, keep lookin
  
 - **You finish with work to show.** A live portfolio site, live ad campaigns you have run and a month inside a real agency, so interviews feel familiar. 
 - **You get faster at your job.** AI runs through all [9 modules](https://aiinmarketing.in/#tracks), so reports, audits, pages and replies that used to take a day take a fraction of the time. 
-- **You are never queueing for a login.** Pro tools are included in month 2, so you practise instead of watching. 
-- **One fee, nothing else to buy.** The fee covers your portfolio domain and hosting, the pro tools in month 2, the internship and interview preparation. 
+- **You are never queueing for a login.** The ₹9,999 plan includes tool access, so you practise instead of watching. 
+- **Two plans, no hidden add-ons.** Both plans cover your portfolio domain and hosting, the internship and interview preparation. The ₹9,999 plan adds tool access. 
 - **You learn from people you can check.** Four trainers with public LinkedIn profiles and ₹9 Cr+ in combined media spend managed. 
 - **It fits real life.** Live evening classes, so you can keep your studies or your job.  
 
@@ -151,13 +151,13 @@ Weeks 9 to 12 are the agency internship. See the [full curriculum](https://aiinm
 
 ## Tools you will work in 
 
-You learn each tool by doing a task in it, the same task you would get at an agency. That includes WordPress, Elementor and Claude Code, Google Analytics 4, Search Console and Tag Manager, Meta Ads Manager, Google Ads, LinkedIn, Snapchat and X ads, n8n, Zapier and Make, HubSpot and Zoho CRM, Canva, Looker Studio, Shopify and WooCommerce. In month 2, AIM also shares pro access to Claude, Semrush, Google AI Pro, Canva Pro, Ubersuggest and SpyFu, so you practise on the real thing. Tool costs are covered for that month, and the tool names and logos belong to their owners. 
+You learn each tool by doing a task in it, the same task you would get at an agency. That includes WordPress, Elementor and Claude Code, Google Analytics 4, Search Console and Tag Manager, Meta Ads Manager, Google Ads, LinkedIn, Snapchat and X ads, n8n, Zapier and Make, HubSpot and Zoho CRM, Canva, Looker Studio, Shopify and WooCommerce. With the ₹9,999 plan, AIM also gives you access to Claude, Semrush, Gemini Pro, Google AI Pro, Ahrefs, SpyFu, Ubersuggest and Canva, so you practise on the real thing. Tool costs are covered on that plan, and the tool names and logos belong to their owners. 
 
 ## Duration, schedule and fee at AIM 
  
 - **3 months:** 2 months of live training and a 1-month agency internship. 
 - **Live classes:** Monday to Friday, 9 to 11 pm, plus weekend doubt clearing, project reviews and interview prep. 
-- **₹5,999 flat:** all 9 modules and 4 specialisations, the internship and certificate, portfolio site with domain and hosting, CV rewrite, 3 mock interviews and pro tools in month 2 and ad spend for your portfolio. 
+- **₹5,999 flat:** all 9 modules and 4 specialisations, the internship and certificate, portfolio site with domain and hosting, CV rewrite and 3 mock interviews. Tool access is included in the ₹9,999 plan only. 
 - **You pay on your onboarding call,** after you have asked all your questions.  
 
 [See what is included](https://aiinmarketing.in/#bonus) 
@@ -206,7 +206,7 @@ There is no single best course. The best one matches your goal and budget. Look 
 
 ### How much does a digital marketing course cost in India?
 
-Public listings for popular Bangalore-based and online programs range from about ₹18,000 to over ₹3 lakh, as collected on 3 November 2026. AIM is a flat ₹5,999 and includes the agency internship, a portfolio site with domain and hosting, and pro tools in month 2 and ad spend for your portfolio.
+Public listings for popular Bangalore-based and online programs range from about ₹18,000 to over ₹3 lakh, as collected on 3 November 2026. AIM costs ₹5,999 without tool access or ₹9,999 with tool access, and includes the agency internship and a portfolio site with domain and hosting.
 
 ### What is a vibe marketing course?
 
@@ -493,7 +493,7 @@ Meta (Facebook and Instagram), LinkedIn, TikTok, Snapchat and X, with a focus on
 
 ### Is it a replacement for the course?
 
-The book is a reference you can use on your own. The program adds live teaching, feedback, projects, [pro tools](https://aiinmarketing.in/#curriculum) and an agency internship.
+The book is a reference you can use on your own. The program adds live teaching, feedback, projects, optional tool access and an agency internship.
 
 ### Where can I buy it?
 
@@ -653,7 +653,7 @@ A certificate says you attended. A live portfolio shows what you built. **Why it
 
 ## How AIM answers these 
 
-AI is part of all [9 modules](https://aiinmarketing.in/#tracks). You work inside the platforms. You finish with a 1-month [agency internship](https://aiinmarketing.in/#bonus) and a certificate from that agency. It is a flat ₹5,999 that includes the agency internship, [pro tools](https://aiinmarketing.in/#curriculum) in month 2 and ad spend for your portfolio. See the [fee](https://aiinmarketing.in/#bonus), the [curriculum](https://aiinmarketing.in/#tracks) and the [trainers](https://aiinmarketing.in/#trainers), then compare with anything else on your list. 
+AI is part of all [9 modules](https://aiinmarketing.in/#tracks). You work inside the platforms. You finish with a 1-month [agency internship](https://aiinmarketing.in/#bonus) and a certificate from that agency. It costs ₹5,999 without tool access or ₹9,999 with tool access, and both include the agency internship. See the [fee](https://aiinmarketing.in/#bonus), the [curriculum](https://aiinmarketing.in/#tracks) and the [trainers](https://aiinmarketing.in/#trainers), then compare with anything else on your list. 
 
 ## A simple scorecard you can use with any institute 
 
@@ -684,7 +684,7 @@ Price is not a quality score in either direction. A higher fee is fair if it pay
 
 ## Why we published our own answers 
 
-We would rather you check us against the same seven questions. AI sits inside all nine modules, learners practise inside real tools and the program ends with a one-month agency internship. Our trainers have public LinkedIn profiles, and the fee is a single flat ₹5,999 that you pay after your onboarding call. If another program answers these better, choose it. The goal is that you spend your money well.
+We would rather you check us against the same seven questions. AI sits inside all nine modules, learners practise inside real tools and the program ends with a one-month agency internship. Our trainers have public LinkedIn profiles, and the fee is ₹5,999 without tool access or ₹9,999 with it, paid after your onboarding call. If another program answers these better, choose it. The goal is that you spend your money well.
 
 ## Frequently asked questions
 
@@ -789,7 +789,7 @@ Jobs that were mostly button-clicking will shrink. Jobs that mix analysis, creat
 
 ## Practise it before it is someone else's money 
 
-The Performance and Growth specialisation in AIM is built around exactly this: tracking, creative testing, reading automated campaigns and explaining results in plain language. With portfolio ad spend covered, you run live campaigns, not just exercises, and finish with results you can show.
+The Performance and Growth specialisation in AIM is built around exactly this: tracking, creative testing, reading automated campaigns and explaining results in plain language. You work on real-style campaigns, not just exercises, and finish with results you can show.
 
 ## Frequently asked questions
 
@@ -1088,7 +1088,7 @@ The sixth mistake on this list, skills fading, is the most personal. When AI wri
 
 ## Where you can practise safely 
 
-A learning environment is the best place to make these mistakes cheaply. In AIM you run campaigns with portfolio ad spend covered, review work with [trainers](https://aiinmarketing.in/#trainers) and learn a checklist-driven way of working that employers notice. It also gives you stories to tell in interviews about what you caught and how.
+A learning environment is the best place to make these mistakes cheaply. In AIM you work on real-style campaigns, review work with [trainers](https://aiinmarketing.in/#trainers) and learn a checklist-driven way of working that employers notice. It also gives you stories to tell in interviews about what you caught and how.
 
 ## Frequently asked questions
 
@@ -1497,7 +1497,7 @@ If you are a fresher or career switcher, a documented SOP like this one is a str
 
 ## Where AIM fits
 
-In AIM, learners work in real ad platforms and practise reading, proposing and reviewing before they spend. Trainers review the work, and portfolio ad spend is included so you practise on real campaigns. We do not promise jobs. We teach a working method, and this SOP is the way we think about AI in an ad account: the AI can help, the person decides.
+In AIM, learners work in real ad platforms and practise reading, proposing and reviewing before they spend. Trainers review the work, so you practise on real tasks. We do not promise jobs. We teach a working method, and this SOP is the way we think about AI in an ad account: the AI can help, the person decides.
 
 ## Frequently asked questions
 

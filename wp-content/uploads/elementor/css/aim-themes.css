@@ -1,0 +1,26 @@
+/* AIM page themes (v1.0.0). Loaded after aim-blog.css. A page picks one colour theme (data-aimtheme) and one band layout
+   (data-aimlayout) on <body>, so pages with similar content do not look like copies of one template. Colour only changes
+   the CSS variables aim-blog.css already uses; layout only changes the title band. Default (sunrise, left) = no change. */
+body[data-aimtheme="forest"]{--blue:#0f7a5a;--navy:#0b3d2e;--yel:#d9f99d;--bg:#f3fbf6}
+body[data-aimtheme="plum"]{--blue:#6d28d9;--navy:#2e1065;--yel:#fde68a;--bg:#f8f5ff}
+body[data-aimtheme="ember"]{--blue:#c2410c;--navy:#431407;--yel:#fde68a;--bg:#fff7f0}
+body[data-aimtheme="ocean"]{--blue:#0369a1;--navy:#082f49;--yel:#bae6fd;--bg:#f0f8ff}
+body[data-aimtheme="rose"]{--blue:#be185d;--navy:#500724;--yel:#fbcfe8;--bg:#fff5f9}
+body[data-aimtheme="slate"]{--blue:#334155;--navy:#0f172a;--yel:#e2e8f0;--bg:#f6f8fb}
+body[data-aimtheme="forest"] .aimb-band{background:linear-gradient(180deg,#e8f8ee 0%,var(--bg) 100%)}
+body[data-aimtheme="plum"] .aimb-band{background:linear-gradient(180deg,#efe7ff 0%,var(--bg) 100%)}
+body[data-aimtheme="ember"] .aimb-band{background:linear-gradient(180deg,#ffe9d6 0%,var(--bg) 100%)}
+body[data-aimtheme="ocean"] .aimb-band{background:linear-gradient(180deg,#dff1ff 0%,var(--bg) 100%)}
+body[data-aimtheme="rose"] .aimb-band{background:linear-gradient(180deg,#ffe3ef 0%,var(--bg) 100%)}
+body[data-aimtheme="slate"] .aimb-band{background:linear-gradient(180deg,#e6ebf2 0%,var(--bg) 100%)}
+body[data-aimtheme]:not([data-aimtheme="sunrise"]) .aimb-takeaways{border-left-color:var(--blue);background:var(--bg)}
+body[data-aimtheme]:not([data-aimtheme="sunrise"]) .aimb-article a:not(.aimb-btn):not(.aimb-pcard){color:var(--blue)}
+body[data-aimtheme]:not([data-aimtheme="sunrise"]) .aimb-pcard strong,body[data-aimtheme]:not([data-aimtheme="sunrise"]) .aimb-pcard em,body[data-aimtheme]:not([data-aimtheme="sunrise"]) .aimb-pav{color:var(--blue)}
+body[data-aimtheme]:not([data-aimtheme="sunrise"]) .aimb-kicker{color:var(--navy)}
+body[data-aimlayout="center"] .aimb-bandcopy{text-align:center}
+body[data-aimlayout="center"] .aimb-bandcopy .aimb-kicker{justify-self:center}
+body[data-aimlayout="center"] .aimb-bandin-1{justify-items:center}
+body[data-aimlayout="card"] .aimb-band{background:var(--bg);padding:clamp(20px,3vw,40px) 0}
+body[data-aimlayout="card"] .aimb-bandin{background:#fff;border:2px solid var(--navy);border-radius:22px;box-shadow:6px 6px 0 var(--navy);padding-top:clamp(22px,3vw,38px);padding-bottom:clamp(22px,3vw,38px)}
+body[data-aimlayout="left"] .aimb-bandcopy h1{border-left:6px solid var(--blue);padding-left:16px}
+@media(max-width:640px){body[data-aimlayout="card"] .aimb-bandin{box-shadow:3px 3px 0 var(--navy);border-radius:16px}}

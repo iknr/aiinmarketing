@@ -33,6 +33,20 @@ const PLAN = `<ul>
 
 const NAV = '<nav class="aimb-links"><a href="/">Home</a><a href="/digital-marketing-course">Courses</a><a href="/about">About</a><a href="/blogs">Blogs</a><a class="aimb-apply" href="/#bonus">See the fee</a></nav>';
 
+const THEMES = ['sunrise', 'forest', 'plum', 'ember', 'ocean', 'rose', 'slate'];
+const LAYOUTS = ['left', 'center', 'card'];
+const PLACED_PEOPLE = [
+  ['Ankita Kumari', 'Subject Matter Expert at Lokal', '&#8377;15 LPA', 'https://www.linkedin.com/in/ankita-kumari-b17128168/', '/wp-content/uploads/2026/11/adsmentor/face_ankita.webp'],
+  ['Vasavi R V', 'Asst. Manager, Marketing at KloudMate', '&#8377;12 LPA', 'https://www.linkedin.com/in/vasavi-rv-0b2582231/', ''],
+  ['Praneet K', 'Digital Production Specialist at Loblaw Digital', '&#8377;15 LPA', 'https://www.linkedin.com/in/praneet-k-b6043b126/', '/wp-content/uploads/2026/11/adsmentor/face_praneet.webp'],
+  ['Vivek Jain', 'Creative Head', '34% salary hike', 'https://www.linkedin.com/in/vivek-jain-7472842b7/', ''],
+  ['Tamanna Jain', 'Social Media Manager at Amulya Kala', '30% salary hike', 'https://www.linkedin.com/in/tamanna-jain-dm/', ''],
+];
+const PLACED = `<h2 id="placements">Where our students landed: placed at &#8377;5 to &#8377;15 LPA</h2>
+<p>Recent placements and salary growth of students from the Adsmentor program behind AIM. Every profile is public, so you can verify each one yourself. No course can promise you a job, and we do not.</p>
+<div class="aimb-placed">${PLACED_PEOPLE.map(([n, r, pk, u, img]) => `<a class="aimb-pcard" href="${u}" target="_blank" rel="noopener"><span class="aimb-pav">${img ? `<img src="${img}" width="200" height="200" alt="${n}" loading="lazy" decoding="async">` : n.split(' ').map((w) => w[0]).slice(0, 2).join('')}</span><b>${n}</b><span>${r}</span><strong>${pk}</strong><em>View profile on LinkedIn</em></a>`).join('')}</div>`;
+const PLACED_CSS = `<style>.aimb-placed{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin:14px 0 22px}.aimb-pcard{display:flex;flex-direction:column;gap:4px;padding:16px;border:1px solid #dbe3f5;border-radius:14px;background:#fff;text-decoration:none;color:inherit}.aimb-pcard b{font-size:16px}.aimb-pcard span{font-size:14px;color:#44506b}.aimb-pcard strong{margin-top:6px;font-size:18px;color:#0256ec}.aimb-pcard em{font-style:normal;font-size:13px;color:#0256ec}.aimb-pav{width:48px;height:48px;border-radius:50%;background:#e8efff;color:#0256ec;display:flex;align-items:center;justify-content:center;font-weight:800;overflow:hidden;margin-bottom:6px}.aimb-pav img{width:100%;height:100%;object-fit:cover}</style>`;
+
 function page(o) {
   const url = SITE + o.path;
   const ld = [o.course, o.breadcrumb, o.faq && faqLd(o.faq)].filter(Boolean).map((j) => `<script type="application/ld+json">${JSON.stringify(j)}</script>`).join('\n');
@@ -63,9 +77,11 @@ ${GTM}<meta charset="UTF-8">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap">
 <link rel="stylesheet" id="hello-elementor-css" href="/wp-content/themes/hello-elementor/style.css?ver=3.1.1">
 <link rel="stylesheet" id="aim-blog-css" href="/wp-content/uploads/elementor/css/aim-blog.css?ver=2.4.0"><link rel="stylesheet" id="aim-programs-css" href="/wp-content/uploads/elementor/css/aim-programs.css?ver=1.1.0" media="all">
+<link rel="stylesheet" id="aim-themes-css" href="/wp-content/uploads/elementor/css/aim-themes.css?ver=1.0.0">
 ${ld}
+${PLACED_CSS}
 </head>
-<body class="page page-template-default elementor-default">
+<body class="page page-template-default elementor-default" data-aimtheme="${o.theme || 'sunrise'}" data-aimlayout="${o.layout || 'left'}">
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NPKP66BD" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <header class="aimb-header"><div class="aimb-nav">
@@ -79,6 +95,7 @@ ${NAV}
 <nav class="aimb-small" aria-label="Breadcrumb">${o.crumbs.map(([n, u]) => (u ? `<a href="${u}">${esc(n)}</a>` : esc(n))).join(' &rsaquo; ')}</nav>
 <p class="aimb-lead">${rs(o.lead)}</p>
 ${rs(o.body)}
+${PLACED}
 <aside class="aimb-cta"><h2>See the fee and apply</h2><p>AI in every module, hands-on inside the platforms, and a 1-month agency internship. &#8377;5,999 without tool access, or &#8377;9,999 with tool access. Same training and agency internship in both. 7-day money-back guarantee.</p><a class="aimb-btn" href="/#bonus">See the fee</a></aside>
 </article></main>
 <footer class="aimb-footer"><div class="aimb-foot">
@@ -138,45 +155,65 @@ for (const c of CITIES) {
     COMMON_FAQ[3],
   ];
   const near = c.nearby.map((s) => bySlug[s]).filter(Boolean);
-  const body = `
-<h2 id="learn-from-${c.slug}">Learn digital marketing from ${esc(c.name)}, without a centre</h2>
-<p>AIM runs live online, Monday to Friday, 9 to 11 pm IST, with weekends kept for one-on-one doubt clearing, project reviews and interview prep. You can join from ${esc(c.name)} while you study or work, with no commute and no relocation. The program is <a href="/digital-marketing-course">the same for every city</a>, which means the ${esc(c.name)} learner gets the full nine modules, four specialisations and the agency internship.</p>
-<p>AI now does most routine marketing tasks. People who do not learn how companies use AI at work give employers less reason to hire them. That is why AI sits inside every module here, and why you work inside the real platforms from week 1.</p>
-
-<h2 id="work-in-${c.slug}">What marketing work looks like in ${esc(c.name)}</h2>
+  const idx = CITIES.indexOf(c);
+  const v = idx % 3;           // layout variant: section order and heading wording
+  const theme = THEMES[idx % THEMES.length];
+  const layout = LAYOUTS[Math.floor(idx / THEMES.length + idx) % LAYOUTS.length];
+  const N = esc(c.name);
+  const kerala = c.region === 'kerala' || c.hub;
+  const learnH = [`Learn digital marketing from ${N}, without a centre`, `How the live online course works for learners in ${N}`, `Study from ${N} in the evening, keep your day free`][v];
+  const workH = [`What marketing work looks like in ${N}`, `Why ${N} businesses need people who can use AI at work`, `The marketing jobs and clients around ${N}`][v];
+  const projH = [`Briefs you can practise with a ${N} angle`, `Portfolio projects shaped around ${N}`, `Three real-style projects for ${N}`][v];
+  const planH = [`What you do in the 12 weeks`, `Your 12 weeks, week by week`, `The 12-week path in short`][v];
+  const feeH = [`What it costs compared with other programs in India`, `Fees compared: what other live programs list`, `The fee, and how it compares`][v];
+  const sec = {
+    learn: `<h2 id="learn-from-${c.slug}">${learnH}</h2>
+<p>${[
+      `AIM runs live online, Monday to Friday, 9 to 11 pm IST, with weekends kept for one-on-one doubt clearing, project reviews and interview prep. You can join from ${N} while you study or work, with no commute and no relocation. The program is <a href="/digital-marketing-course">the same for every city</a>, which means the ${N} learner gets the full nine modules, four specialisations and the agency internship.`,
+      `There is no classroom in ${N} to travel to. You log in for two hours each weekday evening (9 to 11 pm IST), and weekends are for doubt clearing, project reviews and interview prep. Everything in the <a href="/digital-marketing-course">12-week program</a> is the same wherever you sit: nine modules, four specialisations and a 1-month agency internship.`,
+      `If your days are taken by college, a job or a family business in ${N}, the timing is the point: live classes from 9 to 11 pm IST, Monday to Friday. You get the same <a href="/digital-marketing-course">nine modules, four specialisations and agency internship</a> as every other learner, and your weekends stay open for reviews and doubts.`][v]}</p>
+<p>${[
+      `AI now does most routine marketing tasks. People who do not learn how companies use AI at work give employers less reason to hire them. That is why AI sits inside every module here, and why you work inside the real platforms from week 1.`,
+      `Routine marketing work is moving to AI tools. What stays with people is directing those tools and checking the output. So AI is part of every module, and you work inside the real platforms from the first week.`,
+      `Employers now expect AI to handle the routine parts of marketing, so the person they hire needs to know how to direct it and check it. That is why AI is in every module, with hands-on practice in the real tools from week 1.`][v]}</p>`,
+    work: `<h2 id="work-in-${c.slug}">${workH}</h2>
 <p>${esc(c.industries)}</p>
-<p class="aimb-small">This is general context about the city&rsquo;s economy, not a salary or hiring statistic. For salary expectations, check current listings for the roles you want.</p>
-
-<h2 id="projects">Briefs you can practise with a ${esc(c.name)} angle</h2>
-<p>Each module ends with a project that goes into your live portfolio. In ${esc(c.name)} you could shape yours around local businesses, for example:</p>
+<p class="aimb-small">This is general context about ${kerala ? 'the place' : 'the city'}&rsquo;s economy, not a salary or hiring statistic. For salary expectations, check current listings for the roles you want.</p>`,
+    projects: `<h2 id="projects">${projH}</h2>
+<p>Each module ends with a project that goes into your live portfolio. ${['In', 'You could shape yours around businesses in', 'Examples from'][v]} ${N}${['you could shape yours around local businesses, for example:', ', for example:', ':'][v]}</p>
 <ul>
 ${c.projects.map((x) => `<li>${esc(x)}</li>`).join('\n')}
 </ul>
-<p>For the SEO module, one useful exercise is ${esc(c.seo)}. The same method works for any city, and you keep the result as portfolio proof.</p>
-
-<h2 id="plan">What you do in the 12 weeks</h2>
+<p>For the SEO module, one useful exercise is ${esc(c.seo)}. The same method works for any city, and you keep the result as portfolio proof.</p>`,
+    plan: `<h2 id="plan">${planH}</h2>
 ${PLAN}
-<p>Pick a path that suits you: <strong>freelancer</strong> (land your first clients), <strong>agency</strong> (join an agency team or run your own) or <strong>job</strong> (interview-ready for in-house roles). All three use the same nine modules and the same two fees.</p>
-
-<h2 id="fee">What it costs compared with other programs in India</h2>
-<p>Course fees vary widely, and a city name on a listing does not change what you learn. Here is what live programs in India list, so you can compare before you pay anyone.</p>
-${FEE_TABLE}
-
-${faqHtml(faq)}
-
-<h2 id="more">More digital marketing course pages</h2>
+<p>Pick a path that suits you: <strong>freelancer</strong> (land your first clients), <strong>agency</strong> (join an agency team or run your own) or <strong>job</strong> (interview-ready for in-house roles). All three use the same nine modules and the same two fees.</p>`,
+    fee: `<h2 id="fee">${feeH}</h2>
+<p>Course fees vary widely, and a place name on a listing does not change what you learn. Here is what live programs in India list, so you can compare before you pay anyone.</p>
+${FEE_TABLE}`,
+    faq: faqHtml(faq),
+    more: `<h2 id="more">More digital marketing course pages</h2>
 <ul>
 <li><a href="/digital-marketing-course">Digital marketing course in India: the full program</a></li>
 <li><a href="/ai-digital-marketing-course">AI digital marketing course</a> and <a href="/vibe-marketing-course">vibe marketing course</a></li>
-${near.map((n) => `<li><a href="/digital-marketing-course/${n.slug}">Digital marketing course in ${esc(n.name)}</a></li>`).join('\n')}
+${near.map((n) => `<li><a href="/digital-marketing-course/${n.slug}">${n.hub ? 'Digital marketing course in Kerala: all cities' : 'Digital marketing course in ' + esc(n.name)}</a></li>`).join('\n')}
 <li><a href="/blogs/best-digital-marketing-courses-india-2026-how-to-choose">How to choose the best digital marketing course in India</a></li>
-</ul>`;
+<li><a href="/blogs/digital-marketing-course-fees-india-2026">Digital marketing course fees in India</a></li>
+</ul>`,
+  };
+  const orders = [['learn', 'work', 'projects', 'plan', 'fee', 'faq', 'more'], ['work', 'learn', 'plan', 'projects', 'faq', 'fee', 'more'], ['projects', 'work', 'learn', 'fee', 'plan', 'faq', 'more']];
+  const keralaBlock = c.hub ? `<h2 id="kerala-cities">Digital marketing course by city in Kerala</h2>
+<p>One live online program serves every Kerala city. Pick the page closest to where you live to see projects and context for your area.</p>
+<ul>
+${CITIES.filter((x) => x.region === 'kerala').map((x) => `<li><a href="/digital-marketing-course/${x.slug}">Digital marketing course in ${esc(x.name)}</a></li>`).join('\n')}
+</ul>` : (c.region === 'kerala' ? `<p class="aimb-small">Also in Kerala: <a href="/digital-marketing-course/kerala">digital marketing course in Kerala, all cities</a>.</p>` : '');
+  const body = '\n' + orders[v].map((k) => sec[k] + (k === 'work' ? '\n' + keralaBlock : '')).join('\n\n');
   write(`digital-marketing-course/${c.slug}.html`, page({
     path: p, title, desc, kicker: 'Live online, for learners in ' + c.name,
     h1: `Digital marketing course in ${c.name}: live online, AI built into every module`,
     lead: `A live online AI digital marketing course for learners in ${c.name}. Twelve weeks, nine modules, a 1-month agency internship, from ₹5,999.`,
     crumbs: [['Home', '/'], ['Digital marketing course', '/digital-marketing-course'], [c.name, null]],
-    body, faq,
+    body, faq, theme, layout,
     course: courseLd({ name: `AI Digital Marketing Course for learners in ${c.name}`, desc, path: p, city: c.name.replace(' NCR', '') }),
     breadcrumb: crumbLd([['Home', '/'], ['Digital marketing course', '/digital-marketing-course'], [c.name, p]]),
   }));
@@ -220,7 +257,7 @@ ${faqHtml(faq)}
 <li><a href="/blogs/digital-marketing-course-fees-india-2026">Digital marketing course fees in India, and what to ask</a></li>
 <li><a href="/blogs/vibe-marketing-course-india-what-you-learn">What a vibe marketing course should teach</a></li>
 </ul>`;
-  write('digital-marketing-course/index.html', page({
+  write('digital-marketing-course/index.html', page({ theme: 'sunrise', layout: 'center',
     path: p, title, desc, kicker: 'Digital marketing course in India', h1: 'Digital marketing course in India: live online, AI in every module',
     lead: 'Learn digital marketing the way companies now do it, with AI in all nine modules, then spend a month inside an agency. From ₹5,999.',
     crumbs: [['Home', '/'], ['Digital marketing course', null]], body, faq,
@@ -265,7 +302,7 @@ ${faqHtml(faq)}
 <li><a href="/blogs/agentic-ai-marketing-work-competitors-hand-to-agents">The marketing work competitors are handing to AI agents</a></li>
 <li><a href="/blogs/ai-in-marketing-course-what-to-look-for">Seven questions to ask before paying for an AI marketing course</a></li>
 </ul>`;
-  write('ai-digital-marketing-course.html', page({
+  write('ai-digital-marketing-course.html', page({ theme: 'ocean', layout: 'left',
     path: p, title, desc, kicker: 'AI digital marketing course', h1: 'AI digital marketing course: AI inside every module',
     lead: 'AI now does most routine marketing tasks. This course teaches you to direct it, check it and own the result, inside the real platforms.',
     crumbs: [['Home', '/'], ['Digital marketing course', '/digital-marketing-course'], ['AI digital marketing course', null]], body, faq,
@@ -305,7 +342,7 @@ ${faqHtml(faq)}
 <li><a href="/blogs/what-is-vibe-marketing">What vibe marketing is</a></li>
 <li><a href="/blogs/vibe-marketing-course-india-what-you-learn">What a vibe marketing course should teach</a></li>
 </ul>`;
-  write('vibe-marketing-course.html', page({
+  write('vibe-marketing-course.html', page({ theme: 'plum', layout: 'card',
     path: p, title, desc, kicker: 'Vibe marketing course', h1: 'Vibe marketing course: direct AI to do the work, then own the result',
     lead: 'Learn vibe marketing inside the real tools, on briefs shaped like company work, then prove it in a 1-month agency internship.',
     crumbs: [['Home', '/'], ['Digital marketing course', '/digital-marketing-course'], ['Vibe marketing course', null]], body, faq,
@@ -337,7 +374,7 @@ ${faqHtml(faq)}
 <h2 id="cities">Join from your city</h2>
 <p>${CITIES.map((c) => `<a href="/digital-marketing-course/${c.slug}">${esc(c.name)}</a>`).join(', ')}.</p>
 <p>See also the <a href="/digital-marketing-course">full program page</a> and the <a href="/blogs/best-digital-marketing-courses-india-2026-how-to-choose">guide to choosing a course</a>.</p>`;
-  write('digital-marketing-course-online.html', page({
+  write('digital-marketing-course-online.html', page({ theme: 'forest', layout: 'center',
     path: p, title, desc, kicker: 'Online digital marketing course', h1: 'Online digital marketing course with live evening classes',
     lead: 'Learn from home, live, in the evening, and finish with an agency internship. From ₹5,999.',
     crumbs: [['Home', '/'], ['Digital marketing course', '/digital-marketing-course'], ['Online course', null]], body, faq,

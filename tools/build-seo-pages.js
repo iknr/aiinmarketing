@@ -217,6 +217,8 @@ ${faqHtml(faq)}
 <li><a href="/blogs/best-digital-marketing-courses-india-2026-how-to-choose">How to choose the best digital marketing course in India</a></li>
 <li><a href="/blogs/ai-in-marketing-course-what-to-look-for">Seven questions to ask before paying for an AI marketing course</a></li>
 <li><a href="/blogs/what-is-vibe-marketing">What vibe marketing is and how to start</a></li>
+<li><a href="/blogs/digital-marketing-course-fees-india-2026">Digital marketing course fees in India, and what to ask</a></li>
+<li><a href="/blogs/vibe-marketing-course-india-what-you-learn">What a vibe marketing course should teach</a></li>
 </ul>`;
   write('digital-marketing-course/index.html', page({
     path: p, title, desc, kicker: 'Digital marketing course in India', h1: 'Digital marketing course in India: live online, AI in every module',
@@ -301,6 +303,7 @@ ${faqHtml(faq)}
 <li><a href="/digital-marketing-course">Digital marketing course in India: the full program</a></li>
 <li><a href="/ai-digital-marketing-course">AI digital marketing course</a></li>
 <li><a href="/blogs/what-is-vibe-marketing">What vibe marketing is</a></li>
+<li><a href="/blogs/vibe-marketing-course-india-what-you-learn">What a vibe marketing course should teach</a></li>
 </ul>`;
   write('vibe-marketing-course.html', page({
     path: p, title, desc, kicker: 'Vibe marketing course', h1: 'Vibe marketing course: direct AI to do the work, then own the result',

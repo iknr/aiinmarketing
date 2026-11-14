@@ -16,5 +16,24 @@
     "pdf": "wp-content/uploads/2026/11/guides/how-to-choose-a-digital-marketing-course.pdf",
     "sourceSha256": "1313a1b3422d0f6f49ecea48409533d9e01b5dde5e76a3c9e55e3e5970c8ab64",
     "pdfSha256": "071de8b7a0dbc170e628f975d0bc475d1a307599f1689f49f0f1feec8aea5688"
+  },
+  "legacy": {
+    "_note": "No HTML source exists for these four PDFs. Footer line patched on 2026-11-14 (from Rs 5,999, old all-inclusive wording removed from the text layer). Any change needs a rebuilt source in tools/pdf-src, then move the entry into the jobs list.",
+    "ad-account-ownership-checklist": {
+      "pdf": "wp-content/uploads/2026/11/guides/ad-account-ownership-checklist.pdf",
+      "pdfSha256": "7c8c78060afc6217093a71e02c1960a053335588f76fc70b996f3422b7ec6180"
+    },
+    "ai-announcement-checklist-for-marketers": {
+      "pdf": "wp-content/uploads/2026/11/guides/ai-announcement-checklist-for-marketers.pdf",
+      "pdfSha256": "91772c49178c2b4c1e470b51a60cbe32914a7b789cb6b7dd522919564b791f8e"
+    },
+    "meta-ads-mcp-cli-usage-sop": {
+      "pdf": "wp-content/uploads/2026/11/guides/meta-ads-mcp-cli-usage-sop.pdf",
+      "pdfSha256": "a7b67c9d0b48610557b4fd3c972500ef26ba7ba8e0b6f76bdaabfe03b81b9bac"
+    },
+    "rtcros-prompt-guide-for-marketers": {
+      "pdf": "wp-content/uploads/2026/11/guides/rtcros-prompt-guide-for-marketers.pdf",
+      "pdfSha256": "050507ed9084d8e09c5fd1f8855ff2dde77d595214f5e1d32bfbbaaded4c9c6e"
+    }
   }
 }

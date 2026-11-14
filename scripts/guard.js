@@ -442,6 +442,11 @@ const INVARIANTS = [
         for (const [re, label] of banned) if (re.test(txt)) p.push(`${srcFile}: contains the retired claim "${label}". The only plans are Rs 5,999 without tool access and Rs 9,999 with tool access.`);
         if (name === 'brochure' || name === 'syllabus' || name === 'checklist') for (const price of ['5,999', '9,999']) if (!txt.includes(price)) p.push(`${srcFile}: must state the ${price} plan.`);
       }
+      for (const [n, e] of Object.entries(manifest.legacy || {})) {
+        if (n.startsWith('_')) continue;
+        if (!exists(e.pdf)) p.push(`${e.pdf} missing.`);
+        else if (fileHash(abs(e.pdf)) !== e.pdfSha256) p.push(`${e.pdf} changed but it has no HTML source. Build a source in tools/pdf-src, add it to build-pdfs.js and manifest jobs, then rebuild; do not edit PDFs by hand.`);
+      }
       return p;
     },
   },

@@ -45,6 +45,10 @@ const MUTATIONS = [
   ['remove the byline component from a blog post', (d) => edit(d, 'blogs/what-is-vibe-marketing.html', (s) => s.replace(/<div class="aimb-byline">[\s\S]*?<p class="aimb-bl-sub">[\s\S]*?<\/p><\/div>/, '<p class="aimb-meta">By <a href="/author/kailasnathr" rel="author">Kailas Nath R</a> and <a href="/author/kautilyaroshan" rel="author">Kautilya Roshan</a></p>'))],
   ['strip the read time from a byline', (d) => edit(d, 'blogs/what-is-vibe-marketing.html', (s) => s.replace(/\d+ min read/, 'quick read'))],
   ['drop the aim-byline.js script tag from a post', (d) => edit(d, 'blogs/what-is-vibe-marketing.html', (s) => s.replace(/<script id="aim-byline-js"[^>]*><\/script>/, ''))],
+  ['remove the www to apex redirect from vercel.json', (d) => edit(d, 'vercel.json', (s) => { const j = JSON.parse(s); j.redirects = j.redirects.filter((r) => !(r.has || []).length); return JSON.stringify(j, null, 2); })],
+  ['edit the brochure source without rebuilding the PDF', (d) => edit(d, 'tools/pdf-src/brochure.htm', (s) => s.replace('in 12 weeks.', 'in 13 weeks.'))],
+  ['put a retired claim into the brochure source', (d) => edit(d, 'tools/pdf-src/brochure.htm', (s) => s.replace('Two plans. Same program.', 'All-inclusive. One flat fee.'))],
+  ['replace the brochure PDF with a hand-edited file', (d) => fs.writeFileSync(path.join(d, 'wp-content/uploads/2026/11/guides/aim-program-brochure.pdf'), Buffer.from('%PDF-1.4 hand edited'))],
   ['drop a blog post from llms.txt', (d) => edit(d, 'llms.txt', (s) => s.split('https://aiinmarketing.in/blogs/what-is-vibe-marketing').join('https://aiinmarketing.in/blogs/gone'))],
 ];
 

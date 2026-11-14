@@ -417,6 +417,35 @@ const INVARIANTS = [
     },
   },
   {
+    id: 'guide-pdfs',
+    title: 'Downloadable guide PDFs are built from their HTML sources (tools/pdf-src) and carry the current plans',
+    why: 'The brochure, syllabus and checklist go to leads. A PDF edited by hand, or a source changed without rebuilding, can show an old price or promise. The sources are the single place to edit; node tools/build-pdfs.js rebuilds the PDFs and the manifest.',
+    check() {
+      const p = [];
+      const mf = 'tools/pdf-src/manifest.json';
+      if (!exists(mf)) return [`${mf} missing; run node tools/build-pdfs.js and commit the result.`];
+      let manifest;
+      try { manifest = JSON.parse(read(mf)); } catch (e) { return [`${mf} is not valid JSON.`]; }
+      const { sourceHash, fileHash } = require(path.join(ROOT, 'tools/pdf-src/hash.js'));
+      const required = { brochure: 'wp-content/uploads/2026/11/guides/aim-program-brochure.pdf', syllabus: 'wp-content/uploads/2026/11/guides/aim-12-week-syllabus.pdf', checklist: 'wp-content/uploads/2026/11/guides/how-to-choose-a-digital-marketing-course.pdf' };
+      const banned = [[/all[- ]inclusive/i, 'all-inclusive'], [/\b(one|a) flat (fee|price)|flat (fee|₹|rs)|₹\s?5,999 flat/i, 'flat fee'], [/pro tools/i, 'pro tools'], [/ad spend (is |was )?(covered|included)|portfolio ad spend|portfolio live ads/i, 'ad spend covered'], [/canva pro/i, 'Canva Pro'], [/no tiers/i, 'no tiers']];
+      for (const [name, pdf] of Object.entries(required)) {
+        const e = manifest[name];
+        if (!e) { p.push(`${mf}: entry "${name}" missing.`); continue; }
+        if (e.pdf !== pdf) p.push(`${mf}: "${name}" must point to ${pdf}.`);
+        const srcFile = `tools/pdf-src/${name}.htm`;
+        if (!exists(srcFile)) { p.push(`${srcFile} missing: the PDF source must stay in the repo.`); continue; }
+        if (!exists(pdf)) { p.push(`${pdf} missing.`); continue; }
+        if (sourceHash(name) !== e.sourceSha256) p.push(`${srcFile} (or an image it uses) changed since the PDF was built. Run node tools/build-pdfs.js ${name} and commit the PDF, cover and manifest.`);
+        if (fileHash(abs(pdf)) !== e.pdfSha256) p.push(`${pdf} does not match the manifest: it was edited or replaced without its source. Change tools/pdf-src/${name}.htm and rebuild with node tools/build-pdfs.js ${name}.`);
+        const txt = visibleText(read(srcFile));
+        for (const [re, label] of banned) if (re.test(txt)) p.push(`${srcFile}: contains the retired claim "${label}". The only plans are Rs 5,999 without tool access and Rs 9,999 with tool access.`);
+        if (name === 'brochure' || name === 'syllabus' || name === 'checklist') for (const price of ['5,999', '9,999']) if (!txt.includes(price)) p.push(`${srcFile}: must state the ${price} plan.`);
+      }
+      return p;
+    },
+  },
+  {
     id: 'secret-hygiene',
     title: 'No API keys / tokens in the repo and no tracked .env file',
     why: 'The Heffl key lives only in Vercel environment variables. A key committed to GitHub must be treated as leaked.',

@@ -1,0 +1,20 @@
+{
+  "brochure": {
+    "source": "tools/pdf-src/brochure.htm",
+    "pdf": "wp-content/uploads/2026/11/guides/aim-program-brochure.pdf",
+    "sourceSha256": "2b25041ae6ba2b842c4c35463f11c6eef596ab41a9315472011cd2ccb6faff38",
+    "pdfSha256": "64ea73025159878c1405e42037e3998bd4a1670261b00b3923589aa5e6a9b230"
+  },
+  "syllabus": {
+    "source": "tools/pdf-src/syllabus.htm",
+    "pdf": "wp-content/uploads/2026/11/guides/aim-12-week-syllabus.pdf",
+    "sourceSha256": "22ea98db9b4049833e6bf7f60558e5463af36601f1b9726cb6b934d7fe97e119",
+    "pdfSha256": "26e6742f774e999f6607e48d016cba6d44637166ed940555e2c0c04b86a54379"
+  },
+  "checklist": {
+    "source": "tools/pdf-src/checklist.htm",
+    "pdf": "wp-content/uploads/2026/11/guides/how-to-choose-a-digital-marketing-course.pdf",
+    "sourceSha256": "1313a1b3422d0f6f49ecea48409533d9e01b5dde5e76a3c9e55e3e5970c8ab64",
+    "pdfSha256": "071de8b7a0dbc170e628f975d0bc475d1a307599f1689f49f0f1feec8aea5688"
+  }
+}

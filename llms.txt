@@ -40,6 +40,7 @@ AIM teaches marketing by doing: learners build a live WordPress site, connect Cl
 - [AI digital marketing course](https://aiinmarketing.in/ai-digital-marketing-course): AI digital marketing course: AI in every module, tools, what you build.
 - [Vibe marketing course](https://aiinmarketing.in/vibe-marketing-course): Vibe marketing course: build, research, run and check with AI.
 - [Online digital marketing course](https://aiinmarketing.in/digital-marketing-course-online): How the live online format and online internship work.
+- [All pages](https://aiinmarketing.in/all-pages): Every public page on the site in one list.
 - [Blog index](https://aiinmarketing.in/blogs): All guides, newest first.
 - [Privacy policy](https://aiinmarketing.in/privacy-policy): How AIM collects, uses and protects personal information.
 - [Terms and refund policy](https://aiinmarketing.in/terms): Two plans (₹5,999, or ₹9,999 with tools), pay after the onboarding call, 7-day money-back guarantee, no job guarantee.

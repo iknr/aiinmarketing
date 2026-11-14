@@ -83,7 +83,7 @@ ${rs(o.body)}
 </article></main>
 <footer class="aimb-footer"><div class="aimb-foot">
 <span class="aimb-mark">AIM</span> <span>AI in Marketing by <a href="https://adsmentor.in" target="_blank" rel="noopener">Adsmentor</a> &middot; &copy; 2026</span>
-<a href="/">Home</a><a href="/digital-marketing-course">Courses</a><a href="/about">About</a><a href="/blogs">Blogs</a><a href="/privacy-policy">Privacy policy</a><a href="mailto:contact@adsmentor.in">contact@adsmentor.in</a>
+<a href="/">Home</a><a href="/digital-marketing-course">Courses</a><a href="/about">About</a><a href="/blogs">Blogs</a><a href="/all-pages">All pages</a><a href="/privacy-policy">Privacy policy</a><a href="mailto:contact@adsmentor.in">contact@adsmentor.in</a>
 </div></footer>
 <script id="aim-magnet-js" src="/wp-content/plugins/elementor/assets/js/aim-magnet.js?ver=1.0.0" defer></script><script id="aim-track-js" src="/wp-content/plugins/elementor/assets/js/aim-track.js?ver=1.1.0" defer></script>
 </body>
@@ -341,6 +341,34 @@ ${faqHtml(faq)}
     course: courseLd({ name: 'Online Digital Marketing Course (AIM)', desc, path: p }),
     breadcrumb: crumbLd([['Home', '/'], ['Digital marketing course', '/digital-marketing-course'], ['Online course', p]]),
   }));
+}
+
+// ---------- HTML sitemap (not in seo-pages.json: it has no Course schema) ----------
+{
+  const blogDir = path.join(ROOT, 'blogs');
+  const posts = fs.readdirSync(blogDir).filter((f) => f.endsWith('.html') && f !== 'index.html').map((f) => {
+    const h = fs.readFileSync(path.join(blogDir, f), 'utf8');
+    const t = (/<h1[^>]*>([\s\S]*?)<\/h1>/.exec(h) || [])[1] || f;
+    return [f.replace(/\.html$/, ''), t.replace(/<[^>]+>/g, '').trim()];
+  });
+  const body = `
+<h2>Main pages</h2>
+<ul><li><a href="/">Home: the AIM program, fee and how to apply</a></li><li><a href="/about">About AIM</a></li><li><a href="/blogs">Blog</a></li><li><a href="/terms">Terms and refund policy</a></li><li><a href="/all-pages">All pages</a><a href="/privacy-policy">Privacy policy</a></li></ul>
+<h2>Courses</h2>
+<ul><li><a href="/digital-marketing-course">Digital marketing course in India</a></li><li><a href="/ai-digital-marketing-course">AI digital marketing course</a></li><li><a href="/vibe-marketing-course">Vibe marketing course</a></li><li><a href="/digital-marketing-course-online">Online digital marketing course</a></li></ul>
+<h2>Digital marketing course by city</h2>
+<ul>${CITIES.map((c) => `<li><a href="/digital-marketing-course/${c.slug}">Digital marketing course in ${esc(c.name)}</a></li>`).join('')}</ul>
+<h2>Blog posts</h2>
+<ul>${posts.map(([s, t]) => `<li><a href="/blogs/${s}">${t}</a></li>`).join('')}</ul>
+<h2>Authors</h2>
+<ul><li><a href="/author/kailasnathr">Kailas Nath R</a></li><li><a href="/author/kautilyaroshan">Kautilya Roshan</a></li></ul>`;
+  write('all-pages.html', page({
+    path: '/all-pages', title: 'All Pages: AIM Site Map | AI in Marketing', desc: 'Every page on aiinmarketing.in in one list: course pages, city pages, blog posts, authors and policies.',
+    kicker: 'Site map', h1: 'All pages on AIM', lead: 'Every public page on aiinmarketing.in, grouped by type.',
+    crumbs: [['Home', '/'], ['All pages', null]], body,
+    breadcrumb: crumbLd([['Home', '/'], ['All pages', '/all-pages']]),
+  }));
+  out.pop();
 }
 console.log('wrote', out.length, 'pages');
 fs.writeFileSync(path.join(ROOT, 'tools', 'seo-pages.json'), JSON.stringify(out, null, 1) + '\n');

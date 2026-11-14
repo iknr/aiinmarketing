@@ -49,6 +49,8 @@ const MUTATIONS = [
   ['edit the brochure source without rebuilding the PDF', (d) => edit(d, 'tools/pdf-src/brochure.htm', (s) => s.replace('in 12 weeks.', 'in 13 weeks.'))],
   ['put a retired claim into the brochure source', (d) => edit(d, 'tools/pdf-src/brochure.htm', (s) => s.replace('Two plans. Same program.', 'All-inclusive. One flat fee.'))],
   ['replace the brochure PDF with a hand-edited file', (d) => fs.writeFileSync(path.join(d, 'wp-content/uploads/2026/11/guides/aim-program-brochure.pdf'), Buffer.from('%PDF-1.4 hand edited'))],
+  ['drop the Course schema from a city page', (d) => edit(d, 'digital-marketing-course/pune.html', (s) => s.replace('"@type":"Course"', '"@type":"Thing"'))],
+  ['drop a city page from the sitemap', (d) => edit(d, 'sitemap.xml', (s) => s.replace('https://aiinmarketing.in/digital-marketing-course/delhi', 'https://aiinmarketing.in/digital-marketing-course/gone'))],
   ['drop a blog post from llms.txt', (d) => edit(d, 'llms.txt', (s) => s.split('https://aiinmarketing.in/blogs/what-is-vibe-marketing').join('https://aiinmarketing.in/blogs/gone'))],
 ];
 

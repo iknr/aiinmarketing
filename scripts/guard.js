@@ -47,7 +47,7 @@ const rel = (p) => path.relative(ROOT, p).split(path.sep).join('/');
 let _files = null;
 const allFiles = () => (_files = _files || walk(ROOT).map(rel));
 const htmlFiles = () => allFiles().filter((f) => f.toLowerCase().endsWith('.html'));
-const publicHtml = () => htmlFiles().filter((f) => f !== 'wp-login.html');
+const publicHtml = () => htmlFiles().filter((f) => f !== 'wp-login.html' && f !== '404.html');
 const blogPosts = () => htmlFiles().filter((f) => /^blogs\/[^/]+\.html$/.test(f) && f !== 'blogs/index.html');
 const slugOf = (f) => path.basename(f, '.html');
 const count = (s, sub) => (s.split(sub).length - 1);
@@ -412,6 +412,32 @@ const INVARIANTS = [
           const target = u.startsWith('/') ? u.slice(1) : path.posix.join(path.posix.dirname(f), u);
           if (!fs.existsSync(abs(target))) p.push(`${f}: image ${u} does not exist in the repo.`);
         }
+      }
+      return p;
+    },
+  },
+  {
+    id: 'course-pages',
+    title: 'Course and city pages (tools/seo-pages.json) keep schema, both plans, internal links, sitemap and llms.txt entries',
+    why: 'These pages target the course and city searches. Each needs Course, FAQPage and BreadcrumbList schema, both public plans, a link to the pillar page, and a sitemap plus llms.txt entry, or the ranking work is lost silently. Edit tools/seo-pages-data.js or tools/build-seo-pages.js and rebuild, never the HTML by hand.',
+    check() {
+      const p = [];
+      const mf = 'tools/seo-pages.json';
+      if (!exists(mf)) return [`${mf} missing; run node tools/build-seo-pages.js and commit the result.`];
+      let list;
+      try { list = JSON.parse(read(mf)); } catch (e) { return [`${mf} is not valid JSON.`]; }
+      if (list.length < 20) p.push(`${mf}: only ${list.length} pages listed (expected at least 20).`);
+      const sm = new Set(sitemapUrls() || []), llms = tryRead('llms.txt') || '';
+      for (const f of list) {
+        const h = tryRead(f);
+        if (h === null) { p.push(`${f}: course/city page file missing. Rebuild with node tools/build-seo-pages.js.`); continue; }
+        const types = jsonLd(h).filter((x) => x.ok).map((x) => x.data['@type']);
+        for (const t of ['Course', 'FAQPage', 'BreadcrumbList']) if (!types.includes(t)) p.push(`${f}: ${t} JSON-LD missing.`);
+        if (!/5,999|5999/.test(h) || !/9,999|9999/.test(h)) p.push(`${f}: both plans (5,999 and 9,999) must appear.`);
+        if (f !== 'digital-marketing-course/index.html' && !h.includes('href="/digital-marketing-course"')) p.push(`${f}: link to /digital-marketing-course missing.`);
+        const url = pageUrl(f);
+        if (!sm.has(url)) p.push(`${f}: not listed in sitemap.xml.`);
+        if (!llms.includes(url)) p.push(`${f}: not listed in llms.txt.`);
       }
       return p;
     },

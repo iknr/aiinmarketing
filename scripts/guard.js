@@ -216,6 +216,7 @@ const INVARIANTS = [
       const hasRed = (a, b) => red.some((r) => r.source === a && r.destination === b && (r.permanent === true || r.statusCode === 301 || r.statusCode === 308));
       if (!hasRed('/blog', '/blogs')) p.push(`${f}: permanent redirect /blog -> /blogs missing.`);
       if (!hasRed('/blog/:slug', '/blogs/:slug')) p.push(`${f}: permanent redirect /blog/:slug -> /blogs/:slug missing.`);
+      if (!red.some((r) => (r.has || []).some((h) => h.type === 'host' && h.value === 'www.aiinmarketing.in') && /^https:\/\/aiinmarketing\.in\//.test(r.destination || '') && (r.permanent === true || r.statusCode === 301 || r.statusCode === 308))) p.push(`${f}: permanent host redirect www.aiinmarketing.in -> https://aiinmarketing.in missing (one canonical host for SEO).`);
       const rw = v.rewrites || [];
       for (const src of ['/wp-login.php', '/wp-admin', '/wp-admin/', '/wp-admin/index.php']) if (!rw.some((r) => r.source === src && r.destination === '/wp-login')) p.push(`${f}: rewrite ${src} -> /wp-login (decoy login) missing.`);
       if (!rw.some((r) => r.source === '/wp-admin/admin-ajax.php' && r.destination === '/api/lead')) p.push(`${f}: rewrite /wp-admin/admin-ajax.php -> /api/lead missing; forms would stop working.`);

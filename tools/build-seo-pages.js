@@ -36,9 +36,9 @@ const NAV = '<nav class="aimb-links"><a href="/">Home</a><a href="/digital-marke
 const THEMES = ['sunrise', 'forest', 'plum', 'ember', 'ocean', 'rose', 'slate'];
 const LAYOUTS = ['left', 'center', 'card'];
 const PLACED_PEOPLE = [
-  ['Ankita Kumari', 'Subject Matter Expert at Lokal', '&#8377;15 LPA', 'https://www.linkedin.com/in/ankita-kumari-b17128168/', '/wp-content/uploads/2026/11/adsmentor/face_ankita.webp'],
+  ['Ankita Kumari', 'Subject Matter Expert at Lokal', '&#8377;15 LPA', 'https://www.linkedin.com/in/ankita-kumari-b17128168/', ''],
   ['Vasavi R V', 'Asst. Manager, Marketing at KloudMate', '&#8377;12 LPA', 'https://www.linkedin.com/in/vasavi-rv-0b2582231/', ''],
-  ['Praneet K', 'Digital Production Specialist at Loblaw Digital', '&#8377;15 LPA', 'https://www.linkedin.com/in/praneet-k-b6043b126/', '/wp-content/uploads/2026/11/adsmentor/face_praneet.webp'],
+  ['Praneet K', 'Digital Production Specialist at Loblaw Digital', '&#8377;15 LPA', 'https://www.linkedin.com/in/praneet-k-b6043b126/', ''],
   ['Vivek Jain', 'Creative Head', '34% salary hike', 'https://www.linkedin.com/in/vivek-jain-7472842b7/', ''],
   ['Tamanna Jain', 'Social Media Manager at Amulya Kala', '30% salary hike', 'https://www.linkedin.com/in/tamanna-jain-dm/', ''],
 ];

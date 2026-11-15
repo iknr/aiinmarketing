@@ -145,3 +145,20 @@
   }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init();
 })();
+
+/* FAQ topic tabs */
+(function(){
+  function init(){
+    var t=document.querySelector('#faq .fq-tabs'); if(!t) return;
+    var btns=[].slice.call(t.querySelectorAll('button')), panels=[].slice.call(document.querySelectorAll('#faq .fq-list > .fq-g'));
+    t.setAttribute('role','tablist');
+    function pick(i,focus){ btns.forEach(function(b,k){ var on=k===i; b.classList.toggle('on',on); b.setAttribute('aria-selected',on?'true':'false'); b.tabIndex=on?0:-1; if(panels[k]) panels[k].classList.toggle('on',on); }); if(focus) btns[i].focus(); }
+    btns.forEach(function(b,i){
+      b.setAttribute('role','tab'); b.setAttribute('type','button');
+      b.addEventListener('click',function(){ pick(i,false); });
+      b.addEventListener('keydown',function(e){ var k=e.key; if(k!=='ArrowRight'&&k!=='ArrowLeft') return; e.preventDefault(); pick((i+(k==='ArrowRight'?1:-1)+btns.length)%btns.length,true); });
+    });
+    pick(0,false);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init();
+})();

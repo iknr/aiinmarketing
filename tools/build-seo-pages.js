@@ -77,7 +77,7 @@ ${GTM}<meta charset="UTF-8">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap">
 <link rel="stylesheet" id="hello-elementor-css" href="/wp-content/themes/hello-elementor/style.css?ver=3.1.1">
-<link rel="stylesheet" id="aim-blog-css" href="/wp-content/uploads/elementor/css/aim-blog.css?ver=2.6.0"><link rel="stylesheet" id="aim-programs-css" href="/wp-content/uploads/elementor/css/aim-programs.css?ver=1.1.0" media="all">
+<link rel="stylesheet" id="aim-blog-css" href="/wp-content/uploads/elementor/css/aim-blog.css?ver=2.7.0"><link rel="stylesheet" id="aim-programs-css" href="/wp-content/uploads/elementor/css/aim-programs.css?ver=1.1.0" media="all">
 <link rel="stylesheet" id="aim-themes-css" href="/wp-content/uploads/elementor/css/aim-themes.css?ver=1.0.0"><link rel="stylesheet" id="aim-course-css" href="/wp-content/uploads/elementor/css/aim-course.css?ver=1.0.1">
 ${ld}
 ${PLACED_CSS}

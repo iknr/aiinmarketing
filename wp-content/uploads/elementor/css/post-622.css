@@ -2842,3 +2842,32 @@ html {
   .am-lp #popular-courses li { margin: 0; }
 }
 /* ===== END HOME POLISH 2026 ===== */
+
+/* HOME INTERACTION 2026: accordions, stacking cards, tabs, jump bar */
+.am-lp details.amx-acc>summary{list-style:none;cursor:default}
+.am-lp details.amx-acc>summary::-webkit-details-marker{display:none}
+.am-lp .amx-stack{display:block}
+.am-lp .amx-stack>.am-card{position:sticky;top:calc(132px + var(--i,0)*22px);margin:0 0 28px;max-width:860px;margin-left:auto;margin-right:auto}
+.am-lp .amx-stack>.am-card:nth-child(2){--i:1}
+.am-lp .amx-stack>.am-card:nth-child(3){--i:2}
+.am-lp .amx-tabbar{display:none}
+#amx-jump{display:none}
+@media (min-width:901px){
+  #amx-jump{display:flex;position:fixed;left:50%;bottom:18px;transform:translate(-50%,24px);opacity:0;pointer-events:none;transition:opacity .2s,transform .2s;z-index:80;gap:4px;background:#fff;border:2px solid #111827;border-radius:999px;padding:5px;box-shadow:4px 4px 0 #111827}
+  #amx-jump.is-on{opacity:1;transform:translate(-50%,0);pointer-events:auto}
+  #amx-jump a{font:700 14px 'Plus Jakarta Sans',sans-serif;color:#111827;text-decoration:none;padding:8px 14px;border-radius:999px}
+  #amx-jump a:hover,#amx-jump a:focus-visible{background:#ffd43b}
+}
+@media (max-width:820px){
+  .am-lp details.amx-acc>summary{cursor:pointer;position:relative;padding-right:34px;min-height:44px}
+  .am-lp details.amx-acc>summary::after{content:"+";position:absolute;right:0;top:0;font:800 24px/1 'Plus Jakarta Sans',sans-serif;color:#111827}
+  .am-lp details.amx-acc[open]>summary::after{content:"\2212"}
+  .am-lp details.amx-acc>summary h3{margin-bottom:6px}
+  .am-lp .amx-tabbar{display:flex;gap:8px;margin:0 0 14px;overflow-x:auto}
+  .am-lp .amx-tabbar button{flex:1;min-height:44px;border:2px solid #111827;border-radius:999px;background:#fff;font:700 14px 'Plus Jakarta Sans',sans-serif;color:#111827;padding:0 14px}
+  .am-lp .amx-tabbar button[aria-selected="true"]{background:#ffd43b;box-shadow:3px 3px 0 #111827}
+  [data-aimtabs] .amx-trackcard{display:none}
+  [data-aimtabs] .amx-trackcard.is-on{display:block}
+  .am-lp .amx-stack>.am-card{top:calc(72px + var(--i,0)*16px)}
+}
+@media (prefers-reduced-motion:reduce){.am-lp .amx-stack>.am-card{position:static}#amx-jump{transition:none}}

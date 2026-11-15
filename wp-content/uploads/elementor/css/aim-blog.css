@@ -378,3 +378,22 @@ a.aimb-pill:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px;
   .aimb-links .aimb-apply { padding: 9px 11px; font-size: 14px; white-space: nowrap; }
   .aimb-mark { font-size: 21px; padding: 5px 8px; }
 }
+
+/* Blog redesign (option B, 16 Nov 2026): reading-first posts and a lighter index. Scoped to .type-post and .aimb-indexmain only. */
+.aimb-article.type-post > p, .aimb-article.type-post > ul, .aimb-article.type-post > ol, .aimb-article.type-post > h2, .aimb-article.type-post > h3, .aimb-article.type-post > h4, .aimb-article.type-post > .aimb-takeaways, .aimb-article.type-post > .aimb-toc, .aimb-article.type-post > .aimb-small, .aimb-article.type-post > details, .aimb-article.type-post > .aimb-related { max-width: 780px; }
+.aimb-article.type-post > p, .aimb-article.type-post > ul > li, .aimb-article.type-post > ol > li { font-size: 19px; line-height: 1.72; }
+.aimb-article.type-post > .aimb-lead { font-size: 22px; line-height: 1.6; font-weight: 500; }
+.aimb-article.type-post > h2 { font-size: 32px; line-height: 1.2; margin-top: 64px; letter-spacing: -.01em; }
+.aimb-article.type-post > h3 { font-size: 22px; line-height: 1.3; }
+.aimb-article.type-post > .aimb-takeaways { background: #fffbea; border: 0; border-left: 6px solid #ffd43b; border-radius: 0 18px 18px 0; }
+.aimb-article.type-post > .aimb-takeaways li { font-size: 18px; }
+.aimb-article.type-post > .aimb-toc { background: #f7f3ea; border: 0; border-radius: 18px; }
+.aimb-article.type-post > .aimb-toc ol { counter-reset: aimt; list-style: none; padding-left: 0; }
+.aimb-article.type-post > .aimb-toc li { counter-increment: aimt; font-size: 16px; }
+.aimb-article.type-post > .aimb-toc li::before { content: counter(aimt); display: inline-grid; place-items: center; width: 24px; height: 24px; border-radius: 50%; background: #111827; color: #ffd43b; font-weight: 800; font-size: 12px; margin-right: 10px; }
+.aimb-article.type-post > .aimb-tablewrap { border: 1px solid #e5e7eb; box-shadow: none; border-radius: 14px; }
+.aimb-indexmain .aimb-band { background: #fffdf7; }
+.aimb-indexmain .aimb-card { border: 1px solid #e5e7eb; border-radius: 18px; background: #fff; overflow: hidden; padding-bottom: 20px; transition: transform .15s; }
+.aimb-indexmain .aimb-card:hover { transform: translateY(-3px); }
+.aimb-indexmain .aimb-card > :not(.aimb-thumb) { margin-left: 18px; margin-right: 18px; }
+@media (max-width: 640px) { .aimb-article.type-post > p, .aimb-article.type-post > ul > li, .aimb-article.type-post > ol > li { font-size: 17px; } .aimb-article.type-post > .aimb-lead { font-size: 19px; } .aimb-article.type-post > h2 { font-size: 26px; margin-top: 48px; } }

@@ -310,3 +310,9 @@
     bottom: 24px;
   }
 }
+
+/* phones: the launcher stays out of the hero and shows once the visitor is past it */
+@media (max-width: 820px) {
+  .aim-launcher { display: none !important; }
+  html.aim-past-hero .aim-launcher:not([hidden]) { display: flex !important; }
+}

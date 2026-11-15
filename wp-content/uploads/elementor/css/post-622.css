@@ -19,7 +19,7 @@
   --ink: #0b0d12;
   --ink-2: #22262e;
   --body: #454c59;
-  --muted: #7b8494;
+  --muted: #5b6475;
   --line: #e4e8ee;
   --paper: #fff;
   --bg-black: #000205;
@@ -2789,3 +2789,56 @@ html {
   .am-lp header .am-navlinks .am-ddp a { padding: 10px 0; font-size: 15px; border-bottom: 0; }
   .am-lp header .am-navlinks a:last-child { border-bottom: 0; }
 }
+
+/* ===== HOME POLISH 2026 (hero hierarchy, contrast, tap targets, fonts) ===== */
+.elementor-622 .am-lp { --pk-green: #0b7a3b; --pk-soft: #444c5a; }
+.elementor-622 .am-lp .amx-hero { padding: 132px 0 56px; }
+.elementor-622 .am-lp .amx-hero-grid { align-items: start; row-gap: 40px; }
+.elementor-622 .am-lp .amx-hero-copy { min-width: 0; }
+.elementor-622 .am-lp h1 { font-size: clamp(36px, 4vw, 54px) !important; line-height: 1.1 !important; max-width: 17em; }
+.elementor-622 .am-lp .amx-lead { font-size: 18.5px !important; line-height: 1.6 !important; max-width: 60ch; margin-top: 16px; color: var(--pk-soft); }
+.elementor-622 .am-lp .amx-lead-1 { color: var(--pk-ink); font-weight: 600; }
+.elementor-622 .am-lp .amx-lead-2 { margin-top: 10px; }
+.elementor-622 .am-lp .amx-cta-row { margin-top: 24px; }
+.elementor-622 .am-lp .amx-micro { margin-top: 14px; font-size: 14.5px; line-height: 1.55; max-width: 60ch; }
+.elementor-622 .am-lp .amx-micro b { color: var(--pk-ink); }
+.elementor-622 .am-lp .amx-gchip { display: inline-flex; align-items: center; gap: 6px; margin-right: 8px; font-weight: 700; color: var(--pk-blue); }
+.elementor-622 .am-lp .amx-paths { margin-top: 20px; }
+.elementor-622 .am-lp .amx-hero-more { grid-column: 1 / -1; display: grid; gap: 22px; padding-top: 30px; border-top: 2px solid var(--pk-ink); }
+.elementor-622 .am-lp .amx-hero-more .amx-benefits { margin: 0; grid-template-columns: repeat(4, 1fr); gap: 18px 24px; }
+.elementor-622 .am-lp .amx-hero-more .amx-specs-label { margin: 0 0 -6px; }
+.elementor-622 .am-lp .amx-hero-more .amx-specs { grid-template-columns: repeat(4, 1fr); gap: 14px; }
+.elementor-622 .am-lp .amx-hero-more .amx-proofrow { margin-top: 0; }
+@media (min-width: 901px) {
+  .elementor-622 .am-lp .amx-receipt { position: sticky; top: 112px; }
+}
+@media (max-width: 1100px) {
+  .elementor-622 .am-lp .amx-hero-more .amx-benefits, .elementor-622 .am-lp .amx-hero-more .amx-specs { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 900px) {
+  .elementor-622 .am-lp .amx-hero { padding-top: 44px; padding-bottom: 40px; }
+  .elementor-622 .am-lp .amx-lead { font-size: 17px !important; }
+  .elementor-622 .am-lp .amx-hero-more { padding-top: 24px; }
+}
+@media (max-width: 640px) {
+  .elementor-622 .am-lp .amx-hero-more .amx-benefits, .elementor-622 .am-lp .amx-hero-more .amx-specs { grid-template-columns: 1fr; }
+}
+/* contrast: muted text and small notes must reach 4.5 to 1 */
+.am-lp .am-rvrole, .am-lp .amx-small, .am-lp .am-fine, .am-lp .am-note, .am-lp .am-prole, .am-lp .am-pusd { color: #5b6475; }
+.am-lp .am-pusd { color: #0b7a3b; }
+.am-lp .am-fine, .am-lp .am-note { font-size: 14px; }
+/* popup form and skip link use the same font as the page */
+#elementor-popup-modal-519, #elementor-popup-modal-519 *:not(svg):not(path), .skip-link { font-family: "Plus Jakarta Sans", "Segoe UI", sans-serif !important; }
+/* tap targets on phones: 44 px */
+@media (max-width: 820px) {
+  .am-lp footer a, .am-lp .amx-proofrow a, .am-lp .amx-link, .am-lp .aimp-link, .am-lp .am-rvlink, .am-lp .am-note a, .am-lp .am-fine a {
+    display: inline-flex; align-items: center; min-height: 44px;
+  }
+  .am-lp .aimp-link { display: flex; }
+  .am-lp .amx-path { min-height: 44px; }
+}
+@media (max-width: 820px) {
+  .am-lp #popular-courses li a, .am-lp .amx-moreguides a, .am-lp .am-striphead a, .am-lp a.am-extlink, .am-lp .amx-trackstrip a, .am-lp .am-tr-name a { display: inline-flex; align-items: center; gap: 0.35em; flex-wrap: wrap; min-height: 44px; }
+  .am-lp #popular-courses li { margin: 0; }
+}
+/* ===== END HOME POLISH 2026 ===== */

@@ -15,12 +15,12 @@ html,body{overflow-x:clip}
 .aimp-card h3{margin:0 0 10px;font-size:19px;color:var(--ink)}
 .aimp-mode{font-weight:800;font-size:16px;margin:0 0 10px!important;color:var(--ink)!important}
 .aimp-desc{color:var(--mut);font-size:15px;line-height:1.6;margin:0 0 14px}
-.aimp-k{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#8a93a8;margin:0 0 8px}
+.aimp-k{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#5f6a80;margin:0 0 8px}
 .aimp-chips{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px}
 .aimp-chips span{border:1px solid var(--line);border-radius:99px;padding:7px 10px;font-size:13px;text-align:center;color:#3b4560}
 .aimp-best{background:#f3f4f8;border-radius:10px;padding:12px 14px;margin-bottom:14px}
-.aimp-best small{display:block;color:#8a93a8;font-size:12px;margin-bottom:3px}
-.aimp-best strong{color:#e0532a;font-size:15px}
+.aimp-best small{display:block;color:#5f6a80;font-size:12px;margin-bottom:3px}
+.aimp-best strong{color:#111827;font-size:15px}
 .aimp-link{margin-top:auto;display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:14px;text-decoration:none;color:var(--ink);font-weight:700}
 .aimp-link b{color:var(--b)}
 .aimp-lead{margin-top:64px;background:var(--ink);border-radius:22px;padding:clamp(28px,4vw,52px)}
@@ -122,3 +122,23 @@ html,body{overflow-x:clip}
 html{scroll-padding-top:80px}
 @media(max-width:1000px){.aimp-brochure .aimp-lead{grid-template-columns:minmax(0,150px) minmax(0,1fr)}.aimp-brochure .aimp-mag{grid-column:1/-1}}
 @media(max-width:640px){.aimp-brochure .aimp-lead{grid-template-columns:1fr;justify-items:start}.aimp-brochure-cover{max-width:160px}.aimp-brochure .aimp-mag{width:100%}}
+
+/* one design style with the rest of the home page: ink borders, offset shadows, yellow highlights (1.5.0) */
+.aimp-full{--b:#0b4fd6;--ink:#111827;--mut:#444c5a;--line:#e7e1d4;background:#f7f3ea;border-top:2px solid #111827;border-bottom:2px solid #111827}
+.aimp-head{text-align:left;margin-left:0;margin-right:0;max-width:760px}
+.aimp-eye{display:inline-block;background:#ffd43b;color:#111827;padding:6px 12px;border-radius:999px;letter-spacing:.06em;font-size:12.5px}
+.aimp-head h2{font-weight:800}
+.aimp-card{border:2px solid #111827;border-radius:18px;box-shadow:5px 5px 0 #111827}
+.aimp-card.is-pop{border:2px solid #111827;box-shadow:5px 5px 0 #0b4fd6}
+.aimp-badge{background:#ffd43b;color:#111827;border:2px solid #111827}
+.aimp-ic{background:#fff4c2;color:#111827;border:2px solid #111827}
+.aimp-chips span{border:1.5px solid #111827;border-radius:12px;color:#111827;background:#fff}
+.aimp-best{background:#fff4c2;border:1.5px solid #111827}
+.aimp-best small{color:#444c5a}
+.aimp-link{border-top:2px solid #111827;min-height:44px}
+.aimp-link b{color:#0b4fd6}
+.aimp-mag{border:2px solid #111827;border-radius:16px}
+.aimp-mag button{background:#0b4fd6;border:2px solid #111827;box-shadow:3px 3px 0 #111827;min-height:44px}
+.aimp-mag input{border:2px solid #111827;min-height:44px}
+.aimp-lead{background:#111827;border:2px solid #111827}
+.aimp-lead .aimp-eye{background:#ffd43b;color:#111827}

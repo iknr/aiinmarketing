@@ -3192,3 +3192,13 @@ html body #programs-home .pg-A .pg-best{margin-top:auto!important;height:auto!im
 .elementor-622 .am-lp #apply-steps .st{grid-template-columns:1fr 1fr!important;gap:22px 14px!important}.elementor-622 .am-lp #apply-steps .st p{font-size:15px!important}
 html body #programs-home .pg-A{grid-template-columns:1fr!important;gap:26px!important}html body #programs-home .pg-A .pg-c,html body #programs-home .pg-A .pg-c:nth-child(n+4){grid-column:auto!important;padding:20px!important;box-shadow:4px 4px 0 #111827!important}
 .elementor-622 .am-lp #popular-courses .am-grid{grid-template-columns:1fr!important;gap:16px!important}.elementor-622 .am-lp #featured-blogs .amx-feat{grid-template-columns:1fr!important}.elementor-622 .am-lp #featured-blogs .amx-moreguides ul{columns:1!important}}
+
+/* WHOLE-PAGE PASS 2026-11: align programs and brochure with the page column, quieter rules, full-width FAQ, compact chat launcher on phones */
+html body #programs-home .aimp-inner, html body #brochure .aimp-inner { max-width: 1268px !important; padding-left: 16px !important; padding-right: 16px !important; }
+html body #programs-home.aimp-full, html body #brochure.aimp-full { border-top: 0 !important; border-bottom: 0 !important; }
+.elementor-622 .am-lp #faq .fq-A .fq-list { max-width: none !important; }
+@media (max-width: 820px) {
+  html body .aim-launcher { width: 56px !important; height: 56px !important; padding: 0 !important; justify-content: center !important; border-radius: 50% !important; }
+  html body .aim-launcher .aim-launcher-text { display: none !important; }
+}
+@media (max-width: 820px) { html body #programs-home .aimp-inner, html body #brochure .aimp-inner { padding-left: 14px !important; padding-right: 14px !important; } }

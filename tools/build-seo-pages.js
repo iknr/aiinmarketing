@@ -47,10 +47,11 @@ const PLACED = `<h2 id="placements">Where our students landed: placed at &#8377;
 <div class="aimb-placed">${PLACED_PEOPLE.map(([n, r, pk, u, img]) => `<a class="aimb-pcard" href="${u}" target="_blank" rel="noopener"><span class="aimb-pav">${img ? `<img src="${img}" width="200" height="200" alt="${n}" loading="lazy" decoding="async">` : n.split(' ').map((w) => w[0]).slice(0, 2).join('')}</span><b>${n}</b><span>${r}</span><strong>${pk}</strong><em>View profile on LinkedIn</em></a>`).join('')}</div>`;
 const PLACED_CSS = `<style>.aimb-placed{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin:14px 0 22px}.aimb-pcard{display:flex;flex-direction:column;gap:4px;padding:16px;border:1px solid #dbe3f5;border-radius:14px;background:#fff;text-decoration:none;color:inherit}.aimb-pcard b{font-size:16px}.aimb-pcard span{font-size:14px;color:#44506b}.aimb-pcard strong{margin-top:6px;font-size:18px;color:#0256ec}.aimb-pcard em{font-style:normal;font-size:13px;color:#0256ec}.aimb-pav{width:48px;height:48px;border-radius:50%;background:#e8efff;color:#0256ec;display:flex;align-items:center;justify-content:center;font-weight:800;overflow:hidden;margin-bottom:6px}.aimb-pav img{width:100%;height:100%;object-fit:cover}</style>`;
 
+const { upgrade } = require('./course-shell.js');
 function page(o) {
   const url = SITE + o.path;
   const ld = [o.course, o.breadcrumb, o.faq && faqLd(o.faq)].filter(Boolean).map((j) => `<script type="application/ld+json">${JSON.stringify(j)}</script>`).join('\n');
-  return `<!DOCTYPE html>
+  return upgrade(`<!DOCTYPE html>
 <html lang="en-IN">
 <head>
 ${GTM}<meta charset="UTF-8">
@@ -77,7 +78,7 @@ ${GTM}<meta charset="UTF-8">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap">
 <link rel="stylesheet" id="hello-elementor-css" href="/wp-content/themes/hello-elementor/style.css?ver=3.1.1">
 <link rel="stylesheet" id="aim-blog-css" href="/wp-content/uploads/elementor/css/aim-blog.css?ver=2.5.1"><link rel="stylesheet" id="aim-programs-css" href="/wp-content/uploads/elementor/css/aim-programs.css?ver=1.1.0" media="all">
-<link rel="stylesheet" id="aim-themes-css" href="/wp-content/uploads/elementor/css/aim-themes.css?ver=1.0.0">
+<link rel="stylesheet" id="aim-themes-css" href="/wp-content/uploads/elementor/css/aim-themes.css?ver=1.0.0"><link rel="stylesheet" id="aim-course-css" href="/wp-content/uploads/elementor/css/aim-course.css?ver=1.0.1">
 ${ld}
 ${PLACED_CSS}
 </head>
@@ -102,7 +103,7 @@ ${PLACED}
 <script id="aim-magnet-js" src="/wp-content/plugins/elementor/assets/js/aim-magnet.js?ver=1.0.0" defer></script><script id="aim-track-js" src="/wp-content/plugins/elementor/assets/js/aim-track.js?ver=1.1.0" defer></script>
 </body>
 </html>
-`;
+`);
 }
 
 function faqLd(faq) {

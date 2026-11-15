@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="A beginner at a laptop with a simple step-by-step path leading to a first live website">
+<title>A beginner at a laptop with a simple step-by-step path leading to a first live website</title>
+<style>text{font-family:'Plus Jakarta Sans','Segoe UI',Arial,sans-serif;font-weight:800}</style>
+<rect width="1200" height="630" fill="#be185d"/>
+<circle cx="1010" cy="170" r="210" fill="#9d174d"/>
+<circle cx="1080" cy="520" r="120" fill="#fbcfe8" opacity=".95"/>
+<rect x="70" y="70" width="110" height="52" rx="14" fill="#fbcfe8"/>
+<text x="125" y="107" text-anchor="middle" font-size="30" fill="#500724">AIM</text>
+<text x="70" y="300" font-size="76" fill="#ffffff">Digital marketing</text>
+<text x="70" y="392" font-size="76" fill="#fbcfe8">for beginners</text>
+<text x="70" y="520" font-size="30" fill="#dbe7ff" style="font-weight:600">AI in Marketing by Adsmentor</text>
+</svg>

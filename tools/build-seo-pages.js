@@ -48,10 +48,11 @@ const PLACED = `<h2 id="placements">Where our students landed: placed at &#8377;
 const PLACED_CSS = `<style>.aimb-placed{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;margin:14px 0 22px}.aimb-pcard{display:flex;flex-direction:column;gap:4px;padding:16px;border:1px solid #dbe3f5;border-radius:14px;background:#fff;text-decoration:none;color:inherit}.aimb-pcard b{font-size:16px}.aimb-pcard span{font-size:14px;color:#44506b}.aimb-pcard strong{margin-top:6px;font-size:18px;color:#0256ec}.aimb-pcard em{font-style:normal;font-size:13px;color:#0256ec}.aimb-pav{width:48px;height:48px;border-radius:50%;background:#e8efff;color:#0256ec;display:flex;align-items:center;justify-content:center;font-weight:800;overflow:hidden;margin-bottom:6px}.aimb-pav img{width:100%;height:100%;object-fit:cover}</style>`;
 
 const { upgrade } = require('./course-shell.js');
+const { syncHeader } = require('./sync-header.js');
 function page(o) {
   const url = SITE + o.path;
   const ld = [o.course, o.breadcrumb, o.faq && faqLd(o.faq)].filter(Boolean).map((j) => `<script type="application/ld+json">${JSON.stringify(j)}</script>`).join('\n');
-  return upgrade(`<!DOCTYPE html>
+  return syncHeader(upgrade(`<!DOCTYPE html>
 <html lang="en-IN">
 <head>
 ${GTM}<meta charset="UTF-8">
@@ -103,7 +104,7 @@ ${PLACED}
 <script id="aim-magnet-js" src="/wp-content/plugins/elementor/assets/js/aim-magnet.js?ver=1.0.0" defer></script><script id="aim-track-js" src="/wp-content/plugins/elementor/assets/js/aim-track.js?ver=1.1.0" defer></script>
 </body>
 </html>
-`);
+`));
 }
 
 function faqLd(faq) {

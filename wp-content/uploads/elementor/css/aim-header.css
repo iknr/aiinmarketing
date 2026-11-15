@@ -1,0 +1,58 @@
+/* Shared site header (1.0.0): announcement bar + nav, same look as the home page header. Used by every page except the home page, which has its own markup. */
+.aimh-top { position: sticky; top: 0; z-index: 60; font-family: "Plus Jakarta Sans","Segoe UI",sans-serif; }
+.aimh-ann { height: 40px; background: #0f1b3d; color: #fff; overflow: hidden; display: flex; align-items: center; }
+.aimh-track { display: flex; align-items: center; width: max-content; animation: aimh-scroll 52s linear infinite; will-change: transform; }
+.aimh-ann:hover .aimh-track, .aimh-ann:focus-within .aimh-track { animation-play-state: paused; }
+.aimh-item { display: inline-block; white-space: nowrap; font-size: 14.5px; font-weight: 400; line-height: 40px; padding: 0 26px; position: relative; }
+.aimh-item::after { content: ""; position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,.32); }
+.aimh-item b { color: #ffd43b; font-weight: 700; }
+@keyframes aimh-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) { .aimh-track { animation: none; width: 100%; justify-content: center; } .aimh-item:not(:first-child) { display: none; } .aimh-item::after { display: none; } }
+.aimh-header { position: relative; background: #fffdf7; border-bottom: 2px solid #111827; color: #111827; }
+.aimh-nav { box-sizing: border-box; display: flex; align-items: center; gap: 20px; height: 72px; width: 100%; padding: 0 22px; max-width: 1180px; margin: 0 auto; }
+@media (min-width: 1181px) { .aimh-nav { max-width: none; padding: 0 40px; } }
+.aimh-brand { display: flex; align-items: center; gap: 12px; flex: none; }
+.aimh-mark { display: inline-block; font-size: 28px; font-weight: 800; line-height: 1.2; color: #111827; background: #ffd43b; border: 2px solid #111827; border-radius: 10px; padding: 6px 10px; box-shadow: 3px 3px 0 #111827; text-decoration: none; }
+.aimh-brand a { text-decoration: none; }
+.aimh-text { display: flex; flex-direction: column; line-height: 1.25; }
+.aimh-text small { font-size: 11.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; color: #444c5a; }
+.aimh-text a { font-size: 12.5px; font-weight: 700; color: #0b4fd6; text-decoration: underline; text-decoration-color: #ffd43b; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.aimh-cb { position: absolute; opacity: 0; pointer-events: none; width: 0; height: 0; }
+.aimh-toggle { display: none; flex-direction: column; justify-content: center; gap: 5px; width: 44px; height: 44px; padding: 0 10px; margin-left: auto; box-sizing: border-box; border: 1.5px solid #e7e1d4; border-radius: 11px; cursor: pointer; }
+.aimh-toggle span { display: block; height: 2px; width: 100%; background: #22262e; border-radius: 2px; transition: transform .2s, opacity .2s; }
+.aimh-cb:checked + .aimh-toggle span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.aimh-cb:checked + .aimh-toggle span:nth-child(2) { opacity: 0; }
+.aimh-cb:checked + .aimh-toggle span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.aimh-cb:focus-visible + .aimh-toggle { outline: 3px solid #ffd43b; outline-offset: 2px; }
+.aimh-links { margin-left: auto; display: flex; align-items: center; gap: 17px; font-size: 14.5px; font-weight: 600; }
+.aimh-links > a, .aimh-dd > summary { display: inline-flex; align-items: center; min-height: 44px; line-height: 1.2; color: #111827; text-decoration: none; white-space: nowrap; }
+.aimh-dd { position: relative; }
+.aimh-dd > summary { list-style: none; cursor: pointer; gap: 6px; }
+.aimh-dd > summary::-webkit-details-marker { display: none; }
+.aimh-dd > summary::after { content: ""; width: 6px; height: 6px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg) translateY(-2px); }
+.aimh-dd[open] > summary::after { transform: rotate(-135deg) translateY(-1px); }
+.aimh-links > a:hover, .aimh-dd > summary:hover { color: #0b4fd6; }
+.aimh-dd > summary:focus-visible, .aimh-links > a:focus-visible { outline: 3px solid #ffd43b; outline-offset: 2px; }
+.aimh-ddp { position: absolute; top: calc(100% + 14px); right: 0; z-index: 70; min-width: 280px; padding: 12px; display: grid; gap: 2px; background: #fff; border: 2px solid #0b0d12; border-radius: 14px; box-shadow: 4px 4px 0 #0b0d12; }
+.aimh-ddp2 { grid-template-columns: repeat(2, minmax(200px, 1fr)); gap: 2px 22px; min-width: 470px; }
+.aimh-ddp strong { display: block; margin: 4px 6px; font-size: 12px; font-weight: 900; letter-spacing: .06em; text-transform: uppercase; color: #22262e; }
+.aimh-links .aimh-ddp a { display: block; padding: 7px 8px; border-radius: 8px; font-size: 14.5px; font-weight: 600; line-height: 1.35; color: #111827; text-decoration: none; }
+.aimh-links .aimh-ddp a:hover, .aimh-links .aimh-ddp a:focus-visible { background: #f1f5fb; color: #0b4fd6; }
+.aimh-links > a.aimh-apply { display: inline-block; min-height: 0; margin-left: 3px; padding: 9px 18px; font-size: 17px; font-weight: 800; line-height: 1.3; color: #fff; background: #0b4fd6; border: 2px solid #111827; border-radius: 12px; box-shadow: 3px 3px 0 #111827; }
+.aimh-links > a.aimh-apply:hover { color: #fff; background: #0a45bd; }
+@media (max-width: 1180px) {
+  .aimh-toggle { display: flex; }
+  .aimh-links { display: none; position: absolute; top: 72px; left: 0; right: 0; margin: 0; flex-direction: column; align-items: stretch; gap: 0; padding: 6px 22px 16px; background: rgba(255,255,255,.98); border-bottom: 1px solid #e7e1d4; box-shadow: 0 22px 44px -26px rgba(16,32,64,.4); max-height: calc(100vh - 114px); overflow: auto; }
+  .aimh-cb:checked ~ .aimh-links { display: flex; }
+  .aimh-links > a, .aimh-dd > summary { padding: 13px 0; font-size: 16px; border-bottom: 1px solid #e7e1d4; width: 100%; box-sizing: border-box; }
+  .aimh-dd { position: static; }
+  .aimh-dd > summary { justify-content: space-between; }
+  .aimh-ddp, .aimh-ddp2 { position: static; min-width: 0; box-shadow: none; border: 0; border-radius: 0; padding: 4px 0 8px 10px; grid-template-columns: 1fr; max-height: 55vh; overflow: auto; }
+  .aimh-links .aimh-ddp a { padding: 10px 0; font-size: 15px; }
+  .aimh-links > a.aimh-apply { display: block; margin: 14px 0 0; text-align: center; border-bottom: 2px solid #111827; width: 100%; }
+}
+@media (max-width: 560px) { .aimh-item { font-size: 13px; padding: 0 20px; } .aimh-mark { font-size: 24px; padding: 5px 8px; } }
+/* sticky blocks and anchors must clear the 114px header */
+html { scroll-padding-top: 126px; }
+.aimb-article h2[id], .lg-sec, .aimb-article [id] { scroll-margin-top: 130px; }
+.au-side, .lg-toc { top: 134px; }

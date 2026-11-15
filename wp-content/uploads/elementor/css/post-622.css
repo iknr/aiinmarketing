@@ -2871,3 +2871,55 @@ html {
   .am-lp .amx-stack>.am-card{top:calc(72px + var(--i,0)*16px)}
 }
 @media (prefers-reduced-motion:reduce){.am-lp .amx-stack>.am-card{position:static}#amx-jump{transition:none}}
+
+/* HERO 2026-11 (yellow fee block + track cards) */
+.elementor-622 .am-lp .amh-about{max-width:860px;margin:26px 0 0!important;font-size:16px}
+.elementor-622 .am-lp .amh{padding-bottom:40px}
+.elementor-622 .am-lp .amh-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:44px;align-items:center}
+.elementor-622 .am-lp .amh-copy h1{margin:16px 0 18px}
+.elementor-622 .am-lp .amh-copy .amx-lead{max-width:640px}
+.elementor-622 .am-lp .amh-fee{background:#ffd43b;border:2px solid #111827;border-radius:28px;padding:28px;box-shadow:8px 8px 0 #111827;color:#111827}
+.elementor-622 .am-lp .amh-from{font-weight:700;font-size:15px}
+.elementor-622 .am-lp .amh-big{font-size:76px;font-weight:800;line-height:1;letter-spacing:-.03em;margin:4px 0}
+.elementor-622 .am-lp .amh-alt{font-size:15px;margin-bottom:14px}
+.elementor-622 .am-lp .amh-fee ul{list-style:none;margin:0 0 18px;padding:12px 0 0;border-top:2px dashed #111827}
+.elementor-622 .am-lp .amh-fee li{display:flex;gap:8px;align-items:flex-start;font-weight:600;font-size:15px;line-height:1.4;padding:4px 0}
+.elementor-622 .am-lp .amh-fee li svg{flex:none;margin-top:1px}
+.elementor-622 .am-lp .amh-btn{display:flex;align-items:center;justify-content:center;min-height:52px;padding:0 22px;border-radius:14px;border:2px solid #111827;background:#0b4fd6;color:#fff;font-weight:800;font-size:17px;text-decoration:none;box-shadow:4px 4px 0 #111827;transition:transform .15s,box-shadow .15s}
+.elementor-622 .am-lp .amh-btn:hover,.elementor-622 .am-lp .amh-btn:focus-visible{transform:translate(-2px,-2px);box-shadow:6px 6px 0 #111827;color:#fff}
+.elementor-622 .am-lp .amh-g{display:flex;gap:8px;align-items:flex-start;font-size:13px;font-weight:600;line-height:1.45;margin:14px 0 0}
+.elementor-622 .am-lp .amh-g svg{flex:none;margin-top:1px}
+.elementor-622 .am-lp .amh-paths{margin-top:48px}
+.elementor-622 .am-lp .amh-q{font-weight:800;font-size:22px;margin:0 0 14px;color:#111827}
+.elementor-622 .am-lp .amh-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.elementor-622 .am-lp .amh-card{display:flex;flex-direction:column;background:#fff;border:2px solid #111827;border-top:10px solid var(--c);border-radius:20px;padding:22px;box-shadow:5px 5px 0 #111827}
+.elementor-622 .am-lp .amh-t{font-weight:800;font-size:13px;color:#4b5563}
+.elementor-622 .am-lp .amh-card b{font-size:20px;line-height:1.3;margin:6px 0 8px;color:#111827}
+.elementor-622 .am-lp .amh-card p{color:#4b5563;font-size:15px;line-height:1.5;margin:0 0 18px;flex:1}
+.elementor-622 .am-lp .amh-card .amh-btn{min-height:46px;font-size:15px}
+.elementor-622 .am-lp .amh-more{display:inline-flex;align-items:center;justify-content:center;min-height:44px;font-weight:700;font-size:14px;color:#111827;text-decoration:underline;text-decoration-color:#ffd43b;text-decoration-thickness:3px;text-underline-offset:4px}
+.elementor-622 .am-lp .amh-bar{display:flex;gap:10px 22px;flex-wrap:wrap;align-items:center;margin-top:22px;padding:14px 20px;border:2px solid #111827;border-radius:16px;background:#ffd43b;font-size:15px;font-weight:600;color:#111827}
+.elementor-622 .am-lp .amh-bar span{display:inline-flex;gap:6px;align-items:center}
+.elementor-622 .am-lp .amh-bar a{color:#111827;font-weight:800}
+.elementor-622 .am-lp .amh-specs{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:22px}
+.elementor-622 .am-lp .amh-specs a{display:block;background:var(--b);border:2px solid #111827;border-radius:20px;padding:18px;text-decoration:none;color:#374151;font-size:14px;line-height:1.45}
+.elementor-622 .am-lp .amh-specs b{display:block;color:#111827;font-size:17px;margin-bottom:4px}
+.elementor-622 .am-lp .amh-proof{display:flex;gap:10px 26px;flex-wrap:wrap;margin-top:22px}
+.elementor-622 .am-lp .amh-proof a{display:inline-flex;align-items:center;min-height:44px;color:#111827;font-weight:700;text-decoration:none;border-bottom:2px solid #ffd43b}
+@media (max-width:900px){
+ .elementor-622 .am-lp .amh-grid{grid-template-columns:1fr;gap:22px}
+ .elementor-622 .am-lp .amh-fee{padding:20px;border-radius:22px}
+ .elementor-622 .am-lp .amh-big{font-size:56px}
+ .elementor-622 .am-lp .amh-paths{margin-top:30px}
+ .elementor-622 .am-lp .amh-q{font-size:18px}
+ .elementor-622 .am-lp .amh-cards{grid-template-columns:1fr;gap:12px}
+ .elementor-622 .am-lp .amh-card{padding:16px}
+ .elementor-622 .am-lp .amh-card b{font-size:17px}
+ .elementor-622 .am-lp .amh-card p{font-size:14px;margin-bottom:12px}
+ .elementor-622 .am-lp .amh-bar{flex-direction:column;align-items:flex-start;gap:6px}
+ .elementor-622 .am-lp .amh-specs{grid-template-columns:1fr 1fr;gap:8px}
+ .elementor-622 .am-lp .amh-specs a{padding:12px;font-size:13px}
+ .elementor-622 .am-lp .amh-specs b{font-size:14px}
+ .elementor-622 .am-lp .amh-proof{flex-direction:column;gap:0}
+}
+@media (prefers-reduced-motion:reduce){.elementor-622 .am-lp .amh-btn{transition:none}}

@@ -56,3 +56,40 @@
   }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init();
 })();
+/* AI Lab: tool picker on desktop, 3D stacking cards on phones */
+(function(){
+  function init(){
+    var lab=document.getElementById('lab'); if(!lab) return;
+    var tabs=[].slice.call(lab.querySelectorAll('.lab-tabs button')), pns=[].slice.call(lab.querySelectorAll('.lab-pn'));
+    function pick(i,focus){
+      tabs.forEach(function(t,k){ var on=k===i; t.classList.toggle('is-on',on); t.setAttribute('aria-selected',on?'true':'false'); t.tabIndex=on?0:-1; });
+      pns.forEach(function(p,k){ p.classList.toggle('is-on',k===i); });
+      if(focus) tabs[i].focus();
+    }
+    tabs.forEach(function(t,i){
+      t.addEventListener('click',function(){pick(i)});
+      t.addEventListener('keydown',function(e){
+        var k=e.key; if(k!=='ArrowDown'&&k!=='ArrowUp'&&k!=='ArrowRight'&&k!=='ArrowLeft'&&k!=='Home'&&k!=='End') return;
+        e.preventDefault(); var n=k==='Home'?0:k==='End'?tabs.length-1:(i+(k==='ArrowDown'||k==='ArrowRight'?1:-1)+tabs.length)%tabs.length; pick(n,true);
+      });
+    });
+    var mq=matchMedia('(max-width:820px)'), rm=matchMedia('(prefers-reduced-motion: reduce)'), tick=false;
+    function clear(){ pns.forEach(function(p){ p.style.transform=''; p.style.filter=''; }); }
+    function fx(){
+      tick=false;
+      if(!mq.matches||rm.matches){ clear(); return; }
+      pns.forEach(function(p,i){
+        var nx=pns[i+1]; if(!nx){ p.style.transform=''; p.style.filter=''; return; }
+        var h=p.offsetHeight||300, stick=parseFloat(getComputedStyle(p).top)||0;
+        var d=nx.getBoundingClientRect().top-(stick+14);
+        var t=Math.max(0,Math.min(1,1-d/h));
+        p.style.transform='perspective(900px) scale('+(1-0.07*t).toFixed(4)+') rotateX('+(-5*t).toFixed(2)+'deg)';
+        p.style.filter='brightness('+(1-0.14*t).toFixed(3)+')';
+      });
+    }
+    function req(){ if(!tick){ tick=true; requestAnimationFrame(fx); } }
+    window.addEventListener('scroll',req,{passive:true}); window.addEventListener('resize',req);
+    if(mq.addEventListener) mq.addEventListener('change',req); fx();
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init();
+})();

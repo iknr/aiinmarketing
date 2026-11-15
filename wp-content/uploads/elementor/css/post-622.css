@@ -2961,3 +2961,33 @@ html {
  .elementor-622 .am-lp .rvb-list .am-rv{flex-basis:82%}
 }
 .elementor-622 .am-lp .rvb-links .am-extlink{display:inline !important;min-height:0;line-height:1.9}
+
+/* AI LAB 2026-11: tool picker on desktop, 3D stacking cards on phones */
+.elementor-622 .am-lp #ai-lab .lab{margin:28px 0 !important}
+.elementor-622 .am-lp #ai-lab .lab h3{font-size:22px !important;line-height:1.25 !important;font-weight:800 !important;margin:0 0 8px !important;color:#111827 !important}
+.elementor-622 .am-lp #ai-lab .lab p{margin:0 !important;font-size:16px !important;line-height:1.55 !important;color:#374151 !important}
+.elementor-622 .am-lp #ai-lab .lab-tag{display:inline-block !important;font-size:12px !important;font-weight:800 !important;letter-spacing:.08em !important;margin-bottom:10px !important;color:#111827 !important}
+.elementor-622 .am-lp #ai-lab .lab-b span{display:block !important;font-size:12px !important;font-weight:800 !important;letter-spacing:.06em !important;text-transform:uppercase !important;margin-bottom:4px !important}
+.elementor-622 .am-lp #ai-lab .lab-b b{font-size:16px !important;line-height:1.4 !important;font-weight:700 !important}
+@media (min-width:821px){
+.elementor-622 .am-lp #ai-lab .lab{display:grid !important;grid-template-columns:300px minmax(0,1fr) !important;gap:24px !important;align-items:stretch !important}
+.elementor-622 .am-lp #ai-lab .lab-tabs{display:flex !important;flex-direction:column !important;gap:10px !important}
+.elementor-622 .am-lp #ai-lab .lab-tabs button{display:flex !important;gap:14px !important;align-items:center !important;text-align:left !important;border:2px solid #111827 !important;border-radius:16px !important;background:#fff !important;padding:14px 16px !important;font:800 14px/1.2 "Plus Jakarta Sans",system-ui,sans-serif !important;letter-spacing:.04em !important;color:#111827 !important;cursor:pointer !important;min-height:56px !important;transition:box-shadow .15s,background .15s}
+.elementor-622 .am-lp #ai-lab .lab-tabs button small{font-size:13px !important;opacity:.6}
+.elementor-622 .am-lp #ai-lab .lab-tabs button.is-on{background:#111827 !important;color:#ffd43b !important;box-shadow:5px 5px 0 #ffd43b !important}
+.elementor-622 .am-lp #ai-lab .lab-tabs button:focus-visible{outline:3px solid #0b4fd6 !important;outline-offset:2px !important}
+.elementor-622 .am-lp #ai-lab .lab-pn{display:none !important;height:100% !important;background:var(--bg) !important;border:2px solid #111827 !important;border-radius:24px !important;padding:36px !important;box-shadow:8px 8px 0 #111827 !important;flex-direction:column !important;justify-content:center !important}
+.elementor-622 .am-lp #ai-lab .lab-pn.is-on{display:flex !important}
+.elementor-622 .am-lp #ai-lab .lab-pn h3{font-size:34px !important;line-height:1.15 !important;max-width:560px !important}
+.elementor-622 .am-lp #ai-lab .lab-pn p{font-size:18px !important;max-width:560px !important;margin-bottom:22px !important}
+.elementor-622 .am-lp #ai-lab .lab-b{background:#fff !important;border:2px solid #111827 !important;border-radius:16px !important;padding:16px 20px !important;max-width:560px !important}
+}
+@media (max-width:820px){
+.elementor-622 .am-lp #ai-lab .lab-tabs{display:none !important}
+.elementor-622 .am-lp #ai-lab .lab-panel{display:block !important}
+.elementor-622 .am-lp #ai-lab .lab-pn{display:flex !important;flex-direction:column !important;position:sticky !important;top:calc(84px + var(--i)*14px) !important;min-height:310px !important;background:var(--bg) !important;border:2px solid #111827 !important;border-radius:24px !important;padding:22px !important;margin:0 0 22px !important;box-shadow:0 5px 0 #111827 !important;transform-origin:50% 0 !important;will-change:transform}
+.elementor-622 .am-lp #ai-lab .lab-pn h3{font-size:21px !important}
+.elementor-622 .am-lp #ai-lab .lab-pn p{font-size:15px !important}
+.elementor-622 .am-lp #ai-lab .lab-b{margin-top:auto !important;padding-top:16px !important}
+.elementor-622 .am-lp #ai-lab .lab-b b{display:block !important;background:#fff !important;border:2px solid #111827 !important;border-radius:14px !important;padding:12px 14px !important}
+}

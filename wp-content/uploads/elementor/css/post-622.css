@@ -2769,3 +2769,23 @@ html {
 .am-tr-photo img.is-popout { width: 124px; height: 124px; border-radius: 0; object-fit: contain; background: transparent; margin-top: -14px; }
 .am-tr-photo:has(img.is-popout) .am-tr-yrs { right: -2px; top: -2px; }
 @media (max-width: 640px) { .am-tr-photo img.is-popout { width: 104px; height: 104px; } }
+
+/* home navigation menus (Courses, Guides) */
+.am-navlinks .am-dd { position: relative; }
+.am-navlinks .am-dd > summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 6px; padding: 6px 0; border-bottom: 2px solid transparent; white-space: nowrap; }
+.am-navlinks .am-dd > summary::-webkit-details-marker { display: none; }
+.am-navlinks .am-dd > summary::after { content: ""; width: 6px; height: 6px; border-right: 2px solid currentColor; border-bottom: 2px solid currentColor; transform: rotate(45deg) translateY(-2px); }
+.am-navlinks .am-dd[open] > summary::after { transform: rotate(-135deg) translateY(-1px); }
+.am-navlinks .am-dd > summary:hover { color: var(--blue); border-bottom-color: var(--blue); }
+.am-navlinks .am-dd > summary:focus-visible { outline: 3px solid #ffd447; outline-offset: 2px; }
+.am-navlinks .am-ddp { position: absolute; top: calc(100% + 14px); right: 0; z-index: 60; min-width: 280px; padding: 12px; display: grid; gap: 2px; background: #fff; border: 2px solid var(--ink); border-radius: 14px; box-shadow: 4px 4px 0 var(--ink); }
+.am-navlinks .am-ddp2 { grid-template-columns: repeat(2, minmax(200px, 1fr)); gap: 2px 22px; min-width: 470px; }
+.am-navlinks .am-ddp strong { display: block; margin: 4px 6px; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-2); }
+.am-navlinks .am-ddp a { display: block; padding: 7px 8px; border: 0; border-radius: 8px; font-size: 14.5px; line-height: 1.35; white-space: normal; }
+.am-navlinks .am-ddp a:hover { background: #f1f5fb; color: var(--blue); border: 0; }
+@media (max-width: 1180px) {
+  .am-lp header .am-navlinks .am-dd > summary { padding: 13px 0; font-size: 16px; border-bottom: 1px solid var(--line); justify-content: space-between; }
+  .am-lp header .am-navlinks .am-ddp, .am-lp header .am-navlinks .am-ddp2 { position: static; min-width: 0; box-shadow: none; border: 0; border-radius: 0; padding: 4px 0 8px 10px; grid-template-columns: 1fr; max-height: 55vh; overflow: auto; }
+  .am-lp header .am-navlinks .am-ddp a { padding: 10px 0; font-size: 15px; border-bottom: 0; }
+  .am-lp header .am-navlinks a:last-child { border-bottom: 0; }
+}

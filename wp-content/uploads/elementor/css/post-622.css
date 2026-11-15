@@ -2991,3 +2991,31 @@ html {
 .elementor-622 .am-lp #ai-lab .lab-b{margin-top:auto !important;padding-top:16px !important}
 .elementor-622 .am-lp #ai-lab .lab-b b{display:block !important;background:#fff !important;border:2px solid #111827 !important;border-radius:14px !important;padding:12px 14px !important}
 }
+
+/* WHO IT IS FOR + LEARN BY DOING 2026-11 (option A) */
+
+
+.tk,.elementor-622 .am-lp #inside .vs{font-family:'Plus Jakarta Sans',system-ui,sans-serif!important;color:#111827!important;margin:26px 0!important}
+.elementor-622 .am-lp #three-tracks .tk h3{font-size:22px!important;line-height:1.25!important;font-weight:800!important;margin:0 0 10px!important;color:#111827!important}
+.elementor-622 .am-lp #three-tracks .tk-ul{list-style:none!important;margin:0!important;padding:0!important}.elementor-622 .am-lp #three-tracks .tk-ul li{position:relative!important;padding-left:30px!important;margin:0 0 10px!important;font-size:16px!important;line-height:1.5!important;color:#1f2937!important}
+.elementor-622 .am-lp #three-tracks .tk-ul li::before{content:"✓"!important;position:absolute!important;left:0!important;top:0!important;width:22px!important;height:22px!important;border-radius:50%!important;background:var(--c,#111827)!important;color:#fff!important;font-size:13px!important;font-weight:800!important;display:flex!important;align-items:center!important;justify-content:center!important}
+.elementor-622 .am-lp #three-tracks .tk-best{margin:0 0 14px!important;font-size:15px!important;line-height:1.5!important;color:#374151!important}
+
+.elementor-622 .am-lp #three-tracks .tk-A .tk-tabs{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:12px!important;margin-bottom:16px!important}
+.elementor-622 .am-lp #three-tracks .tk-A .tk-tabs button{display:flex!important;gap:12px!important;align-items:center!important;text-align:left!important;background:#fff!important;border:2px solid #111827!important;border-top:8px solid var(--c)!important;border-radius:16px!important;padding:14px 18px!important;font:800 17px/1.2 'Plus Jakarta Sans',sans-serif!important;color:#111827!important;min-height:60px!important;cursor:pointer!important}
+.elementor-622 .am-lp #three-tracks .tk-A .tk-tabs button small{opacity:.5!important;font-size:13px!important}
+.elementor-622 .am-lp #three-tracks .tk-A .tk-tabs button.is-on{background:var(--c)!important;color:#fff!important;box-shadow:5px 5px 0 #111827!important}
+.elementor-622 .am-lp #three-tracks .tk-A .tk-pn{display:none!important;grid-template-columns:1fr 1fr!important;gap:36px!important;background:var(--t)!important;border:2px solid #111827!important;border-radius:24px!important;padding:34px!important;box-shadow:8px 8px 0 #111827!important}
+.elementor-622 .am-lp #three-tracks .tk-A .tk-pn.is-on{display:grid!important}.elementor-622 .am-lp #three-tracks .tk-A h3{font-size:30px!important}.elementor-622 .am-lp #three-tracks .tk-A .tk-acts{display:flex!important;align-items:center!important;flex-wrap:wrap!important;gap:6px!important}
+.elementor-622 .am-lp #three-tracks .tk-A .tk-ul{background:#fff!important;border:2px solid #111827!important;border-radius:18px!important;padding:22px 22px 12px!important}
+.elementor-622 .am-lp #inside .vs-A{border:2px solid #111827!important;border-radius:22px!important;overflow:hidden!important;background:#fff!important}
+.elementor-622 .am-lp #inside .vs-A .vs-h,.elementor-622 .am-lp #inside .vs-A .vs-r{display:grid!important;grid-template-columns:1fr 1fr!important}
+.elementor-622 .am-lp #inside .vs-A .vs-h b{padding:16px 24px!important;font-size:18px!important;font-weight:800!important;background:#e5e7eb!important}.elementor-622 .am-lp #inside .vs-A .vs-h b:last-child{background:#ffd43b!important}
+.elementor-622 .am-lp #inside .vs-A .vs-r span{padding:18px 24px!important;font-size:16px!important;line-height:1.45!important;border-top:1px solid #e5e7eb!important;position:relative!important;padding-left:56px!important}
+.elementor-622 .am-lp #inside .vs-A .vs-r .no{color:#6b7280!important}.elementor-622 .am-lp #inside .vs-A .vs-r .yes{background:#fffbe6!important;font-weight:600!important}
+.elementor-622 .am-lp #inside .vs-A .vs-r span::before{position:absolute!important;left:22px!important;top:17px!important;width:24px!important;height:24px!important;border-radius:50%!important;display:flex!important;align-items:center!important;justify-content:center!important;font-size:13px!important;font-weight:800!important}
+.elementor-622 .am-lp #inside .vs-A .no::before{content:"✕"!important;background:#e5e7eb!important;color:#6b7280!important}.elementor-622 .am-lp #inside .vs-A .yes::before{content:"✓"!important;background:#111827!important;color:#ffd43b!important}
+@media(max-width:820px){.elementor-622 .am-lp #three-tracks .tk-A .tk-tabs{display:flex!important;overflow-x:auto!important;gap:8px!important;padding-bottom:6px!important}.elementor-622 .am-lp #three-tracks .tk-A .tk-tabs button{flex:none!important;min-height:48px!important;font-size:15px!important;border-top-width:2px!important;border-radius:999px!important;padding:10px 16px!important}.elementor-622 .am-lp #three-tracks .tk-A .tk-tabs button small{display:none!important}.elementor-622 .am-lp #three-tracks .tk-A .tk-pn{padding:20px!important;gap:18px!important;box-shadow:5px 5px 0 #111827!important}.elementor-622 .am-lp #three-tracks .tk-A .tk-pn.is-on{grid-template-columns:1fr!important}.elementor-622 .am-lp #three-tracks .tk-A h3{font-size:22px!important}.elementor-622 .am-lp #inside .vs-A .vs-h b{padding:12px 14px!important;font-size:15px!important}.elementor-622 .am-lp #inside .vs-A .vs-r span{padding:14px 12px 14px 44px!important;font-size:14px!important}.elementor-622 .am-lp #inside .vs-A .vs-r span::before{left:10px!important;top:13px!important;width:22px!important;height:22px!important}}
+.elementor-622 .am-lp #three-tracks .tk-tabs button:focus-visible{outline:3px solid #0b4fd6 !important;outline-offset:2px !important}
+.elementor-622 .am-lp #three-tracks .tk-pn{scroll-margin-top:110px}
+.elementor-622 .am-lp #three-tracks .tk-acts .am-btn{margin-right:8px}

@@ -93,3 +93,36 @@
   }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init();
 })();
+/* Who it is for: track picker. Links to #track-* open the right tab first. */
+(function(){
+  function init(){
+    var box=document.getElementById('tk'); if(!box) return;
+    var tabs=[].slice.call(box.querySelectorAll('.tk-tabs button')), pns=[].slice.call(box.querySelectorAll('.tk-pn'));
+    function pick(i,focus){
+      tabs.forEach(function(t,k){ var on=k===i; t.classList.toggle('is-on',on); t.setAttribute('aria-selected',on?'true':'false'); t.tabIndex=on?0:-1; });
+      pns.forEach(function(p,k){ p.classList.toggle('is-on',k===i); });
+      if(focus) tabs[i].focus();
+    }
+    tabs.forEach(function(t,i){
+      t.addEventListener('click',function(){pick(i)});
+      t.addEventListener('keydown',function(e){
+        var k=e.key; if(k!=='ArrowRight'&&k!=='ArrowLeft'&&k!=='Home'&&k!=='End') return;
+        e.preventDefault(); pick(k==='Home'?0:k==='End'?tabs.length-1:(i+(k==='ArrowRight'?1:-1)+tabs.length)%tabs.length,true);
+      });
+    });
+    function go(hash,smooth){
+      var id=hash.replace('#',''); var i=pns.findIndex(function(p){return p.id===id}); if(i<0) return false;
+      pick(i);
+      var el=box.parentNode.querySelector('.tk-tabs'); var y=el.getBoundingClientRect().top+window.pageYOffset-150;
+      window.scrollTo({top:y,behavior:(smooth&&!matchMedia('(prefers-reduced-motion: reduce)').matches)?'smooth':'auto'});
+      return true;
+    }
+    document.addEventListener('click',function(e){
+      var a=e.target.closest&&e.target.closest('a[href^="#track-"]'); if(!a) return;
+      if(go(a.getAttribute('href'),true)){ e.preventDefault(); if(history.replaceState) history.replaceState(null,'',a.getAttribute('href')); }
+    });
+    window.addEventListener('hashchange',function(){ go(location.hash,true); });
+    if(location.hash.indexOf('#track-')===0) setTimeout(function(){go(location.hash,false)},60);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init();
+})();

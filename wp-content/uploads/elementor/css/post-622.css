@@ -2923,3 +2923,41 @@ html {
  .elementor-622 .am-lp .amh-proof{flex-direction:column;gap:0}
 }
 @media (prefers-reduced-motion:reduce){.elementor-622 .am-lp .amh-btn{transition:none}}
+
+/* HEADER FULL WIDTH 2026-11: the bar, not the inner box, carries the background and the rule */
+.elementor-622 .am-lp > header{background:#fffdf7 !important;border-bottom:2px solid #111827 !important;box-shadow:none !important}
+.elementor-622 .am-lp > header .am-wrap.am-nav{background:transparent !important;border-bottom:0 !important;box-shadow:none !important}
+.elementor-622 .am-lp .am-navlinks{align-items:center}
+.elementor-622 .am-lp .am-navlinks > a,.elementor-622 .am-lp .am-navlinks .am-dd > summary{display:inline-flex;align-items:center;min-height:44px;padding-top:0;padding-bottom:0;line-height:1.2;margin:0}
+@media (min-width:1181px){.elementor-622 .am-lp > header .am-wrap.am-nav{max-width:none !important;width:100% !important;padding-left:40px !important;padding-right:40px !important}}
+
+/* REVIEWS 2026-11 (option B: rating panel + swipe row) */
+.elementor-622 .am-lp .rvb{padding:56px 0 !important;background:#fffdf5 !important}
+.elementor-622 .am-lp .rvb-in{display:grid;grid-template-columns:330px minmax(0,1fr);gap:32px;align-items:start}
+.elementor-622 .am-lp .rvb-score{display:flex;flex-direction:column;align-items:center;justify-content:center;width:140px;height:140px;border:2px solid #111827;border-radius:24px;background:#ffd43b;box-shadow:5px 5px 0 #111827;font-weight:700;font-size:14px;color:#111827}
+.elementor-622 .am-lp .rvb-score b{font-size:52px;line-height:1}
+.elementor-622 .am-lp .rvb-stars{letter-spacing:2px}
+.elementor-622 .am-lp .rvb-side h2{font-size:clamp(26px,2.6vw,36px);line-height:1.15;font-weight:800;margin:22px 0 8px;color:#111827}
+.elementor-622 .am-lp .rvb-side p{margin:0 0 12px;color:#4b5563;font-size:16px;line-height:1.55}
+.elementor-622 .am-lp .rvb-links{display:flex;flex-direction:column;gap:4px}
+.elementor-622 .am-lp .rvb-links .am-extlink{display:inline-flex;align-items:center;min-height:36px}
+.elementor-622 .am-lp .rvb-nav{display:flex;gap:10px;margin-top:14px}
+.elementor-622 .am-lp .rvb-nav button{width:48px;height:48px;border:2px solid #111827;border-radius:50%;background:#fff;color:#111827;font-size:20px;font-weight:800;box-shadow:3px 3px 0 #111827;cursor:pointer;padding:0}
+.elementor-622 .am-lp .rvb-nav button:disabled{opacity:.35;cursor:default;box-shadow:none}
+.elementor-622 .am-lp .rvb-nav button:focus-visible{outline:3px solid #0b4fd6;outline-offset:2px}
+.elementor-622 .am-lp .rvb-list{display:flex !important;grid-template-columns:none !important;gap:16px !important;overflow-x:auto;scroll-snap-type:x mandatory;padding:4px 8px 16px 4px !important;margin:0 !important;max-width:none !important;scrollbar-width:thin}
+.elementor-622 .am-lp .rvb-list:focus-visible{outline:3px solid #0b4fd6;outline-offset:4px}
+.elementor-622 .am-lp .rvb-list .am-rv{flex:0 0 340px;scroll-snap-align:start;border:2px solid #111827 !important;border-radius:20px !important;box-shadow:4px 4px 0 #111827 !important;background:#fff !important}
+@media (max-width:900px){
+ .elementor-622 .am-lp .rvb{padding:36px 0 !important}
+ .elementor-622 .am-lp .rvb-in{grid-template-columns:1fr;gap:16px}
+ .elementor-622 .am-lp .rvb-side{display:grid;grid-template-columns:96px 1fr;gap:4px 14px;align-items:start}
+ .elementor-622 .am-lp .rvb-score{width:96px;height:96px;border-radius:18px;grid-row:1/3}
+ .elementor-622 .am-lp .rvb-score b{font-size:34px}.elementor-622 .am-lp .rvb-score span{font-size:11px}
+ .elementor-622 .am-lp .rvb-side h2{font-size:22px;margin:0}
+ .elementor-622 .am-lp .rvb-side p,.elementor-622 .am-lp .rvb-links{grid-column:1/-1}
+ .elementor-622 .am-lp .rvb-side p{font-size:14px;margin-top:10px}
+ .elementor-622 .am-lp .rvb-nav{display:none}
+ .elementor-622 .am-lp .rvb-list .am-rv{flex-basis:82%}
+}
+.elementor-622 .am-lp .rvb-links .am-extlink{display:inline !important;min-height:0;line-height:1.9}

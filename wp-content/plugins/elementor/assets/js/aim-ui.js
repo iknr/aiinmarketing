@@ -43,3 +43,16 @@
   if(mq.addEventListener) mq.addEventListener('change',accordions);
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init();
 })();
+/* reviews: arrow buttons scroll the row by one card */
+(function(){
+  function init(){
+    var l=document.getElementById('rvb-list'); if(!l) return;
+    var p=document.querySelector('.rvb-prev'), n=document.querySelector('.rvb-next');
+    function step(d){ var c=l.querySelector('.am-rv'); var w=c?c.getBoundingClientRect().width+16:320; l.scrollBy({left:d*w,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}); }
+    function upd(){ if(!p) return; p.disabled=l.scrollLeft<4; n.disabled=l.scrollLeft+l.clientWidth>=l.scrollWidth-4; }
+    if(p) p.addEventListener('click',function(){step(-1)});
+    if(n) n.addEventListener('click',function(){step(1)});
+    l.addEventListener('scroll',upd,{passive:true}); window.addEventListener('resize',upd); upd();
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init();
+})();

@@ -42,6 +42,30 @@ const PLACED_PEOPLE = [
   ['Vivek Jain', 'Creative Head', '34% salary hike', 'https://www.linkedin.com/in/vivek-jain-7472842b7/', ''],
   ['Tamanna Jain', 'Social Media Manager at Amulya Kala', '30% salary hike', 'https://www.linkedin.com/in/tamanna-jain-dm/', ''],
 ];
+// Sourced pay figures (owner approved 16 Nov 2026). Source: AmbitionBox, "Digital Marketing Executive" salaries, self-reported, read 16 Nov 2026
+// (page "Updated: 14 Nov 2026", 49.1k salaries in India, typical range Rs 3.3 to 3.7 lakh a year for 0 to 5 years). Chennai shows an average only (no range).
+// Refresh every quarter and change the date below when you do.
+const PAY_URL = 'https://www.ambitionbox.com/profile/digital-marketing-executive-salary';
+const PAY_READ = '16 November 2026';
+const PAY = {
+  delhi: { loc: 'New Delhi', lo: '3.3', hi: '3.7', n: '6.9k' },
+  mumbai: { loc: 'Mumbai', lo: '3.6', hi: '4', n: '3.6k' },
+  bangalore: { loc: 'Bengaluru', lo: '3.7', hi: '4', n: '5.4k' },
+  hyderabad: { loc: 'Hyderabad', lo: '3.3', hi: '3.6', n: '4.6k' },
+  pune: { loc: 'Pune', lo: '3.2', hi: '3.6', n: '4.5k' },
+  chennai: { loc: 'Chennai', avg: '3.6' },
+};
+function payHtml(c) {
+  const d = PAY[c.slug];
+  if (!d) return '';
+  const city = d.avg
+    ? `AmbitionBox lists an average of about &#8377;${d.avg} lakh a year for people in ${d.loc} with the job title Digital Marketing Executive.`
+    : `On AmbitionBox, people in ${d.loc} with the job title Digital Marketing Executive report a typical salary of &#8377;${d.lo} to &#8377;${d.hi} lakh a year, based on ${d.n} self-reported salaries.`;
+  return `<h3 id="pay-in-${c.slug}">What an entry-level digital marketing job pays in ${esc(c.name)}</h3>
+<p>${city} Across India the same title shows &#8377;3.3 to &#8377;3.7 lakh a year for 0 to 5 years of experience, based on 49.1k salaries (read on ${PAY_READ}).</p>
+<p class="aimb-small">These are self-reported figures for one job title across all employers, from <a href="${PAY_URL}" rel="noopener nofollow">AmbitionBox</a>. They are a market benchmark, not AIM placement results, and they change, so check the live page before you decide. The placement section on this page covers our own students.</p>`;
+}
+
 const PLACED = `<h2 id="placements">Where our students landed: placed at &#8377;5 to &#8377;15 LPA</h2>
 <p>Recent placements and salary growth of students from the Adsmentor program behind AIM. Every profile is public, so you can verify each one yourself. No course can promise you a job, and we do not.</p>
 <div class="aimb-placed">${PLACED_PEOPLE.map(([n, r, pk, u, img]) => `<a class="aimb-pcard" href="${u}" target="_blank" rel="noopener"><span class="aimb-pav">${img ? `<img src="${img}" width="200" height="200" alt="${n}" loading="lazy" decoding="async">` : n.split(' ').map((w) => w[0]).slice(0, 2).join('')}</span><b>${n}</b><span>${r}</span><strong>${pk}</strong><em>View profile on LinkedIn</em></a>`).join('')}</div>`;
@@ -177,7 +201,7 @@ for (const c of CITIES) {
       `Employers now expect AI to handle the routine parts of marketing, so the person they hire needs to know how to direct it and check it. That is why AI is in every module, with hands-on practice in the real tools from week 1.`][v]}</p>`,
     work: `<h2 id="work-in-${c.slug}">${workH}</h2>
 <p>${esc(c.industries)}</p>
-<p class="aimb-small">This is general context about ${kerala ? 'the place' : 'the city'}&rsquo;s economy, not a salary or hiring statistic. For salary expectations, check current listings for the roles you want.</p>`,
+<p class="aimb-small">This is general context about ${kerala ? 'the place' : 'the city'}&rsquo;s economy, not a hiring statistic.${PAY[c.slug] ? '' : ' For salary expectations, check current listings for the roles you want.'}</p>${payHtml(c) ? '\n' + payHtml(c) : ''}`,
     projects: `<h2 id="projects">${projH}</h2>
 <p>Each module ends with a project that goes into your live portfolio. ${['In', 'You could shape yours around businesses in', 'Examples from'][v]} ${N}${['you could shape yours around local businesses, for example:', ', for example:', ':'][v]}</p>
 <ul>

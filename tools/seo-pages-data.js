@@ -1,7 +1,7 @@
 'use strict';
 /* Content data for the course pages and city pages. Rules (owner + CLAUDE.md): only facts the site already states
  * (fees, schedule, modules, internship, guarantee) plus widely known, stable facts about each city's economy.
- * No invented statistics, no salary figures, no named local institutes, no centre addresses (AIM is live online). */
+ * No invented statistics, no salary figures except the sourced AmbitionBox pay block (see PAY in build-seo-pages.js), no named local institutes, no centre addresses (AIM is live online). */
 const CITIES = [
   { slug: 'delhi', name: 'Delhi NCR', vol: 8100, state: 'Delhi, Gurugram, Noida and Ghaziabad',
     industries: 'Delhi NCR holds the head offices of a large share of India\'s consumer brands, publishers, ecommerce companies, education businesses and agencies, and its three satellite cities add finance, IT services and real estate. Marketing hiring here is spread across brands, agencies and startups, so the same skills (ads, SEO, content, automation) are used in very different settings.',

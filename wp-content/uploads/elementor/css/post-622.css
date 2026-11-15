@@ -3019,3 +3019,48 @@ html {
 .elementor-622 .am-lp #three-tracks .tk-tabs button:focus-visible{outline:3px solid #0b4fd6 !important;outline-offset:2px !important}
 .elementor-622 .am-lp #three-tracks .tk-pn{scroll-margin-top:110px}
 .elementor-622 .am-lp #three-tracks .tk-acts .am-btn{margin-right:8px}
+
+/* FEE STORY 2026-11 (option C) */
+
+
+.fs,.elementor-622 .am-lp #access .ac{font-family:'Plus Jakarta Sans',system-ui,sans-serif!important;color:#111827!important;margin:26px 0!important}
+.elementor-622 .am-lp #fees-market .fs-note{font-size:13px!important;color:#6b7280!important;margin:14px 0 0!important}.elementor-622 .am-lp #access .ac-end{margin:22px 0 0!important;font-weight:700!important;font-size:17px!important}
+.elementor-622 .am-lp #fees-market .fs-stat{background:#111827!important;border-radius:20px!important;padding:22px 26px!important;color:#fff!important;display:flex!important;flex-direction:column!important;gap:8px!important}.elementor-622 .am-lp #fees-market .fs-stat b{font-size:34px!important;line-height:1.1!important;color:#ffd43b!important;font-weight:800!important}.elementor-622 .am-lp #fees-market .fs-stat span{font-size:15px!important;line-height:1.5!important;color:#e5e7eb!important}
+.elementor-622 .am-lp #fees-market .fs-bar{display:grid!important;grid-template-columns:230px 1fr!important;gap:18px!important;align-items:center!important;margin-bottom:14px!important}
+.elementor-622 .am-lp #fees-market .fs-l b{display:block!important;font-size:16px!important;font-weight:800!important}.elementor-622 .am-lp #fees-market .fs-l span{font-size:13px!important;color:#4b5563!important}
+.elementor-622 .am-lp #fees-market .fs-t{position:relative!important;height:46px!important;border:2px solid #111827!important;border-radius:12px!important;background:#fff!important;overflow:hidden!important}
+.elementor-622 .am-lp #fees-market .fs-t i{position:absolute!important;left:0!important;top:0!important;bottom:0!important;display:block!important}.elementor-622 .am-lp #fees-market .fs-t .r{background:repeating-linear-gradient(45deg,#d6d3c8,#d6d3c8 6px,#e7e5dc 6px,#e7e5dc 12px)!important}.elementor-622 .am-lp #fees-market .fs-t .m{background:#b9b5a8!important}
+.elementor-622 .am-lp #fees-market .fs-t em{position:absolute!important;right:12px!important;top:50%!important;transform:translateY(-50%)!important;font-style:normal!important;font-weight:800!important;font-size:15px!important}
+.elementor-622 .am-lp #fees-market .fs-bar.us .m{background:#0b4fd6!important}.elementor-622 .am-lp #fees-market .fs-bar.us .fs-t em{background:#ffd43b!important;border:2px solid #111827!important;border-radius:8px!important;padding:3px 10px!important}
+@media(max-width:820px){.elementor-622 .am-lp #fees-market .fs-bar{grid-template-columns:1fr!important;gap:6px!important}.elementor-622 .am-lp #fees-market .fs-t{height:42px!important}}
+
+#fees-market{background:#111827!important}.elementor-622 .am-lp #fees-market .am-sec-head h2{color:#fff!important}.elementor-622 .am-lp #fees-market .am-sec-head p{color:#d1d5db!important}.elementor-622 .am-lp #fees-market .am-eyebrow{color:#111827!important}
+.elementor-622 .am-lp #fees-market .fs-C .fs-hero{display:flex!important;align-items:center!important;gap:28px!important;flex-wrap:wrap!important}.elementor-622 .am-lp #fees-market .fs-C small{display:block!important;font-size:12px!important;font-weight:800!important;letter-spacing:.08em!important;text-transform:uppercase!important;color:#9ca3af!important;margin-bottom:6px!important}
+.elementor-622 .am-lp #fees-market .fs-C s{font-size:60px!important;font-weight:800!important;color:#6b7280!important;line-height:1!important}.elementor-622 .am-lp #fees-market .fs-C .fs-arrow{font-size:40px!important;color:#ffd43b!important}.elementor-622 .am-lp #fees-market .fs-C .fs-new b{font-size:96px!important;font-weight:800!important;color:#ffd43b!important;line-height:1!important}.elementor-622 .am-lp #fees-market .fs-C .fs-new small{color:#ffd43b!important}
+.elementor-622 .am-lp #fees-market .fs-C .fs-pill{background:#ffd43b!important;color:#111827!important;border-radius:999px!important;padding:12px 22px!important;font-weight:800!important;font-size:22px!important}.elementor-622 .am-lp #fees-market .fs-C .fs-bigs{color:#e5e7eb!important;font-size:16px!important;margin:16px 0 28px!important;max-width:640px!important}
+.elementor-622 .am-lp #fees-market .fs-C .fs-l b{color:#fff!important}.elementor-622 .am-lp #fees-market .fs-C .fs-l span{color:#9ca3af!important}.elementor-622 .am-lp #fees-market .fs-C .fs-t{height:34px!important;background:#1f2937!important;border-color:#374151!important}.elementor-622 .am-lp #fees-market .fs-C .fs-t em{color:#fff!important;font-size:14px!important}.elementor-622 .am-lp #fees-market .fs-C .fs-bar.us .fs-t{border-color:#ffd43b!important}.elementor-622 .am-lp #fees-market .fs-C .fs-bar.us .fs-t em{color:#111827!important}.elementor-622 .am-lp #fees-market .fs-C .fs-t .m{background:#6b7280!important}.elementor-622 .am-lp #fees-market .fs-C .fs-t .r{background:repeating-linear-gradient(45deg,#374151,#374151 6px,#4b5563 6px,#4b5563 12px)!important}
+.elementor-622 .am-lp #fees-market .fs-note{color:#9ca3af!important}
+.elementor-622 .am-lp #access .ac-C{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:16px!important}.elementor-622 .am-lp #access .ac-C .ac-c{display:flex!important;flex-direction:column!important;gap:10px!important;border:2px solid #111827!important;border-radius:22px!important;padding:22px!important;background:#fff!important;box-shadow:5px 5px 0 #111827!important}
+.elementor-622 .am-lp #access .ac-C .ac-c:nth-child(6n+1){background:#d3f5df!important}.elementor-622 .am-lp #access .ac-C .ac-c:nth-child(6n+2){background:#dbe7ff!important}.elementor-622 .am-lp #access .ac-C .ac-c:nth-child(6n+3){background:#ffe0ec!important}.elementor-622 .am-lp #access .ac-C .ac-c:nth-child(6n+4){background:#e8e0ff!important}.elementor-622 .am-lp #access .ac-C .ac-c:nth-child(6n+5){background:#fff3c4!important}.elementor-622 .am-lp #access .ac-C .ac-c:nth-child(6n){background:#ffd43b!important}
+.elementor-622 .am-lp #access .ac-C .ac-tag{font-size:12px!important;font-weight:800!important;letter-spacing:.08em!important;text-transform:uppercase!important}.elementor-622 .am-lp #access .ac-C s{font-size:14px!important;color:#4b5563!important;line-height:1.4!important}.elementor-622 .am-lp #access .ac-C b{font-size:17px!important;line-height:1.4!important;font-weight:800!important}
+@media(max-width:820px){.elementor-622 .am-lp #fees-market .fs-C .fs-hero{gap:12px!important}.elementor-622 .am-lp #fees-market .fs-C s{font-size:36px!important}.elementor-622 .am-lp #fees-market .fs-C .fs-new b{font-size:56px!important}.elementor-622 .am-lp #fees-market .fs-C .fs-arrow{font-size:26px!important}.elementor-622 .am-lp #fees-market .fs-C .fs-pill{font-size:17px!important}
+.elementor-622 .am-lp #access .ac-C{grid-template-columns:1fr!important;gap:12px!important}.elementor-622 .am-lp #access .ac-C .ac-c{padding:16px!important;box-shadow:3px 3px 0 #111827!important}
+}
+.elementor-622 .am-lp #fees-market{background:#111827 !important}
+.elementor-622 .am-lp #compare .cp-hint{display:none;font-size:13px !important;font-weight:700 !important;color:#4b5563 !important;margin:0 0 8px !important}
+.elementor-622 .am-lp #compare .amx-tablewrap{overflow-x:auto !important;border:2px solid #111827 !important;border-radius:20px !important;background:#fff !important;box-shadow:none !important}
+.elementor-622 .am-lp #compare .amx-tablewrap:focus-visible{outline:3px solid #0b4fd6 !important;outline-offset:2px !important}
+.elementor-622 .am-lp #compare table.amx-t{min-width:960px !important;width:100% !important;border-collapse:separate !important;border-spacing:0 !important;border:0 !important}
+.elementor-622 .am-lp #compare table.amx-t th,.elementor-622 .am-lp #compare table.amx-t td{padding:15px 18px !important;font-size:14px !important;line-height:1.45 !important;border-top:1px solid #e5e7eb !important;vertical-align:top !important;text-align:left !important}
+.elementor-622 .am-lp #compare table.amx-t thead th{border-top:0 !important;font-weight:800 !important;font-size:15px !important;background:#f3f4f6 !important}
+.elementor-622 .am-lp #compare table.amx-t th:first-child,.elementor-622 .am-lp #compare table.amx-t td:first-child{position:sticky !important;left:0 !important;z-index:2 !important;background:#fff !important;font-weight:800 !important;min-width:170px !important;width:170px !important}
+.elementor-622 .am-lp #compare table.amx-t thead th:first-child{background:#f3f4f6 !important}
+.elementor-622 .am-lp #compare table.amx-t th:nth-child(2),.elementor-622 .am-lp #compare table.amx-t td:nth-child(2){position:sticky !important;left:170px !important;z-index:1 !important;background:#fffbe6 !important;font-weight:700 !important;min-width:240px !important}
+.elementor-622 .am-lp #compare table.amx-t thead th:nth-child(2){background:#ffd43b !important}
+@media (max-width:820px){
+.elementor-622 .am-lp #compare .cp-hint{display:block !important}
+.elementor-622 .am-lp #compare table.amx-t{min-width:760px !important}
+.elementor-622 .am-lp #compare table.amx-t th,.elementor-622 .am-lp #compare table.amx-t td{padding:12px 10px !important;font-size:13px !important}
+.elementor-622 .am-lp #compare table.amx-t th:first-child,.elementor-622 .am-lp #compare table.amx-t td:first-child{min-width:96px !important;width:96px !important}
+.elementor-622 .am-lp #compare table.amx-t th:nth-child(2),.elementor-622 .am-lp #compare table.amx-t td:nth-child(2){left:96px !important;min-width:190px !important}
+}

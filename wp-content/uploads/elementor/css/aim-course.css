@@ -43,3 +43,10 @@
 .cv-hero .cv-link,.cv-hero .cv-link:visited{color:#111827 !important}
 .cv-hero .cv-btn,.cv-fee .cv-btn{color:#fff !important}
 @media(max-width:860px){.cv-facts{display:grid;grid-template-columns:repeat(3,1fr)}.cv-facts li{padding:8px 10px}.cv-facts b{font-size:15px}.cv-facts span{font-size:12px}}
+/* All pages (site map): chip lists and a two-column blog list */
+.cv-s-main-pages ul,.cv-s-courses ul,.cv-s-authors ul{display:flex;flex-wrap:wrap;gap:10px;list-style:none;padding:0}
+.cv-s-main-pages li,.cv-s-courses li,.cv-s-authors li{margin:0}
+.cv-s-main-pages li a,.cv-s-courses li a,.cv-s-authors li a{display:inline-block;border:2px solid #111827;border-radius:999px;padding:8px 16px;background:#fff;font-size:15px;font-weight:700;color:#111827;text-decoration:none}
+.cv-s-blog-posts ul{display:grid;grid-template-columns:1fr 1fr;gap:12px;list-style:none;padding:0}
+.cv-s-blog-posts li{margin:0}.cv-s-blog-posts li a{display:block;height:100%;box-sizing:border-box;border:2px solid #111827;border-radius:14px;padding:12px 16px;background:#fff;font-size:15.5px;line-height:1.4;font-weight:700;text-decoration:none}
+@media(max-width:700px){.cv-s-blog-posts ul{grid-template-columns:1fr}}

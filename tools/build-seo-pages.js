@@ -77,8 +77,8 @@ ${GTM}<meta charset="UTF-8">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&amp;display=swap">
 <link rel="stylesheet" id="hello-elementor-css" href="/wp-content/themes/hello-elementor/style.css?ver=3.1.1">
-<link rel="stylesheet" id="aim-blog-css" href="/wp-content/uploads/elementor/css/aim-blog.css?ver=2.7.0"><link rel="stylesheet" id="aim-programs-css" href="/wp-content/uploads/elementor/css/aim-programs.css?ver=1.1.0" media="all">
-<link rel="stylesheet" id="aim-themes-css" href="/wp-content/uploads/elementor/css/aim-themes.css?ver=1.0.0"><link rel="stylesheet" id="aim-course-css" href="/wp-content/uploads/elementor/css/aim-course.css?ver=1.0.1">
+<link rel="stylesheet" id="aim-blog-css" href="/wp-content/uploads/elementor/css/aim-blog.css?ver=2.8.0"><link rel="stylesheet" id="aim-programs-css" href="/wp-content/uploads/elementor/css/aim-programs.css?ver=1.1.0" media="all">
+<link rel="stylesheet" id="aim-themes-css" href="/wp-content/uploads/elementor/css/aim-themes.css?ver=1.0.0"><link rel="stylesheet" id="aim-course-css" href="/wp-content/uploads/elementor/css/aim-course.css?ver=1.0.2">
 ${ld}
 ${PLACED_CSS}
 </head>
@@ -390,15 +390,15 @@ ${faqHtml(faq)}
     return [f.replace(/\.html$/, ''), t.replace(/<[^>]+>/g, '').trim()];
   });
   const body = `
-<h2>Main pages</h2>
-<ul><li><a href="/">Home: the AIM program, fee and how to apply</a></li><li><a href="/about">About AIM</a></li><li><a href="/blogs">Blog</a></li><li><a href="/terms">Terms and refund policy</a></li><li><a href="/all-pages">All pages</a><a href="/privacy-policy">Privacy policy</a></li></ul>
-<h2>Courses</h2>
+<h2 id="main-pages">Main pages</h2>
+<ul><li><a href="/">Home: the AIM program, fee and how to apply</a></li><li><a href="/about">About AIM</a></li><li><a href="/blogs">Blog</a></li><li><a href="/terms">Terms and refund policy</a></li><li><a href="/all-pages">All pages</a></li><li><a href="/privacy-policy">Privacy policy</a></li></ul>
+<h2 id="courses">Courses</h2>
 <ul><li><a href="/digital-marketing-course">Digital marketing course in India</a></li><li><a href="/ai-digital-marketing-course">AI digital marketing course</a></li><li><a href="/vibe-marketing-course">Vibe marketing course</a></li><li><a href="/digital-marketing-course-online">Online digital marketing course</a></li></ul>
-<h2>Digital marketing course by city</h2>
+<h2 id="cities">Digital marketing course by city</h2>
 <ul>${CITIES.map((c) => `<li><a href="/digital-marketing-course/${c.slug}">Digital marketing course in ${esc(c.name)}</a></li>`).join('')}</ul>
-<h2>Blog posts</h2>
+<h2 id="blog-posts">Blog posts</h2>
 <ul>${posts.map(([s, t]) => `<li><a href="/blogs/${s}">${t}</a></li>`).join('')}</ul>
-<h2>Authors</h2>
+<h2 id="authors">Authors</h2>
 <ul><li><a href="/author/kailasnathr">Kailas Nath R</a></li><li><a href="/author/kautilyaroshan">Kautilya Roshan</a></li></ul>`;
   write('all-pages.html', page({
     path: '/all-pages', title: 'All Pages: AIM Site Map | AI in Marketing', desc: 'Every page on aiinmarketing.in in one list: course pages, city pages, blog posts, authors and policies.',

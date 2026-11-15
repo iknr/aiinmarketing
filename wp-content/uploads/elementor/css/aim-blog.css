@@ -368,3 +368,13 @@ a.aimb-pill:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px;
 .aimb-fbrand a { display: inline; }
 @media (max-width: 900px) { .aimb-foot.aimb-foot5 { grid-template-columns: 1fr 1fr; } .aimb-fbrand { grid-column: 1 / -1; } }
 @media (max-width: 480px) { .aimb-foot.aimb-foot5 { grid-template-columns: 1fr; } }
+
+/* phone header: keep logo mark, Courses, Guides and the fee button on one row (2.5.1) */
+@media (max-width: 640px) {
+  .aimb-brandtext { display: none; }
+  .aimb-header .aimb-nav { gap: 8px; }
+  .aimb-links { gap: 10px; font-size: 14px; }
+  .aimb-dd > summary { gap: 4px; padding: 10px 0; min-height: 44px; }
+  .aimb-links .aimb-apply { padding: 9px 11px; font-size: 14px; white-space: nowrap; }
+  .aimb-mark { font-size: 21px; padding: 5px 8px; }
+}

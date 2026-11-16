@@ -1,5 +1,6 @@
-/*! AIM assistant (1.0.0): a pre-written question flow on every page. No AI, no free typing, nothing is sent anywhere.
- *  The visitor taps a question and gets a short fixed answer. Everything it says comes from the site's own text
+/*! AIM assistant (1.1.0): a pre-written question flow on every page. The visitor taps a question and gets a short fixed answer.
+ *  Optional: when /api/chat reports enabled (GEMINI_API_KEY set on Vercel) a typing box appears and Gemini answers from the site facts.
+ *  If the endpoint is off, unreachable or fails at any point, the typing box disappears and the pre-written flow carries on. Everything it says comes from the site's own text
  *  (fees, schedule, modules, internship, refund). It does not discuss placements or jobs: the team handles that on a call.
  *  Edit the NODES object below to change the content. Events pushed to dataLayer (no personal data): chat_open, chat_choice.
  */
@@ -108,7 +109,10 @@
     '<div class="aimc-title"><b>AIM assistant</b><small>Pre-written answers. The team handles the rest.</small></div>' +
     '<button type="button" class="aimc-x" aria-label="Close the assistant">&times;</button></div>' +
     '<div class="aimc-log" role="log" aria-live="polite" tabindex="0"></div>' +
-    '<div class="aimc-opts" role="group" aria-label="Choose a question"></div>';
+    '<div class="aimc-opts" role="group" aria-label="Choose a question"></div>' +
+    '<form class="aimc-form" hidden><input class="aimc-in" type="text" maxlength="400" autocomplete="off" placeholder="Type your question" aria-label="Type your question">' +
+    '<button class="aimc-send" type="submit">Send</button>' +
+    '<p class="aimc-note">AI answers can be wrong. Please do not type phone numbers or emails. The team confirms everything on your onboarding call.</p></form>';
 
   document.body.appendChild(launcher);
   document.body.appendChild(panel);
@@ -116,6 +120,10 @@
 
   var log = panel.querySelector('.aimc-log');
   var opts = panel.querySelector('.aimc-opts');
+  var form = panel.querySelector('.aimc-form');
+  var input = panel.querySelector('.aimc-in');
+  var sendBtn = panel.querySelector('.aimc-send');
+  var aiOn = false, aiChecked = false, history = [];
   var started = false, busy = false, timers = [];
 
   function later(fn, ms) { timers.push(setTimeout(fn, reduce ? 0 : ms)); }
@@ -191,6 +199,61 @@
     say(greeting(), function () { showOptions(MENU); });
   }
 
+    // ------------------------------------------------------------------ optional AI mode
+  function timedFetch(url, init, ms) {
+    var ctl = typeof AbortController === 'function' ? new AbortController() : null;
+    var timer = setTimeout(function () { if (ctl) ctl.abort(); }, ms);
+    var o = init || {};
+    if (ctl) o.signal = ctl.signal;
+    return fetch(url, o).then(function (r) { clearTimeout(timer); return r; }, function (e) { clearTimeout(timer); throw e; });
+  }
+
+  function aiOff() { aiOn = false; form.hidden = true; }
+
+  function probeAi() {
+    if (aiChecked) return;
+    aiChecked = true;
+    if (typeof fetch !== 'function') return;
+    timedFetch('/api/chat', { method: 'GET', cache: 'no-store' }, 2500)
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) { if (d && d.enabled === true) { aiOn = true; form.hidden = false; } })
+      .catch(function () { /* stay on the pre-written flow */ });
+  }
+
+  var AFTER_AI = [{ label: 'Apply now', href: APPLY_HREF, primary: true, apply: true }, TEAM, { label: 'Back to the menu', to: 'menu' }];
+
+  function askAi(text) {
+    if (busy || !aiOn) return;
+    var q = text.replace(/\s+/g, ' ').trim().slice(0, 400);
+    if (!q) return;
+    input.value = '';
+    addBubble(q, 'me');
+    history.push({ role: 'user', content: q });
+    push({ event: 'chat_choice', chat_choice: 'typed_question', page_path: location.pathname });
+    busy = true; opts.innerHTML = ''; input.disabled = true; sendBtn.disabled = true;
+    var typing = addBubble('\u2026', 'bot');
+    typing.classList.add('aimc-typing');
+    function done() { busy = false; input.disabled = false; sendBtn.disabled = false; }
+    function fallBack() {
+      typing.classList.remove('aimc-typing');
+      typing.textContent = 'I cannot reach the assistant right now. Please pick a question below, or talk to the team.';
+      aiOff(); done(); showOptions(MENU);
+    }
+    timedFetch('/api/chat', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ messages: history.slice(-8) }) }, 12000)
+      .then(function (r) { if (!r.ok) throw new Error('status'); return r.json(); })
+      .then(function (d) {
+        if (!d || typeof d.reply !== 'string' || !d.reply) throw new Error('empty');
+        typing.classList.remove('aimc-typing');
+        typing.textContent = d.reply;
+        history.push({ role: 'assistant', content: d.reply });
+        done(); scrollLog();
+        showOptions(d.handoff ? [NODES.team.options[0], NODES.team.options[1], NODES.team.options[2], BACK] : AFTER_AI);
+      })
+      .catch(fallBack);
+  }
+
+  form.addEventListener('submit', function (e) { e.preventDefault(); askAi(input.value); });
+
   function openPanel() {
     panel.hidden = false;
     launcher.setAttribute('aria-expanded', 'true');
@@ -199,6 +262,7 @@
     panel.classList.add('is-in');
     push({ event: 'chat_open', page_path: location.pathname });
     if (!started) start();
+    probeAi();
     setTimeout(function () { var b = opts.querySelector('.aimc-btn'); (b || panel.querySelector('.aimc-x')).focus(); }, 60);
   }
 
@@ -207,7 +271,7 @@
     panel.hidden = true;
     launcher.hidden = false;
     launcher.setAttribute('aria-expanded', 'false');
-    if (started && !opts.children.length) { started = false; log.innerHTML = ''; } // closed mid-answer: restart next time
+    if (started && !opts.children.length) { started = false; history = []; log.innerHTML = ''; } // closed mid-answer: restart next time
     launcher.focus({ preventScroll: true });
   }
 

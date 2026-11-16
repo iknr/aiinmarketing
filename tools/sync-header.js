@@ -13,8 +13,8 @@ const HEADER = `<div class="aimh-top"><div class="aimh-ann" aria-label="Announce
 </div></header></div>`;
 const CSS = '<link rel="stylesheet" id="aim-header-css" href="/wp-content/uploads/elementor/css/aim-header.css?ver=1.0.0" media="all">';
 // AIM assistant (chat flow): CSS + script on every page. The home page carries the same two tags by hand in index.html.
-const CHAT_CSS = '<link rel="stylesheet" id="aim-chat-css" href="/wp-content/uploads/elementor/css/aim-chat.css?ver=1.0.1" media="all">';
-const CHAT_JS = '<script id="aim-chat-js" src="/wp-content/plugins/elementor/assets/js/aim-chat.js?ver=1.0.0" defer></script>';
+const CHAT_CSS = '<link rel="stylesheet" id="aim-chat-css" href="/wp-content/uploads/elementor/css/aim-chat.css?ver=1.1.0" media="all">';
+const CHAT_JS = '<script id="aim-chat-js" src="/wp-content/plugins/elementor/assets/js/aim-chat.js?ver=1.1.0" defer></script>';
 function syncHeader(html) {
   const old = /<div class="aimh-top">[\s\S]*?<\/header><\/div>|<header class="aimb-header">[\s\S]*?<\/header>/;
   if (!old.test(html)) return html;                       // pages without the shared header (home, wp-login) are left alone

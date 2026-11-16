@@ -22,6 +22,7 @@ const ROOT = path.resolve(__dirname, '..');
 const GTM_ID = 'GTM-NPKP66BD';
 const OLD_GTM_ID = 'GTM-M3H6S33J';
 const SITE = 'https://aiinmarketing.in';
+const MIN_CHAT_TESTS = 25; // tools/test-chat.js minimum. RAISE when you add tests, never lower.
 const MIN_LEAD_TESTS = 50; // tools/test-lead.js must pass at least this many checks. RAISE when you add tests, never lower.
 const SKIP_DIRS = new Set(['node_modules', '.git', '.vercel', '.next']);
 // Posts published before the "Sources" rule. Do not add to this list: new posts need a Sources section.
@@ -473,6 +474,32 @@ const INVARIANTS = [
         if (!exists(e.pdf)) p.push(`${e.pdf} missing.`);
         else if (fileHash(abs(e.pdf)) !== e.pdfSha256) p.push(`${e.pdf} changed but it has no HTML source. Build a source in tools/pdf-src, add it to build-pdfs.js and manifest jobs, then rebuild; do not edit PDFs by hand.`);
       }
+      return p;
+    },
+  },
+  {
+    id: 'chat-endpoint',
+    title: 'AI chat endpoint keeps its safety rules and its tests pass; the privacy policy names Gemini',
+    why: 'api/chat.js sends visitor questions to Google Gemini. It must stay origin-checked and rate-limited, keep the key only in process.env, refuse phone numbers and emails, hand off placement, job and salary questions, never log message text and fall back cleanly. The policy must say questions go to Google.',
+    check() {
+      const p = [];
+      const f = 'api/chat.js', s = tryRead(f);
+      if (s === null) return [`${f} missing. Restore from git history.`];
+      const need = [['ALLOWED_HOSTS', 'origin allow-list'], ['function originOk', 'origin check'], ['function limited', 'per-IP rate limit'], ['process.env.GEMINI_API_KEY', 'key read from process.env'],
+        ['x-goog-api-key', 'key sent only in the header'], ['AbortController', 'timeout'], ['HAS_CONTACT', 'phone/email block'], ['OFF_LIMITS', 'placement/job/salary hand-off'], ['DAILY_MAX', 'daily cap']];
+      for (const [n, w] of need) if (!s.includes(n)) p.push(`${f}: ${w} missing ("${n}").`);
+      if (/console\.(log|error|warn)\([^)]*(content|messages|lastUser|reply)/.test(s)) p.push(`${f}: logs visitor text or replies. Log status only.`);
+      if (/AIza[0-9A-Za-z_-]{20,}/.test(s)) p.push(`${f}: contains a Google API key.`);
+      if (!exists('tools/test-chat.js')) return p.concat(['tools/test-chat.js missing. Restore from git history.']);
+      const r = spawnSync(process.execPath, [abs('tools/test-chat.js')], { encoding: 'utf8', cwd: ROOT, timeout: 60000 });
+      const out = (r.stdout || '') + (r.stderr || '');
+      const sum = /(\d+)\/(\d+) passed/.exec(out);
+      if (r.status !== 0) p.push('tools/test-chat.js failed:\n    ' + out.split('\n').filter((l) => /^FAIL/.test(l)).slice(0, 8).join('\n    '));
+      if ((sum ? +sum[2] : 0) < MIN_CHAT_TESTS) p.push(`tools/test-chat.js has fewer than ${MIN_CHAT_TESTS} checks (MIN_CHAT_TESTS). Tests were deleted: restore them.`);
+      const pp = tryRead('privacy-policy.html');
+      if (pp === null || !norm(visibleText(pp)).includes('sent to google (gemini)')) p.push('privacy-policy.html: the sentence that chat questions are sent to Google (Gemini) is missing.');
+      const c = tryRead('wp-content/plugins/elementor/assets/js/aim-chat.js');
+      if (c === null || !c.includes('/api/chat') || !c.includes('aiOff')) p.push('aim-chat.js: the optional AI mode or its fallback (aiOff) is missing.');
       return p;
     },
   },

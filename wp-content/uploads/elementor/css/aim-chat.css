@@ -1,4 +1,4 @@
-/* AIM assistant (1.0.0): launcher + pre-written question flow. Colours are fixed so page themes do not change it. */
+/* AIM assistant (1.1.0): launcher + pre-written question flow. Colours are fixed so page themes do not change it. */
 .aimc-launcher, .aimc-panel { font-family: "Plus Jakarta Sans","Segoe UI",sans-serif; letter-spacing: 0; color: #111827; box-sizing: border-box; }
 .aimc-panel *, .aimc-launcher * { box-sizing: border-box; }
 .aimc-launcher { position: fixed; z-index: 9980; right: 12px; bottom: 16px; display: inline-flex; align-items: center; gap: 9px; padding: 8px 16px 8px 8px; font: 800 15px/1 "Plus Jakarta Sans","Segoe UI",sans-serif; color: #111827; background: #fff; border: 2px solid #111827; border-radius: 999px; box-shadow: 3px 3px 0 #111827; cursor: pointer; }
@@ -33,3 +33,11 @@
 @media (max-width: 380px) { .aimc-ltext { display: none; } .aimc-launcher { padding: 6px; } }
 @media print { .aimc-launcher, .aimc-panel { display: none !important; } }
 @media (prefers-reduced-motion: reduce) { .aimc-panel.is-in, .aimc-msg { animation: none; } }
+
+.aimc-form { display: flex; flex-wrap: wrap; gap: 8px; padding: 10px 14px 12px; background: #fff; border-top: 1.5px solid #e7e1d4; }
+.aimc-form[hidden] { display: none; }
+.aimc-in { flex: 1 1 160px; min-width: 0; min-height: 42px; padding: 8px 12px; font: 500 15px/1.3 "Plus Jakarta Sans","Segoe UI",sans-serif; color: #111827; background: #fffdf7; border: 2px solid #111827; border-radius: 12px; }
+.aimc-in:focus-visible { outline: 3px solid #0b4fd6; outline-offset: 1px; }
+.aimc-send { min-height: 42px; padding: 8px 16px; font: 800 14px/1 "Plus Jakarta Sans","Segoe UI",sans-serif; color: #fff; background: #0b4fd6; border: 2px solid #111827; border-radius: 12px; box-shadow: 2px 2px 0 #111827; cursor: pointer; }
+.aimc-send:disabled, .aimc-in:disabled { opacity: .55; cursor: default; }
+.aimc-note { flex-basis: 100%; margin: 0; font-size: 12px; font-weight: 500; line-height: 1.4; color: #4b5563; }

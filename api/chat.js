@@ -23,7 +23,8 @@ const DAILY_MAX = 600; // total AI calls per warm instance per day
 const MAX_MESSAGES = 8;
 const MAX_CHARS = 400;
 const MAX_TOTAL_CHARS = 2400;
-const TIMEOUT_MS = 9000;
+const ATTEMPT1_MS = 5000;
+const ATTEMPT2_MS = 4000;
 const GEMINI = 'https://generativelanguage.googleapis.com/v1beta/models/';
 
 const HANDOFF_REPLY = 'The team is the best person to answer that, and they can talk it through on a call. Message them on WhatsApp +91 96116 28535, call +91 83406 47293 or write to contact@adsmentor.in.';
@@ -138,27 +139,38 @@ module.exports = async function handler(req, res) {
   if (overDailyCap(now)) return send(res, 503, { error: 'cap' });
   dayCount++;
 
-  const model = String(process.env.GEMINI_MODEL || 'gemini-flash-latest').replace(/[^A-Za-z0-9._-]/g, '').replace(/\.{2,}/g, '.') || 'gemini-flash-latest';
-  const ctl = new AbortController();
-  const timer = setTimeout(() => ctl.abort(), TIMEOUT_MS);
+  const safe = (m) => String(m || '').replace(/[^A-Za-z0-9._-]/g, '').replace(/\.{2,}/g, '.');
+  // Fast model first, the other as backup, each with its own time limit (the function must answer within about 10 s).
+  const models = [...new Set([safe(process.env.GEMINI_MODEL) || 'gemini-flash-lite-latest', 'gemini-flash-latest'].filter(Boolean))];
   try {
-    const call = (cfg) => fetch(`${GEMINI}${model}:generateContent`, {
-      method: 'POST',
-      headers: { 'content-type': 'application/json', 'x-goog-api-key': key },
-      signal: ctl.signal,
-      body: JSON.stringify({
-        systemInstruction: { parts: [{ text: SYSTEM }] },
-        contents: msgs.map((m) => ({ role: m.role === 'assistant' ? 'model' : 'user', parts: [{ text: m.content }] })),
-        generationConfig: cfg,
-      }),
-    });
-    // Short fact answers need no reasoning: thinking off keeps replies fast. A model that rejects the setting gets one retry without it.
-    let r = await call({ temperature: 0.3, maxOutputTokens: 500, thinkingConfig: { thinkingBudget: 0 } });
-    if (r.status === 400) r = await call({ temperature: 0.3, maxOutputTokens: 900 });
-    if (!r.ok) {
-      console.error(JSON.stringify({ event: 'chat_ai_failed', status: r.status })); // status only, never the message
-      return send(res, 503, { error: 'unavailable' });
+    let r = null;
+    for (let i = 0; i < models.length && !(r && r.ok); i++) {
+      const model = models[i];
+      const ctl = new AbortController();
+      const timer = setTimeout(() => ctl.abort(), i === 0 ? ATTEMPT1_MS : ATTEMPT2_MS);
+      const call = (cfg) => fetch(`${GEMINI}${model}:generateContent`, {
+        method: 'POST',
+        headers: { 'content-type': 'application/json', 'x-goog-api-key': key },
+        signal: ctl.signal,
+        body: JSON.stringify({
+          systemInstruction: { parts: [{ text: SYSTEM }] },
+          contents: msgs.map((m) => ({ role: m.role === 'assistant' ? 'model' : 'user', parts: [{ text: m.content }] })),
+          generationConfig: cfg,
+        }),
+      });
+      try {
+        // Short fact answers need no reasoning: thinking off keeps replies fast. A model that rejects the setting gets one retry without it.
+        r = await call({ temperature: 0.3, maxOutputTokens: 500, thinkingConfig: { thinkingBudget: 0 } });
+        if (r.status === 400) r = await call({ temperature: 0.3, maxOutputTokens: 900 });
+        if (!r.ok) console.error(JSON.stringify({ event: 'chat_ai_failed', model, status: r.status })); // never the message text
+      } catch (e) {
+        r = null;
+        console.error(JSON.stringify({ event: 'chat_ai_failed', model, status: e && e.name === 'AbortError' ? 'timeout' : 'network' }));
+      } finally {
+        clearTimeout(timer);
+      }
     }
+    if (!r || !r.ok) return send(res, 503, { error: 'unavailable' });
     const data = await r.json();
     const parts = (((data.candidates || [])[0] || {}).content || {}).parts || [];
     let reply = clean(parts.filter((p) => p && typeof p.text === 'string' && !p.thought).map((p) => p.text).join(' ')).slice(0, 700);
@@ -166,9 +178,7 @@ module.exports = async function handler(req, res) {
     if (OFF_LIMITS.test(reply)) return send(res, 200, { reply: HANDOFF_REPLY, handoff: true });
     return send(res, 200, { reply, handoff: false });
   } catch (e) {
-    console.error(JSON.stringify({ event: 'chat_ai_failed', status: e && e.name === 'AbortError' ? 'timeout' : 'network' }));
+    console.error(JSON.stringify({ event: 'chat_ai_failed', status: 'error' }));
     return send(res, 503, { error: 'unavailable' });
-  } finally {
-    clearTimeout(timer);
   }
 };

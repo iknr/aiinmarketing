@@ -1,0 +1,35 @@
+/* AIM assistant (1.0.0): launcher + pre-written question flow. Colours are fixed so page themes do not change it. */
+.aimc-launcher, .aimc-panel { font-family: "Plus Jakarta Sans","Segoe UI",sans-serif; letter-spacing: 0; color: #111827; box-sizing: border-box; }
+.aimc-panel *, .aimc-launcher * { box-sizing: border-box; }
+.aimc-launcher { position: fixed; z-index: 9980; right: 12px; bottom: 16px; display: inline-flex; align-items: center; gap: 9px; padding: 8px 16px 8px 8px; font: 800 15px/1 "Plus Jakarta Sans","Segoe UI",sans-serif; color: #111827; background: #fff; border: 2px solid #111827; border-radius: 999px; box-shadow: 3px 3px 0 #111827; cursor: pointer; }
+.aimc-launcher[hidden], .aimc-panel[hidden] { display: none !important; }
+.aimc-launcher:hover { transform: translate(-1px,-1px); box-shadow: 4px 4px 0 #111827; }
+.aimc-launcher:focus-visible, .aimc-btn:focus-visible, .aimc-x:focus-visible, .aimc-log:focus-visible { outline: 3px solid #0b4fd6; outline-offset: 2px; }
+.aimc-av { display: inline-grid; place-items: center; width: 34px; height: 34px; font-size: 12px; font-weight: 800; color: #111827; background: #ffd43b; border: 2px solid #111827; border-radius: 50%; flex: none; }
+.aimc-home .aimc-launcher { bottom: 86px; }   /* clears the sticky Apply bar on the phone home page */
+@media (min-width: 821px) { .aimc-launcher, .aimc-home .aimc-launcher { right: 24px; bottom: 24px; } }
+.aimc-panel { position: fixed; z-index: 9990; right: 10px; bottom: 10px; left: 10px; display: flex; flex-direction: column; max-height: min(640px, calc(100vh - 20px)); max-height: min(640px, calc(100dvh - 20px)); background: #fffdf7; border: 2px solid #111827; border-radius: 18px; box-shadow: 5px 5px 0 #111827; overflow: hidden; }
+@media (min-width: 821px) { .aimc-panel { left: auto; right: 24px; bottom: 24px; width: 390px; } }
+.aimc-panel.is-in { animation: aimc-rise .25s ease-out; }
+@keyframes aimc-rise { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.aimc-head { display: flex; align-items: center; gap: 11px; padding: 12px 14px; background: #ffd43b; border-bottom: 2px solid #111827; }
+.aimc-head .aimc-av { background: #fff; }
+.aimc-title { display: flex; flex-direction: column; min-width: 0; line-height: 1.3; }
+.aimc-title b { font-size: 16px; font-weight: 800; }
+.aimc-title small { font-size: 12.5px; font-weight: 600; color: #3b4150; }
+.aimc-x { margin-left: auto; width: 40px; height: 40px; font-size: 26px; line-height: 1; color: #111827; background: transparent; border: 0; border-radius: 10px; cursor: pointer; flex: none; }
+.aimc-x:hover { background: rgba(17,24,39,.1); }
+.aimc-log { flex: 1 1 auto; min-height: 120px; overflow-y: auto; padding: 14px; display: flex; flex-direction: column; gap: 9px; overscroll-behavior: contain; }
+.aimc-msg { max-width: 88%; padding: 10px 13px; font-size: 15px; font-weight: 500; line-height: 1.5; border-radius: 14px; overflow-wrap: anywhere; animation: aimc-rise .2s ease-out; }
+.aimc-bot { align-self: flex-start; background: #fff; border: 1.5px solid #e7e1d4; border-bottom-left-radius: 4px; }
+.aimc-me { align-self: flex-end; color: #fff; background: #0b4fd6; border-bottom-right-radius: 4px; font-weight: 600; }
+.aimc-typing { color: #6b7280; letter-spacing: .2em; }
+.aimc-opts { display: flex; flex-wrap: wrap; gap: 8px; padding: 12px 14px 14px; border-top: 1.5px solid #e7e1d4; background: #fff; max-height: 46%; overflow-y: auto; }
+.aimc-opts:empty { display: none; }
+.aimc-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 40px; padding: 8px 14px; font: 700 14px/1.25 "Plus Jakarta Sans","Segoe UI",sans-serif; color: #0b4fd6; text-align: left; text-decoration: none; background: #fff; border: 2px solid #0b4fd6; border-radius: 12px; cursor: pointer; }
+.aimc-btn:hover { background: #eef3fe; }
+.aimc-primary { color: #fff; background: #0b4fd6; border-color: #111827; box-shadow: 2px 2px 0 #111827; }
+.aimc-primary:hover { background: #0a45bd; }
+@media (max-width: 380px) { .aimc-ltext { display: none; } .aimc-launcher { padding: 6px; } }
+@media print { .aimc-launcher, .aimc-panel { display: none !important; } }
+@media (prefers-reduced-motion: reduce) { .aimc-panel.is-in, .aimc-msg { animation: none; } }

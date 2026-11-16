@@ -12,12 +12,18 @@ const HEADER = `<div class="aimh-top"><div class="aimh-ann" aria-label="Announce
 <nav class="aimh-links" aria-label="Main"><a href="/#ai-lab">The AI Lab</a><a href="/#tracks">Modules</a><a href="/#curriculum">Tools</a><a href="/#bonus">Fees</a><a href="/#trainers">Trainers</a><a href="/#faq">FAQs</a><details class="aimh-dd" name="aimhnav"><summary>Courses</summary><div class="aimh-ddp aimh-ddp2">${COURSES}</div></details><details class="aimh-dd" name="aimhnav"><summary>Guides</summary><div class="aimh-ddp">${GUIDES}</div></details><a href="/about">About</a><a class="aimh-apply" href="/#bonus">Apply Now</a></nav>
 </div></header></div>`;
 const CSS = '<link rel="stylesheet" id="aim-header-css" href="/wp-content/uploads/elementor/css/aim-header.css?ver=1.0.0" media="all">';
+// AIM assistant (chat flow): CSS + script on every page. The home page carries the same two tags by hand in index.html.
+const CHAT_CSS = '<link rel="stylesheet" id="aim-chat-css" href="/wp-content/uploads/elementor/css/aim-chat.css?ver=1.0.1" media="all">';
+const CHAT_JS = '<script id="aim-chat-js" src="/wp-content/plugins/elementor/assets/js/aim-chat.js?ver=1.0.0" defer></script>';
 function syncHeader(html) {
   const old = /<div class="aimh-top">[\s\S]*?<\/header><\/div>|<header class="aimb-header">[\s\S]*?<\/header>/;
   if (!old.test(html)) return html;                       // pages without the shared header (home, wp-login) are left alone
   html = html.replace(old, () => HEADER);
   html = html.replace(/<link rel="stylesheet" id="aim-header-css"[^>]*>\n?/, '');
-  return html.replace(/(<link[^>]*aim-blog\.css[^>]*>)/, (m) => m + '\n' + CSS);
+  html = html.replace(/(<link[^>]*aim-blog\.css[^>]*>)/, (m) => m + '\n' + CSS);
+  html = html.replace(/<link rel="stylesheet" id="aim-chat-css"[^>]*>\n?/, '').replace(/<script id="aim-chat-js"[^>]*><\/script>\n?/, '');
+  html = html.replace(/(<link[^>]*aim-header\.css[^>]*>)/, (m) => m + '\n' + CHAT_CSS);
+  return html.replace(/<\/body>/, () => CHAT_JS + '\n</body>');
 }
 module.exports = { syncHeader, HEADER };
 if (require.main === module) {

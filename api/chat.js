@@ -142,16 +142,19 @@ module.exports = async function handler(req, res) {
   const ctl = new AbortController();
   const timer = setTimeout(() => ctl.abort(), TIMEOUT_MS);
   try {
-    const r = await fetch(`${GEMINI}${model}:generateContent`, {
+    const call = (cfg) => fetch(`${GEMINI}${model}:generateContent`, {
       method: 'POST',
       headers: { 'content-type': 'application/json', 'x-goog-api-key': key },
       signal: ctl.signal,
       body: JSON.stringify({
         systemInstruction: { parts: [{ text: SYSTEM }] },
         contents: msgs.map((m) => ({ role: m.role === 'assistant' ? 'model' : 'user', parts: [{ text: m.content }] })),
-        generationConfig: { temperature: 0.3, maxOutputTokens: 900 },
+        generationConfig: cfg,
       }),
     });
+    // Short fact answers need no reasoning: thinking off keeps replies fast. A model that rejects the setting gets one retry without it.
+    let r = await call({ temperature: 0.3, maxOutputTokens: 500, thinkingConfig: { thinkingBudget: 0 } });
+    if (r.status === 400) r = await call({ temperature: 0.3, maxOutputTokens: 900 });
     if (!r.ok) {
       console.error(JSON.stringify({ event: 'chat_ai_failed', status: r.status })); // status only, never the message
       return send(res, 503, { error: 'unavailable' });

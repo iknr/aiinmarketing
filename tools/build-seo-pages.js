@@ -63,7 +63,7 @@ function payHtml(c) {
     : `On AmbitionBox, people in ${d.loc} with the job title Digital Marketing Executive report a typical salary of &#8377;${d.lo} to &#8377;${d.hi} lakh a year, based on ${d.n} self-reported salaries.`;
   return `<h3 id="pay-in-${c.slug}">What an entry-level digital marketing job pays in ${esc(c.name)}</h3>
 <p>${city} Across India the same title shows &#8377;3.3 to &#8377;3.7 lakh a year for 0 to 5 years of experience, based on 49.1k salaries (read on ${PAY_READ}).</p>
-<p class="aimb-small">These are self-reported figures for one job title across all employers, from <a href="${PAY_URL}" rel="noopener nofollow">AmbitionBox</a>. They are a market benchmark, not AIM placement results, and they change, so check the live page before you decide. The placement section on this page covers our own students.</p>`;
+<p class="aimb-small">These are self-reported figures for one job title across all employers, from <a href="${PAY_URL}" rel="noopener nofollow">AmbitionBox</a>. They are a market benchmark and they change, so check the live page before you decide.</p>`;
 }
 
 const PLACED = `<h2 id="placements">Where our students landed: placed at &#8377;5 to &#8377;15 LPA</h2>

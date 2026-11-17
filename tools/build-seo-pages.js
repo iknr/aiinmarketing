@@ -222,6 +222,7 @@ ${FEE_TABLE}`,
 ${near.map((n) => `<li><a href="/digital-marketing-course/${n.slug}">${n.hub ? 'Digital marketing course in Kerala: all cities' : 'Digital marketing course in ' + esc(n.name)}</a></li>`).join('\n')}
 <li><a href="/blogs/best-digital-marketing-courses-india-2026-how-to-choose">How to choose the best digital marketing course in India</a></li>
 <li><a href="/blogs/digital-marketing-course-fees-india-2026">Digital marketing course fees in India</a></li>
+<li><a href="/blogs/vibe-marketing-course-india-what-you-learn">Vibe marketing course in India: what you learn</a></li>${kerala ? '\n<li><a href="/blogs/digital-marketing-course-kerala-what-to-look-for">Digital marketing course in Kerala: what to look for</a></li>' : ''}
 </ul>`,
   };
   const orders = [['learn', 'work', 'projects', 'plan', 'fee', 'faq', 'more'], ['work', 'learn', 'plan', 'projects', 'faq', 'fee', 'more'], ['projects', 'work', 'learn', 'fee', 'plan', 'faq', 'more']];

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="A learner climbs from a first task to a live project and a first role on a stepped path">
+<title>A learner climbs from a first task to a live project and a first role on a stepped path</title>
+<style>text{font-family:'Plus Jakarta Sans','Segoe UI',Arial,sans-serif}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes rise{0%{transform:scaleY(.2)}60%,100%{transform:scaleY(1)}}
+@keyframes pop{0%{opacity:0;transform:translateY(14px)}20%,100%{opacity:1;transform:none}}
+.bob{animation:bob 4s ease-in-out infinite}.bar{transform-box:fill-box;transform-origin:bottom;animation:rise 2.4s ease-out both}.pp{animation:pop 1.6s ease-out both}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}</style>
+<defs><pattern id="g" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="#fff" stroke-opacity=".06"/></pattern>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0f1b3d"/><stop offset="1" stop-color="#14286b"/></linearGradient></defs>
+<rect width="1200" height="630" fill="url(#bg)"/><rect width="1200" height="630" fill="url(#g)"/>
+<circle cx="1060" cy="70" r="230" fill="#0b4fd6" opacity=".35"/><circle cx="90" cy="590" r="170" fill="#ffd43b" opacity=".13"/>
+<g transform="translate(60 70)"><rect width="180" height="40" rx="20" fill="#ffd43b"/><text x="90" y="27" text-anchor="middle" font-size="19" font-weight="800" fill="#0f1b3d">AIM BLOG</text></g>
+<text x="60" y="260" font-size="62" font-weight="800" fill="#fff">Is digital marketing</text>
+<text x="60" y="345" font-size="62" font-weight="800" fill="#ffd43b">a good career?</text>
+<text x="60" y="410" font-size="28" font-weight="600" fill="#c9d6ff">An honest answer for India, 2026</text>
+<g transform="translate(740 150)"><g class="bob"><rect class="bar" x="0" y="260" width="90" height="90" rx="10" fill="#4c7dff"/><rect class="bar" x="110" y="200" width="90" height="150" rx="10" fill="#4c7dff" style="animation-delay:.3s"/><rect class="bar" x="220" y="130" width="90" height="220" rx="10" fill="#7aa2ff" style="animation-delay:.6s"/><rect class="bar" x="330" y="50" width="90" height="300" rx="10" fill="#ffd43b" style="animation-delay:.9s"/>
+<path d="M375 40V-30" stroke="#fff" stroke-width="5"/><path d="M375 -30l50 20-50 20z" fill="#ff6b6b"/>
+<text x="45" y="315" text-anchor="middle" font-size="22" font-weight="800" fill="#fff">Learn</text><text x="155" y="315" text-anchor="middle" font-size="22" font-weight="800" fill="#fff">Build</text><text x="265" y="315" text-anchor="middle" font-size="22" font-weight="800" fill="#0f1b3d">Intern</text><text x="375" y="315" text-anchor="middle" font-size="22" font-weight="800" fill="#0f1b3d">Role</text></g></g>
+</svg>

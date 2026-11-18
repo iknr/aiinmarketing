@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="A search result with an AI answer on top and three source pages listed underneath, with a checklist beside it">
+<title>A search result with an AI answer on top and three source pages listed underneath, with a checklist beside it</title>
+<style>text{font-family:'Plus Jakarta Sans','Segoe UI',Arial,sans-serif}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+@keyframes rise{0%{transform:scaleY(.2)}60%,100%{transform:scaleY(1)}}
+@keyframes pop{0%{opacity:0;transform:translateY(14px)}20%,100%{opacity:1;transform:none}}
+.bob{animation:bob 4s ease-in-out infinite}.bar{transform-box:fill-box;transform-origin:bottom;animation:rise 2.4s ease-out both}.pp{animation:pop 1.6s ease-out both}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}</style>
+<defs><pattern id="g" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="#fff" stroke-opacity=".06"/></pattern>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0f1b3d"/><stop offset="1" stop-color="#14286b"/></linearGradient></defs>
+<rect width="1200" height="630" fill="url(#bg)"/><rect width="1200" height="630" fill="url(#g)"/>
+<circle cx="1060" cy="70" r="230" fill="#0b4fd6" opacity=".35"/><circle cx="90" cy="590" r="170" fill="#ffd43b" opacity=".13"/>
+<g transform="translate(60 70)"><rect width="180" height="40" rx="20" fill="#ffd43b"/><text x="90" y="27" text-anchor="middle" font-size="19" font-weight="800" fill="#0f1b3d">AIM BLOG</text></g>
+<text x="60" y="260" font-size="62" font-weight="800" fill="#fff">Google AI Mode and</text>
+<text x="60" y="345" font-size="62" font-weight="800" fill="#ffd43b">AI Overviews</text>
+<text x="60" y="410" font-size="28" font-weight="600" fill="#c9d6ff">What Google says, and a 10-point checklist</text>
+<g transform="translate(740 150)"><g class="bob"><rect x="0" y="0" width="440" height="56" rx="28" fill="#fff"/><circle cx="34" cy="28" r="12" fill="none" stroke="#0f1b3d" stroke-width="4"/><path d="M43 37l12 12" stroke="#0f1b3d" stroke-width="4"/><rect x="76" y="22" width="260" height="12" rx="6" fill="#c9d6ff"/>
+<g class="pp"><rect x="0" y="84" width="440" height="150" rx="22" fill="#1d3a9e" stroke="#7aa2ff" stroke-width="2"/><rect x="26" y="112" width="120" height="14" rx="7" fill="#ffd43b"/><rect x="26" y="142" width="380" height="11" rx="5" fill="#c9d6ff"/><rect x="26" y="166" width="340" height="11" rx="5" fill="#c9d6ff"/><rect x="26" y="190" width="250" height="11" rx="5" fill="#c9d6ff"/></g>
+<g class="pp" style="animation-delay:.6s"><rect x="0" y="260" width="136" height="64" rx="14" fill="#fff"/><rect x="152" y="260" width="136" height="64" rx="14" fill="#fff"/><rect x="304" y="260" width="136" height="64" rx="14" fill="#fff"/><circle cx="24" cy="292" r="8" fill="#0b4fd6"/><circle cx="176" cy="292" r="8" fill="#0b4fd6"/><circle cx="328" cy="292" r="8" fill="#0b4fd6"/><rect x="42" y="286" width="76" height="9" rx="4" fill="#c9d6ff"/><rect x="194" y="286" width="76" height="9" rx="4" fill="#c9d6ff"/><rect x="346" y="286" width="76" height="9" rx="4" fill="#c9d6ff"/></g></g></g>
+</svg>

@@ -26,7 +26,7 @@ const CITIES = [
     projects: ['A B2B lead-generation plan for a software or services company, from LinkedIn ads to CRM follow-up', 'A content and SEO plan for a healthcare or life-sciences brand that has to stay accurate and careful with claims', 'A real estate lead funnel for a residential project, with tracking from ad click to site visit'],
     seo: 'a technical SEO audit for a software company website, followed by a three-month content roadmap',
     nearby: ['bangalore', 'chennai', 'pune'],
-    faq: ['Is the course useful if I want to work in a Hyderabad IT or startup company?', 'The nine modules cover the channels such companies hire for: SEO and AI search, paid ads, automation and CRM, content and analytics. The internship and portfolio give you work to show in interviews. We do not promise a job.'] },
+    faq: ['Is the course useful if I want to work in a Hyderabad IT or startup company?', 'The nine modules cover the channels such companies hire for: SEO and AI search, paid ads, automation and CRM, content and analytics. The internship and portfolio give you work to show in interviews.'] },
   { slug: 'ahmedabad', name: 'Ahmedabad', vol: 4400, state: 'Gujarat',
     industries: 'Ahmedabad is a trading and manufacturing city with strong textile, pharmaceutical, chemical and engineering businesses, and a large community of family-run companies. Many of these businesses are still moving their sales online, which is where freelancers and small agencies find work.',
     projects: ['A ads and WhatsApp catalogue plan for a textile or garment trader moving to online sales', 'A B2B enquiry funnel for a chemical or engineering supplier', 'A Google Business Profile and review plan for a family-run restaurant or sweet shop'],

@@ -166,7 +166,7 @@ const COMMON_FAQ = [
   ['How much does the course cost?', 'It costs ₹5,999 without tool access, or ₹9,999 with tool access. The training, all four specialisations and the 1-month agency internship are the same in both. The ₹9,999 plan adds access to Claude, Semrush, Gemini Pro, Google AI Pro, Ahrefs, SpyFu, Ubersuggest and Canva. There is no paid ad budget and no other add-on.'],
   ['Do I need marketing experience to join?', 'No. The program starts from building a website and goes step by step to AI-run workflows, so beginners can join.'],
   ['Is there a refund if it is not right for me?', 'Yes. There is a 7-day money-back guarantee. Tell us within 7 days of your first live class and the program fee is refunded. You pay only after an onboarding call, once your questions are answered.'],
-  ['Do you guarantee a job?', 'No. We do not promise a job. You get real work, an agency internship and interview preparation. Recent students have been placed at ₹5 to 15 LPA, with public profiles you can check.'],
+  ['Do you offer placement support?', 'Yes. Placement support is included: interview prep sessions, job application support and guidance, along with real work, an agency internship and a CV rewrite. Recent students have been placed at ₹5 to 15 LPA, with public profiles you can check.'],
 ];
 
 const out = [];
@@ -439,7 +439,7 @@ ${faqHtml(faq)}
     ['Is the internship paid?', 'No. It is a training internship. You get real client tasks, a weekly mentor check-in and an agency certificate, not a stipend.'],
     ['Where is the internship done?', 'Online, like the rest of the program. You do not need to move to a city or travel to an office.'],
     ['What work do I do in the internship?', 'Real client tasks at a partner agency, in the areas you trained in, such as SEO, content, ads and automation. A mentor checks in every week and the work goes into your portfolio.'],
-    ['Does the internship lead to a job?', 'We do not promise a job. You get real work to show, a portfolio site, a CV rewrite and 3 mock interviews. Hiring is the employer\'s decision.'],
+    ['Do you help with jobs after the internship?', 'Yes. Placement support covers interview prep sessions, job application support and guidance, along with a CV rewrite, 3 mock interviews, a portfolio site and real work to show from the internship.'],
   ].concat(COMMON_FAQ.slice(0, 3));
   const body = `
 <h2 id="what-internship-is">What the internship is</h2>
@@ -453,7 +453,7 @@ ${faqHtml(faq)}
 <li>A live portfolio site on your own domain and hosting.</li>
 <li>A CV rewrite and 3 mock interviews.</li>
 </ul>
-<p>No placement or job is promised. Hiring depends on the employer, and the program is built to give you work you can point to.</p>
+<p>Placement support is part of the program: interview prep sessions, job application support and guidance.</p>
 <h2 id="internship-vs-no-internship">Course with internship or course without: what to check</h2>
 <p>Many courses say internship and mean a project inside the class. Ask four things before you pay: Is it at a real agency? Is it on client work? Does someone review it each week? Does the certificate come from the agency? If any answer is no, it is a class project.</p>
 <h2 id="fee">Fee compared with other programs</h2>
@@ -469,7 +469,7 @@ ${faqHtml(faq)}
 </ul>`;
   write('digital-marketing-course-with-internship.html', page({ theme: 'plum', layout: 'card',
     path: p, title, desc, kicker: 'Digital marketing course with internship', h1: 'Digital marketing course with a 1-month agency internship',
-    answer: 'A digital marketing course with internship should give you a month of real client work, reviewed by a mentor, with a certificate from the agency. AIM includes a 1-month agency internship in both plans, in weeks 9 to 12 of a 12-week live online course, from ₹5,999, or ₹9,999 with tool access. No job is promised.',
+    answer: 'A digital marketing course with internship should give you a month of real client work, reviewed by a mentor, with a certificate from the agency. AIM includes a 1-month agency internship in both plans, in weeks 9 to 12 of a 12-week live online course, from ₹5,999, or ₹9,999 with tool access. Placement support is included.',
     lead: 'Learn live, then spend a month on real client tasks at an agency. Online, from ₹5,999.',
     crumbs: [['Home', '/'], ['Digital marketing course', '/digital-marketing-course'], ['Course with internship', null]], body, faq,
     course: courseLd({ name: 'Digital Marketing Course With Internship (AIM)', desc, path: p }),

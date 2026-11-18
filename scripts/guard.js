@@ -22,7 +22,7 @@ const ROOT = path.resolve(__dirname, '..');
 const GTM_ID = 'GTM-NPKP66BD';
 const OLD_GTM_ID = 'GTM-M3H6S33J';
 const SITE = 'https://aiinmarketing.in';
-const MIN_CHAT_TESTS = 25; // tools/test-chat.js minimum. RAISE when you add tests, never lower.
+const MIN_CHAT_TESTS = 35; // tools/test-chat.js minimum. RAISE when you add tests, never lower.
 const MIN_LEAD_TESTS = 50; // tools/test-lead.js must pass at least this many checks. RAISE when you add tests, never lower.
 const SKIP_DIRS = new Set(['node_modules', '.git', '.vercel', '.next']);
 // Posts published before the "Sources" rule. Do not add to this list: new posts need a Sources section.

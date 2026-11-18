@@ -8,8 +8,9 @@
  *   GEMINI_API_KEY  Google AI Studio key. Without it the page shows the pre-written question flow only.
  *   GEMINI_MODEL    optional, default "gemini-flash-latest"
  *
- * Rules (owner, 16 Nov 2026): answers come only from the site facts in SYSTEM below. No talk about placements, jobs,
- * salaries or guarantees (the sales team handles that on a call). Visitors' phone numbers and emails are never sent to
+ * Rules (owner, 16 Nov 2026, updated 18 Nov 2026): answers come only from the site facts in SYSTEM below. Placement SUPPORT
+ * questions get one fixed reply (interview prep sessions, job application support and guidance). Anything about jobs,
+ * hiring, outcomes, salaries or guarantees is not answered by the AI (the sales team handles that on a call). Visitors' phone numbers and emails are never sent to
  * Google: such a message gets a fixed hand-off reply. Message text is never logged or stored. Any failure answers 503
  * and the page falls back to the pre-written flow. The key is read only from process.env, only sent in the
  * x-goog-api-key header to generativelanguage.googleapis.com, and never logged or returned.
@@ -32,6 +33,11 @@ const PRIVACY_REPLY = 'Please do not share phone numbers or email addresses in t
 
 // Anything about jobs, pay or guarantees is not for the AI to answer.
 const OFF_LIMITS = /placement|placed\b|job\s*guarantee|guarantee[^.]{0,30}\bjobs?\b|\bjobs?\b[^.]{0,30}guarantee|\blpa\b|\bctc\b|salary|salaries|package\s*of|lakhs?\s*(per|a)\s*(year|annum)|\bhir(e|ed|ing)\b|get\s*a\s*job|job\s*assistance/i;
+// Owner (18 Nov 2026): the bot may say AIM offers placement support, with one fixed reply that never touches Google.
+// Questions about outcomes, jobs, pay or guarantees stay off limits (OFF_LIMITS above).
+const SUPPORT_Q = /placement\s*(support|help|assistance|service|team)|job\s*(application|support|help|assistance)|interview\s*(prep|preparation|practice|support|sessions?)|career\s*(support|guidance)/i;
+const OUTCOME_RISK = /guarante|assur|promis|\bwill\b|can\s*i\s*get|get\s*(me\s*)?(a\s*)?jobs?|\bland|salar|\blpa\b|\bctc\b|package|lakh|percent|%|how\s*many|\bhir|success\s*rate|100/i;
+const SUPPORT_REPLY = 'Yes. AIM includes placement support: interview prep sessions, job application support and guidance, plus a CV rewrite, 3 mock interviews, a portfolio site and a 1-month agency internship. For anything about your own situation, the team can talk it through on a call.';
 const HAS_CONTACT = /[^\s@]+@[^\s@]+\.[^\s@]{2,}|(?:\+?\d[\s-]?){10,}/;
 
 const SYSTEM = `You are the AIM assistant on aiinmarketing.in. AIM (AI in Marketing, by Adsmentor) is a live online, AI-first digital marketing program in India. Answer only from these facts.
@@ -135,6 +141,7 @@ module.exports = async function handler(req, res) {
 
   const lastUser = msgs[msgs.length - 1].content;
   if (HAS_CONTACT.test(lastUser)) return send(res, 200, { reply: PRIVACY_REPLY, handoff: true });
+  if (SUPPORT_Q.test(lastUser) && !OUTCOME_RISK.test(lastUser) && !/salar|\blpa\b|\bctc\b/i.test(lastUser)) return send(res, 200, { reply: SUPPORT_REPLY, handoff: false });
   if (OFF_LIMITS.test(lastUser)) return send(res, 200, { reply: HANDOFF_REPLY, handoff: true });
   if (overDailyCap(now)) return send(res, 503, { error: 'cap' });
   dayCount++;

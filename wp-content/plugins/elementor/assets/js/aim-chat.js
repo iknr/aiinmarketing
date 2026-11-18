@@ -1,7 +1,7 @@
 /*! AIM assistant (1.1.0): a pre-written question flow on every page. The visitor taps a question and gets a short fixed answer.
  *  Optional: when /api/chat reports enabled (GEMINI_API_KEY set on Vercel) a typing box appears and Gemini answers from the site facts.
  *  If the endpoint is off, unreachable or fails at any point, the typing box disappears and the pre-written flow carries on. Everything it says comes from the site's own text
- *  (fees, schedule, modules, internship, refund). It does not discuss placements or jobs: the team handles that on a call.
+ *  (fees, schedule, modules, internship, refund). It describes placement support only (interview prep sessions, job application support and guidance); outcomes, jobs and salaries are for the team on a call.
  *  Edit the NODES object below to change the content. Events pushed to dataLayer (no personal data): chat_open, chat_choice.
  */
 (function () {
@@ -22,6 +22,7 @@
     { label: 'When are the classes?', to: 'classes' },
     { label: 'Tell me about the internship', to: 'internship' },
     { label: 'Is it right for me?', to: 'fit' },
+    { label: 'Placement support', to: 'support' },
     { label: 'Payment and refund', to: 'payment' },
     { label: 'Talk to the team', to: 'team' }
   ];
@@ -62,6 +63,11 @@
       say: ['Freelancers, people who want to work in or build agencies, and job seekers all take the same program, at the same fee.',
         'You do not need to know coding or marketing already. You start from building a website, describe what you want in plain language, and learn to check what AI gives you.'],
       options: [{ label: 'What will I learn?', to: 'learn' }, { label: 'When are the classes?', to: 'classes' }, TEAM, BACK]
+    },
+    support: {
+      say: ['Yes. AIM includes placement support: interview prep sessions, job application support and guidance.',
+        'You also get a CV rewrite, 3 mock interviews, a portfolio site and a 1-month agency internship. For anything about your own situation, the team can talk it through.'],
+      options: [{ label: 'Tell me about the internship', to: 'internship' }, APPLY, TEAM, BACK]
     },
     payment: {
       say: ['You pay only after your onboarding call, once your questions are answered.',

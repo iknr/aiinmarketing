@@ -2,20 +2,20 @@
   "brochure": {
     "source": "tools/pdf-src/brochure.htm",
     "pdf": "wp-content/uploads/2026/11/guides/aim-program-brochure.pdf",
-    "sourceSha256": "40fe74dc3840d51b7d284e5666227d727915a376eb8a285e052d3d87f4f1aeee",
-    "pdfSha256": "59a58f60063a823cb6c3a7a62f25c78a69a328deb182fc0c66e1f0b3714ddbd4"
+    "sourceSha256": "e6f371b12de1539fa75b7e075a855230e764a5f5f4f3487525205be171ea8770",
+    "pdfSha256": "763f110b917a995046218123cce8f2d526542e98b362f4cdaf787355ea24b1b1"
   },
   "syllabus": {
     "source": "tools/pdf-src/syllabus.htm",
     "pdf": "wp-content/uploads/2026/11/guides/aim-12-week-syllabus.pdf",
     "sourceSha256": "22ea98db9b4049833e6bf7f60558e5463af36601f1b9726cb6b934d7fe97e119",
-    "pdfSha256": "26e6742f774e999f6607e48d016cba6d44637166ed940555e2c0c04b86a54379"
+    "pdfSha256": "e4166f7a256e642b5a9978e33e170f4bdca57b629fd394430e759f40d144c39f"
   },
   "checklist": {
     "source": "tools/pdf-src/checklist.htm",
     "pdf": "wp-content/uploads/2026/11/guides/how-to-choose-a-digital-marketing-course.pdf",
     "sourceSha256": "1313a1b3422d0f6f49ecea48409533d9e01b5dde5e76a3c9e55e3e5970c8ab64",
-    "pdfSha256": "071de8b7a0dbc170e628f975d0bc475d1a307599f1689f49f0f1feec8aea5688"
+    "pdfSha256": "bd8029d9d3c9d1cd7aa2c78c8d90b5f51be9b881ffbdcb16fe6ccfbdf38f0d30"
   },
   "legacy": {
     "_note": "No HTML source exists for these four PDFs. Footer line patched on 2026-11-14 (from Rs 5,999, old all-inclusive wording removed from the text layer). Any change needs a rebuilt source in tools/pdf-src, then move the entry into the jobs list.",

@@ -65,7 +65,7 @@
     },
     payment: {
       say: ['You pay only after your onboarding call, once your questions are answered.',
-        'There is a 7-day money-back guarantee. If AIM is not right for you, tell us within 7 days of your first live class and we will refund your program fee.'],
+        'There is a 7-day money-back guarantee. If AIM is not right for you, tell us within 7 days of your first live class, with at least 70% attendance in those days, and we will refund your program fee.'],
       options: [{ label: 'What does it cost?', to: 'fees' }, APPLY, BACK]
     },
     team: {

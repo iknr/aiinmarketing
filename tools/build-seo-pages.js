@@ -165,7 +165,7 @@ function courseLd(o) {
 const COMMON_FAQ = [
   ['How much does the course cost?', 'It costs ₹5,999 without tool access, or ₹9,999 with tool access. The training, all four specialisations and the 1-month agency internship are the same in both. The ₹9,999 plan adds access to Claude, Semrush, Gemini Pro, Google AI Pro, Ahrefs, SpyFu, Ubersuggest and Canva. There is no paid ad budget and no other add-on.'],
   ['Do I need marketing experience to join?', 'No. The program starts from building a website and goes step by step to AI-run workflows, so beginners can join.'],
-  ['Is there a refund if it is not right for me?', 'Yes. There is a 7-day money-back guarantee. Tell us within 7 days of your first live class and the program fee is refunded. You pay only after an onboarding call, once your questions are answered.'],
+  ['Is there a refund if it is not right for me?', 'Yes. There is a 7-day money-back guarantee. Tell us within 7 days of your first live class, with at least 70% attendance in those days, and the program fee is refunded. You pay only after an onboarding call, once your questions are answered.'],
   ['Do you offer placement support?', 'Yes. Placement support is included: interview prep sessions, job application support and guidance, along with real work, an agency internship and a CV rewrite. Recent students have been placed at ₹5 to 15 LPA, with public profiles you can check.'],
 ];
 

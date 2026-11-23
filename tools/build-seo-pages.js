@@ -392,6 +392,19 @@ ${faqHtml(faq)}
 <li><strong>Run:</strong> ads on five platforms, DM and WhatsApp automations, chatbots and CRO tests.</li>
 <li><strong>Check:</strong> you review every output, because AI can be confidently wrong and the account is yours.</li>
 </ul>
+<h2 id="two-meanings">Two meanings of vibe marketing: which one this course is</h2>
+<p>You will see the term used two ways. Some brands use it for building a feeling around the brand, through style, culture and tone, instead of listing product features. In AI circles it means directing AI tools to build and run marketing work from plain-language instructions. This course teaches the second meaning, the hands-on one, and the brand side comes in through the Branding and Content specialisation.</p>
+<h2 id="what-you-build">What you build with it</h2>
+<ul>
+<li>A live website on your own domain, built by describing it and directing WordPress MCP and AI coding tools.</li>
+<li>An SEO audit and roadmap, and a 30-day content calendar with one working automation.</li>
+<li>Campaign setups on five platforms, and a media plan.</li>
+<li>Your own AI marketing assistant, and a lead-to-CRM workflow with a chatbot.</li>
+<li>A brand kit, and an ad-account audit with a CRO test plan.</li>
+</ul>
+<h2 id="who-for">Who it suits</h2>
+<p>Freelancers who want to deliver more client work alone, people who want to work in or start an agency, and job seekers who need proof of real work. You do not need to code, and you start from zero. Learners join live from any city, including <a href="/digital-marketing-course/delhi">Delhi NCR</a>, <a href="/digital-marketing-course/mumbai">Mumbai</a>, <a href="/digital-marketing-course/bangalore">Bangalore</a>, <a href="/digital-marketing-course/hyderabad">Hyderabad</a>, <a href="/digital-marketing-course/pune">Pune</a>, <a href="/digital-marketing-course/chennai">Chennai</a>, <a href="/digital-marketing-course/jaipur">Jaipur</a> and <a href="/digital-marketing-course/kochi">Kochi</a>.</p>
+${DIFF('')}
 <h2 id="plan">The 12-week path</h2>
 ${PLAN}
 <h2 id="fee">Fee</h2>

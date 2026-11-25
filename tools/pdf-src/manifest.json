@@ -3,19 +3,19 @@
     "source": "tools/pdf-src/brochure.htm",
     "pdf": "wp-content/uploads/2026/11/guides/aim-program-brochure.pdf",
     "sourceSha256": "a866fbf3a5f33a309a4bb69ee3c242e5185c6dc0d4876d93f85bc8638f3120e5",
-    "pdfSha256": "b65d229fde6ef3edf8f7fe6be394d4799cc03038689e2d96d5bab5dc246086f1"
+    "pdfSha256": "e8bc44348ce5f27fde52ee82f5c9b2859a8cef7eb6eac02ceeaebad339a3df1c"
   },
   "syllabus": {
     "source": "tools/pdf-src/syllabus.htm",
     "pdf": "wp-content/uploads/2026/11/guides/aim-12-week-syllabus.pdf",
     "sourceSha256": "185b640d738654735bb357c29476dd1ec681fdb631aab56cf05336fe576160dc",
-    "pdfSha256": "87546daebbaabe3cfc0a6c60998f2b32abce2f6e98c18bd9c3b6c4a93a4b2d6c"
+    "pdfSha256": "11fbc2ceb4e44f0329532c571f5d4dc2efcbb676d1c7a897d3c8216d0e3cdfce"
   },
   "checklist": {
     "source": "tools/pdf-src/checklist.htm",
     "pdf": "wp-content/uploads/2026/11/guides/how-to-choose-a-digital-marketing-course.pdf",
     "sourceSha256": "b433fc97ca936ab34b93e9608af9aa618e873a64a8afef0bad9e4c4aba6e0f4e",
-    "pdfSha256": "5e3072e74bbf03dcf484565ef6be55c3d796a00889ac29eab3c90aa44c327058"
+    "pdfSha256": "943aeb8e81cbdd0ae7e199a05cab080998a277ba803c4c7a37d385788c3bfd67"
   },
   "legacy": {
     "_note": "No HTML source exists for these four PDFs. Footer line patched on 2026-11-14 (from Rs 5,999, old all-inclusive wording removed from the text layer). Any change needs a rebuilt source in tools/pdf-src, then move the entry into the jobs list.",
@@ -40,6 +40,6 @@
     "source": "tools/pdf-src/portfoliokit.htm",
     "pdf": "wp-content/uploads/2026/11/guides/digital-marketing-portfolio-kit.pdf",
     "sourceSha256": "8021fcb02b417c62568a968e580a592b7a7ada5c5309f0b7c50ebf3ae7cfa9cc",
-    "pdfSha256": "5b593d0003f28d444b92c76b870f9dc5528649debc50f9b6e62fd1bc78181403"
+    "pdfSha256": "123c573fa7a9641032fcf576805ad031bf37a0a26febc973b012876cb0550628"
   }
 }

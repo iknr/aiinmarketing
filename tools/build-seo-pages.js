@@ -20,9 +20,9 @@ const FEE_TABLE = `<div class="aimb-tablewrap"><table class="aimb-table"><thead>
 <tr><td>Placement-led bootcamps</td><td>4 to 7 months</td><td>&#8377;1.05 lakh to &#8377;1.64 lakh</td></tr>
 <tr><td>Institute certification courses</td><td>3 to 6 months</td><td>&#8377;48,000 to &#8377;75,000</td></tr>
 <tr><td>Short bootcamps</td><td>3 months</td><td>&#8377;25,000</td></tr>
-<tr class="aimb-hot"><td><strong>AIM by Adsmentor</strong></td><td>3 months, agency internship included</td><td><strong>&#8377;5,999</strong>, or <strong>&#8377;9,999</strong> with tool access</td></tr>
+<tr class="aimb-hot"><td><strong>AIM by Adsmentor</strong></td><td>3 months, agency internship included</td><td><strong>&#8377;5,999</strong>, or <strong>&#8377;9,999</strong> with full tool access</td></tr>
 </tbody></table></div>
-<p class="aimb-small">Ranges come from public fee listings for 10 programs, checked October 2026. Fees change, so check each provider before you decide. The two AIM plans differ only in tool access (Claude, Semrush, Gemini Pro, Google AI Pro, Ahrefs, SpyFu, Ubersuggest and Canva).</p>`;
+<p class="aimb-small">Ranges come from public fee listings for 10 programs, checked October 2026. Fees change, so check each provider before you decide. The two AIM plans differ only in tool access and live ad experience (Claude, Semrush, Gemini Pro, Google AI Pro, Ahrefs, SpyFu, Ubersuggest and Canva).</p>`;
 
 
 const DIFF = (N) => `<h2 id="what-sets-aim-apart">What AIM does that most digital marketing courses${N ? ' in ' + N : ''} do not</h2>
@@ -31,7 +31,7 @@ const DIFF = (N) => `<h2 id="what-sets-aim-apart">What AIM does that most digita
 <li><strong>You work inside the real platforms.</strong> You log in and do the work yourself instead of watching a trainer&rsquo;s screen.</li>
 <li><strong>A real agency month.</strong> Weeks 9 to 12 are client tasks at a partner agency with a weekly mentor check-in, and the certificate comes from the agency.</li>
 <li><strong>Four specialisations, all included.</strong> AI Generalist, Marktech, Branding and Content, and Performance and Growth, with no add-on fee.</li>
-<li><strong>Two openly listed fees, one training.</strong> &#8377;5,999 without tool access or &#8377;9,999 with it. Only tool access differs.</li>
+<li><strong>Two openly listed fees, one training.</strong> &#8377;5,999 with limited tool access or &#8377;9,999 with full tool access. Only tool access and live ad experience differ.</li>
 <li><strong>Trainers you can check.</strong> Both trainers are practitioners with public profiles on the <a href="/about">about page</a>, so you can verify them before you pay.</li>
 </ul>`;
 
@@ -88,7 +88,7 @@ const { bundlePage } = require('./css-bundle.js');
 
 const answerHtml = (t) => `<div class="aimb-takeaways"><strong>Short answer</strong><p>${rs(esc(t))}</p></div>
 <p class="aimb-small">Free download: <a href="#free-guide-box">The 12-week syllabus</a>, sent to your phone and email.</p>`;
-const bridgeHtml = (k) => `<section class="aimb-bridge"><div class="aimb-bridge-copy"><span class="aimb-bridge-eye">Free download</span><h2 id="free-guide">See the whole 12-week path before you decide</h2><p>The syllabus shows every module, what you build in each and how the agency internship fits in, so you can compare it with any other option.</p><p class="aimb-bridge-link">The full path is &#8377;5,999, or &#8377;9,999 with tool access, paid only after your onboarding call. <a href="/#bonus">See what is included</a>.</p></div><div id="free-guide-box" class="aimp-mag"><h3>The 12-week syllabus</h3><p>Every module, what you build in each, and how the agency internship fits in. See the whole path before you spend a rupee.</p><form class="aim-magnet-form" method="post" action="/wp-admin/admin-ajax.php" data-file="/wp-content/uploads/2026/11/guides/aim-12-week-syllabus.pdf" novalidate><input type="hidden" name="form_name" value="magnet_syllabus"><input type="hidden" name="form_fields[source]" value="magnet-syllabus"><label for="${k}-syllabus-n">Name</label><input id="${k}-syllabus-n" name="form_fields[name]" type="text" autocomplete="name" placeholder="Your name" required><label for="${k}-syllabus-p">WhatsApp number</label><input id="${k}-syllabus-p" name="form_fields[phone]" type="tel" inputmode="tel" autocomplete="tel" placeholder="10-digit mobile number" required><label for="${k}-syllabus-e">Email</label><input id="${k}-syllabus-e" name="form_fields[email]" type="email" autocomplete="email" placeholder="you@email.com" required><button type="submit">Send me the syllabus</button><p class="aimp-msg" role="status" hidden></p></form></div></section>`;
+const bridgeHtml = (k) => `<section class="aimb-bridge"><div class="aimb-bridge-copy"><span class="aimb-bridge-eye">Free download</span><h2 id="free-guide">See the whole 12-week path before you decide</h2><p>The syllabus shows every module, what you build in each and how the agency internship fits in, so you can compare it with any other option.</p><p class="aimb-bridge-link">The full path is &#8377;5,999, or &#8377;9,999 with full tool access, paid only after your onboarding call. <a href="/#bonus">See what is included</a>.</p></div><div id="free-guide-box" class="aimp-mag"><h3>The 12-week syllabus</h3><p>Every module, what you build in each, and how the agency internship fits in. See the whole path before you spend a rupee.</p><form class="aim-magnet-form" method="post" action="/wp-admin/admin-ajax.php" data-file="/wp-content/uploads/2026/11/guides/aim-12-week-syllabus.pdf" novalidate><input type="hidden" name="form_name" value="magnet_syllabus"><input type="hidden" name="form_fields[source]" value="magnet-syllabus"><label for="${k}-syllabus-n">Name</label><input id="${k}-syllabus-n" name="form_fields[name]" type="text" autocomplete="name" placeholder="Your name" required><label for="${k}-syllabus-p">WhatsApp number</label><input id="${k}-syllabus-p" name="form_fields[phone]" type="tel" inputmode="tel" autocomplete="tel" placeholder="10-digit mobile number" required><label for="${k}-syllabus-e">Email</label><input id="${k}-syllabus-e" name="form_fields[email]" type="email" autocomplete="email" placeholder="you@email.com" required><button type="submit">Send me the syllabus</button><p class="aimp-msg" role="status" hidden></p></form></div></section>`;
 
 function page(o) {
   const url = SITE + o.path;
@@ -141,7 +141,7 @@ ${o.answer ? answerHtml(o.answer) : ''}
 ${rs(o.body)}
 ${PLACED}
 ${o.answer ? bridgeHtml(o.path.replace(/[^a-z0-9]+/gi, '-').replace(/^-|-$/g, '').slice(0, 30)) : ''}
-<aside class="aimb-cta"><h2>See the fee and apply</h2><p>AI in every module, hands-on inside the platforms, and a 1-month agency internship. &#8377;5,999 without tool access, or &#8377;9,999 with tool access. Same training and agency internship in both. 7-day money-back guarantee.</p><a class="aimb-btn" href="/#bonus">See the fee</a></aside>
+<aside class="aimb-cta"><h2>See the fee and apply</h2><p>AI in every module, hands-on inside the platforms, and a 1-month agency internship. &#8377;5,999 with limited tool access, or &#8377;9,999 with full tool access. Same training and agency internship in both. 7-day money-back guarantee.</p><a class="aimb-btn" href="/#bonus">See the fee</a></aside>
 </article></main>
 <footer class="aimb-footer"><div class="aimb-foot aimb-foot5"><div class="aimb-fcol aimb-fbrand"><span class="aimb-mark">AIM</span><p>AI in Marketing by <a href="https://adsmentor.in" target="_blank" rel="noopener">Adsmentor</a>. A live online, AI-first digital marketing course. &copy; 2026</p><a href="mailto:contact@adsmentor.in">contact@adsmentor.in</a></div><div class="aimb-fcol"><strong>Courses</strong><a href="/digital-marketing-course">Digital marketing course</a><a href="/ai-digital-marketing-course">AI digital marketing course</a><a href="/vibe-marketing-course">Vibe marketing course</a><a href="/digital-marketing-course-online">Online digital marketing course</a><a href="/digital-marketing-course-with-internship">Course with internship</a><a href="/digital-marketing-course/kerala">Kerala course</a></div><div class="aimb-fcol"><strong>Top cities</strong><a href="/digital-marketing-course/delhi">Delhi NCR</a><a href="/digital-marketing-course/mumbai">Mumbai</a><a href="/digital-marketing-course/bangalore">Bangalore</a><a href="/digital-marketing-course/hyderabad">Hyderabad</a><a href="/digital-marketing-course/pune">Pune</a><a href="/digital-marketing-course/chennai">Chennai</a><a href="/digital-marketing-course/kerala">Kerala</a><a href="/all-pages">All city pages</a></div><div class="aimb-fcol"><strong>Guides</strong><a href="/blogs/digital-marketing-course-for-beginners-india">Course for beginners</a><a href="/blogs/digital-marketing-certificate-india-which-one-counts">Which certificate counts</a><a href="/blogs/digital-marketing-internship-india-how-to-get-one">How to get an internship</a><a href="/blogs/digital-marketing-course-with-placement-india">Course with placement: what to check</a><a href="/blogs/best-digital-marketing-courses-india-2026-how-to-choose">Best courses and how to choose</a><a href="/blogs/digital-marketing-course-fees-india-2026">Course fees in India</a><a href="/blogs">All blog posts</a></div><div class="aimb-fcol"><strong>Company</strong><a href="/about">About</a><a href="/author/kailasnathr">Kailas Nath R</a><a href="/author/kautilyaroshan">Kautilya Roshan</a><a href="/terms">Terms</a><a href="/privacy-policy">Privacy policy</a><a href="/all-pages">All pages</a></div></div></footer>
 <script id="aim-magnet-js" src="/wp-content/plugins/elementor/assets/js/aim-magnet.js?ver=1.0.0" defer></script><script id="aim-track-js" src="/wp-content/plugins/elementor/assets/js/aim-track.js?ver=1.1.0" defer></script>
@@ -165,8 +165,8 @@ function courseLd(o) {
     educationalLevel: 'Beginner', courseMode: 'online',
     provider: { '@type': 'Organization', name: 'Adsmentor', sameAs: 'https://adsmentor.in' },
     offers: [
-      { '@type': 'Offer', name: 'AIM program, without tool access', price: '5999', priceCurrency: 'INR', category: 'Paid', url: SITE + '/#bonus' },
-      { '@type': 'Offer', name: 'AIM program, with tool access', price: '9999', priceCurrency: 'INR', category: 'Paid', url: SITE + '/#bonus' },
+      { '@type': 'Offer', name: 'AIM program, with limited tool access', price: '5999', priceCurrency: 'INR', category: 'Paid', url: SITE + '/#bonus' },
+      { '@type': 'Offer', name: 'AIM program, with full tool access', price: '9999', priceCurrency: 'INR', category: 'Paid', url: SITE + '/#bonus' },
     ],
     hasCourseInstance: { '@type': 'CourseInstance', courseMode: 'online', courseWorkload: 'PT2H per weekday' },
   };
@@ -175,7 +175,7 @@ function courseLd(o) {
   return c;
 }
 const COMMON_FAQ = [
-  ['How much does the course cost?', 'It costs ₹5,999 without tool access, or ₹9,999 with tool access. The training, all four specialisations and the 1-month agency internship are the same in both. The ₹9,999 plan adds access to Claude, Semrush, Gemini Pro, Google AI Pro, Ahrefs, SpyFu, Ubersuggest and Canva. There is no paid ad budget and no other add-on.'],
+  ['How much does the course cost?', 'It costs ₹5,999 with limited tool access, or ₹9,999 with full tool access. The training, all four specialisations and the 1-month agency internship are the same in both. The ₹9,999 plan adds access to Claude, Semrush, Gemini Pro, Google AI Pro, Ahrefs, SpyFu, Ubersuggest and Canva. Only this plan includes live ad experience on an agency or brand account with a real ad budget. There is no paid ad budget and no other add-on.'],
   ['Do I need marketing experience to join?', 'No. The program starts from building a website and goes step by step to AI-run workflows, so beginners can join.'],
   ['Is there a refund if it is not right for me?', 'Yes. There is a 7-day money-back guarantee. Tell us within 7 days of your first live class, with at least 70% attendance in those days, and the program fee is refunded. You pay only after an onboarding call, once your questions are answered.'],
   ['Do you offer placement support?', 'Yes. Placement support is included: interview prep sessions, job application support and guidance, along with real work, an agency internship and a CV rewrite. Recent students have been placed at ₹5 to 15 LPA, with public profiles you can check.'],
@@ -190,12 +190,12 @@ for (const c of CITIES) {
   const p = `/digital-marketing-course/${c.slug}`;
   let title = `Digital Marketing Course in ${c.name} (Live Online, AI) | AIM`;
   if (title.length > 60) title = `Digital Marketing Course in ${c.name} | AIM`;
-  let desc = `Live online AI digital marketing course for learners in ${c.name}. 12 weeks, agency internship, Rs 5,999 or Rs 9,999 with tool access. Evening batches.`;
+  let desc = `Live online AI digital marketing course for learners in ${c.name}. 12 weeks, agency internship, Rs 5,999 or Rs 9,999 with full tool access. Evening batches.`;
   if (desc.length > 160) desc = `Live online AI digital marketing course for ${c.name}. 12 weeks, agency internship, Rs 5,999 or Rs 9,999 with tools. Evening classes.`;
   const faq = [
     [`Is there a physical centre in ${c.name}?`, `No. AIM is a live online program, so there is no classroom in ${c.name} to travel to. You join the live classes from home and get the same training and internship as every other learner.`],
     c.faq,
-    [`How much does a digital marketing course in ${c.name} cost?`, `AIM costs ₹5,999 without tool access, or ₹9,999 with tool access. Because the course is live online, the fee is the same for ${c.name} as for every other city. You pay only after an onboarding call, and there is a 7-day money-back guarantee.`],
+    [`How much does a digital marketing course in ${c.name} cost?`, `AIM costs ₹5,999 with limited tool access, or ₹9,999 with full tool access. Because the course is live online, the fee is the same for ${c.name} as for every other city. You pay only after an onboarding call, and there is a 7-day money-back guarantee.`],
     [`How long is the digital marketing course for learners in ${c.name}?`, `The program runs 12 weeks. Weeks 1 to 4 cover the core skills, weeks 5 to 8 are four specialisations, and weeks 9 to 12 are a 1-month agency internship. Live classes are Monday to Friday, 9 to 11 pm IST.`],
     ...COMMON_FAQ.slice(0, 3),
     COMMON_FAQ[3],
@@ -261,7 +261,7 @@ ${CITIES.filter((x) => x.region === 'kerala').map((x) => `<li><a href="/digital-
   write(`digital-marketing-course/${c.slug}.html`, page({
     path: p, title, desc, kicker: 'Live online, for learners in ' + c.name,
     h1: `Digital marketing course in ${c.name}: live online, AI built into every module`,
-    answer: `Yes, you can take a good digital marketing course from ${c.name} without moving anywhere. AIM by Adsmentor is a live online AI digital marketing course: 12 weeks, nine modules, a 1-month agency internship, and live classes 9 to 11 pm IST on weekdays. It costs ₹5,999, or ₹9,999 with tool access, with a 7-day money-back guarantee.`,
+    answer: `Yes, you can take a good digital marketing course from ${c.name} without moving anywhere. AIM by Adsmentor is a live online AI digital marketing course: 12 weeks, nine modules, a 1-month agency internship, and live classes 9 to 11 pm IST on weekdays. It costs ₹5,999, or ₹9,999 with full tool access, with a 7-day money-back guarantee.`,
     lead: `A live online AI digital marketing course for learners in ${c.name}. Twelve weeks, nine modules, a 1-month agency internship, from ₹5,999.`,
     crumbs: [['Home', '/'], ['Digital marketing course', '/digital-marketing-course'], [c.name, null]],
     body, faq, theme, layout,
@@ -274,7 +274,7 @@ ${CITIES.filter((x) => x.region === 'kerala').map((x) => `<li><a href="/digital-
 {
   const p = '/digital-marketing-course';
   const title = 'Digital Marketing Course in India (Live Online, AI) | AIM';
-  const desc = 'Live online digital marketing course in India: AI in every module, 4 specialisations, 1-month agency internship. Rs 5,999, or Rs 9,999 with tool access.';
+  const desc = 'Live online digital marketing course in India: AI in every module, 4 specialisations, 1-month agency internship. Rs 5,999, or Rs 9,999 with full tool access.';
   const faq = COMMON_FAQ.concat([['Can I join from any city?', 'Yes. Classes are live online from 9 to 11 pm IST on weekdays, so learners in any city in India can join. See the city pages below for local context.'],
     ['What should a good digital marketing course in India include in 2026?', 'Look for five things: AI used inside every module, hands-on work in the real platforms, a portfolio you can show, real client work through an internship, and a fee listed openly. AIM covers all five in 12 weeks.'],
     ['How long does it take to learn digital marketing?', 'The AIM program takes 12 weeks: four weeks of core skills, four weeks of specialisation and a 1-month agency internship. Skill grows with practice after that, so the portfolio and internship matter as much as the classes.'],
@@ -296,7 +296,7 @@ ${PLAN}
 <p>AI now does most routine marketing tasks. If you do not learn how companies use AI at work, employers have less reason to hire you. So you practise with Claude, WordPress MCP, ads MCPs, CRO automations and chatbots inside the platforms, on briefs shaped like real company work. Read more on the <a href="/ai-digital-marketing-course">AI digital marketing course</a> and <a href="/vibe-marketing-course">vibe marketing course</a> pages, or see how <a href="/digital-marketing-course-online">the online format</a> works.</p>
 ${DIFF('')}
 <h2 id="fee">Fee and how it compares</h2>
-<p>There are two plans. &#8377;5,999 without tool access, or &#8377;9,999 with tool access. The training, the four specialisations and the agency internship are the same in both.</p>
+<p>There are two plans. &#8377;5,999 with limited tool access, or &#8377;9,999 with full tool access. The training, the four specialisations and the agency internship are the same in both.</p>
 ${FEE_TABLE}
 <h2 id="cities">Digital marketing course by city</h2>
 <p>The classes are live online, so one program serves every city. Each city page covers what marketing work looks like there and which local briefs you can practise on.</p>
@@ -314,7 +314,7 @@ ${faqHtml(faq)}
 </ul>`;
   write('digital-marketing-course/index.html', page({ theme: 'sunrise', layout: 'center',
     path: p, title, desc, kicker: 'Digital marketing course in India', h1: 'Digital marketing course in India: live online, AI in every module',
-    answer: 'A good digital marketing course in India in 2026 teaches AI inside every module, gives you real work to show, and lists its fee openly. AIM by Adsmentor is built that way: live online, 12 weeks, nine modules, a 1-month agency internship, from ₹5,999, or ₹9,999 with tool access, with a 7-day money-back guarantee.',
+    answer: 'A good digital marketing course in India in 2026 teaches AI inside every module, gives you real work to show, and lists its fee openly. AIM by Adsmentor is built that way: live online, 12 weeks, nine modules, a 1-month agency internship, from ₹5,999, or ₹9,999 with full tool access, with a 7-day money-back guarantee.',
     lead: 'Learn digital marketing the way companies now do it, with AI in all nine modules, then spend a month inside an agency. From ₹5,999.',
     crumbs: [['Home', '/'], ['Digital marketing course', null]], body, faq,
     course: courseLd({ name: 'AI Digital Marketing Course in India (AIM)', desc, path: p }),
@@ -329,7 +329,7 @@ ${faqHtml(faq)}
   const desc = 'An AI digital marketing course where AI runs through all 9 modules: Claude, WordPress MCP, ads MCPs, chatbots. 1-month agency internship. Rs 5,999 or Rs 9,999.';
   const faq = [
     ['What makes this an AI digital marketing course and not a normal one?', 'AI is part of all nine modules and all four specialisations, not one chapter. You work with Claude, Claude Code and the command line, WordPress MCP, MCPs for ads, CRO automations and chatbots, on real-style briefs.'],
-    ['Which AI tools do I get access to?', 'The ₹9,999 plan includes tool access: Claude, Semrush, Gemini Pro, Google AI Pro, Ahrefs, SpyFu, Ubersuggest and Canva. The ₹5,999 plan has no tool access, and the training is the same. Many tools in the course also have free plans or trials.'],
+    ['Which AI tools do I get access to?', 'The ₹9,999 plan includes tool access: Claude, Semrush, Gemini Pro, Google AI Pro, Ahrefs, SpyFu, Ubersuggest and Canva. The ₹5,999 plan has limited tool access, and the training is the same. Many tools in the course also have free plans or trials.'],
     ['What is a digital marketing with AI course?', 'It teaches the usual digital marketing skills, which are SEO, ads, social media, content and analytics, with AI tools used inside each one. At AIM the tools include Claude, WordPress MCP and MCPs for ad accounts, used on real-style briefs.'],
     ['Is an AI digital marketing course worth it in 2026?', 'It is worth it if AI is in every module, you do real work with it and you leave with proof. Check three things before paying: AI inside every module, an internship or real client work, and a fee listed openly. AIM lists both fees and has a 7-day money-back guarantee.'],
     ['How long is the AI digital marketing course?', 'Twelve weeks. Weeks 1 to 4 are core skills, weeks 5 to 8 are four specialisations, and weeks 9 to 12 are a 1-month agency internship. Live classes run Monday to Friday, 9 to 11 pm IST.'],
@@ -352,7 +352,7 @@ ${DIFF('')}
 <h2 id="plan">The 12-week path</h2>
 ${PLAN}
 <h2 id="fee">Fee</h2>
-<p>&#8377;5,999 without tool access, or &#8377;9,999 with tool access. The tiers differ only in tool access.</p>
+<p>&#8377;5,999 with limited tool access, or &#8377;9,999 with full tool access. The tiers differ only in tool access and live ad experience.</p>
 ${FEE_TABLE}
 ${faqHtml(faq)}
 <h2 id="more">More</h2>
@@ -366,7 +366,7 @@ ${faqHtml(faq)}
 </ul>`;
   write('ai-digital-marketing-course.html', page({ theme: 'ocean', layout: 'left',
     path: p, title, desc, kicker: 'AI digital marketing course', h1: 'AI digital marketing course: AI inside every module',
-    answer: 'An AI digital marketing course should teach you to do marketing work with AI tools, not only to read about them. AIM is a live online digital marketing with AI course: AI runs through all nine modules, with Claude, WordPress MCP and MCPs for ad accounts, 12 weeks, a 1-month agency internship, ₹5,999, or ₹9,999 with tool access.',
+    answer: 'An AI digital marketing course should teach you to do marketing work with AI tools, not only to read about them. AIM is a live online digital marketing with AI course: AI runs through all nine modules, with Claude, WordPress MCP and MCPs for ad accounts, 12 weeks, a 1-month agency internship, ₹5,999, or ₹9,999 with full tool access.',
     lead: 'AI now does most routine marketing tasks. This course teaches you to direct it, check it and own the result, inside the real platforms.',
     crumbs: [['Home', '/'], ['Digital marketing course', '/digital-marketing-course'], ['AI digital marketing course', null]], body, faq,
     course: courseLd({ name: 'AI Digital Marketing Course (AIM)', desc, path: p }),
@@ -409,7 +409,7 @@ ${DIFF('')}
 <h2 id="plan">The 12-week path</h2>
 ${PLAN}
 <h2 id="fee">Fee</h2>
-<p>&#8377;5,999 without tool access, or &#8377;9,999 with tool access (Claude, Semrush, Gemini Pro, Google AI Pro, Ahrefs, SpyFu, Ubersuggest and Canva). The training is the same in both.</p>
+<p>&#8377;5,999 with limited tool access, or &#8377;9,999 with full tool access (Claude, Semrush, Gemini Pro, Google AI Pro, Ahrefs, SpyFu, Ubersuggest and Canva). The training is the same in both.</p>
 ${faqHtml(faq)}
 <h2 id="more">More</h2>
 <ul>
@@ -421,7 +421,7 @@ ${faqHtml(faq)}
 </ul>`;
   write('vibe-marketing-course.html', page({ theme: 'plum', layout: 'card',
     path: p, title, desc, kicker: 'Vibe marketing course', h1: 'Vibe marketing course: direct AI to do the work, then own the result',
-    answer: 'Vibe marketing means directing AI to build websites, content, ads and automations while you check the result and own it. AIM teaches it hands-on in 12 weeks, with an agency internship, for ₹5,999, or ₹9,999 with tool access, and a 7-day money-back guarantee.',
+    answer: 'Vibe marketing means directing AI to build websites, content, ads and automations while you check the result and own it. AIM teaches it hands-on in 12 weeks, with an agency internship, for ₹5,999, or ₹9,999 with full tool access, and a 7-day money-back guarantee.',
     lead: 'Learn vibe marketing inside the real tools, on briefs shaped like company work, then prove it in a 1-month agency internship.',
     crumbs: [['Home', '/'], ['Digital marketing course', '/digital-marketing-course'], ['Vibe marketing course', null]], body, faq,
     course: courseLd({ name: 'Vibe Marketing Course (AIM)', desc, path: p }),
@@ -456,7 +456,7 @@ ${faqHtml(faq)}
 <p>See also the <a href="/digital-marketing-course">full program page</a> and the <a href="/blogs/best-digital-marketing-courses-india-2026-how-to-choose">guide to choosing a course</a>.</p>`;
   write('digital-marketing-course-online.html', page({ theme: 'forest', layout: 'center',
     path: p, title, desc, kicker: 'Online digital marketing course', h1: 'Online digital marketing course with live evening classes',
-    answer: 'A good online digital marketing course has live classes, real assignments and a way to prove your work. AIM runs live classes Monday to Friday, 9 to 11 pm IST, with weekend doubt clearing and a 1-month online agency internship, for ₹5,999, or ₹9,999 with tool access.',
+    answer: 'A good online digital marketing course has live classes, real assignments and a way to prove your work. AIM runs live classes Monday to Friday, 9 to 11 pm IST, with weekend doubt clearing and a 1-month online agency internship, for ₹5,999, or ₹9,999 with full tool access.',
     lead: 'Learn from home, live, in the evening, and finish with an agency internship. From ₹5,999.',
     crumbs: [['Home', '/'], ['Digital marketing course', '/digital-marketing-course'], ['Online course', null]], body, faq,
     course: courseLd({ name: 'Online Digital Marketing Course (AIM)', desc, path: p }),
@@ -493,7 +493,7 @@ ${DIFF('')}
 <h2 id="internship-vs-no-internship">Course with internship or course without: what to check</h2>
 <p>Many courses say internship and mean a project inside the class. Ask four things before you pay: Is it at a real agency? Is it on client work? Does someone review it each week? Does the certificate come from the agency? If any answer is no, it is a class project.</p>
 <h2 id="fee">Fee compared with other programs</h2>
-<p>The internship is in both plans. The plans differ only in tool access.</p>
+<p>The internship is in both plans. The plans differ only in tool access and live ad experience.</p>
 ${FEE_TABLE}
 ${faqHtml(faq)}
 <h2 id="more">More</h2>
@@ -505,7 +505,7 @@ ${faqHtml(faq)}
 </ul>`;
   write('digital-marketing-course-with-internship.html', page({ theme: 'plum', layout: 'card',
     path: p, title, desc, kicker: 'Digital marketing course with internship', h1: 'Digital marketing course with a 1-month agency internship',
-    answer: 'A digital marketing course with internship should give you a month of real client work, reviewed by a mentor, with a certificate from the agency. AIM includes a 1-month agency internship in both plans, in weeks 9 to 12 of a 12-week live online course, from ₹5,999, or ₹9,999 with tool access. Placement support is included.',
+    answer: 'A digital marketing course with internship should give you a month of real client work, reviewed by a mentor, with a certificate from the agency. AIM includes a 1-month agency internship in both plans, in weeks 9 to 12 of a 12-week live online course, from ₹5,999, or ₹9,999 with full tool access. Placement support is included.',
     lead: 'Learn live, then spend a month on real client tasks at an agency. Online, from ₹5,999.',
     crumbs: [['Home', '/'], ['Digital marketing course', '/digital-marketing-course'], ['Course with internship', null]], body, faq,
     course: courseLd({ name: 'Digital Marketing Course With Internship (AIM)', desc, path: p }),

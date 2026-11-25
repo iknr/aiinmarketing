@@ -353,14 +353,14 @@ const INVARIANTS = [
   },
   {
     id: 'content-consistency',
-    title: 'Two plan prices (Rs 5,999 without tool access, Rs 9,999 with tool access), 7-day guarantee wording, "Adsmentor" spelling, no placeholders',
+    title: 'Two plan prices (Rs 5,999 with limited tool access, Rs 9,999 with full tool access), 7-day guarantee wording, "Adsmentor" spelling, no placeholders',
     why: 'The price and guarantee are legal/commercial promises shown on many pages and in llms files; a stale price or placeholder text published by mistake is costly.',
     check() {
       const p = [];
       const texts = [...htmlFiles(), 'llms.txt', 'llms-full.txt'].filter(exists).map((f) => [f, f.endsWith('.html') ? visibleText(read(f)) : read(f)]);
       const bad = /(?<![\d,])(?:₹|Rs\.?|INR)\s?(2,?999|3,?999|4,?999)(?!\d)/g;
       for (const [f, t] of texts) {
-        for (const m of t.matchAll(bad)) p.push(`${f}: "${m[0]}" looks like a program price. The only AIM prices are Rs 5,999 (without tool access) and Rs 9,999 (with tool access).`);
+        for (const m of t.matchAll(bad)) p.push(`${f}: "${m[0]}" looks like a program price. The only AIM prices are Rs 5,999 (with limited tool access) and Rs 9,999 (with full tool access).`);
         if (/all-inclusive|one flat (?:fee|₹|&#8377;|Rs)|no other (?:public )?price tier/i.test(t) && !/(do not|don't) call either plan all-inclusive/i.test(t)) p.push(`${f}: the old single-price wording ("all-inclusive", "one flat fee", "no other price tier") is back. AIM has two plans.`);
         if (/Ads Mentor/.test(t)) p.push(`${f}: "Ads Mentor" must be spelled "Adsmentor".`);
         if (/lorem ipsum|\bTODO\b|\bXXX+\b|\bFIXME\b|\[placeholder\]/i.test(t.replace(/\bxxx@/gi, ''))) p.push(`${f}: placeholder text (lorem ipsum / TODO / XXX / FIXME) found.`);
@@ -472,7 +472,7 @@ const INVARIANTS = [
         if (sourceHash(name) !== e.sourceSha256) p.push(`${srcFile} (or an image it uses) changed since the PDF was built. Run node tools/build-pdfs.js ${name} and commit the PDF, cover and manifest.`);
         if (fileHash(abs(pdf)) !== e.pdfSha256) p.push(`${pdf} does not match the manifest: it was edited or replaced without its source. Change tools/pdf-src/${name}.htm and rebuild with node tools/build-pdfs.js ${name}.`);
         const txt = visibleText(read(srcFile));
-        for (const [re, label] of banned) if (re.test(txt)) p.push(`${srcFile}: contains the retired claim "${label}". The only plans are Rs 5,999 without tool access and Rs 9,999 with tool access.`);
+        for (const [re, label] of banned) if (re.test(txt)) p.push(`${srcFile}: contains the retired claim "${label}". The only plans are Rs 5,999 with limited tool access and Rs 9,999 with full tool access.`);
         if (name === 'brochure' || name === 'syllabus' || name === 'checklist' || name === 'portfoliokit') for (const price of ['5,999', '9,999']) if (!txt.includes(price)) p.push(`${srcFile}: must state the ${price} plan.`);
       }
       for (const [n, e] of Object.entries(manifest.legacy || {})) {

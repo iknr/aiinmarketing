@@ -2,12 +2,12 @@
 
 Source: https://aiinmarketing.in | Updated: 2026-11-03 | Summary version: https://aiinmarketing.in/llms.txt
 
-AIM is a live online, AI-first digital marketing program in India by Adsmentor. Nine modules, four specialisations, a one-month agency internship and two plans, ₹5,999 and ₹9,999 with tool access.
+AIM is a live online, AI-first digital marketing program in India by Adsmentor. Nine modules, four specialisations, a one-month agency internship and two plans, ₹5,999 and ₹9,999 with full tool access.
 
 ## Frequently asked questions
 
 ### How much does AIM cost?
-₹5,999 without tool access, or ₹9,999 with tool access. You pay only after your onboarding call, once your questions are answered.
+₹5,999 with limited tool access, or ₹9,999 with full tool access. You pay only after your onboarding call, once your questions are answered.
 
 ### What is included in the fee?
 Live training across nine modules, all four specialisations, a one-month agency internship with certificate, a portfolio website with domain and hosting, a CV rewrite with mock interviews. The ₹9,999 plan adds tool access.
@@ -19,13 +19,13 @@ Yes. We offer a 7-day money-back guarantee. If AIM is not right for you, tell us
 Yes. Classes are live online, so you can join from any city in India.
 
 ### Which tools are included?
-Only the ₹9,999 plan includes tool access: Claude, Semrush, Gemini Pro, Google AI Pro, Ahrefs, SpyFu, Ubersuggest and Canva. The ₹5,999 plan has no tool access.
+Only the ₹9,999 plan includes tool access: Claude, Semrush, Gemini Pro, Google AI Pro, Ahrefs, SpyFu, Ubersuggest and Canva. The ₹5,999 plan has limited tool access (Spectra Pro, Elementor Pro, Canva and Semrush, plus domain and hosting). Claude, Google AI Pro and live ad experience with a real ad budget are not in it.
 
 ### Does AIM offer placement support?
 Yes. Placement support includes interview prep sessions, job application support and guidance. Learners finish with a live portfolio, real client work through the internship, a certificate from the agency and interview preparation.
 
 ### Who is it for?
-Freshers, career switchers, working professionals and small business owners who want practical AI-first marketing skills. AIM has three tracks: freelancers, agencies (join or run one) and job seekers. All three use the same nine modules and the same two fees (Rs 5,999, or Rs 9,999 with tool access).
+Freshers, career switchers, working professionals and small business owners who want practical AI-first marketing skills. AIM has three tracks: freelancers, agencies (join or run one) and job seekers. All three use the same nine modules and the same two fees (Rs 5,999, or Rs 9,999 with full tool access).
 
 ### Who teaches?
 Kautilya Roshan (advertising), [Sumit Chaudhari](https://www.linkedin.com/in/sumitchaudhari2405/) (performance and growth), Kailas Nath R (digital marketing and agentic AI consultant at Big Stone Agency) and [Ankita Kumari](https://www.linkedin.com/in/ankita-kumari-0510/) (retention and CRM). Their LinkedIn profiles are public.
@@ -53,7 +53,7 @@ Looking for the best digital marketing course in India? The honest answer is tha
 - **Do not pay for a syllabus. Pay for what you can do.** Ask whether you will work inside the tools, on real briefs, with real work to show. 
 - **AI belongs in every module,** not in one chapter at the end. Companies now use it in ads, content, SEO, conversion and lead handling. 
 - **Fees vary hugely for similar promises.** Listed fees below range from about ₹18,000 to over ₹3 lakh. 
-- **AIM is ₹5,999 without tool access or ₹9,999 with it,** and both include the [agency internship](https://aiinmarketing.in/#bonus) and a portfolio site with domain and hosting. 
+- **AIM is ₹5,999 with limited tool access or ₹9,999 with full tool access,** and both include the [agency internship](https://aiinmarketing.in/#bonus) and a portfolio site with domain and hosting. 
 - **Live online,** so you can learn from any city in India while you study or work.  
 
 ## Digital marketing course fees compared 
@@ -206,7 +206,7 @@ There is no single best course. The best one matches your goal and budget. Look 
 
 ### How much does a digital marketing course cost in India?
 
-Public listings for popular Bangalore-based and online programs range from about ₹18,000 to over ₹3 lakh, as collected on 3 November 2026. AIM costs ₹5,999 without tool access or ₹9,999 with tool access, and includes the agency internship and a portfolio site with domain and hosting.
+Public listings for popular Bangalore-based and online programs range from about ₹18,000 to over ₹3 lakh, as collected on 3 November 2026. AIM costs ₹5,999 with limited tool access or ₹9,999 with full tool access, and includes the agency internship and a portfolio site with domain and hosting.
 
 ### What is a vibe marketing course?
 
@@ -653,7 +653,7 @@ A certificate says you attended. A live portfolio shows what you built. **Why it
 
 ## How AIM answers these 
 
-AI is part of all [9 modules](https://aiinmarketing.in/#tracks). You work inside the platforms. You finish with a 1-month [agency internship](https://aiinmarketing.in/#bonus) and a certificate from that agency. It costs ₹5,999 without tool access or ₹9,999 with tool access, and both include the agency internship. See the [fee](https://aiinmarketing.in/#bonus), the [curriculum](https://aiinmarketing.in/#tracks) and the [trainers](https://aiinmarketing.in/#trainers), then compare with anything else on your list. 
+AI is part of all [9 modules](https://aiinmarketing.in/#tracks). You work inside the platforms. You finish with a 1-month [agency internship](https://aiinmarketing.in/#bonus) and a certificate from that agency. It costs ₹5,999 with limited tool access or ₹9,999 with full tool access, and both include the agency internship. See the [fee](https://aiinmarketing.in/#bonus), the [curriculum](https://aiinmarketing.in/#tracks) and the [trainers](https://aiinmarketing.in/#trainers), then compare with anything else on your list. 
 
 ## A simple scorecard you can use with any institute 
 
@@ -684,7 +684,7 @@ Price is not a quality score in either direction. A higher fee is fair if it pay
 
 ## Why we published our own answers 
 
-We would rather you check us against the same seven questions. AI sits inside all nine modules, learners practise inside real tools and the program ends with a one-month agency internship. Our trainers have public LinkedIn profiles, and the fee is ₹5,999 without tool access or ₹9,999 with it, paid after your onboarding call. If another program answers these better, choose it. The goal is that you spend your money well.
+We would rather you check us against the same seven questions. AI sits inside all nine modules, learners practise inside real tools and the program ends with a one-month agency internship. Our trainers have public LinkedIn profiles, and the fee is ₹5,999 with limited tool access or ₹9,999 with full tool access, paid after your onboarding call. If another program answers these better, choose it. The goal is that you spend your money well.
 
 ## Frequently asked questions
 

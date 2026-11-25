@@ -74,7 +74,7 @@ const CITIES = [
     projects: ['A growth plan for a SaaS product: SEO, content, paid ads and a lead-to-CRM workflow', 'A D2C launch plan with a media plan, creative tests and conversion tracking', 'An AI-assisted content engine for a brand with a fixed voice'],
     seo: 'a technical SEO audit and topic cluster plan for a SaaS site',
     nearby: ['chennai', 'hyderabad', 'kochi'],
-    faq: ['Bangalore has many institutes. Why consider an online course?', 'Our fee is ₹5,999 or ₹9,999 with tool access, against listed fees of ₹25,000 to ₹1.64 lakh for programs we compared in October 2026. Compare syllabus, tools and who issues the certificate before you decide.'] },
+    faq: ['Bangalore has many institutes. Why consider an online course?', 'Our fee is ₹5,999 or ₹9,999 with full tool access, against listed fees of ₹25,000 to ₹1.64 lakh for programs we compared in October 2026. Compare syllabus, tools and who issues the certificate before you decide.'] },
   { slug: 'coimbatore', name: 'Coimbatore', vol: 2900, state: 'Tamil Nadu',
     industries: 'Coimbatore is a manufacturing and textile city with engineering workshops, pump and motor makers, a strong base of small and medium businesses, and several colleges. Many of these firms sell to other businesses and are only starting to build a web presence.',
     projects: ['A B2B enquiry funnel for a pump, motor or machine-parts maker, with a simple website and Google Ads', 'A catalogue and WhatsApp plan for a textile or garment seller', 'A local SEO plan for a hospital or school'],

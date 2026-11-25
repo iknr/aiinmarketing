@@ -2,20 +2,20 @@
   "brochure": {
     "source": "tools/pdf-src/brochure.htm",
     "pdf": "wp-content/uploads/2026/11/guides/aim-program-brochure.pdf",
-    "sourceSha256": "e6f371b12de1539fa75b7e075a855230e764a5f5f4f3487525205be171ea8770",
-    "pdfSha256": "763f110b917a995046218123cce8f2d526542e98b362f4cdaf787355ea24b1b1"
+    "sourceSha256": "a866fbf3a5f33a309a4bb69ee3c242e5185c6dc0d4876d93f85bc8638f3120e5",
+    "pdfSha256": "b65d229fde6ef3edf8f7fe6be394d4799cc03038689e2d96d5bab5dc246086f1"
   },
   "syllabus": {
     "source": "tools/pdf-src/syllabus.htm",
     "pdf": "wp-content/uploads/2026/11/guides/aim-12-week-syllabus.pdf",
-    "sourceSha256": "22ea98db9b4049833e6bf7f60558e5463af36601f1b9726cb6b934d7fe97e119",
-    "pdfSha256": "e4166f7a256e642b5a9978e33e170f4bdca57b629fd394430e759f40d144c39f"
+    "sourceSha256": "185b640d738654735bb357c29476dd1ec681fdb631aab56cf05336fe576160dc",
+    "pdfSha256": "87546daebbaabe3cfc0a6c60998f2b32abce2f6e98c18bd9c3b6c4a93a4b2d6c"
   },
   "checklist": {
     "source": "tools/pdf-src/checklist.htm",
     "pdf": "wp-content/uploads/2026/11/guides/how-to-choose-a-digital-marketing-course.pdf",
-    "sourceSha256": "1313a1b3422d0f6f49ecea48409533d9e01b5dde5e76a3c9e55e3e5970c8ab64",
-    "pdfSha256": "bd8029d9d3c9d1cd7aa2c78c8d90b5f51be9b881ffbdcb16fe6ccfbdf38f0d30"
+    "sourceSha256": "b433fc97ca936ab34b93e9608af9aa618e873a64a8afef0bad9e4c4aba6e0f4e",
+    "pdfSha256": "5e3072e74bbf03dcf484565ef6be55c3d796a00889ac29eab3c90aa44c327058"
   },
   "legacy": {
     "_note": "No HTML source exists for these four PDFs. Footer line patched on 2026-11-14 (from Rs 5,999, old all-inclusive wording removed from the text layer). Any change needs a rebuilt source in tools/pdf-src, then move the entry into the jobs list.",
@@ -39,7 +39,7 @@
   "portfoliokit": {
     "source": "tools/pdf-src/portfoliokit.htm",
     "pdf": "wp-content/uploads/2026/11/guides/digital-marketing-portfolio-kit.pdf",
-    "sourceSha256": "15eb2087c5916e705740c63c4bb4b299c7b01d791f0d00db8a73e4379c63cff2",
-    "pdfSha256": "eb7f73aa5751dec421ee12a9ec13af3dcadef6878935225d10f627d8884fbb6c"
+    "sourceSha256": "8021fcb02b417c62568a968e580a592b7a7ada5c5309f0b7c50ebf3ae7cfa9cc",
+    "pdfSha256": "5b593d0003f28d444b92c76b870f9dc5528649debc50f9b6e62fd1bc78181403"
   }
 }

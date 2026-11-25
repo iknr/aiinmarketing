@@ -36,7 +36,7 @@
     'Hi, welcome to AIM.',
     'Most marketing courses teach AI as one chapter at the end. We teach it in every module, so you finish able to do the work, not just talk about it.',
     'From week 1 you practise inside the real tools. Then you spend a month at a partner agency and leave with a portfolio and an internship certificate.',
-    'The program is ₹5,999 without tool access, or ₹9,999 with tool access. The training, 4 specialisations and agency internship are the same in both plans. You pay only after your onboarding call, once your questions are answered, and a 7-day money-back guarantee applies.',
+    'The program is ₹5,999 with limited tool access, or ₹9,999 with full tool access. The training, 4 specialisations and agency internship are the same in both plans. You pay only after your onboarding call, once your questions are answered, and a 7-day money-back guarantee applies.',
     'Would you like to see what is included?'
   ];
 

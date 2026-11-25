@@ -38,13 +38,13 @@
     menu: { say: ['What would you like to know?'], options: MENU },
     fees: {
       say: ['There are two plans. The training is the same in both.',
-        '₹5,999 without tool access, or ₹9,999 with tool access.',
+        '₹5,999 with limited tool access, or ₹9,999 with full tool access.',
         'Both include all 9 modules and the 4 specialisations, the 1-month agency internship with a certificate, a portfolio site with domain and hosting, and a CV rewrite with 3 mock interviews. There are no other add-ons.'],
       options: [{ label: 'What is tool access?', to: 'tools' }, { label: 'Payment and refund', to: 'payment' }, APPLY, BACK]
     },
     tools: {
-      say: ['The ₹9,999 plan adds access to Claude, Semrush, Gemini Pro, Google AI Pro, Ahrefs, SpyFu, Ubersuggest and Canva.',
-        'The ₹5,999 plan has no tool access. You still learn the same way, inside the real platforms where you have access. The exact access dates are confirmed on your onboarding call.'],
+      say: ['The ₹9,999 plan adds access to Claude, Semrush, Gemini Pro, Google AI Pro, Ahrefs, SpyFu, Ubersuggest and Canva. Only this plan includes live ad experience on an agency or brand account with a real ad budget.',
+        'The ₹5,999 plan has limited tool access (Spectra Pro, Elementor Pro, Canva and Semrush, plus domain and hosting). Claude, Google AI Pro and live ad experience with a real ad budget are not in it. You still learn the same way, inside the real platforms where you have access. The exact access dates are confirmed on your onboarding call.'],
       options: [{ label: 'What does it cost?', to: 'fees' }, APPLY, BACK]
     },
     learn: {

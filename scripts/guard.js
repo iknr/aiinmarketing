@@ -460,7 +460,7 @@ const INVARIANTS = [
       let manifest;
       try { manifest = JSON.parse(read(mf)); } catch (e) { return [`${mf} is not valid JSON.`]; }
       const { sourceHash, fileHash } = require(path.join(ROOT, 'tools/pdf-src/hash.js'));
-      const required = { brochure: 'wp-content/uploads/2026/11/guides/aim-program-brochure.pdf', syllabus: 'wp-content/uploads/2026/11/guides/aim-12-week-syllabus.pdf', checklist: 'wp-content/uploads/2026/11/guides/how-to-choose-a-digital-marketing-course.pdf' };
+      const required = { brochure: 'wp-content/uploads/2026/11/guides/aim-program-brochure.pdf', syllabus: 'wp-content/uploads/2026/11/guides/aim-12-week-syllabus.pdf', checklist: 'wp-content/uploads/2026/11/guides/how-to-choose-a-digital-marketing-course.pdf', portfoliokit: 'wp-content/uploads/2026/11/guides/digital-marketing-portfolio-kit.pdf' };
       const banned = [[/all[- ]inclusive/i, 'all-inclusive'], [/\b(one|a) flat (fee|price)|flat (fee|₹|rs)|₹\s?5,999 flat/i, 'flat fee'], [/pro tools/i, 'pro tools'], [/ad spend (is |was )?(covered|included)|portfolio ad spend|portfolio live ads/i, 'ad spend covered'], [/canva pro/i, 'Canva Pro'], [/no tiers/i, 'no tiers']];
       for (const [name, pdf] of Object.entries(required)) {
         const e = manifest[name];
@@ -473,7 +473,7 @@ const INVARIANTS = [
         if (fileHash(abs(pdf)) !== e.pdfSha256) p.push(`${pdf} does not match the manifest: it was edited or replaced without its source. Change tools/pdf-src/${name}.htm and rebuild with node tools/build-pdfs.js ${name}.`);
         const txt = visibleText(read(srcFile));
         for (const [re, label] of banned) if (re.test(txt)) p.push(`${srcFile}: contains the retired claim "${label}". The only plans are Rs 5,999 without tool access and Rs 9,999 with tool access.`);
-        if (name === 'brochure' || name === 'syllabus' || name === 'checklist') for (const price of ['5,999', '9,999']) if (!txt.includes(price)) p.push(`${srcFile}: must state the ${price} plan.`);
+        if (name === 'brochure' || name === 'syllabus' || name === 'checklist' || name === 'portfoliokit') for (const price of ['5,999', '9,999']) if (!txt.includes(price)) p.push(`${srcFile}: must state the ${price} plan.`);
       }
       for (const [n, e] of Object.entries(manifest.legacy || {})) {
         if (n.startsWith('_')) continue;

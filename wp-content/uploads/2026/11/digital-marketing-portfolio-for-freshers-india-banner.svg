@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="A one-page case study with a problem, steps and a before and after result, next to a six-project checklist">
+<title>A one-page case study with a problem, steps and a before and after result, next to a six-project checklist</title>
+<style>text{font-family:'Plus Jakarta Sans','Segoe UI',Arial,sans-serif}
+@keyframes rise{0%{transform:scaleY(.2)}60%,100%{transform:scaleY(1)}}
+.bar{transform-box:fill-box;transform-origin:bottom;animation:rise 2.2s ease-out both}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}</style>
+<defs><pattern id="g" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0V48" fill="none" stroke="#fff" stroke-opacity=".06"/></pattern>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0f1b3d"/><stop offset="1" stop-color="#14286b"/></linearGradient></defs>
+<rect width="1200" height="630" fill="url(#bg)"/><rect width="1200" height="630" fill="url(#g)"/>
+<circle cx="1080" cy="60" r="220" fill="#0b4fd6" opacity=".35"/><circle cx="80" cy="600" r="160" fill="#ffd43b" opacity=".13"/>
+<g transform="translate(60 70)"><rect width="190" height="40" rx="20" fill="#ffd43b"/><text x="95" y="27" text-anchor="middle" font-size="18" font-weight="800" fill="#0f1b3d">FREE KIT</text></g>
+<text x="60" y="200" font-size="58" font-weight="800" fill="#fff">Digital Marketing</text>
+<text x="60" y="266" font-size="58" font-weight="800" fill="#fff">Portfolio Kit</text>
+<text x="60" y="320" font-size="26" fill="#b8c4e0">6 projects, a case study template,</text>
+<text x="60" y="354" font-size="26" fill="#b8c4e0">and a 14-day plan. No client needed.</text>
+<g transform="translate(60 410)" font-size="22" fill="#e6ecfa" font-weight="700">
+<rect width="34" height="34" rx="8" fill="#0b57e6"/><text x="17" y="25" text-anchor="middle" fill="#fff">1</text><text x="48" y="25">Pick two projects</text>
+<g transform="translate(0 50)"><rect width="34" height="34" rx="8" fill="#0b57e6"/><text x="17" y="25" text-anchor="middle" fill="#fff">2</text><text x="48" y="25">Show a number and a date</text></g>
+<g transform="translate(0 100)"><rect width="34" height="34" rx="8" fill="#0b57e6"/><text x="17" y="25" text-anchor="middle" fill="#fff">3</text><text x="48" y="25">Say what went wrong</text></g></g>
+<g transform="translate(700 90)"><rect width="440" height="450" rx="22" fill="#fff"/>
+<text x="30" y="52" font-size="20" font-weight="800" fill="#0b57e6">CASE STUDY, ONE PAGE</text>
+<text x="30" y="92" font-size="24" font-weight="800" fill="#0b1b3d">Rs 500 ad test, 2 creatives</text>
+<rect x="30" y="110" width="380" height="2" fill="#e6ecf8"/>
+<text x="30" y="146" font-size="17" fill="#46506b">Problem: 9 of 40 seats sold</text>
+<text x="30" y="176" font-size="17" fill="#46506b">Did: 2 first lines, 5 days</text>
+<text x="30" y="214" font-size="17" font-weight="800" fill="#0b1b3d">Cost per chat</text>
+<rect class="bar" x="30" y="232" width="150" height="150" rx="8" fill="#c7d2ea"/><text x="105" y="410" text-anchor="middle" font-size="18" fill="#46506b">Price line Rs 36</text>
+<rect class="bar" x="230" y="292" width="150" height="90" rx="8" fill="#0b57e6"/><text x="305" y="410" text-anchor="middle" font-size="18" font-weight="800" fill="#0b1b3d">Skill line Rs 23</text>
+<rect x="30" y="422" width="150" height="0" fill="none"/></g>
+</svg>

@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /* Rebuilds the downloadable guide PDFs from their HTML sources in tools/pdf-src/ and records hashes in
  * tools/pdf-src/manifest.json (the build guard compares them, so a source edit without a rebuild fails the build).
- * Usage: node tools/build-pdfs.js [brochure|syllabus|checklist ...]   (no argument = all)
+ * Usage: node tools/build-pdfs.js [brochure|syllabus|checklist|portfoliokit ...]   (no argument = all)
  * Needs Playwright with Chromium (same as tools/test-attribution.js) and the Inter font installed for the intended look.
  * The brochure cover image is rebuilt too: wp-content/uploads/2026/11/guides/aim-program-brochure-cover.webp (needs pdftoppm + Pillow, optional). */
 const fs = require('fs');
@@ -14,6 +14,7 @@ const JOBS = {
   brochure: { pdf: 'aim-program-brochure.pdf' },
   syllabus: { pdf: 'aim-12-week-syllabus.pdf' },
   checklist: { pdf: 'how-to-choose-a-digital-marketing-course.pdf' },
+  portfoliokit: { pdf: 'digital-marketing-portfolio-kit.pdf' },
 };
 (async () => {
   const names = process.argv.slice(2).length ? process.argv.slice(2) : Object.keys(JOBS);

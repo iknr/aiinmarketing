@@ -2046,3 +2046,279 @@ Repeat the checks monthly. Small, steady updates beat one big rewrite.
 
 Points about Google are paraphrased from the pages above. Google may update its guidance, so check the pages for the latest. Last checked 18 November 2026.
 
+# Digital Marketing Portfolio for Freshers: Six Projects, a Template and a Free Kit
+
+URL: https://aiinmarketing.in/blogs/digital-marketing-portfolio-for-freshers-india
+Author: Kailas Nath R
+Co-author: Kautilya Roshan
+Published: 2026-11-26
+Summary: Build a digital marketing portfolio with no client. Six projects, a one-page case study template, a 14-day plan and a free PDF kit for freshers in India.
+
+Most fresher portfolios get skipped in under a minute. They list tools, show a few posts and prove nothing. This guide shows what a person reviewing 40 applications actually looks for, six projects you can finish without a client, a one-page case study template and a 14-day plan. The whole kit is also a free download.
+
+Key takeawaysA portfolio is proof that you can get a result. A list of tools is not proof.
+Every case study needs a problem, your steps, a number with a date, and what went wrong.
+You do not need a client. You need honest labels: own project, practice with permission, or paid work.
+Two finished projects beat six half-done ones. Finish two in 14 days, then publish.
+
+Short answerBuild two small projects with real numbers, write each one on a single page using the template below, label them honestly and put them behind one link. Put that link in your resume and your LinkedIn Featured section. That is a better portfolio than most freshers send.
+
+Get the free Portfolio Kit (PDF)
+
+In this guideWhy most fresher portfolios get skipped
+What a reviewer looks for in 60 seconds
+What to do when you have no client
+Six projects you can finish without a client
+The one-page case study template
+A worked sample
+Where to put it
+How to show AI work honestly
+Questions you will get about your projects
+A 14-day plan
+Mistakes that make a portfolio weaker
+People also ask
+Sources and how we checked them
+
+Why most fresher portfolios get skipped
+
+Think about the person on the other side. They have a stack of applications and a list of open roles. They open your link, give it a few seconds and decide whether to keep reading. I have seen this from both sides, as a trainer who reviews student work and as someone who has sat through a lot of weak portfolios. The pattern is the same almost every time.
+
+The page opens with a line like "passionate digital marketer". Then comes a row of logos for tools the person has opened once. Then three screenshots of Instagram posts with no context, and a contact form. Nothing on the page tells the reader what the person did, why they did it or what changed because of it.
+
+That is the real problem. It is not that freshers lack experience. It is that the page does not show thinking. A reviewer cannot tell if you made the work yourself, if it worked, or if you would know what to do next. So they move on.
+
+What a reviewer looks for in 60 seconds
+
+There are four things. If your page has all four, you are already ahead of most applicants.
+
+A clear problem. Who was this for and what were they trying to do? "Grow Instagram" is not a problem. "A bakery with 300 followers and no online orders" is.
+
+What you actually did. Three to five steps in plain words. Not "SEO, SEM, SMM". Say what you changed and why you changed it.
+
+A number, or a before and after. Small is fine. 41 clicks from a Rs 500 test is real. A dated screenshot is proof. A claim without a number is just a claim.
+
+What you would change. This one surprises people. A fresher who can say what went wrong sounds more believable than one whose every project "went viral". It shows judgement, and judgement is what a team hires for.
+
+Notice what is not on the list: tool logos, certificate badges, and a long skills bar. Those are fine as a small footer. They are not the portfolio.
+
+What to do when you have no client
+
+This is where most people stop, and it is the easiest problem to solve. You do not need a paying client to show real work. You need a real situation and an honest label.
+
+Your options, from easiest to hardest:
+
+Your own project. A small site, a newsletter, a niche page. You control everything, so you can test freely.
+
+A local shop or a friend's small business, with permission. Many owners are happy to let a student look at their Google listing or run a tiny test. Get a yes in writing, even a message is enough.
+
+A community event or a college club. A workshop with 40 seats and a deadline is a real goal with a real number.
+
+Paid work. If you get it, great. Label it clearly and show only what the client allows.
+
+Three honesty rules that protect you
+
+Label every project. Write "own project", "practice with permission" or "paid work" on each one, with the month and year. Never present practice work as paid client work. If someone checks, it ends the conversation and your credibility with it.
+
+Use accounts the business owns. If you run ads for someone, they should create the ad account and add you as a partner. If you run it from your own account, the proof disappears when you stop and the owner has no history. I wrote about the cost of getting this wrong in the case study on who owns your ad account.
+
+Hide private data. Blur customer names, phone numbers and any spend figure you were asked to keep private.
+
+Six projects you can finish without a client
+
+Each of these takes 3 to 7 days and ends with something you can screenshot. Pick the ones that match the role you want. The full kit has the same six with a ready checklist for each.
+
+1. A local search audit for a real shop
+
+Pick a local business with a weak Google Business Profile. Check the name, category, hours, photos, reviews and how the shop shows up for five searches a customer would type. Write down ten findings and rank them by impact. If the owner agrees, make the fixes and note the dates.
+
+Proof to show: the ten findings as a one-page PDF, and before and after screenshots with dates if you made changes. Good interview line: "I found three fixes that mattered most and put them first, because the shop had no time for ten."
+
+2. A small site that ranks for one narrow search
+
+Build a five-page site around one narrow topic, for example digital marketing for dentists in Kochi. Pick five to ten low-competition phrases, write one page for each and add the site to Google Search Console. Wait four weeks and look at which queries show impressions.
+
+Proof to show: the Search Console performance chart with dates. Even 50 impressions counts, because it shows the work was found. Show what you changed after week two. Good interview line: "The first draft got no impressions, so I rewrote two titles to match how people search, and one page started showing."
+
+3. A Rs 500 paid ads test with two creatives
+
+Run a tiny ad test for a real offer, such as a workshop or a friend's shop. Set one goal, and make it leads, not likes. Make two creatives that differ in only one thing, such as the first line. Run both for five days at Rs 100 a day and record the cost per lead.
+
+Proof to show: a dated screenshot of results, your test setup and a paragraph on why the winner won. Good interview line: "Creative B cost less per lead, but only nine leads came in, so I would not call it final. I would retest with more budget." That sentence shows you understand sample size, which many experienced people forget.
+
+4. A five-message follow-up sequence
+
+Write a WhatsApp or email sequence for people who enquired and then went quiet. Map the five common reasons: price, timing, trust, confusion, forgot. Write one message per reason. Send them to ten real people who agreed to help, or use a friend's enquiry list with permission, and count the replies.
+
+Proof to show: the five messages, who each one is for, the reply count and the one message you would delete.
+
+5. One weekly task handed to AI, with a human check
+
+Pick a task that repeats, like a weekly ad report draft, a competitor ad scan or a content calendar. Time it by hand first. Then build a repeatable AI workflow for it: a prompt with a role, task, context and output format. Run it on three weeks of data, list what the AI got wrong and add a review step before anything goes to a client.
+
+Proof to show: time before and after, the prompt, three outputs and the list of errors you caught. Good interview line: "It saved about 40 minutes a week, but it made up a number twice, so a person approves every report." For a prompt structure you can copy, see the RTCROS prompt guide.
+
+6. A 12-post content series with a result
+
+Publish 12 posts for one narrow audience and test three hook styles across them. After three weeks, rank the posts by saves and comments, not likes. Write down what the top two have in common.
+
+Proof to show: the 12-post table with numbers, the best and worst post side by side, and your next six posts based on what you learned.
+
+Which two to start with
+
+Aiming at an SEO or content role: start with 2 and 6. Aiming at paid ads: start with 3 and 5. Aiming at an agency or client role: start with 1 and 4. Not sure yet: start with 1 and 3, because both finish fast and show results.
+
+Get the six projects as a PDF
+
+The one-page case study template
+
+One case study, one page, every row filled. This is the part that turns work into proof.
+
+Title. What changed, in one line. Example: "Cut cost per lead for a local workshop from Rs 210 to Rs 130 in five days".
+
+Label. Own project, practice with permission, or paid work, with month and year.
+
+The problem. Who it was for, what they wanted and what was not working. Two sentences.
+
+What I did. Three to five steps in plain words. Include the one decision you are proudest of.
+
+Tools. Only the tools you really used.
+
+Result. Numbers with the date range and where they came from. If the sample is small, say so.
+
+What went wrong. One thing that failed and what you did next.
+
+What I would do next. One test you would run with more time or budget.
+
+Proof. The screenshots, files or links, each with a date.
+
+A worked sample
+
+The numbers below are made up to show the format. Use your own, and never copy these as if they were real results.
+
+Two ad creatives, one workshop, Rs 500 budgetLabel: practice with permission, November 2026.Problem: A weekend photography workshop had 40 seats and 9 sign-ups, and the organiser had only posted organically.What I did: Ran two Meta ads for five days at Rs 100 a day. Same photo, different first line. One was about the price, the other about the skill gained. Clicks went to a WhatsApp chat.Result: The price line brought 14 chats at Rs 36 each. The skill line brought 22 chats at Rs 23 each. Eight chats became sign-ups.What went wrong: Four people asked for the venue address, which was missing from the ad. I added it on day three.Next: Test a video testimonial against the photo with a Rs 1,500 budget.Proof: Three dated screenshots, both creatives and the chat count sheet.
+
+Read it again and notice what it does not have. There is no claim that the ad "went viral" and no claim that it "boosted engagement". It says what happened, in numbers, and admits one thing went wrong. That is exactly what makes it believable.
+
+Where to put it
+
+Keep it simple. One link, one page, easy to open on a phone.
+
+One link to share. A simple site, a Notion page or a public document all work. The tool matters less than the page opening fast.
+
+The first screen. Two lines: who you are, what you do and who you help. Then your best case study, right away.
+
+Two to four case studies. Not twelve. Best one first.
+
+A PDF copy. Some recruiters ask for an attachment. Keep a PDF of the same page ready.
+
+Your resume and LinkedIn. Put the link in your resume header and in the LinkedIn Featured section.
+
+Update it. Show the month it was last updated, and refresh it at least every 90 days.
+
+Post one case study on LinkedIn as a short story, lesson first. A post that says "my first ad test failed, here is why" often gets more attention than a polished success story, and it brings people to your page.
+
+How to show AI work honestly
+
+Everyone uses AI now, and reviewers know it. Hiding it looks worse than showing it. What they want to know is simple: what did the AI do, what did you do and how do you know the output was right?
+
+For any project where AI helped, add three short lines: the task you gave it, what you checked by hand and one error you caught. That last line matters most. A person who can find the mistakes in AI work is more useful to a team than one who only produces more of it. This also holds up in an interview, because you can talk about it without guessing.
+
+If you want to go deeper on this, our guide on AI advertising mistakes that can cost you a client lists the errors worth looking for.
+
+Questions you will get about your projects
+
+When you share a portfolio, the interview usually starts from it. Be ready for these ten. A short answer for each is in the kit, but think about your own before you open it.
+
+Why did you pick this project?
+What did not work?
+How do you know your work caused the result?
+What was the budget, and who paid?
+Walk me through the numbers.
+What would you do with Rs 50,000?
+Which part did AI do?
+What would you do differently?
+What did the client or owner think?
+What did you learn that surprised you?
+
+The strongest answers are small and specific. "I would test the first line before anything else, because the two creatives only differed there" beats a long answer about strategy.
+
+A 14-day plan
+
+This is for a part-time pace, about an hour and a half a day.
+
+Day 1. Pick two projects and an audience for each. Write the label for both.
+
+Day 2. Set up your tools and tracking. Create a spreadsheet for the numbers. Take "before" screenshots with dates.
+
+Days 3 to 5. Project A: do the work and start the test or audit. Log numbers every day.
+
+Days 6 to 8. Project B: do the work. Keep logging both.
+
+Day 9. Check results. Write down what went wrong in each project while you still remember it clearly.
+
+Days 10 and 11. Write both case studies with the template. Cut every sentence that has no number or no step.
+
+Day 12. Build the one page that holds them.
+
+Day 13. Ask one person to read it for 60 seconds and tell you what they remember. Fix what they missed.
+
+Day 14. Publish. Add the link to your resume and post one case study on LinkedIn.
+
+After day 14, apply with the link in your first line. In every message, name the one case study closest to the role and say which number moved.
+
+Mistakes that make a portfolio weaker
+
+Too many projects. Twelve thin ones look worse than three solid ones.
+
+No dates. A screenshot without a date proves nothing.
+
+Only success stories. If nothing ever went wrong, the reviewer wonders if you are leaving something out.
+
+Passing off practice as client work. It gets caught, and it costs more than any gain.
+
+Stock photos and vague claims. "Boosted engagement" tells nobody anything.
+
+A slow, hard-to-open page. If it does not load on a phone in a couple of seconds, many people will not wait.
+
+Waiting until it is perfect. Publish after two projects. You can add the third later.
+
+If you are still choosing a learning path, our guides on how to get a digital marketing internship and whether digital marketing is a good career cover the steps before and after the portfolio. We do not promise anyone a job, and no portfolio can either. It gives you better proof, and better proof gives you better conversations.
+
+People also ask
+What should a digital marketing portfolio include?
+
+Two to four case studies, each with the problem, your steps, a number with a date range, what went wrong and what you would do next. Add a short line about who you help, a working contact and a PDF copy.
+
+How do I build a digital marketing portfolio with no experience?
+
+Use your own project, a local shop with permission, a college club or a small event. Run a small audit, test or content series, record real numbers and label each project honestly as own, practice or paid work.
+
+How many projects do I need in my portfolio?
+
+Two finished projects are enough to start. Publish them, then add more over time. Three solid case studies look stronger than a dozen thin ones.
+
+Can I use made-up or practice projects?
+
+Practice projects are fine if you say so and use real data you collected. Never present a practice project as paid client work or invent results.
+
+Do I need a website for my portfolio?
+
+Not necessarily. A single page that opens fast on a phone is enough, whether it is a small site, a Notion page or a public document. Keep a PDF copy for recruiters who ask for attachments.
+
+How do I show AI work in my portfolio?
+
+State the task you gave the AI, what you checked by hand and one error you caught. Reviewers value the person who verifies the output more than the person who only generates it.
+
+How long does it take to build a portfolio?
+
+Two projects and one page can be finished in about 14 days at a part-time pace. Search projects need an extra few weeks to show results in Search Console.
+
+Sources and how we checked them
+
+Search and local listing tasks follow Google's own help centres: Google Search Console Help and Google Business Profile Help.
+
+Paid test setup follows Meta's documentation: Meta Business Help Centre.
+
+Course schedule, internship, plans and refund rule: digital marketing course page.
+
+This guide contains no outside statistics and no salary figures. The projects, template and plan come from our experience reviewing learner work. The example numbers are made up to show a format. We run one of the programs mentioned, and the kit is free whether or not you join it. Last checked 26 November 2026.

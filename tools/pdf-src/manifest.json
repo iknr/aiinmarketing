@@ -35,5 +35,11 @@
       "pdf": "wp-content/uploads/2026/11/guides/rtcros-prompt-guide-for-marketers.pdf",
       "pdfSha256": "050507ed9084d8e09c5fd1f8855ff2dde77d595214f5e1d32bfbbaaded4c9c6e"
     }
+  },
+  "portfoliokit": {
+    "source": "tools/pdf-src/portfoliokit.htm",
+    "pdf": "wp-content/uploads/2026/11/guides/digital-marketing-portfolio-kit.pdf",
+    "sourceSha256": "15eb2087c5916e705740c63c4bb4b299c7b01d791f0d00db8a73e4379c63cff2",
+    "pdfSha256": "eb7f73aa5751dec421ee12a9ec13af3dcadef6878935225d10f627d8884fbb6c"
   }
 }

@@ -44,11 +44,13 @@ const FORM_LABELS = {
   magnet_checklist: 'Free guide: 5-question course checklist',
   magnet_ad_account: 'Free guide: ad account ownership checklist',
   magnet_brochure: 'Brochure download',
+  magnet_portfolio_kit: 'Free guide: Digital marketing portfolio kit',
 };
 const SOURCE_LABELS = {
   'magnet-rtcros-prompt-guide': 'Free guide: RTCROS prompt guide',
   'magnet-meta-mcp-cli-sop': 'Free guide: Meta Ads MCP and CLI SOP',
   'magnet-ai-announcement-checklist': 'Free guide: AI announcement checklist',
+  'magnet-portfolio-kit': 'Free guide: Digital marketing portfolio kit',
 };
 
 // Module-scope state (best effort: per warm serverless instance only).

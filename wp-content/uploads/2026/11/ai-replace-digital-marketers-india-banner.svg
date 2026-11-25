@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-label="Two columns: routine tasks AI now drafts, and judgement skills that stay with people">
+<title>Two columns: routine tasks AI now drafts, and judgement skills that stay with people</title>
+<style>text{font-family:'Plus Jakarta Sans','Segoe UI',Arial,sans-serif}</style>
+<defs><linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#0f1b3d"/><stop offset="1" stop-color="#14286b"/></linearGradient></defs>
+<rect width="1200" height="630" fill="url(#bg)"/>
+<circle cx="1080" cy="60" r="220" fill="#0b4fd6" opacity=".35"/><circle cx="80" cy="600" r="160" fill="#ffd43b" opacity=".13"/>
+<g transform="translate(60 70)"><rect width="250" height="40" rx="20" fill="#ffd43b"/><text x="125" y="27" text-anchor="middle" font-size="18" font-weight="800" fill="#0f1b3d">2026 GUIDE</text></g>
+<text x="60" y="200" font-size="56" font-weight="800" fill="#fff">Will AI Replace</text>
+<text x="60" y="264" font-size="56" font-weight="800" fill="#fff">Digital Marketers?</text>
+<text x="60" y="320" font-size="26" fill="#b8c4e0">What is going, what stays, and how</text>
+<text x="60" y="354" font-size="26" fill="#b8c4e0">to judge any course at any price.</text>
+<g transform="translate(640 80)"><rect width="500" height="470" rx="22" fill="#fff"/>
+<text x="30" y="52" font-size="20" font-weight="800" fill="#0b57e6">AI DRAFTS NOW</text>
+<text x="30" y="90" font-size="20" fill="#46506b">First drafts, keyword groups,</text><text x="30" y="118" font-size="20" fill="#46506b">report summaries, variations</text>
+<rect x="30" y="150" width="440" height="2" fill="#e6ecf8"/>
+<text x="30" y="200" font-size="20" font-weight="800" fill="#0b1b3d">PEOPLE STILL OWN</text>
+<text x="30" y="240" font-size="20" fill="#46506b">1. Setting the goal</text><text x="30" y="274" font-size="20" fill="#46506b">2. Planning a test</text>
+<text x="30" y="308" font-size="20" fill="#46506b">3. Checking AI output</text><text x="30" y="342" font-size="20" fill="#46506b">4. Reading results honestly</text>
+<text x="30" y="376" font-size="20" fill="#46506b">5. Explaining the decision</text>
+<rect x="30" y="404" width="440" height="40" rx="10" fill="#0b57e6"/><text x="250" y="431" text-anchor="middle" font-size="18" font-weight="800" fill="#fff">Build these. Use AI for the rest.</text></g>
+</svg>

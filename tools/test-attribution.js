@@ -204,6 +204,37 @@ test('phase 1: Clarity ids come from clarity("metadata") when the cookies are no
   await ctx.close();
 });
 
+test('phase 2: GA4 events (form_start, whatsapp_click, scroll_50) and page_type on a city page', async (browser) => {
+  const { ctx, page, problems } = await newPage(browser);
+  await page.goto(BASE + '/digital-marketing-course/surat.html');
+  await page.evaluate(() => { window.dataLayer = window.dataLayer || []; });
+  await page.locator('form.aim-magnet-form input[name="form_fields[name]"], form.aim-magnet-form input[type="text"]').first().focus();
+  await page.evaluate(() => {
+    const a = document.createElement('a'); a.href = 'https://wa.me/919611628535'; a.textContent = 'WhatsApp'; a.id = 'wa-test';
+    a.addEventListener('click', (e) => e.preventDefault()); document.body.appendChild(a); a.click();
+    window.scrollTo(0, document.documentElement.scrollHeight);
+  });
+  await page.waitForTimeout(400);
+  const ev = await page.evaluate(() => window.dataLayer.filter((x) => x && x.event).map((x) => ({ event: x.event, page_type: x.page_type || '', form_type: x.form_type || '' })));
+  const has = (n) => ev.find((x) => x.event === n);
+  assert(has('form_start') && has('form_start').page_type === 'city' && has('form_start').form_type === 'guide', JSON.stringify(ev));
+  assert(has('whatsapp_click') && has('whatsapp_click').page_type === 'city', JSON.stringify(ev));
+  assert(has('scroll_50') && has('scroll_50').page_type === 'city', JSON.stringify(ev));
+  assert.strictEqual(ev.filter((x) => x.event === 'scroll_50').length, 1);
+  assert.deepStrictEqual(problems, []);
+  await ctx.close();
+});
+
+test('phase 2: no scroll_50 on blog pages, page types resolve', async (browser) => {
+  const { ctx, page } = await newPage(browser);
+  await page.goto(BASE + '/index.html');
+  await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
+  await page.waitForTimeout(300);
+  const ev = await page.evaluate(() => window.dataLayer.map((x) => x && x.event));
+  assert(!ev.includes('scroll_50'), 'home page must not fire scroll_50');
+  await ctx.close();
+});
+
 test('no horizontal overflow at 390px and GTM loader present once', async (browser) => {
   const { ctx, page } = await newPage(browser);
   await page.setViewportSize({ width: 390, height: 800 });

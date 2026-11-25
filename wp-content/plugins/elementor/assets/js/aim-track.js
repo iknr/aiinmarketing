@@ -1,7 +1,7 @@
 /*! AIM event helper: pushes conversion events to the GTM dataLayer.
  *  Also captures campaign attribution (utm_*, click ids, referrer host, landing path) and adds it to form submissions,
  *  plus (phase 1) first and last touch in full, channel (ai-chat, paid-search, organic-search, social, ...), full form page URL and Clarity ids.
- *  Events: lead_submit (apply / contact forms), guide_download (free guides), apply_click, buy_click (Amazon), track_click (three-track links). */
+ *  Events (phase 2 adds form_start, form_submit, syllabus_download, whatsapp_click, scroll_50 and page_type): lead_submit (apply / contact forms), guide_download (free guides), apply_click, buy_click (Amazon), track_click (three-track links). */
 (function () {
   'use strict';
   window.dataLayer = window.dataLayer || [];
@@ -77,12 +77,27 @@
       });
     } catch (e) { /* ignore */ }
   }
+  // Phase 2: page type, for GA4 params and Clarity segments (home, city, course, course-pillar, blog, blog-index, author, policy, other).
+  function pageType() {
+    var p = location.pathname.toLowerCase().replace(/\.html$/, '').replace(/\/+$/, '') || '/';
+    if (p === '/' || p === '/index') return 'home';
+    if (p === '/digital-marketing-course' || p === '/digital-marketing-course/index') return 'course-pillar';
+    if (/^\/digital-marketing-course\/[a-z-]+$/.test(p)) return 'city';
+    if (/^\/(ai-digital-marketing-course|vibe-marketing-course|digital-marketing-course-online)$/.test(p)) return 'course';
+    if (p === '/blogs') return 'blog-index';
+    if (/^\/blogs\//.test(p)) return 'blog';
+    if (/^\/author\//.test(p)) return 'author';
+    if (p === '/privacy-policy') return 'policy';
+    return 'other';
+  }
+  function isCoursePage() { var t = pageType(); return t === 'city' || t === 'course' || t === 'course-pillar'; }
   // Tags the Clarity session (filterable under Custom tags) when Clarity is loaded; never throws.
   function tagClarity(vals, submitted) {
     try {
       if (typeof window.clarity !== 'function') return;
       window.clarity('set', 'channel', vals.channel || 'direct');
       window.clarity('set', 'attribution', vals.attribution || 'direct');
+      window.clarity('set', 'page_type', pageType());
       if (vals.ai_model) window.clarity('set', 'ai_model', vals.ai_model);
       if (submitted) { window.clarity('set', 'lead_form', 'yes'); window.clarity('event', 'lead_form_submit'); }
     } catch (e) { /* ignore */ }
@@ -179,8 +194,9 @@
     var tk = a.getAttribute('data-track');
     if (tk) push({ event: 'track_click', track: tk, location: a.getAttribute('data-track-loc') || '', page_path: location.pathname });
     var href = a.getAttribute('href') || '';
-    if (href.indexOf('#elementor-action') === 0) push({ event: 'apply_click', link_text: (a.textContent || '').trim().slice(0, 60), page_path: location.pathname });
+    if (href.indexOf('#elementor-action') === 0) push({ event: 'apply_click', link_text: (a.textContent || '').trim().slice(0, 60), page_path: location.pathname, page_type: pageType() });
     else if (/amazon\./i.test(href)) push({ event: 'buy_click', link_url: href, page_path: location.pathname });
+    if (/^https?:\/\/(wa\.me|api\.whatsapp\.com|(www\.)?whatsapp\.com)\//i.test(href)) push({ event: 'whatsapp_click', link_text: (a.textContent || '').trim().slice(0, 60), page_path: location.pathname, page_type: pageType() });
   }, true);
   function watch(node) {
     if (!node || node.__aimWatched) return;
@@ -192,10 +208,41 @@
       node.__aimFired = node.textContent;
       var src = form.querySelector('[name="form_fields[source]"]');
       var name = (form.querySelector('[name="form_name"]') || {}).value || form.getAttribute('name') || '';
-      if (form.classList.contains('aim-magnet-form')) push({ event: 'guide_download', guide: src ? src.value : name, page_path: location.pathname });
+      var guide = src ? src.value : name;
+      var isGuide = form.classList.contains('aim-magnet-form');
+      if (isGuide) push({ event: 'guide_download', guide: guide, page_path: location.pathname });
       else push({ event: 'lead_submit', form_name: name, page_path: location.pathname });
+      // Phase 2 GA4 events (additive: the events above stay). form_submit is the key event for every successful lead form.
+      var cur = pick();
+      push({ event: 'form_submit', form_name: name, form_type: isGuide ? 'guide' : 'apply', guide: isGuide ? guide : '', page_path: location.pathname, page_type: pageType(), channel: cur.channel || '', ai_model: cur.ai_model || '' });
+      if (isGuide && /syllabus/i.test(guide + ' ' + name)) push({ event: 'syllabus_download', guide: guide, page_path: location.pathname, page_type: pageType() });
     }).observe(node, { attributes: true, attributeFilter: ['class'], childList: true, characterData: true, subtree: true });
   }
+  // form_start: first touch of any lead form field, once per form per page view.
+  document.addEventListener('focusin', function (e) {
+    try {
+      var el = e.target, form = el && el.closest && el.closest('form');
+      if (!form || form.__aimStarted || !isLeadForm(form) || !/^(INPUT|SELECT|TEXTAREA)$/.test(el.nodeName) || el.type === 'hidden') return;
+      form.__aimStarted = true;
+      var nm = (form.querySelector('[name="form_name"]') || {}).value || form.getAttribute('name') || '';
+      push({ event: 'form_start', form_name: nm, form_type: form.classList.contains('aim-magnet-form') ? 'guide' : 'apply', page_path: location.pathname, page_type: pageType() });
+    } catch (err) { /* ignore */ }
+  }, true);
+  // scroll_50: once per page view, course pages only (city, online, pillar, AI and vibe course pages).
+  (function () {
+    if (!isCoursePage()) return;
+    var done = false;
+    function check() {
+      if (done) return;
+      var h = document.documentElement, max = (h.scrollHeight || 0) - (window.innerHeight || 0);
+      if (max > 0 && (window.pageYOffset || h.scrollTop || 0) / max >= 0.5) {
+        done = true;
+        window.removeEventListener('scroll', check);
+        push({ event: 'scroll_50', page_path: location.pathname, page_type: pageType() });
+      }
+    }
+    window.addEventListener('scroll', check, { passive: true });
+  })();
   function scan() { document.querySelectorAll('form .elementor-message, form .aimp-msg').forEach(watch); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', scan); else scan();
 })();

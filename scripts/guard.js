@@ -510,6 +510,22 @@ const INVARIANTS = [
     },
   },
   {
+    id: 'favicon-on-every-page',
+    title: 'Every HTML page links the AIM favicon files (/favicon.ico, /favicon.svg, /apple-touch-icon.png) and the files exist',
+    why: 'Google shows a favicon next to the site in search results only when it is a real crawlable file, not an inline data URI. A page without the links, or a missing icon file, loses the logo in search and in browser tabs.',
+    check() {
+      const p = [];
+      for (const f of ['favicon.ico', 'favicon.svg', 'apple-touch-icon.png']) if (!exists(f)) p.push(`${f} is missing from the site root. Restore it from git history.`);
+      for (const f of htmlFiles()) {
+        const h = tryRead(f) || '';
+        if (!/<link rel="icon" href="\/favicon\.ico"/.test(h)) p.push(`${f}: <link rel="icon" href="/favicon.ico"> missing.`);
+        if (!/<link rel="icon" href="\/favicon\.svg"/.test(h)) p.push(`${f}: <link rel="icon" href="/favicon.svg"> missing.`);
+        if (!/<link rel="apple-touch-icon" href="\/apple-touch-icon\.png"/.test(h)) p.push(`${f}: apple-touch-icon link missing.`);
+      }
+      return p;
+    },
+  },
+  {
     id: 'secret-hygiene',
     title: 'No API keys / tokens in the repo and no tracked .env file',
     why: 'The Heffl key lives only in Vercel environment variables. A key committed to GitHub must be treated as leaked.',

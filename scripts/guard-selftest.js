@@ -36,6 +36,7 @@ const MUTATIONS = [
   ['remove the Gemini privacy sentence', (d) => edit(d, 'privacy-policy.html', (s) => s.replace(/sent to Google \(Gemini\)/g, 'processed'))],
   ['remove the privacy sentence about IP address', (d) => edit(d, 'privacy-policy.html', (s) => s.replace(/IP address/gi, 'network id'))],
   ['remove the aim-track.js attribution code', (d) => edit(d, 'wp-content/plugins/elementor/assets/js/aim-track.js', (s) => s.replace(/aim_attr_first/g, 'x_gone'))],
+  ['remove the favicon link from a page', (d) => edit(d, 'about.html', (s) => s.replace(/<link rel="icon" href="\/favicon\.ico"[^>]*>/, ''))],
   ['change a page price phrase to 4,999', (d) => edit(d, 'index.html', (s) => s.replace(/(₹|Rs\.?\s?)5,999/, '$14,999'))],
   ['remove the /blog redirect from vercel.json', (d) => edit(d, 'vercel.json', (s) => { const j = JSON.parse(s); j.redirects = j.redirects.filter((r) => r.source !== '/blog'); return JSON.stringify(j, null, 2); })],
   ['add a sitemap entry for /wp-login', (d) => edit(d, 'sitemap.xml', (s) => s.replace('</urlset>', '<url><loc>https://aiinmarketing.in/wp-login</loc></url></urlset>'))],

@@ -23,7 +23,7 @@ const GTM_ID = 'GTM-NPKP66BD';
 const OLD_GTM_ID = 'GTM-M3H6S33J';
 const SITE = 'https://aiinmarketing.in';
 const MIN_CHAT_TESTS = 35; // tools/test-chat.js minimum. RAISE when you add tests, never lower.
-const MIN_LEAD_TESTS = 50; // tools/test-lead.js must pass at least this many checks. RAISE when you add tests, never lower.
+const MIN_LEAD_TESTS = 52; // tools/test-lead.js must pass at least this many checks. RAISE when you add tests, never lower.
 const SKIP_DIRS = new Set(['node_modules', '.git', '.vercel', '.next']);
 // Posts published before the "Sources" rule. Do not add to this list: new posts need a Sources section.
 const NO_SOURCES_GRANDFATHERED = new Set([
@@ -169,7 +169,8 @@ const INVARIANTS = [
       const p = [];
       const need = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid', 'fbclid', 'msclkid', 'click_id', 'referrer_host', 'landing_path',
         'aim_attr_first', 'aim_attr_last', 'localStorage', 'sessionStorage', 'form_fields[', 'attribution',
-        'apply_click', 'buy_click', 'lead_submit', 'guide_download', 'track_click', 'attribution_set', 'dataLayer'];
+        'apply_click', 'buy_click', 'lead_submit', 'guide_download', 'track_click', 'attribution_set', 'dataLayer',
+        'first_touch', 'last_touch', 'channelOf', 'form_url', 'clarity_user', 'clarity_session', '_clck', '_clsk'];
       for (const n of need) if (!s.includes(n)) p.push(`${f}: missing \`${n}\`. Restore from history: git log -S'${n}' -- ${f}`);
       if (!/addEventListener\(\s*'submit'[\s\S]*?\},\s*true\s*\)/.test(s)) p.push(`${f}: the capture-phase submit listener (addEventListener('submit', ..., true)) is missing; hidden UTM inputs would no longer be added.`);
       if ((s.match(/\btry\s*\{/g) || []).length < 3) p.push(`${f}: storage access must stay inside try/catch (fewer than 3 try blocks found).`);

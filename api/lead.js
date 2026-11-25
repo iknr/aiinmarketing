@@ -229,7 +229,26 @@ function buildAttribution(body, page) {
   const has = UTM_KEYS.some((k) => a[k]) || a.hasClick;
   const given = f('attribution').toLowerCase();
   a.attribution = ['first', 'last', 'direct'].includes(given) ? given : has ? 'last' : 'direct';
+  // Phase 1 extras (all optional; absent from older cached pages): both touches, channel, full form URL, Clarity ids.
+  // Click id parameters are stripped from any URL text, the same rule as for the click id value itself.
+  const g = (k, max) => (typeof body[`form_fields[${k}]`] === 'string' ? cleanAttr(body[`form_fields[${k}]`], max).replace(/[?&](gclid|fbclid|msclkid)=[^&\s;]*/gi, '') : '');
+  a.firstTouch = g('first_touch', 400);
+  a.lastTouch = g('last_touch', 400);
+  const formUrl = g('form_url', 250);
+  a.formUrl = /^https:\/\/(www\.)?aiinmarketing\.in(\/|$)/.test(formUrl) ? formUrl : '';
+  const channel = g('channel', 20).toLowerCase();
+  a.channel = /^[a-z-]{3,20}$/.test(channel) ? channel : '';
+  const clarityUser = g('clarity_user', 24).toLowerCase();
+  const claritySession = g('clarity_session', 24).toLowerCase();
+  a.clarityUser = /^[a-z0-9]{3,24}$/.test(clarityUser) ? clarityUser : '';
+  a.claritySession = /^[a-z0-9]{3,24}$/.test(claritySession) ? claritySession : '';
   return a;
+}
+
+/** Extra campaign text, only when the browser sent it: "; channel: ai-chat; clarity: <user>/<session>". */
+function attrExtra(a) {
+  const clarity = a.clarityUser || a.claritySession ? `${a.clarityUser || '-'}/${a.claritySession || '-'}` : '';
+  return [a.channel && `; channel: ${a.channel}`, clarity && `; clarity: ${clarity}`].filter(Boolean).join('');
 }
 
 /** Redacted, structured form for logs: never the full click id. */
@@ -244,6 +263,7 @@ function attrLog(a) {
     referrer: a.referrerHost,
     landing: a.landingPath,
     attribution: a.attribution,
+    channel: a.channel,
   };
 }
 
@@ -400,30 +420,45 @@ function customFields(ctx, abuseType) {
     cf_form: friendlyLabel(ctx.formSource, ctx.form),
     cf_form_source: clean(ctx.formSource, 100),
     cf_page_url: clean(ctx.pageUrl, 200),
-    cf_campaign_utm: clean(`${utmSummary(a)}; click id present: ${a.hasClick ? 'yes' : 'no'}; referrer: ${a.referrerHost || '-'}; first landing: ${a.landingPath || '-'}; attribution: ${a.attribution}`, 300),
+    cf_campaign_utm: clean(`${utmSummary(a)}; click id present: ${a.hasClick ? 'yes' : 'no'}; referrer: ${a.referrerHost || '-'}; first landing: ${a.landingPath || '-'}; attribution: ${a.attribution}${attrExtra(a)}`, 300),
     cf_ip_address: ctx.ip || '',
     cf_country: ctx.country || '',
     cf_region: ctx.region || '',
     cf_city: ctx.city || '',
     cf_abuse_type: abuseType || '',
   };
+  // Optional columns for the phase 1 attribution details. OFF unless HEFFL_ATTR_FIELDS=true, because Heffl rejects a
+  // lead that names a custom field which does not exist yet (the owner creates the columns first, see CLAUDE.md).
+  if (process.env.HEFFL_ATTR_FIELDS === 'true') {
+    Object.assign(all, {
+      cf_channel: a.channel || '',
+      cf_first_touch: clean(a.firstTouch, 400),
+      cf_last_touch: clean(a.lastTouch, 400),
+      cf_clarity_user_id: a.clarityUser || '',
+      cf_clarity_session_id: a.claritySession || '',
+    });
+  }
   return Object.fromEntries(Object.entries(all).filter(([, v]) => v));
 }
 
 function contextText(ctx) {
   const a = ctx.attr;
-  const campaign = `${utmSummary(a)}; click id present: ${a.hasClick ? 'yes' : 'no'}; referrer: ${a.referrerHost || '-'}; first landing: ${a.landingPath || '-'}; attribution: ${a.attribution}`;
+  const campaign = `${utmSummary(a)}; click id present: ${a.hasClick ? 'yes' : 'no'}; referrer: ${a.referrerHost || '-'}; first landing: ${a.landingPath || '-'}; attribution: ${a.attribution}${attrExtra(a)}`;
   return [
     `Current situation: ${ctx.situation || '-'}`,
     `Form: ${friendlyLabel(ctx.formSource, ctx.form)}`,
     `Form source (raw): ${ctx.formSource || '-'}`,
     `Form name (raw): ${ctx.form || '-'}`,
     `Page: ${ctx.pageUrl || '-'}`,
+    a.formUrl ? `Form page (full URL): ${a.formUrl}` : '',
     `Campaign / UTM: ${campaign}`,
+    a.firstTouch ? `First touch: ${a.firstTouch}` : '',
+    a.lastTouch ? `Last touch: ${a.lastTouch}` : '',
+    a.clarityUser || a.claritySession ? `Clarity user ID: ${a.clarityUser || '-'} | session ID: ${a.claritySession || '-'} (Clarity > Recordings > Filters > User ID)` : '',
     `Submitted: ${formatIST(ctx.receivedAt)}`,
     `IP address: ${ctx.ip || '-'}`,
     `Approximate location: ${geoText(ctx)}`,
-  ].join('\n');
+  ].filter(Boolean).join('\n');
 }
 
 /**

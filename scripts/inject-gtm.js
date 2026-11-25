@@ -22,7 +22,7 @@ const BODY = `
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=${GTM_ID}" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 `;
-const TRACK_VER = '1.1.0';
+const TRACK_VER = '1.2.0';
 const TRACK = `<script id="aim-track-js" src="/wp-content/plugins/elementor/assets/js/aim-track.js?ver=${TRACK_VER}" defer></script>\n`;
 function walk(dir, out) {
   for (const name of fs.readdirSync(dir, { withFileTypes: true })) {

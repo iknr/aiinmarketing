@@ -1,5 +1,6 @@
 /*! AIM event helper: pushes conversion events to the GTM dataLayer.
- *  Also captures campaign attribution (utm_*, click ids, referrer host, landing path) and adds it to form submissions.
+ *  Also captures campaign attribution (utm_*, click ids, referrer host, landing path) and adds it to form submissions,
+ *  plus (phase 1) first and last touch in full, channel (ai-chat, paid-search, organic-search, social, ...), full form page URL and Clarity ids.
  *  Events: lead_submit (apply / contact forms), guide_download (free guides), apply_click, buy_click (Amazon), track_click (three-track links). */
 (function () {
   'use strict';
@@ -12,7 +13,52 @@
   var CLICK = ['gclid', 'fbclid', 'msclkid'];
   var OWN = ['aiinmarketing.in', 'www.aiinmarketing.in'];
   var TTL = 30 * 24 * 60 * 60 * 1000;
-  function clean(v) { return String(v == null ? '' : v).replace(/[\u0000-\u001f\u007f-\u009f<>]/g, '').trim().slice(0, 120); }
+  function clean(v, max) { return String(v == null ? '' : v).replace(/[\u0000-\u001f\u007f-\u009f<>]/g, '').trim().slice(0, max || 120); }
+  // Page URL without click ids (gclid/fbclid/msclkid) and without the #hash, so the full landing URL keeps its UTM tags.
+  function urlNoClick(href, max) {
+    try { var u = new URL(href); CLICK.forEach(function (k) { u.searchParams.delete(k); }); return clean(u.origin + u.pathname + u.search, max); } catch (e) { return ''; }
+  }
+  // Channel: AI chat tools (ChatGPT adds utm_source=chatgpt.com itself) are one channel, kept apart from search and social.
+  var AI = /(^|\.)(chatgpt\.com|chat\.openai\.com|openai\.com|perplexity\.ai|gemini\.google\.com|claude\.ai|copilot\.microsoft\.com|phind\.com|you\.com)$/;
+  var SEARCH = /(^|\.)(google\.[a-z.]+|bing\.com|duckduckgo\.com|yahoo\.com|ecosia\.org|brave\.com)$/;
+  var SOCIAL = /(^|\.)(linkedin\.com|lnkd\.in|facebook\.com|instagram\.com|t\.co|twitter\.com|x\.com|youtube\.com|reddit\.com|wa\.me|whatsapp\.com)$/;
+  function channelOf(a) {
+    if (!a) return 'direct';
+    var s = a.utm_source || '', m = a.utm_medium || '', h = a.referrer_host || '';
+    if (AI.test(s) || AI.test(h)) return 'ai-chat';
+    if (a.gclid || a.msclkid || /^(cpc|ppc|paid-search|paidsearch|sem)$/.test(m)) return 'paid-search';
+    if (a.fbclid || /^(paid|paid-social|paidsocial|cpm)$/.test(m)) return 'paid-social';
+    if (m === 'email') return 'email';
+    if (m === 'social' || SOCIAL.test(s) || SOCIAL.test(h)) return 'social';
+    if (m === 'organic' || SEARCH.test(h)) return 'organic-search';
+    if (h) return 'referral';
+    return hasCampaign(a) ? 'other-campaign' : 'direct';
+  }
+  // One readable line per touch: channel, utm, referrer, full landing URL, date.
+  function touchText(a) {
+    if (!a) return '';
+    var u = [a.utm_source, a.utm_medium, a.utm_campaign, a.utm_term, a.utm_content].map(function (v) { return v || '-'; }).join(' / ');
+    var day = '-';
+    try { if (a.t) day = new Date(a.t).toISOString().slice(0, 10); } catch (e) { /* ignore */ }
+    return clean('channel: ' + channelOf(a) + '; utm: ' + u + '; referrer: ' + (a.referrer_url || a.referrer_host || '-') + '; landing: ' + (a.landing_url || a.landing_path || '-') + '; date: ' + day, 400);
+  }
+  // Microsoft Clarity ids (cookies _clck = user, _clsk = session, first segment), so a lead can be matched to its recording.
+  function claId(name) {
+    try {
+      var m = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+      var v = m ? decodeURIComponent(m[1]).split('|')[0] : '';
+      return /^[a-z0-9]{3,24}$/i.test(v) ? v.toLowerCase() : '';
+    } catch (e) { return ''; }
+  }
+  // Tags the Clarity session (filterable under Custom tags) when Clarity is loaded; never throws.
+  function tagClarity(vals, submitted) {
+    try {
+      if (typeof window.clarity !== 'function') return;
+      window.clarity('set', 'channel', vals.channel || 'direct');
+      window.clarity('set', 'attribution', vals.attribution || 'direct');
+      if (submitted) { window.clarity('set', 'lead_form', 'yes'); window.clarity('event', 'lead_form_submit'); }
+    } catch (e) { /* ignore */ }
+  }
   function store(kind) { try { return window[kind]; } catch (e) { return null; } }
   function read(kind, key) { try { var s = store(kind); var v = s && s.getItem(key); return v ? JSON.parse(v) : null; } catch (e) { return null; } }
   function write(kind, key, obj) { try { var s = store(kind); if (s) s.setItem(key, JSON.stringify(obj)); } catch (e) { /* storage blocked */ } }
@@ -23,15 +69,18 @@
     return false;
   }
   function current() {
-    var a = { landing_path: clean(location.pathname), t: Date.now() };
+    var a = { landing_path: clean(location.pathname), landing_url: urlNoClick(location.href, 250), t: Date.now() };
     try {
       var q = new URLSearchParams(location.search);
-      UTM.concat(CLICK).forEach(function (k) { var v = clean(q.get(k)); if (v) a[k] = v; });
+      // UTM values are stored lowercase so "LinkedIn" and "linkedin" never split into two sources
+      UTM.concat(CLICK).forEach(function (k) { var v = clean(q.get(k)); if (v && UTM.indexOf(k) > -1) v = v.toLowerCase(); if (v) a[k] = v; });
     } catch (e) { /* no URLSearchParams */ }
     try {
-      var h = document.referrer ? new URL(document.referrer).hostname.toLowerCase() : '';
+      var r = document.referrer ? new URL(document.referrer) : null;
+      var h = r ? r.hostname.toLowerCase() : '';
       a.referrer_host = h && OWN.indexOf(h) < 0 ? clean(h) : '';
-    } catch (e) { a.referrer_host = ''; }
+      a.referrer_url = a.referrer_host ? clean(r.origin + r.pathname, 160) : '';
+    } catch (e) { a.referrer_host = ''; a.referrer_url = ''; }
     return a;
   }
   var cur = current();
@@ -62,6 +111,13 @@
       attribution: kind
     };
     if (kind === 'last') f.referrer_host = src.referrer_host || f.referrer_host;
+    // Phase 1 extras: both touches in full, channel, full form page URL, Clarity ids (all optional on the server)
+    f.channel = channelOf(src);
+    f.first_touch = touchText(first || cur);
+    f.last_touch = touchText(last);
+    f.form_url = urlNoClick(location.href, 250);
+    f.clarity_user = claId('_clck');
+    f.clarity_session = claId('_clsk');
     return f;
   }
   function isLeadForm(f) {
@@ -82,8 +138,11 @@
         if (!inp) { inp = document.createElement('input'); inp.type = 'hidden'; inp.name = name; form.appendChild(inp); }
         inp.value = vals[k];
       });
+      tagClarity(vals, true);
     } catch (err) { /* never block a submission */ }
   }, true);
+  // Tag the Clarity session with the channel shortly after load (Clarity is loaded by GTM, so give it a moment).
+  setTimeout(function () { try { tagClarity(pick(), false); } catch (e) { /* ignore */ } }, 3500);
   document.addEventListener('click', function (e) {
     var a = e.target.closest && e.target.closest('a');
     if (!a) return;

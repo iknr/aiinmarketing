@@ -30,7 +30,7 @@ function resp(status, data, headers = {}) {
 /** Fresh module + env + mocked fetch. routes: fn(url, init) -> response | Promise | 'hang' */
 function setup({ env = {}, route } = {}) {
   delete require.cache[require.resolve(HANDLER)];
-  for (const k of ['HEFFL_API_KEY', 'HEFFL_LEAD_SOURCE_NAME', 'HEFFL_LEAD_STAGE_NAME', 'HEFFL_USE_CUSTOM_FIELDS', 'LEAD_WEBHOOK_URL', 'VERCEL_ENV', 'HEFFL_TIMEOUT_MS']) delete process.env[k];
+  for (const k of ['HEFFL_API_KEY', 'HEFFL_LEAD_SOURCE_NAME', 'HEFFL_LEAD_STAGE_NAME', 'HEFFL_USE_CUSTOM_FIELDS', 'HEFFL_ATTR_FIELDS', 'LEAD_WEBHOOK_URL', 'VERCEL_ENV', 'HEFFL_TIMEOUT_MS']) delete process.env[k];
   Object.assign(process.env, env);
   logs.length = 0;
   const calls = [];
@@ -837,6 +837,53 @@ test('H) custom-field columns: abuse and real leads carry Form, IP, location, si
   assert.strictEqual(posts.length, 2);
   assert(!Object.keys(posts[1].body).some((k) => k.startsWith('cf_')));
   assert.strictEqual(abuseTasks(m.calls).length, 1, 'the context task is still created');
+});
+
+// ------------------------------------------------------------ phase 1: first/last touch, channel, full URL, Clarity ids
+const P1 = {
+  'form_fields[utm_source]': 'chatgpt.com',
+  'form_fields[channel]': 'ai-chat',
+  'form_fields[first_touch]': 'channel: ai-chat; utm: chatgpt.com / - / - / - / -; referrer: -; landing: https://aiinmarketing.in/digital-marketing-course?utm_source=chatgpt.com&gclid=SECRETCLICK1; date: 2026-11-17',
+  'form_fields[last_touch]': 'channel: social; utm: linkedin / social / nov-launch / - / -; referrer: https://www.linkedin.com/feed; landing: https://aiinmarketing.in/?utm_source=linkedin; date: 2026-11-20',
+  'form_fields[form_url]': 'https://aiinmarketing.in/digital-marketing-course/surat?utm_source=chatgpt.com',
+  'form_fields[clarity_user]': '1duntkm',
+  'form_fields[clarity_session]': 'abc123x',
+};
+
+test('P1) first/last touch, channel, full form URL and Clarity ids reach the task and campaign line; click id parameters stripped', async () => {
+  const { handler, calls } = setupAbuse();
+  await call(handler, { body: { ...GOOD, ...P1 } });
+  const d = taskCalls(calls)[0].body.description;
+  assert(d.includes('attribution: last; channel: ai-chat; clarity: 1duntkm/abc123x'), 'campaign line carries channel and Clarity ids');
+  assert(d.includes('First touch: channel: ai-chat; utm: chatgpt.com'));
+  assert(d.includes('Last touch: channel: social; utm: linkedin / social / nov-launch'));
+  assert(d.includes('Form page (full URL): https://aiinmarketing.in/digital-marketing-course/surat?utm_source=chatgpt.com'));
+  assert(d.includes('Clarity user ID: 1duntkm | session ID: abc123x'));
+  assert(!JSON.stringify(calls).includes('SECRETCLICK1'), 'click id parameter removed from URL text');
+  assert(!wholeLogs().includes('SECRETCLICK1'));
+  // invalid values are dropped, a foreign form URL is dropped, and nothing is added when the browser sent nothing
+  const b = setupAbuse();
+  await call(b.handler, { body: { ...uniq(901), 'form_fields[channel]': 'ai chat!', 'form_fields[clarity_user]': '<x>', 'form_fields[clarity_session]': '../etc', 'form_fields[form_url]': 'https://evil.example/' } });
+  const bd = taskCalls(b.calls)[0].body.description;
+  assert(!/channel:|Clarity|Form page|First touch|Last touch/.test(bd));
+});
+
+test('P1) extra Heffl columns are sent only when HEFFL_ATTR_FIELDS=true; the campaign column text stays short', async () => {
+  const off = setupAbuse({ lead: () => resp(200, { id: 'ld_p1', customFields: { x: 1 } }) }, { HEFFL_USE_CUSTOM_FIELDS: 'true' });
+  await call(off.handler, { body: { ...GOOD, ...P1 } });
+  const ob = leadPosts(off.calls)[0].body;
+  assert(!Object.keys(ob).some((k) => ['cf_channel', 'cf_first_touch', 'cf_last_touch', 'cf_clarity_user_id', 'cf_clarity_session_id'].includes(k)));
+  assert(ob.cf_campaign_utm.includes('channel: ai-chat; clarity: 1duntkm/abc123x'));
+  assert(ob.cf_campaign_utm.length <= 300);
+  const on = setupAbuse({ lead: () => resp(200, { id: 'ld_p1', customFields: { x: 1 } }) }, { HEFFL_USE_CUSTOM_FIELDS: 'true', HEFFL_ATTR_FIELDS: 'true' });
+  await call(on.handler, { body: { ...GOOD, ...P1 } });
+  const nb = leadPosts(on.calls)[0].body;
+  assert.strictEqual(nb.cf_channel, 'ai-chat');
+  assert(nb.cf_first_touch.startsWith('channel: ai-chat'));
+  assert(nb.cf_last_touch.startsWith('channel: social'));
+  assert.strictEqual(nb.cf_clarity_user_id, '1duntkm');
+  assert.strictEqual(nb.cf_clarity_session_id, 'abc123x');
+  assert(!JSON.stringify(on.calls).includes('SECRETCLICK1'));
 });
 
 (async () => {

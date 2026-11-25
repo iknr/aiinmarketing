@@ -152,6 +152,43 @@ test('storage blocked: no errors, current-page data still submitted', async (bro
   await ctx.close();
 });
 
+test('phase 1: lowercase UTM, ai-chat channel, first/last touch with full URL (no click id), Clarity ids and tags', async (browser) => {
+  const { ctx, page, problems, bodies } = await newPage(browser);
+  await ctx.addCookies([{ name: '_clck', value: '1duntkm|2|g1a|0|2100', url: BASE }, { name: '_clsk', value: 'abc123x|1700000000|2|1|x', url: BASE }]);
+  await page.addInitScript(() => { window.__clarity = []; window.clarity = function () { window.__clarity.push([].slice.call(arguments)); }; });
+  await page.goto(BASE + '/about.html?utm_source=ChatGPT.com&utm_campaign=Nov-Launch&gclid=zz9', { referer: 'https://chatgpt.com/' });
+  await page.goto(BASE + '/index.html?utm_source=LinkedIn&utm_medium=Social');
+  const b = await submitAndGet(page, bodies, page.locator('form.aim-magnet-form').first());
+  const f = (k) => b.get('form_fields[' + k + ']');
+  assert.strictEqual(f('utm_source'), 'linkedin');
+  assert.strictEqual(f('utm_medium'), 'social');
+  assert.strictEqual(f('channel'), 'social');
+  assert(f('first_touch').startsWith('channel: ai-chat; utm: chatgpt.com / - / nov-launch'), f('first_touch'));
+  assert(/utm_source=chatgpt\.com/i.test(f('first_touch')), 'full landing URL kept with its UTM tags (as typed in the link)');
+  assert(f('last_touch').startsWith('channel: social; utm: linkedin / social'));
+  assert(!/gclid|zz9/.test(f('first_touch') + f('last_touch') + f('form_url')), 'click id never in URL text');
+  assert(/utm_source=linkedin/i.test(f('form_url')));
+  assert.strictEqual(f('clarity_user'), '1duntkm');
+  assert.strictEqual(f('clarity_session'), 'abc123x');
+  const calls = await page.evaluate(() => window.__clarity);
+  assert(calls.some((c) => c[0] === 'set' && c[1] === 'lead_form' && c[2] === 'yes'), 'Clarity session tagged on submit');
+  assert(calls.some((c) => c[0] === 'event' && c[1] === 'lead_form_submit'));
+  assert.deepStrictEqual(problems, []);
+  await ctx.close();
+});
+
+test('phase 1: no Clarity, no cookies, blocked storage: submission still carries the fields, no errors', async (browser) => {
+  const { ctx, page, problems, bodies } = await newPage(browser, { blockStorage: true });
+  await page.goto(BASE + '/index.html?utm_source=test&utm_medium=cpc');
+  const b = await submitAndGet(page, bodies, page.locator('form.aim-magnet-form').first());
+  assert.strictEqual(b.get('form_fields[clarity_user]'), '');
+  assert.strictEqual(b.get('form_fields[clarity_session]'), '');
+  assert.strictEqual(b.get('form_fields[channel]'), 'paid-search');
+  assert(b.get('form_fields[first_touch]').startsWith('channel: paid-search'));
+  assert.deepStrictEqual(problems, []);
+  await ctx.close();
+});
+
 test('no horizontal overflow at 390px and GTM loader present once', async (browser) => {
   const { ctx, page } = await newPage(browser);
   await page.setViewportSize({ width: 390, height: 800 });

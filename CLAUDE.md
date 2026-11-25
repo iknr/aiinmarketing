@@ -55,7 +55,7 @@ Environment variables (Vercel > Settings > Environment Variables):
 | `HEFFL_LEAD_STAGE_NAME` | no, default `New` | Heffl lead stage, found by name |
 | `HEFFL_USE_CUSTOM_FIELDS` | no, default off | Set to `true` only after creating ALL the lead custom fields listed under "Heffl columns" below |
 | `LEAD_WEBHOOK_URL` | no | Fallback: receives leads Heffl could not store (Zapier, Make, Apps Script) |
-| `HEFFL_ATTR_FIELDS` | no, default off | Set to `true` only after creating the five phase 1 lead custom fields in Heffl: `Channel`, `First touch`, `Last touch`, `Clarity user ID`, `Clarity session ID` (keys `cf_channel`, `cf_first_touch`, `cf_last_touch`, `cf_clarity_user_id`, `cf_clarity_session_id`). Needs `HEFFL_USE_CUSTOM_FIELDS=true` too. Until then the same details are in the follow-up task text and the `Campaign UTM` column. |
+| `HEFFL_ATTR_FIELDS` | no, default off (ON in production since 25 Nov 2026: the five columns exist in Heffl and the variable is set to `true`) | Set to `true` only after creating the five phase 1 lead custom fields in Heffl: `Channel`, `First touch`, `Last touch`, `Clarity user ID`, `Clarity session ID` (keys `cf_channel`, `cf_first_touch`, `cf_last_touch`, `cf_clarity_user_id`, `cf_clarity_session_id`). Needs `HEFFL_USE_CUSTOM_FIELDS=true` too. Until then the same details are in the follow-up task text and the `Campaign UTM` column. |
 
 How it works:
 

@@ -50,6 +50,19 @@
       return /^[a-z0-9]{3,24}$/i.test(v) ? v.toLowerCase() : '';
     } catch (e) { return ''; }
   }
+  // Clarity's own metadata call gives the same user and session ids the recordings list shows (cookies are only the fallback).
+  var claMeta = { user: '', session: '' };
+  function readMeta() {
+    try {
+      if (typeof window.clarity !== 'function') return;
+      window.clarity('metadata', function (m) {
+        try {
+          if (m && /^[a-z0-9]{3,24}$/i.test(String(m.userId || ''))) claMeta.user = String(m.userId).toLowerCase();
+          if (m && /^[a-z0-9]{3,24}$/i.test(String(m.sessionId || ''))) claMeta.session = String(m.sessionId).toLowerCase();
+        } catch (e) { /* ignore */ }
+      });
+    } catch (e) { /* ignore */ }
+  }
   // Tags the Clarity session (filterable under Custom tags) when Clarity is loaded; never throws.
   function tagClarity(vals, submitted) {
     try {
@@ -116,8 +129,9 @@
     f.first_touch = touchText(first || cur);
     f.last_touch = touchText(last);
     f.form_url = urlNoClick(location.href, 250);
-    f.clarity_user = claId('_clck');
-    f.clarity_session = claId('_clsk');
+    readMeta();
+    f.clarity_user = claMeta.user || claId('_clck');
+    f.clarity_session = claMeta.session || claId('_clsk');
     return f;
   }
   function isLeadForm(f) {
@@ -142,7 +156,7 @@
     } catch (err) { /* never block a submission */ }
   }, true);
   // Tag the Clarity session with the channel shortly after load (Clarity is loaded by GTM, so give it a moment).
-  setTimeout(function () { try { tagClarity(pick(), false); } catch (e) { /* ignore */ } }, 3500);
+  setTimeout(function () { try { readMeta(); tagClarity(pick(), false); } catch (e) { /* ignore */ } }, 3500);
   document.addEventListener('click', function (e) {
     var a = e.target.closest && e.target.closest('a');
     if (!a) return;

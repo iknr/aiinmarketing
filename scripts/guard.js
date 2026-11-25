@@ -170,7 +170,7 @@ const INVARIANTS = [
       const need = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid', 'fbclid', 'msclkid', 'click_id', 'referrer_host', 'landing_path',
         'aim_attr_first', 'aim_attr_last', 'localStorage', 'sessionStorage', 'form_fields[', 'attribution',
         'apply_click', 'buy_click', 'lead_submit', 'guide_download', 'track_click', 'attribution_set', 'dataLayer',
-        'first_touch', 'last_touch', 'channelOf', 'form_url', 'clarity_user', 'clarity_session', '_clck', '_clsk'];
+        'first_touch', 'last_touch', 'channelOf', 'form_url', 'clarity_user', 'clarity_session', '_clck', '_clsk', 'metadata'];
       for (const n of need) if (!s.includes(n)) p.push(`${f}: missing \`${n}\`. Restore from history: git log -S'${n}' -- ${f}`);
       if (!/addEventListener\(\s*'submit'[\s\S]*?\},\s*true\s*\)/.test(s)) p.push(`${f}: the capture-phase submit listener (addEventListener('submit', ..., true)) is missing; hidden UTM inputs would no longer be added.`);
       if ((s.match(/\btry\s*\{/g) || []).length < 3) p.push(`${f}: storage access must stay inside try/catch (fewer than 3 try blocks found).`);

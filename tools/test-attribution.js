@@ -189,6 +189,20 @@ test('phase 1: no Clarity, no cookies, blocked storage: submission still carries
   await ctx.close();
 });
 
+test('phase 1: Clarity ids come from clarity("metadata") when the cookies are not readable', async (browser) => {
+  const { ctx, page, problems, bodies } = await newPage(browser);
+  await page.addInitScript(() => {
+    window.clarity = function (cmd, cb) { if (cmd === 'metadata' && typeof cb === 'function') cb({ projectId: 'p', userId: 'meta1u', sessionId: 'meta1s', pageNum: 1 }); };
+  });
+  await page.goto(BASE + '/index.html?utm_source=chatgpt.com');
+  const b = await submitAndGet(page, bodies, page.locator('form.aim-magnet-form').first());
+  assert.strictEqual(b.get('form_fields[clarity_user]'), 'meta1u');
+  assert.strictEqual(b.get('form_fields[clarity_session]'), 'meta1s');
+  assert.strictEqual(b.get('form_fields[channel]'), 'ai-chat');
+  assert.deepStrictEqual(problems, []);
+  await ctx.close();
+});
+
 test('no horizontal overflow at 390px and GTM loader present once', async (browser) => {
   const { ctx, page } = await newPage(browser);
   await page.setViewportSize({ width: 390, height: 800 });

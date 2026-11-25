@@ -26,6 +26,10 @@ Tools: `node scripts/guard.js` (the build guard, runs in the Vercel build right 
 3. Run `bash scripts/publish.sh`, wait for the production deployment to be READY and aliased, then `node scripts/live-check.js`.
 4. Tell the owner what was lost and when. If the guard did not catch it, add an invariant for it (rule 5).
 
+## Progress logging
+
+After every piece of progress run the `/log-progress` command (`.claude/commands/log-progress.md`). It updates the SEO Tracker sheet and the Content Schedule Log sheet.
+
 ## Analytics: Google Tag Manager GTM-NPKP66BD
 
 - Every HTML page must contain the GTM snippet (loader in `<head>`, noscript iframe after `<body>`).

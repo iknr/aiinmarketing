@@ -843,6 +843,7 @@ test('H) custom-field columns: abuse and real leads carry Form, IP, location, si
 const P1 = {
   'form_fields[utm_source]': 'chatgpt.com',
   'form_fields[channel]': 'ai-chat',
+  'form_fields[ai_model]': 'gemini',
   'form_fields[first_touch]': 'channel: ai-chat; utm: chatgpt.com / - / - / - / -; referrer: -; landing: https://aiinmarketing.in/digital-marketing-course?utm_source=chatgpt.com&gclid=SECRETCLICK1; date: 2026-11-17',
   'form_fields[last_touch]': 'channel: social; utm: linkedin / social / nov-launch / - / -; referrer: https://www.linkedin.com/feed; landing: https://aiinmarketing.in/?utm_source=linkedin; date: 2026-11-20',
   'form_fields[form_url]': 'https://aiinmarketing.in/digital-marketing-course/surat?utm_source=chatgpt.com',
@@ -854,7 +855,7 @@ test('P1) first/last touch, channel, full form URL and Clarity ids reach the tas
   const { handler, calls } = setupAbuse();
   await call(handler, { body: { ...GOOD, ...P1 } });
   const d = taskCalls(calls)[0].body.description;
-  assert(d.includes('attribution: last; channel: ai-chat; clarity: 1duntkm/abc123x'), 'campaign line carries channel and Clarity ids');
+  assert(d.includes('attribution: last; channel: ai-chat; ai: gemini; clarity: 1duntkm/abc123x'), 'campaign line carries channel and Clarity ids');
   assert(d.includes('First touch: channel: ai-chat; utm: chatgpt.com'));
   assert(d.includes('Last touch: channel: social; utm: linkedin / social / nov-launch'));
   assert(d.includes('Form page (full URL): https://aiinmarketing.in/digital-marketing-course/surat?utm_source=chatgpt.com'));
@@ -873,7 +874,7 @@ test('P1) extra Heffl columns are sent only when HEFFL_ATTR_FIELDS=true; the cam
   await call(off.handler, { body: { ...GOOD, ...P1 } });
   const ob = leadPosts(off.calls)[0].body;
   assert(!Object.keys(ob).some((k) => ['cf_channel', 'cf_first_touch', 'cf_last_touch', 'cf_clarity_user_id', 'cf_clarity_session_id'].includes(k)));
-  assert(ob.cf_campaign_utm.includes('channel: ai-chat; clarity: 1duntkm/abc123x'));
+  assert(ob.cf_campaign_utm.includes('channel: ai-chat; ai: gemini; clarity: 1duntkm/abc123x'));
   assert(ob.cf_campaign_utm.length <= 300);
   const on = setupAbuse({ lead: () => resp(200, { id: 'ld_p1', customFields: { x: 1 } }) }, { HEFFL_USE_CUSTOM_FIELDS: 'true', HEFFL_ATTR_FIELDS: 'true' });
   await call(on.handler, { body: { ...GOOD, ...P1 } });

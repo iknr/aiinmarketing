@@ -34,13 +34,27 @@
     if (h) return 'referral';
     return hasCampaign(a) ? 'other-campaign' : 'direct';
   }
+  // Which AI tool inside the ai-chat channel: chatgpt, gemini, perplexity, claude, copilot, phind, you (else other-ai); '' when not AI.
+  function aiModelOf(a) {
+    if (!a) return '';
+    var t = ((a.utm_source || '') + ' ' + (a.referrer_host || '')).toLowerCase();
+    if (!AI.test(a.utm_source || '') && !AI.test(a.referrer_host || '')) return '';
+    if (/chatgpt|openai/.test(t)) return 'chatgpt';
+    if (/gemini/.test(t)) return 'gemini';
+    if (/perplexity/.test(t)) return 'perplexity';
+    if (/claude/.test(t)) return 'claude';
+    if (/copilot/.test(t)) return 'copilot';
+    if (/phind/.test(t)) return 'phind';
+    if (/(^|[ .])you\.com/.test(t)) return 'you';
+    return 'other-ai';
+  }
   // One readable line per touch: channel, utm, referrer, full landing URL, date.
   function touchText(a) {
     if (!a) return '';
     var u = [a.utm_source, a.utm_medium, a.utm_campaign, a.utm_term, a.utm_content].map(function (v) { return v || '-'; }).join(' / ');
     var day = '-';
     try { if (a.t) day = new Date(a.t).toISOString().slice(0, 10); } catch (e) { /* ignore */ }
-    return clean('channel: ' + channelOf(a) + '; utm: ' + u + '; referrer: ' + (a.referrer_url || a.referrer_host || '-') + '; landing: ' + (a.landing_url || a.landing_path || '-') + '; date: ' + day, 400);
+    return clean('channel: ' + channelOf(a) + (aiModelOf(a) ? ' (' + aiModelOf(a) + ')' : '') + '; utm: ' + u + '; referrer: ' + (a.referrer_url || a.referrer_host || '-') + '; landing: ' + (a.landing_url || a.landing_path || '-') + '; date: ' + day, 400);
   }
   // Microsoft Clarity ids (cookies _clck = user, _clsk = session, first segment), so a lead can be matched to its recording.
   function claId(name) {
@@ -69,6 +83,7 @@
       if (typeof window.clarity !== 'function') return;
       window.clarity('set', 'channel', vals.channel || 'direct');
       window.clarity('set', 'attribution', vals.attribution || 'direct');
+      if (vals.ai_model) window.clarity('set', 'ai_model', vals.ai_model);
       if (submitted) { window.clarity('set', 'lead_form', 'yes'); window.clarity('event', 'lead_form_submit'); }
     } catch (e) { /* ignore */ }
   }
@@ -126,6 +141,7 @@
     if (kind === 'last') f.referrer_host = src.referrer_host || f.referrer_host;
     // Phase 1 extras: both touches in full, channel, full form page URL, Clarity ids (all optional on the server)
     f.channel = channelOf(src);
+    f.ai_model = aiModelOf(src);
     f.first_touch = touchText(first || cur);
     f.last_touch = touchText(last);
     f.form_url = urlNoClick(location.href, 250);

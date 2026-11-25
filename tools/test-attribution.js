@@ -163,7 +163,7 @@ test('phase 1: lowercase UTM, ai-chat channel, first/last touch with full URL (n
   assert.strictEqual(f('utm_source'), 'linkedin');
   assert.strictEqual(f('utm_medium'), 'social');
   assert.strictEqual(f('channel'), 'social');
-  assert(f('first_touch').startsWith('channel: ai-chat; utm: chatgpt.com / - / nov-launch'), f('first_touch'));
+  assert(f('first_touch').startsWith('channel: ai-chat (chatgpt); utm: chatgpt.com / - / nov-launch'), f('first_touch'));
   assert(/utm_source=chatgpt\.com/i.test(f('first_touch')), 'full landing URL kept with its UTM tags (as typed in the link)');
   assert(f('last_touch').startsWith('channel: social; utm: linkedin / social'));
   assert(!/gclid|zz9/.test(f('first_touch') + f('last_touch') + f('form_url')), 'click id never in URL text');
@@ -199,6 +199,7 @@ test('phase 1: Clarity ids come from clarity("metadata") when the cookies are no
   assert.strictEqual(b.get('form_fields[clarity_user]'), 'meta1u');
   assert.strictEqual(b.get('form_fields[clarity_session]'), 'meta1s');
   assert.strictEqual(b.get('form_fields[channel]'), 'ai-chat');
+  assert.strictEqual(b.get('form_fields[ai_model]'), 'chatgpt');
   assert.deepStrictEqual(problems, []);
   await ctx.close();
 });

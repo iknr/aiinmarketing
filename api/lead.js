@@ -238,6 +238,8 @@ function buildAttribution(body, page) {
   a.formUrl = /^https:\/\/(www\.)?aiinmarketing\.in(\/|$)/.test(formUrl) ? formUrl : '';
   const channel = g('channel', 20).toLowerCase();
   a.channel = /^[a-z-]{3,20}$/.test(channel) ? channel : '';
+  const aiModel = g('ai_model', 20).toLowerCase();
+  a.aiModel = /^[a-z-]{3,20}$/.test(aiModel) ? aiModel : '';
   const clarityUser = g('clarity_user', 24).toLowerCase();
   const claritySession = g('clarity_session', 24).toLowerCase();
   a.clarityUser = /^[a-z0-9]{3,24}$/.test(clarityUser) ? clarityUser : '';
@@ -248,7 +250,7 @@ function buildAttribution(body, page) {
 /** Extra campaign text, only when the browser sent it: "; channel: ai-chat; clarity: <user>/<session>". */
 function attrExtra(a) {
   const clarity = a.clarityUser || a.claritySession ? `${a.clarityUser || '-'}/${a.claritySession || '-'}` : '';
-  return [a.channel && `; channel: ${a.channel}`, clarity && `; clarity: ${clarity}`].filter(Boolean).join('');
+  return [a.channel && `; channel: ${a.channel}`, a.aiModel && `; ai: ${a.aiModel}`, clarity && `; clarity: ${clarity}`].filter(Boolean).join('');
 }
 
 /** Redacted, structured form for logs: never the full click id. */
@@ -264,6 +266,7 @@ function attrLog(a) {
     landing: a.landingPath,
     attribution: a.attribution,
     channel: a.channel,
+    ai_model: a.aiModel,
   };
 }
 

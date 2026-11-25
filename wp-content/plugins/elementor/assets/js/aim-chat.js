@@ -10,9 +10,11 @@
   window.__aimChat = true;
 
   var HOME = location.pathname === '/' || location.pathname === '/index.html';
-  var APPLY_HREF = HOME ? '#elementor-action:action=popup:open&settings=eyJpZCI6IjUxOSIsInRvZ2dsZSI6ZmFsc2V9' : '/#bonus';
+  var APPLY_HREF = HOME ? '#elementor-action:action=popup:open&settings=eyJpZCI6IjUxOSIsInRvZ2dsZSI6ZmFsc2V9' : '/#apply';
   var SYLLABUS_HREF = HOME ? '#syllabus' : '/#syllabus';
   var WA = 'https://wa.me/919611628535?text=' + encodeURIComponent('Hi, I have a question about the AIM course.');
+  var WA2 = 'https://wa.me/916282434535?text=' + encodeURIComponent('Hi, I have a question about the AIM course.');
+  var WA2_OPT = { label: 'Chat on WhatsApp +91 62824 34535', href: WA2, external: true };
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // ------------------------------------------------------------------ content
@@ -24,6 +26,8 @@
     { label: 'Is it right for me?', to: 'fit' },
     { label: 'Placement support', to: 'support' },
     { label: 'Payment and refund', to: 'payment' },
+    { label: 'Apply now', href: APPLY_HREF, primary: true, apply: true },
+    WA2_OPT,
     { label: 'Talk to the team', to: 'team' }
   ];
   var BACK = { label: 'Back to the menu', to: 'menu' };
@@ -77,7 +81,8 @@
     team: {
       say: ['The team can answer anything this chat cannot, such as batch dates or your own situation. Call, message or write to us.'],
       options: [
-        { label: 'WhatsApp +91 96116 28535', href: WA, external: true, primary: true },
+        Object.assign({ primary: true }, WA2_OPT),
+        { label: 'WhatsApp +91 96116 28535', href: WA, external: true },
         { label: 'Call +91 83406 47293', href: 'tel:+918340647293' },
         { label: 'Email contact@adsmentor.in', href: 'mailto:contact@adsmentor.in' },
         BACK
@@ -226,7 +231,7 @@
       .catch(function () { /* stay on the pre-written flow */ });
   }
 
-  var AFTER_AI = [{ label: 'Apply now', href: APPLY_HREF, primary: true, apply: true }, TEAM, { label: 'Back to the menu', to: 'menu' }];
+  var AFTER_AI = [{ label: 'Apply now', href: APPLY_HREF, primary: true, apply: true }, WA2_OPT, TEAM, { label: 'Back to the menu', to: 'menu' }];
 
   function askAi(text) {
     if (busy || !aiOn) return;
@@ -253,7 +258,7 @@
         typing.textContent = d.reply;
         history.push({ role: 'assistant', content: d.reply });
         done(); scrollLog();
-        showOptions(d.handoff ? [NODES.team.options[0], NODES.team.options[1], NODES.team.options[2], BACK] : AFTER_AI);
+        showOptions(d.handoff ? NODES.team.options : AFTER_AI);
       })
       .catch(fallBack);
   }
@@ -284,4 +289,13 @@
   launcher.addEventListener('click', openPanel);
   panel.querySelector('.aimc-x').addEventListener('click', closePanel);
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !panel.hidden) closePanel(); });
+
+  // "Apply now" on other pages links to /#apply: the home page then opens the regular Apply popup itself.
+  if (HOME && location.hash === '#apply') {
+    var dlg = document.getElementById('elementor-popup-modal-519');
+    if (dlg && typeof dlg.showModal === 'function' && !dlg.open) {
+      try { dlg.showModal(); } catch (e) { /* ignore */ }
+      try { history.replaceState(null, '', location.pathname + location.search); } catch (e) { /* ignore */ }
+    }
+  }
 })();

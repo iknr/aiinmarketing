@@ -361,6 +361,7 @@ ${faqHtml(faq)}
 <li><a href="/vibe-marketing-course">Vibe marketing course</a></li>
 <li><a href="/digital-marketing-course-online">Online digital marketing course</a></li>
 <li><a href="/digital-marketing-course-with-internship">Digital marketing course with internship</a></li>
+<li><a href="/digital-marketing-course-syllabus">Digital marketing course syllabus</a></li>
 <li><a href="/blogs/agentic-ai-marketing-work-competitors-hand-to-agents">The marketing work competitors are handing to AI agents</a></li>
 <li><a href="/blogs/ai-in-marketing-course-what-to-look-for">Seven questions to ask before paying for an AI marketing course</a></li>
 </ul>`;
@@ -416,6 +417,7 @@ ${faqHtml(faq)}
 <li><a href="/digital-marketing-course">Digital marketing course in India: the full program</a></li>
 <li><a href="/ai-digital-marketing-course">AI digital marketing course</a></li>
 <li><a href="/digital-marketing-course-with-internship">Digital marketing course with internship</a></li>
+<li><a href="/digital-marketing-course-syllabus">Digital marketing course syllabus</a></li>
 <li><a href="/blogs/what-is-vibe-marketing">What vibe marketing is</a></li>
 <li><a href="/blogs/vibe-marketing-course-india-what-you-learn">What a vibe marketing course should teach</a></li>
 </ul>`;
@@ -513,6 +515,73 @@ ${faqHtml(faq)}
   }));
 }
 
+// ---------- Syllabus pillar page ----------
+{
+  const p = '/digital-marketing-course-syllabus';
+  const title = 'Digital Marketing Course Syllabus: AI Integrated, Online | AIM';
+  const desc = '12-week digital marketing course syllabus: 9 modules, AI integrated in every one, live online, 4 specialisations and an agency internship. From Rs 5,999.';
+  const faq = [
+    ['What is in the AIM digital marketing course syllabus?', 'Nine modules over 12 weeks. Weeks 1 to 4 are five core modules: web development with WordPress, WordPress MCP and vibe coding; SEO and AI search; social media, content and automations; ads on Facebook, Instagram, LinkedIn, Snapchat and X; and media planning. Weeks 5 to 8 are four specialisations: AI Generalist, Marktech, Branding and Content, and Performance and Growth. Weeks 9 to 12 are a 1-month agency internship.'],
+    ['What does an AI integrated digital marketing course mean?', 'AI is used inside every module, not taught as one separate chapter. You use Claude, WordPress MCP, MCPs for ad accounts, CRO automations and chatbots on the same tasks a marketer does at work, such as building a site, auditing SEO, running ads and planning media.'],
+    ['Is the course fully online, and can I join from anywhere in India?', 'Yes. Classes are live online, Monday to Friday, 9 to 11 pm IST, so you can join from any city in India without moving. Class recordings are available in the LMS.'],
+    ['How many hours a day are the classes?', 'Two hours a day, Monday to Friday, 9 to 11 pm IST, which suits students and working people.'],
+    ['Do I get to choose a specialisation?', 'All four specialisations are included in the fee: AI Generalist, Marktech, Branding and Content, and Performance and Growth. There is no add-on fee for any of them.'],
+    ['Is the syllabus the same in both plans?', 'The training is the same in both plans. The ₹5,999 plan has limited tool access (Spectra Pro, Elementor Pro, Canva and Semrush, plus domain and hosting). The ₹9,999 plan adds full tool access and live ad experience on an agency or brand account with a real ad budget.'],
+    ['Can I get the syllabus as a PDF?', 'Yes. The 12-week syllabus is a free download on this page. Enter your name, WhatsApp number and email and it is sent to you.'],
+  ].concat(COMMON_FAQ.slice(1, 3));
+  const mods = [
+    ['Weeks 1 to 4', 'Module 1. Web development: WordPress, WordPress MCP and vibe coding', 'Your live portfolio website and one landing page'],
+    ['Weeks 1 to 4', 'Module 2. SEO and AI search', 'An SEO audit and a 3-month roadmap for a real brand'],
+    ['Weeks 1 to 4', 'Module 3. Social media, content and automations', 'A 30-day content calendar and one working DM or WhatsApp automation'],
+    ['Weeks 1 to 4', 'Module 4. Ads on Facebook, Instagram, LinkedIn, Snapchat and X', 'Campaign setups on all 5 platforms with a test plan'],
+    ['Weeks 1 to 4', 'Module 5. Media planning', 'A full media plan for a brand launch'],
+    ['Weeks 5 to 8', 'Four specialisations: AI Generalist, Marktech, Branding and Content, Performance and Growth', 'Deeper project work in each track, all included'],
+    ['Weeks 9 to 12', 'Agency internship', 'Real client tasks, a weekly mentor check-in and an agency certificate'],
+  ];
+  const body = `
+<h2 id="week-by-week">The 12-week digital marketing course syllabus</h2>
+<p>This is the whole path, module by module, with what you build in each one. Classes are live online, Monday to Friday, 9 to 11 pm IST, and recordings stay in the LMS.</p>
+<div class="aimb-tablewrap"><table class="aimb-table"><thead><tr><th>When</th><th>Module</th><th>What you build</th></tr></thead><tbody>
+${mods.map(([w, m, b]) => `<tr><td>${w}</td><td>${esc(m)}</td><td>${esc(b)}</td></tr>`).join('\n')}
+</tbody></table></div>
+<h2 id="ai-integrated">Why an AI integrated digital marketing course matters</h2>
+<p>AI now does much of the routine work in marketing: first drafts, audits, reports, setup and reporting. A syllabus that treats AI as one extra chapter leaves you able to talk about it but not to work with it. In an AI integrated digital marketing course, AI sits inside every module. You use Claude, WordPress MCP, MCPs for ad accounts, CRO automations and chatbots on the tasks you are learning, so you finish with the habit of working with AI, not a list of tools you have seen.</p>
+<p>That is the difference employers and clients notice. Someone who can show a site, an SEO audit, a content calendar with a working automation and campaign setups, all built with AI inside real platforms, is easier to hire than someone with a certificate and a list of topics.</p>
+<h2 id="how-ai-fits">Where AI shows up in each module</h2>
+<ul>
+<li><strong>Web development:</strong> you build your portfolio site with WordPress, WordPress MCP and vibe coding, instead of dragging blocks for weeks.</li>
+<li><strong>SEO and AI search:</strong> you audit a real brand for Google and for AI search answers, and write a 3-month roadmap.</li>
+<li><strong>Social media, content and automations:</strong> a content calendar plus one DM or WhatsApp automation that actually runs.</li>
+<li><strong>Ads:</strong> campaigns on five platforms, with a test plan, working with MCPs for ad accounts.</li>
+<li><strong>Specialisations:</strong> Marktech goes deep on Claude, MCP, automations, tracking and chatbots. AI Generalist ties every skill together so one person can do the work of a small team.</li>
+</ul>
+<h2 id="online">A digital marketing course online, live, from any city in India</h2>
+<p>You do not need to live near a training centre. The course is a live digital marketing course online, for students and working people anywhere in India, with classes in the evening. See the <a href="/digital-marketing-course-online">online digital marketing course</a> page for how the format works, or browse the <a href="/digital-marketing-course">digital marketing course in India</a> page and the <a href="/all-pages">city pages</a>.</p>
+${DIFF('India')}
+<h2 id="plans">What is included in the fee</h2>
+${PLAN}
+<p>The training is the same in both plans. The ₹5,999 plan has limited tool access (Spectra Pro, Elementor Pro, Canva and Semrush, plus domain and hosting). The ₹9,999 plan adds full tool access and live ad experience on an agency or brand account with a real ad budget.</p>
+${FEE_TABLE}
+${faqHtml(faq)}
+<h2 id="more">More</h2>
+<ul>
+<li><a href="/digital-marketing-course">Digital marketing course in India: the full program</a></li>
+<li><a href="/ai-digital-marketing-course">AI digital marketing course</a></li>
+<li><a href="/digital-marketing-course-online">Online digital marketing course</a></li>
+<li><a href="/digital-marketing-course-with-internship">Digital marketing course with internship</a></li>
+<li><a href="/digital-marketing-course-syllabus">Digital marketing course syllabus</a></li>
+<li><a href="/blogs/best-digital-marketing-courses-india-2026-how-to-choose">How to choose the best digital marketing course in India</a></li>
+</ul>`;
+  write('digital-marketing-course-syllabus.html', page({ theme: 'ocean', layout: 'card',
+    path: p, title, desc, kicker: 'Digital marketing course syllabus', h1: 'Digital marketing course syllabus: 12 weeks, AI in every module, live online',
+    answer: 'The AIM digital marketing course syllabus is 12 weeks and nine modules, taught live online. Weeks 1 to 4 cover five core modules, weeks 5 to 8 are four specialisations, and weeks 9 to 12 are a 1-month agency internship. AI is built into every module, so you learn to work with it, not just hear about it. From ₹5,999, or ₹9,999 with full tool access.',
+    lead: 'Every module, what you build in each, and why AI sits inside all of them. Online, from ₹5,999.',
+    crumbs: [['Home', '/'], ['Digital marketing course', '/digital-marketing-course'], ['Syllabus', null]], body, faq,
+    course: courseLd({ name: 'Digital Marketing Course Syllabus: AI Integrated, Live Online (AIM)', desc, path: p }),
+    breadcrumb: crumbLd([['Home', '/'], ['Digital marketing course', '/digital-marketing-course'], ['Syllabus', p]]),
+  }));
+}
+
 // ---------- HTML sitemap (not in seo-pages.json: it has no Course schema) ----------
 {
   const blogDir = path.join(ROOT, 'blogs');
@@ -525,7 +594,7 @@ ${faqHtml(faq)}
 <h2 id="main-pages">Main pages</h2>
 <ul><li><a href="/">Home: the AIM program, fee and how to apply</a></li><li><a href="/about">About AIM</a></li><li><a href="/blogs">Blog</a></li><li><a href="/terms">Terms and refund policy</a></li><li><a href="/all-pages">All pages</a></li><li><a href="/privacy-policy">Privacy policy</a></li></ul>
 <h2 id="courses">Courses</h2>
-<ul><li><a href="/digital-marketing-course">Digital marketing course in India</a></li><li><a href="/ai-digital-marketing-course">AI digital marketing course</a></li><li><a href="/vibe-marketing-course">Vibe marketing course</a></li><li><a href="/digital-marketing-course-online">Online digital marketing course</a></li><li><a href="/digital-marketing-course-with-internship">Digital marketing course with internship</a></li></ul>
+<ul><li><a href="/digital-marketing-course">Digital marketing course in India</a></li><li><a href="/ai-digital-marketing-course">AI digital marketing course</a></li><li><a href="/vibe-marketing-course">Vibe marketing course</a></li><li><a href="/digital-marketing-course-online">Online digital marketing course</a></li><li><a href="/digital-marketing-course-with-internship">Digital marketing course with internship</a></li><li><a href="/digital-marketing-course-syllabus">Digital marketing course syllabus</a></li></ul>
 <h2 id="cities">Digital marketing course by city</h2>
 <ul>${CITIES.map((c) => `<li><a href="/digital-marketing-course/${c.slug}">Digital marketing course in ${esc(c.name)}</a></li>`).join('')}</ul>
 <h2 id="blog-posts">Blog posts</h2>

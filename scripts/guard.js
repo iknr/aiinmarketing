@@ -430,6 +430,10 @@ const INVARIANTS = [
       try { list = JSON.parse(read(mf)); } catch (e) { return [`${mf} is not valid JSON.`]; }
       if (list.length < 20) p.push(`${mf}: only ${list.length} pages listed (expected at least 20).`);
       const sm = new Set(sitemapUrls() || []), llms = tryRead('llms.txt') || '';
+      try {
+        const cb = require('../tools/css-bundle.js');
+        if (!exists(cb.BUNDLE) || read(cb.BUNDLE) !== cb.build()) p.push(`${cb.BUNDLE} is out of date with its source stylesheets. Run node tools/build-seo-pages.js and commit the result.`);
+      } catch (e) { p.push('course CSS bundle check failed: ' + e.message); }
       for (const f of list) {
         const h = tryRead(f);
         if (h === null) { p.push(`${f}: course/city page file missing. Rebuild with node tools/build-seo-pages.js.`); continue; }
@@ -437,6 +441,7 @@ const INVARIANTS = [
         for (const t of ['Course', 'FAQPage', 'BreadcrumbList']) if (!types.includes(t)) p.push(`${f}: ${t} JSON-LD missing.`);
         if (!/5,999|5999/.test(h) || !/9,999|9999/.test(h)) p.push(`${f}: both plans (5,999 and 9,999) must appear.`);
         if (f !== 'digital-marketing-course/index.html' && !h.includes('href="/digital-marketing-course"')) p.push(`${f}: link to /digital-marketing-course missing.`);
+        if (!h.includes('aim-course-bundle.css')) p.push(`${f}: must load the single aim-course-bundle.css (rebuild with node tools/build-seo-pages.js).`);
         const url = pageUrl(f);
         if (!sm.has(url)) p.push(`${f}: not listed in sitemap.xml.`);
         if (!llms.includes(url)) p.push(`${f}: not listed in llms.txt.`);

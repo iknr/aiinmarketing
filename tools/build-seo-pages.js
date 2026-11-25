@@ -84,6 +84,7 @@ const PLACED_CSS = `<style>.aimb-placed{display:grid;grid-template-columns:repea
 
 const { upgrade } = require('./course-shell.js');
 const { syncHeader } = require('./sync-header.js');
+const { bundlePage } = require('./css-bundle.js');
 
 const answerHtml = (t) => `<div class="aimb-takeaways"><strong>Short answer</strong><p>${rs(esc(t))}</p></div>
 <p class="aimb-small">Free download: <a href="#free-guide-box">The 12-week syllabus</a>, sent to your phone and email.</p>`;
@@ -92,7 +93,7 @@ const bridgeHtml = (k) => `<section class="aimb-bridge"><div class="aimb-bridge-
 function page(o) {
   const url = SITE + o.path;
   const ld = [o.course, o.breadcrumb, o.faq && faqLd(o.faq)].filter(Boolean).map((j) => `<script type="application/ld+json">${JSON.stringify(j)}</script>`).join('\n');
-  return syncHeader(upgrade(`<!DOCTYPE html>
+  return bundlePage(syncHeader(upgrade(`<!DOCTYPE html>
 <html lang="en-IN">
 <head>
 ${GTM}<meta charset="UTF-8">
@@ -146,7 +147,7 @@ ${o.answer ? bridgeHtml(o.path.replace(/[^a-z0-9]+/gi, '-').replace(/^-|-$/g, ''
 <script id="aim-magnet-js" src="/wp-content/plugins/elementor/assets/js/aim-magnet.js?ver=1.0.0" defer></script><script id="aim-track-js" src="/wp-content/plugins/elementor/assets/js/aim-track.js?ver=1.1.0" defer></script>
 </body>
 </html>
-`));
+`)));
 }
 
 function faqLd(faq) {

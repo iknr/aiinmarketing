@@ -199,6 +199,7 @@ for (const c of CITIES) {
   const faq = [
     [`Is there a physical centre in ${c.name}?`, `No. AIM is a live online program, so there is no classroom in ${c.name} to travel to. You join the live classes from home and get the same training and internship as every other learner.`],
     c.faq,
+    ...(c.faq2 ? [c.faq2] : []),
     [`How much does a digital marketing course in ${c.name} cost?`, `AIM costs ₹5,999 with limited tool access, or ₹9,999 with full tool access. Because the course is live online, the fee is the same for ${c.name} as for every other city. You pay only after an onboarding call, and there is a 7-day money-back guarantee.`],
     [`How long is the digital marketing course for learners in ${c.name}?`, `The program runs 12 weeks. Weeks 1 to 4 cover the core skills, weeks 5 to 8 are four specialisations, and weeks 9 to 12 are a 1-month agency internship. Live classes are Monday to Friday, 9 to 11 pm IST.`],
     ...COMMON_FAQ.slice(0, 3),
@@ -227,7 +228,7 @@ for (const c of CITIES) {
       `Routine marketing work is moving to AI tools. What stays with people is directing those tools and checking the output. So AI is part of every module, and you work inside the real platforms from the first week.`,
       `Employers now expect AI to handle the routine parts of marketing, so the person they hire needs to know how to direct it and check it. That is why AI is in every module, with hands-on practice in the real tools from week 1.`][v]}</p>`,
     work: `<h2 id="work-in-${c.slug}">${workH}</h2>
-<p>${esc(c.industries)}</p>
+<p>${esc(c.industries)}</p>${c.local ? '\n<p>' + esc(c.local) + '</p>' : ''}
 <p class="aimb-small">This is general context about ${kerala ? 'the place' : 'the city'}&rsquo;s economy, not a hiring statistic.${PAY[c.slug] ? '' : ' For salary expectations, check current listings for the roles you want.'}</p>${payHtml(c) ? '\n' + payHtml(c) : ''}`,
     projects: `<h2 id="projects">${projH}</h2>
 <p>Each module ends with a project that goes into your live portfolio. ${['In', 'You could shape yours around businesses in', 'Examples from'][v]} ${N}${['you could shape yours around local businesses, for example:', ', for example:', ':'][v]}</p>

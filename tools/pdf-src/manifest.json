@@ -39,7 +39,7 @@
   "portfoliokit": {
     "source": "tools/pdf-src/portfoliokit.htm",
     "pdf": "wp-content/uploads/2026/11/guides/digital-marketing-portfolio-kit.pdf",
-    "sourceSha256": "8021fcb02b417c62568a968e580a592b7a7ada5c5309f0b7c50ebf3ae7cfa9cc",
-    "pdfSha256": "123c573fa7a9641032fcf576805ad031bf37a0a26febc973b012876cb0550628"
+    "sourceSha256": "6ab896bcdc27127aa073a138bf77c428fe6cb2407168dac60d403c20aaf4caf1",
+    "pdfSha256": "4077bf440cee34cd2936885db59c1a0dcaf82bd385950185ba1114ee5306e062"
   }
 }

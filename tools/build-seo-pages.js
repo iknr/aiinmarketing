@@ -361,7 +361,7 @@ ${faqHtml(faq)}
 <li><a href="/vibe-marketing-course">Vibe marketing course</a></li>
 <li><a href="/digital-marketing-course-online">Online digital marketing course</a></li>
 <li><a href="/digital-marketing-course-with-internship">Digital marketing course with internship</a></li>
-<li><a href="/digital-marketing-course-syllabus">Digital marketing course syllabus</a></li><li><a href="/digital-marketing-course-after-12th">Digital marketing course after 12th</a></li><li><a href="/digital-marketing-projects">Digital marketing projects</a></li>
+<li><a href="/digital-marketing-course-syllabus">Digital marketing course syllabus</a></li><li><a href="/digital-marketing-course-after-12th">Digital marketing course after 12th</a></li><li><a href="/digital-marketing-projects">Digital marketing projects</a></li><li><a href="/digital-marketing-resume">Digital marketing resume</a></li><li><a href="/digital-marketing-freelancing">Digital marketing freelancing</a></li>
 <li><a href="/blogs/agentic-ai-marketing-work-competitors-hand-to-agents">The marketing work competitors are handing to AI agents</a></li>
 <li><a href="/blogs/ai-in-marketing-course-what-to-look-for">Seven questions to ask before paying for an AI marketing course</a></li>
 </ul>`;
@@ -777,6 +777,161 @@ ${faqHtml(faq)}
     crumbs: [['Home', '/'], ['Digital marketing course', '/digital-marketing-course'], ['Projects', null]], body, faq,
     course: courseLd({ name: 'Digital Marketing Projects (AIM)', desc, path: p }),
     breadcrumb: crumbLd([['Home', '/'], ['Digital marketing course', '/digital-marketing-course'], ['Projects', p]]),
+  }));
+}
+
+// ---------- Resume pillar page ----------
+{
+  const p = '/digital-marketing-resume';
+  const title = 'Digital Marketing Resume for Freshers: Format and Tips | AIM';
+  const desc = 'Digital marketing resume for freshers: what to put in, a clean format, bullet examples without fake numbers and mistakes to avoid. Free checklist and tips.';
+  const faq = [
+    ['What should a digital marketing resume for a fresher include?', 'A short summary, a skills and tools section, projects with links, any internship or client work, education and a portfolio link. Put projects above education if you have no job history.'],
+    ['How long should a fresher resume be?', 'One page. A recruiter scans it in seconds, so every line has to earn its place.'],
+    ['What if I have no experience?', 'Use projects. A live site, an SEO audit, a content calendar and campaign setups show what you can do. Say they are practice projects and link to each.'],
+    ['Should I put numbers on my resume?', 'Only real ones. If you ran a real account, give the real result. If a project was practice, describe what you built and decided instead of inventing a result.'],
+    ['Which skills should I list?', 'Group them: SEO, content and social, paid ads, analytics, web and AI tools. List only tools you can use in an interview, and name them: for example WordPress, Search Console, GA4, Meta Ads Manager, Canva and Claude.'],
+    ['Do I need a portfolio link on the resume?', 'Yes. It is the most useful line on the page. Put it at the top beside your contact details.'],
+    ['Should I mention AI tools?', 'Yes, with a clear line on what you used them for and what you checked yourself. Employers want people who can direct AI tools, not just name them.'],
+    ['Can AIM help with my resume?', 'Yes. Placement support includes a CV rewrite, 3 mock interviews, interview prep sessions and job application support and guidance. There is no guarantee of a job.'],
+  ];
+  const body = `
+<h2 id="what">What a digital marketing resume has to do</h2>
+<p>A recruiter will give your resume a few seconds. It has to show three things fast: what you can do, proof that you did it and a link they can click. For a fresher, that means projects, tools and a portfolio link, in that order of importance. A long career summary does not help when there is no career yet.</p>
+<h2 id="layout">A clean one-page layout</h2>
+<ol>
+<li><strong>Header:</strong> name, phone, email, city, LinkedIn and portfolio link.</li>
+<li><strong>Summary:</strong> two lines, your focus and your best proof.</li>
+<li><strong>Skills and tools:</strong> grouped by area.</li>
+<li><strong>Projects:</strong> three to four, each with a link.</li>
+<li><strong>Internship or client work:</strong> if you have any.</li>
+<li><strong>Education and certificates.</strong></li>
+</ol>
+<p>Use one simple font, plain headings and no photo, tables or graphics. Many hiring tools read plain text better than designed layouts.</p>
+<h2 id="summary">Writing the summary</h2>
+<p>Two lines, in plain words. Example: <em>Digital marketing fresher focused on SEO and content, with a live portfolio site, an SEO audit and a 3-month roadmap for a real brand. Completed a 1-month agency internship.</em> Replace each part with what is true for you.</p>
+<h2 id="bullets">Project and internship bullets that read well</h2>
+<p>Start with what you did, name the tool, then say why or what came of it. Do not invent numbers.</p>
+<div class="aimb-tablewrap"><table class="aimb-table"><thead><tr><th>Weak</th><th>Better</th></tr></thead><tbody>
+<tr><td>Worked on SEO</td><td>Audited a local business site in Semrush and Search Console and wrote a 3-month roadmap with priorities</td></tr>
+<tr><td>Managed social media</td><td>Planned a 30-day content calendar in Canva and set up one DM automation to capture leads</td></tr>
+<tr><td>Knowledge of ads</td><td>Set up Meta and Google campaigns with audience, creative and a test plan for a launch brief</td></tr>
+<tr><td>Built a website</td><td>Built and published a portfolio site on WordPress with project pages and a contact form</td></tr>
+</tbody></table></div>
+<h2 id="skills">Skills and tools: how to list them</h2>
+<ul>
+<li><strong>Search:</strong> keyword research, on-page SEO, Search Console, Semrush</li>
+<li><strong>Content and social:</strong> content calendars, Canva, scheduling, DM automation</li>
+<li><strong>Paid ads:</strong> Meta Ads Manager, Google Ads, LinkedIn Campaign Manager</li>
+<li><strong>Analytics:</strong> GA4, Tag Manager basics, simple reports</li>
+<li><strong>Web and AI:</strong> WordPress, Claude and other AI tools, landing pages</li>
+</ul>
+<p>Keep only what you can talk about in an interview.</p>
+<h2 id="mistakes">Mistakes that cost interviews</h2>
+<ul>
+<li>Two or more pages with little proof.</li>
+<li>A skills bar or star ratings. They tell the reader nothing.</li>
+<li>Invented results or inflated job titles.</li>
+<li>Projects with no links.</li>
+<li>One resume for every job. Change the summary and the order of skills for each role.</li>
+</ul>
+<h2 id="after">What to build before you write the resume</h2>
+<p>If your resume feels thin, the fix is work, not wording. Build a portfolio site and three to five projects, and get real client experience. See the guides on <a href="/digital-marketing-projects">digital marketing projects</a>, <a href="/blogs/digital-marketing-portfolio-for-freshers-india">building a fresher portfolio</a> and <a href="/blogs/digital-marketing-internship-india-how-to-get-one">getting an internship</a>. In the AIM program you finish with a live portfolio site and a 1-month <a href="/digital-marketing-course-with-internship">agency internship</a>, and placement support includes a CV rewrite and 3 mock interviews.</p>
+${DIFF('India')}
+${faqHtml(faq)}
+<h2 id="more">More</h2>
+<ul>
+<li><a href="/digital-marketing-course">Digital marketing course in India: the full program</a></li>
+<li><a href="/digital-marketing-course-after-12th">Digital marketing course after 12th</a></li>
+<li><a href="/digital-marketing-course-syllabus">Digital marketing course syllabus</a></li>
+<li><a href="/blogs/digital-marketing-portfolio-for-freshers-india">Digital marketing portfolio for freshers</a></li>
+</ul>`;
+  write('digital-marketing-resume.html', page({ theme: 'sunrise', layout: 'card',
+    path: p, title, desc, kicker: 'Digital marketing resume', h1: 'Digital marketing resume for freshers: what to include, a clean format and examples',
+    answer: 'A digital marketing resume for a fresher should fit one page and lead with proof: a portfolio link, three to four projects, grouped skills and tools, and any internship. Write bullets as what you did, the tool and the reason, and never invent numbers. In the AIM program you finish with a live portfolio and a 1-month agency internship, with a CV rewrite and 3 mock interviews.',
+    lead: 'A one-page layout, bullet examples without fake numbers, and the mistakes that cost interviews.',
+    crumbs: [['Home', '/'], ['Digital marketing course', '/digital-marketing-course'], ['Resume', null]], body, faq,
+    course: courseLd({ name: 'Digital Marketing Resume Guide for Freshers (AIM)', desc, path: p }),
+    breadcrumb: crumbLd([['Home', '/'], ['Digital marketing course', '/digital-marketing-course'], ['Resume', p]]),
+  }));
+}
+
+// ---------- Freelance pillar page ----------
+{
+  const p = '/digital-marketing-freelancing';
+  const title = 'Digital Marketing Freelancer in India: How to Start | AIM';
+  const desc = 'How to become a digital marketing freelancer in India: skills, services to offer, finding your first clients, pricing models and mistakes. Practical guide.';
+  const faq = [
+    ['Can a fresher become a digital marketing freelancer?', 'Yes, but start narrow. Pick one service you can do well, build proof with practice projects and one or two real small clients, then add more services.'],
+    ['What services can a digital marketing freelancer offer?', 'Common ones are SEO audits, content and social media management, Meta and Google ads setup and management, landing pages and email or WhatsApp automations.'],
+    ['How do I find my first freelance client?', 'Start with people who already know you and local businesses with weak websites or no ads. Show a short, specific audit of their page, then offer one clear fix. A portfolio link and a short call do more than a long pitch.'],
+    ['How should I price freelance work?', 'There are three common models: a fixed price per project, a monthly retainer and an hourly rate. Fixed or retainer prices work better for beginners, because you are paid for the outcome and not the time you spend.'],
+    ['Do I need a portfolio to freelance?', 'Yes. A live site with three to five projects, each with the brief, process and what you decided, is the strongest proof you can have.'],
+    ['Freelancing or a job first?', 'Both work. A job or internship gives you training and real accounts. Many people freelance on the side first, then decide. The AIM internship gives one month of real client work before you choose.'],
+    ['Can AI replace a freelancer?', 'AI does a lot of routine work, so freelancers who use it well finish faster and take on more. The skill that stays valuable is judgement: what to do for this client and why.'],
+    ['What does AIM teach that helps freelancers?', 'Live portfolio site, SEO, content and automation, ads on five platforms, media planning, four specialisations and a 1-month agency internship. One path in the program is built for freelancers.'],
+  ];
+  const body = `
+<h2 id="what">What a digital marketing freelancer does</h2>
+<p>A freelancer sells marketing work to businesses without being their employee: setting up and running ads, fixing search visibility, planning content, building landing pages or automating follow-ups. You decide your services, your clients and your price. You also carry the work of finding clients, which is why proof and a clear offer matter so much.</p>
+<h2 id="skills">Skills you need before the first client</h2>
+<ul>
+<li>One strong service, such as SEO, ads or content.</li>
+<li>A simple website that you built and can explain.</li>
+<li>Basic analytics, so you can show what changed.</li>
+<li>Clear writing, for proposals and reports.</li>
+<li>AI tools to work faster, with checks on what they produce.</li>
+</ul>
+<h2 id="services">Services to start with</h2>
+<div class="aimb-tablewrap"><table class="aimb-table"><thead><tr><th>Service</th><th>Good first client</th><th>Proof to build</th></tr></thead><tbody>
+<tr><td>SEO audit and fixes</td><td>A local business with a weak site</td><td>An audit with a 3-month roadmap</td></tr>
+<tr><td>Social media and content</td><td>A small brand posting at random</td><td>A 30-day content calendar</td></tr>
+<tr><td>Meta or Google ads setup</td><td>A business with a clear offer</td><td>A campaign setup with a test plan</td></tr>
+<tr><td>Landing pages</td><td>A service business sending traffic to a home page</td><td>A live landing page with tracking</td></tr>
+<tr><td>WhatsApp or DM automation</td><td>A business that loses leads on slow replies</td><td>A working flow that captures a lead</td></tr>
+</tbody></table></div>
+<h2 id="first-client">How to find your first client</h2>
+<ol>
+<li><strong>Pick one service and one type of client.</strong> Narrow is easier to explain and to find.</li>
+<li><strong>Build proof.</strong> Practice projects and a portfolio site. See <a href="/digital-marketing-projects">digital marketing projects</a>.</li>
+<li><strong>Start with people near you:</strong> friends, family businesses, local shops and clinics.</li>
+<li><strong>Send a short audit.</strong> Three specific findings and one fix beat a generic pitch.</li>
+<li><strong>Offer a small first project</strong> with a clear scope and price.</li>
+<li><strong>Ask for a testimonial</strong> and a link when it goes well.</li>
+</ol>
+<h2 id="pricing">Pricing models</h2>
+<ul>
+<li><strong>Fixed price per project:</strong> clear for the client. Define the scope in writing.</li>
+<li><strong>Monthly retainer:</strong> steady income for ongoing work such as content or ads management.</li>
+<li><strong>Hourly:</strong> simple, but it punishes you for getting faster with AI.</li>
+</ul>
+<p>Beginners usually do better with a fixed price or a retainer. Price on the outcome and the work, not only the hours.</p>
+<h2 id="mistakes">Mistakes beginners make</h2>
+<ul>
+<li>Offering everything to everyone.</li>
+<li>Working with no written scope, so it grows without extra pay.</li>
+<li>Promising results nobody can guarantee.</li>
+<li>Having no portfolio link in messages.</li>
+<li>Not tracking results, so there is nothing to show next time.</li>
+</ul>
+<h2 id="aim">How the AIM program helps</h2>
+<p>AIM has a path for people who want to freelance. You build a live portfolio site, practise each service on real-style briefs, choose a specialisation and spend a month in an agency doing real client tasks, which gives you work to show. Read the honest views in <a href="/blogs/will-ai-replace-digital-marketers-india">will AI replace digital marketers</a> and <a href="/blogs/is-digital-marketing-a-good-career-india-2026">is digital marketing a good career in India</a>, and see how to <a href="/blogs/digital-marketing-internship-india-how-to-get-one">get an internship</a>. Placement support, if you choose a job instead, includes interview prep sessions, job application support and guidance.</p>
+${DIFF('India')}
+${faqHtml(faq)}
+<h2 id="more">More</h2>
+<ul>
+<li><a href="/digital-marketing-course">Digital marketing course in India: the full program</a></li>
+<li><a href="/digital-marketing-course-syllabus">Digital marketing course syllabus</a></li>
+<li><a href="/digital-marketing-resume">Digital marketing resume</a></li>
+<li><a href="/digital-marketing-course-with-internship">Digital marketing course with internship</a></li>
+</ul>`;
+  write('digital-marketing-freelancing.html', page({ theme: 'ocean', layout: 'card',
+    path: p, title, desc, kicker: 'Digital marketing freelancing', h1: 'Digital marketing freelancer in India: how to start and find your first client',
+    answer: 'To become a digital marketing freelancer in India, pick one service, build a portfolio with three to five projects, approach local businesses with a short specific audit and offer a small first project at a fixed price. Add services as you get proof. The AIM program includes a freelancer path, a live portfolio site and a 1-month agency internship.',
+    lead: 'Skills, services, first clients, pricing and mistakes. A practical guide for freshers.',
+    crumbs: [['Home', '/'], ['Digital marketing course', '/digital-marketing-course'], ['Freelancing', null]], body, faq,
+    course: courseLd({ name: 'Digital Marketing Freelancer Guide (AIM)', desc, path: p }),
+    breadcrumb: crumbLd([['Home', '/'], ['Digital marketing course', '/digital-marketing-course'], ['Freelancing', p]]),
   }));
 }
 

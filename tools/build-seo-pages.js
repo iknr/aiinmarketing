@@ -361,7 +361,7 @@ ${faqHtml(faq)}
 <li><a href="/vibe-marketing-course">Vibe marketing course</a></li>
 <li><a href="/digital-marketing-course-online">Online digital marketing course</a></li>
 <li><a href="/digital-marketing-course-with-internship">Digital marketing course with internship</a></li>
-<li><a href="/digital-marketing-course-syllabus">Digital marketing course syllabus</a></li><li><a href="/digital-marketing-course-after-12th">Digital marketing course after 12th</a></li>
+<li><a href="/digital-marketing-course-syllabus">Digital marketing course syllabus</a></li><li><a href="/digital-marketing-course-after-12th">Digital marketing course after 12th</a></li><li><a href="/digital-marketing-projects">Digital marketing projects</a></li>
 <li><a href="/blogs/agentic-ai-marketing-work-competitors-hand-to-agents">The marketing work competitors are handing to AI agents</a></li>
 <li><a href="/blogs/ai-in-marketing-course-what-to-look-for">Seven questions to ask before paying for an AI marketing course</a></li>
 </ul>`;
@@ -661,6 +661,92 @@ ${faqHtml(faq)}
     crumbs: [['Home', '/'], ['Digital marketing course', '/digital-marketing-course'], ['After 12th', null]], body, faq,
     course: courseLd({ name: 'Digital Marketing Course After 12th (AIM)', desc, path: p }),
     breadcrumb: crumbLd([['Home', '/'], ['Digital marketing course', '/digital-marketing-course'], ['After 12th', p]]),
+  }));
+}
+
+// ---------- Projects pillar page ----------
+{
+  const p = '/digital-marketing-projects';
+  const title = 'Digital Marketing Projects for Students and Freshers | AIM';
+  const desc = 'Digital marketing project ideas for students and freshers: 12 projects with what to build, tools and what to show. Includes the 5 built in the AIM course.';
+  const faq = [
+    ['What are good digital marketing projects for students?', 'Pick projects that end in something a person can open or check: a live website, an SEO audit with a roadmap, a 30-day content calendar, a campaign setup with a test plan and a media plan for a launch. Reports with only screenshots are weak proof.'],
+    ['Can I do digital marketing projects with no clients?', 'Yes. Use a real local business, a brand you already know or your own site. Say it is a practice brief. Employers care more about how you think and what you built than about whether money changed hands.'],
+    ['How many projects do I need in my portfolio?', 'Three to five solid ones beat fifteen thin ones. Cover a site, search, content and ads at least once each.'],
+    ['Is there a digital marketing projects PDF I can download?', 'Yes. The free Digital Marketing Portfolio Kit is a 7-page PDF that shows how to present your projects. Get it from the portfolio guide linked on this page.'],
+    ['What projects do you build in the AIM course?', 'A live portfolio website and landing page, an SEO audit with a 3-month roadmap, a 30-day content calendar with one working DM or WhatsApp automation, campaign setups on five ad platforms with a test plan, and a full media plan for a brand launch. Specialisations and the agency internship add more.'],
+    ['Do I need to spend money on ads for a project?', 'No. A campaign setup with targeting, creative, budget logic and a test plan shows the skill without spend. On the ₹9,999 plan you also get live ad experience on an agency or brand account with a real ad budget.'],
+    ['Can I use AI tools in my projects?', 'Yes, and you should. Say clearly what AI did and what you decided. Employers want to see that you can direct the tools, check the output and fix it.'],
+    ['Where do I show my projects?', 'On your own portfolio website, with one page per project, plus your LinkedIn featured section and your CV.'],
+  ];
+  const ideas = [
+    ['Portfolio website', 'WordPress, AI site builder', 'A live site with an about page, project pages and a contact form'],
+    ['Landing page for a local business', 'WordPress, Canva', 'One page with a clear offer, form and tracking'],
+    ['SEO audit and 3-month roadmap', 'Semrush or free tools, Search Console', 'Findings, priorities and a month-by-month plan'],
+    ['Keyword and content plan', 'Semrush or free tools', '20 keywords grouped by intent with page ideas'],
+    ['30-day content calendar', 'Canva, an AI writing tool', 'A calendar with posts, formats and goals'],
+    ['DM or WhatsApp automation', 'An automation tool', 'A working flow that replies and captures a lead'],
+    ['Meta or Instagram campaign setup', 'Ads Manager', 'Audience, creative, budget logic and a test plan'],
+    ['Google search campaign setup', 'Google Ads', 'Keyword themes, ad copy and negatives'],
+    ['LinkedIn ads setup', 'Campaign Manager', 'Targeting for a B2B offer with a test plan'],
+    ['Email welcome sequence', 'Any email tool', 'Four emails with timing and goal'],
+    ['Media plan for a brand launch', 'A spreadsheet', 'Channels, budget split, timeline and measures'],
+    ['Analytics dashboard', 'GA4, a spreadsheet', 'A one-page view of what to track and why'],
+  ];
+  const body = `
+<h2 id="what">What a good digital marketing project looks like</h2>
+<p>A good project ends in something a person can open or check. A live page. A plan with reasons. A campaign setup with a test plan. A report with screenshots and no thinking behind it does not convince anyone. If you are a student or a fresher, three to five strong projects usually matter more than a long list.</p>
+<h2 id="ideas">12 digital marketing project ideas for students and freshers</h2>
+<div class="aimb-tablewrap"><table class="aimb-table"><thead><tr><th>Project</th><th>Tools</th><th>What you show</th></tr></thead><tbody>
+${ideas.map(([a, b, c]) => `<tr><td>${esc(a)}</td><td>${esc(b)}</td><td>${esc(c)}</td></tr>`).join('\n')}
+</tbody></table></div>
+<p>Use a real local business, a brand you know or your own site, and say it is a practice brief. Do not invent results. Show your reasoning instead.</p>
+<h2 id="how">How to run each project</h2>
+<ol>
+<li><strong>Write a one-paragraph brief:</strong> who the business is, what it sells, the goal.</li>
+<li><strong>Research before you build:</strong> competitors, audience, search terms.</li>
+<li><strong>Build the thing:</strong> the page, plan or setup, with AI tools where they save time.</li>
+<li><strong>Explain your choices:</strong> why this audience, this budget split, this headline.</li>
+<li><strong>Publish it:</strong> one page per project on your site, linked from LinkedIn.</li>
+</ol>
+<h2 id="aim">The projects you build in the AIM course</h2>
+<p>Every module ends with something you make, and AI is part of each one.</p>
+<ul>
+<li><strong>Module 1:</strong> your live portfolio website and one landing page.</li>
+<li><strong>Module 2:</strong> an SEO audit and a 3-month roadmap for a real brand.</li>
+<li><strong>Module 3:</strong> a 30-day content calendar and one working DM or WhatsApp automation.</li>
+<li><strong>Module 4:</strong> campaign setups on Facebook, Instagram, LinkedIn, Snapchat and X with a test plan.</li>
+<li><strong>Module 5:</strong> a full media plan for a brand launch.</li>
+<li><strong>Specialisations and internship:</strong> deeper work in your track, then real client tasks in the 1-month agency internship.</li>
+</ul>
+<p>See the full path on the <a href="/digital-marketing-course-syllabus">syllabus page</a>, and read <a href="/blogs/digital-marketing-portfolio-for-freshers-india">how to build a fresher portfolio</a>, which includes the free 7-page Portfolio Kit PDF.</p>
+<h2 id="present">How to present projects so they get noticed</h2>
+<ul>
+<li>One page per project: brief, process, result or plan, what you learned.</li>
+<li>Lead with the outcome, not the tool list.</li>
+<li>Be honest about what was practice and what was real client work.</li>
+<li>Add your best two projects to your CV and your LinkedIn featured section.</li>
+</ul>
+<p>Looking for real work next? Read <a href="/blogs/digital-marketing-internship-india-how-to-get-one">how to get a digital marketing internship</a>.</p>
+${DIFF('India')}
+<h2 id="fee">Fee compared with other options</h2>
+<p>The ₹5,999 plan has limited tool access (Spectra Pro, Elementor Pro, Canva and Semrush, plus domain and hosting). The ₹9,999 plan adds full tool access and live ad experience on an agency or brand account with a real ad budget. The training and the internship are the same.</p>
+${FEE_TABLE}
+${faqHtml(faq)}
+<h2 id="more">More</h2>
+<ul>
+<li><a href="/digital-marketing-course">Digital marketing course in India: the full program</a></li>
+<li><a href="/digital-marketing-course-after-12th">Digital marketing course after 12th</a></li>
+<li><a href="/digital-marketing-course-syllabus">Digital marketing course syllabus</a></li>
+<li><a href="/digital-marketing-course-with-internship">Digital marketing course with internship</a></li>
+</ul>`;
+  write('digital-marketing-projects.html', page({ theme: 'ocean', layout: 'card',
+    path: p, title, desc, kicker: 'Digital marketing projects', h1: 'Digital marketing projects for students and freshers: 12 ideas and how to present them',
+    answer: 'The best digital marketing projects for students end in something people can open: a live site, an SEO audit with a roadmap, a content calendar with an automation, a campaign setup with a test plan and a media plan. Build three to five, explain your choices and publish one page for each. The AIM course has you build five of these, with AI in every module.',
+    lead: 'Twelve project ideas, how to run each one, and how to show them. Plus the projects built in the AIM course.',
+    crumbs: [['Home', '/'], ['Digital marketing course', '/digital-marketing-course'], ['Projects', null]], body, faq,
+    course: courseLd({ name: 'Digital Marketing Projects (AIM)', desc, path: p }),
+    breadcrumb: crumbLd([['Home', '/'], ['Digital marketing course', '/digital-marketing-course'], ['Projects', p]]),
   }));
 }
 

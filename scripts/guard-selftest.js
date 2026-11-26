@@ -54,6 +54,8 @@ const MUTATIONS = [
   ['replace the brochure PDF with a hand-edited file', (d) => fs.writeFileSync(path.join(d, 'wp-content/uploads/2026/11/guides/aim-program-brochure.pdf'), Buffer.from('%PDF-1.4 hand edited'))],
   ['drop the Course schema from a city page', (d) => edit(d, 'digital-marketing-course/pune.html', (s) => s.replace('"@type":"Course"', '"@type":"Thing"'))],
   ['drop a city page from the sitemap', (d) => edit(d, 'sitemap.xml', (s) => s.replace('https://aiinmarketing.in/digital-marketing-course/delhi', 'https://aiinmarketing.in/digital-marketing-course/gone'))],
+  ['remove the Organization schema from a blog post', (d) => edit(d, 'blogs/what-is-vibe-marketing.html', (s) => s.replace(/<script type="application\/ld\+json" id="aim-org-schema">[\s\S]*?<\/script>/, ''))],
+  ['drop the LinkedIn sameAs from the Organization schema', (d) => edit(d, 'terms.html', (s) => s.replace(/(id="aim-org-schema">[^<]*?)linkedin\.com\/company\/aim-ai-in-marketing-by-adsmentor/, '$1linkedin.com/company/gone'))],
   ['drop a blog post from llms.txt', (d) => edit(d, 'llms.txt', (s) => s.split('https://aiinmarketing.in/blogs/what-is-vibe-marketing').join('https://aiinmarketing.in/blogs/gone'))],
 ];
 

@@ -526,6 +526,26 @@ const INVARIANTS = [
     },
   },
   {
+    id: 'org-schema-on-every-page',
+    title: 'Every public page carries the AIM Organization schema (same @id as the home page) with sameAs links; every page but the home page also carries the WebSite node',
+    why: 'Organization schema with sameAs links ties every page to one entity (AIM by Adsmentor, its LinkedIn, X and Crunchbase profiles) so Google and AI search tools recognise the brand consistently. Without it the entity is only defined on the home page. Generated pages get it from tools/build-seo-pages.js; every other page needs node tools/org-schema.js after it is added. The home page is owner-protected and keeps its own block.',
+    check() {
+      const p = [];
+      const ID = SITE + '/#org';
+      for (const f of publicHtml()) {
+        const h = tryRead(f) || '';
+        const items = [];
+        for (const b of jsonLd(h)) if (b.ok) for (const x of flat(b.data['@graph'] || b.data)) items.push(x);
+        const org = items.find((x) => x && x['@id'] === ID && typeOf(x).some((t) => /Organization/.test(t)));
+        if (!org) { p.push(`${f}: Organization JSON-LD with "@id": "${ID}" is missing. Run node tools/org-schema.js (or rebuild with node tools/build-seo-pages.js) and commit.`); continue; }
+        const same = flat(org.sameAs || []).join(' ');
+        if (!/linkedin\.com\/company\/aim-ai-in-marketing-by-adsmentor/.test(same) || !/x\.com\/ai_inmarketing_/.test(same)) p.push(`${f}: Organization sameAs must list the AIM LinkedIn company page and the X profile.`);
+        if (f !== 'index.html' && !items.some((x) => x && typeOf(x).includes('WebSite') && x['@id'] === SITE + '/#website')) p.push(`${f}: WebSite JSON-LD node is missing. Run node tools/org-schema.js.`);
+      }
+      return p;
+    },
+  },
+  {
     id: 'secret-hygiene',
     title: 'No API keys / tokens in the repo and no tracked .env file',
     why: 'The Heffl key lives only in Vercel environment variables. A key committed to GitHub must be treated as leaked.',

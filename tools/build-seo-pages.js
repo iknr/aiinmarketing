@@ -85,6 +85,7 @@ const PLACED_CSS = `<style>.aimb-placed{display:grid;grid-template-columns:repea
 const { upgrade } = require('./course-shell.js');
 const { syncHeader } = require('./sync-header.js');
 const { bundlePage } = require('./css-bundle.js');
+const { ORG_SCRIPT } = require('./org-schema.js');
 
 const answerHtml = (t) => `<div class="aimb-takeaways"><strong>Short answer</strong><p>${rs(esc(t))}</p></div>
 <p class="aimb-small">Free download: <a href="#free-guide-box">The 12-week syllabus</a>, sent to your phone and email.</p>`;
@@ -122,6 +123,7 @@ ${GTM}<meta charset="UTF-8">
 <link rel="stylesheet" id="aim-blog-css" href="/wp-content/uploads/elementor/css/aim-blog.css?ver=2.8.0"><link rel="stylesheet" id="aim-programs-css" href="/wp-content/uploads/elementor/css/aim-programs.css?ver=1.1.0" media="all">
 <link rel="stylesheet" id="aim-themes-css" href="/wp-content/uploads/elementor/css/aim-themes.css?ver=1.0.0"><link rel="stylesheet" id="aim-course-css" href="/wp-content/uploads/elementor/css/aim-course.css?ver=1.0.2">
 ${ld}
+${ORG_SCRIPT}
 ${PLACED_CSS}
 </head>
 <body class="page page-template-default elementor-default" data-aimtheme="${o.theme || 'sunrise'}" data-aimlayout="${o.layout || 'left'}">
@@ -394,6 +396,14 @@ ${faqHtml(faq)}
 <li><strong>Run:</strong> ads on five platforms, DM and WhatsApp automations, chatbots and CRO tests.</li>
 <li><strong>Check:</strong> you review every output, because AI can be confidently wrong and the account is yours.</li>
 </ul>
+<h3>Vibe marketing course at a glance</h3>
+<div class="aimb-tablewrap"><table class="aimb-table"><thead><tr><th>Item</th><th>Detail</th></tr></thead><tbody>
+<tr><td>Format</td><td>Live online, Monday to Friday, 9 to 11 pm IST</td></tr>
+<tr><td>Length</td><td>12 weeks, nine modules, ending with a 1-month agency internship</td></tr>
+<tr><td>Coding</td><td>Not needed. You start from zero and describe what you want to AI coding tools.</td></tr>
+<tr><td>Fee</td><td>&#8377;5,999 with limited tool access, or &#8377;9,999 with full tool access. Same training in both.</td></tr>
+<tr><td>Refund</td><td>7-day money-back guarantee</td></tr>
+</tbody></table></div>
 <h2 id="two-meanings">Two meanings of vibe marketing: which one this course is</h2>
 <p>You will see the term used two ways. Some brands use it for building a feeling around the brand, through style, culture and tone, instead of listing product features. In AI circles it means directing AI tools to build and run marketing work from plain-language instructions. This course teaches the second meaning, the hands-on one, and the brand side comes in through the Branding and Content specialisation.</p>
 <h2 id="what-you-build">What you build with it</h2>

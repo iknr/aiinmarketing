@@ -36,7 +36,9 @@
     n.innerHTML=items.map(function(x){return '<a href="#'+x[0]+'">'+x[1]+'</a>';}).join('');
     document.body.appendChild(n);
     var hero=document.getElementById('top')||document.querySelector('.am-lp section');
-    function on(){ var y=hero?hero.getBoundingClientRect().bottom:300; n.classList.toggle('is-on', y<0); }
+    var ft=document.querySelector('footer');
+    function on(){ var y=hero?hero.getBoundingClientRect().bottom:300; var fy=ft?ft.getBoundingClientRect().top:1e9; n.classList.toggle('is-on', y<0 && fy>window.innerHeight-8); }
+    window.addEventListener('resize',on);
     window.addEventListener('scroll',on,{passive:true}); on();
   }
   function init(){ accordions(); tabs(); jump(); }

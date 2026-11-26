@@ -12,7 +12,6 @@
   var HOME = location.pathname === '/' || location.pathname === '/index.html';
   var APPLY_HREF = HOME ? '#elementor-action:action=popup:open&settings=eyJpZCI6IjUxOSIsInRvZ2dsZSI6ZmFsc2V9' : '/#apply';
   var SYLLABUS_HREF = HOME ? '#syllabus' : '/#syllabus';
-  var WA = 'https://wa.me/919611628535?text=' + encodeURIComponent('Hi, I have a question about the AIM course.');
   var WA2 = 'https://wa.me/916282434535?text=' + encodeURIComponent('Hi, I have a question about the AIM course.');
   var WA2_OPT = { label: 'Chat on WhatsApp +91 62824 34535', href: WA2, external: true };
   var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -82,8 +81,7 @@
       say: ['The team can answer anything this chat cannot, such as batch dates or your own situation. Call, message or write to us.'],
       options: [
         Object.assign({ primary: true }, WA2_OPT),
-        { label: 'WhatsApp +91 96116 28535', href: WA, external: true },
-        { label: 'Call +91 83406 47293', href: 'tel:+918340647293' },
+        { label: 'Call +91 62824 34535', href: 'tel:+916282434535' },
         { label: 'Email contact@adsmentor.in', href: 'mailto:contact@adsmentor.in' },
         BACK
       ]

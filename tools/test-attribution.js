@@ -210,7 +210,7 @@ test('phase 2: GA4 events (form_start, whatsapp_click, scroll_50) and page_type 
   await page.evaluate(() => { window.dataLayer = window.dataLayer || []; });
   await page.locator('form.aim-magnet-form input[name="form_fields[name]"], form.aim-magnet-form input[type="text"]').first().focus();
   await page.evaluate(() => {
-    const a = document.createElement('a'); a.href = 'https://wa.me/919611628535'; a.textContent = 'WhatsApp'; a.id = 'wa-test';
+    const a = document.createElement('a'); a.href = 'https://wa.me/916282434535'; a.textContent = 'WhatsApp'; a.id = 'wa-test';
     a.addEventListener('click', (e) => e.preventDefault()); document.body.appendChild(a); a.click();
     window.scrollTo(0, document.documentElement.scrollHeight);
   });

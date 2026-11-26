@@ -568,6 +568,10 @@ a.aimb-pill:focus-visible { outline: 3px solid var(--blue); outline-offset: 2px;
 html { scroll-padding-top: 126px; }
 .aimb-article h2[id], .lg-sec, .aimb-article [id] { scroll-margin-top: 130px; }
 .au-side, .lg-toc { top: 134px; }
+/* 1.1.0: grouped menu. Program dropdown is narrow, student links sit under Courses */
+.aimh-ddp:not(.aimh-ddp2) { min-width: 230px; }
+.aimh-sub { margin-top: 10px; padding-top: 6px; border-top: 1px solid #e7e1d4; display: grid; gap: 2px; }
+.aimh-links > a.aimh-apply { white-space: nowrap; }
 /* aim-chat.css */
 /* AIM assistant (1.1.0): launcher + pre-written question flow. Colours are fixed so page themes do not change it. */
 .aimc-launcher, .aimc-panel { font-family: "Plus Jakarta Sans","Segoe UI",sans-serif; letter-spacing: 0; color: #111827; box-sizing: border-box; }

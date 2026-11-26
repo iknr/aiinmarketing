@@ -3202,3 +3202,7 @@ html body #programs-home.aimp-full, html body #brochure.aimp-full { border-top: 
   html body .aim-launcher .aim-launcher-text { display: none !important; }
 }
 @media (max-width: 820px) { html body #programs-home .aimp-inner, html body #brochure .aimp-inner { padding-left: 14px !important; padding-right: 14px !important; } }
+
+/* grouped menu: student links under Courses */
+.am-navlinks .am-sub { margin-top: 10px; padding-top: 6px; border-top: 1px solid #e7e1d4; display: grid; gap: 2px; }
+.am-navlinks .am-ddp:not(.am-ddp2) { min-width: 230px; }

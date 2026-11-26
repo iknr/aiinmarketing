@@ -28,8 +28,8 @@ const ATTEMPT1_MS = 5000;
 const ATTEMPT2_MS = 4000;
 const GEMINI = 'https://generativelanguage.googleapis.com/v1beta/models/';
 
-const HANDOFF_REPLY = 'The team is the best person to answer that, and they can talk it through on a call. Message them on WhatsApp +91 96116 28535, call +91 83406 47293 or write to contact@adsmentor.in.';
-const PRIVACY_REPLY = 'Please do not share phone numbers or email addresses in this chat. The team can reach you if you apply, or you can message them on WhatsApp +91 96116 28535.';
+const HANDOFF_REPLY = 'The team is the best person to answer that, and they can talk it through on a call. Message or call them on WhatsApp +91 62824 34535 or write to contact@adsmentor.in.';
+const PRIVACY_REPLY = 'Please do not share phone numbers or email addresses in this chat. The team can reach you if you apply, or you can message them on WhatsApp +91 62824 34535.';
 
 // Anything about jobs, pay or guarantees is not for the AI to answer.
 const OFF_LIMITS = /placement|placed\b|job\s*guarantee|guarantee[^.]{0,30}\bjobs?\b|\bjobs?\b[^.]{0,30}guarantee|\blpa\b|\bctc\b|salary|salaries|package\s*of|lakhs?\s*(per|a)\s*(year|annum)|\bhir(e|ed|ing)\b|get\s*a\s*job|job\s*assistance/i;
@@ -57,7 +57,7 @@ LEARNING
 SCHEDULE
 - Live online, Monday to Friday, 9 to 11 pm IST. Weekends are for doubt clearing, project reviews and interview prep. About 12 weeks of live classes, then a 1-month internship at a partner agency. The agency is matched to the student's projects and strongest area.
 
-CONTACT: WhatsApp +91 62824 34535 or +91 96116 28535, phone +91 83406 47293, email contact@adsmentor.in. Applying takes about 30 seconds on the website.
+CONTACT: WhatsApp or phone +91 62824 34535, email contact@adsmentor.in. Applying takes about 30 seconds on the website.
 
 RULES
 - Use only the facts above. If you do not know, say so and suggest the team. Never invent dates, batch dates, discounts, offers or numbers.

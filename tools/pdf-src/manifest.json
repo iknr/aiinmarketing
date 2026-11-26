@@ -2,8 +2,8 @@
   "brochure": {
     "source": "tools/pdf-src/brochure.htm",
     "pdf": "wp-content/uploads/2026/11/guides/aim-program-brochure.pdf",
-    "sourceSha256": "a866fbf3a5f33a309a4bb69ee3c242e5185c6dc0d4876d93f85bc8638f3120e5",
-    "pdfSha256": "e8bc44348ce5f27fde52ee82f5c9b2859a8cef7eb6eac02ceeaebad339a3df1c"
+    "sourceSha256": "063fda2ed828516af03ddbf76ef41cd4aa03d29e06d1aec5c5d94a16be846624",
+    "pdfSha256": "4e6667cd014c3b5ff0881925c7bd35ac4ed28083d5af99136249335e1c143df0"
   },
   "syllabus": {
     "source": "tools/pdf-src/syllabus.htm",

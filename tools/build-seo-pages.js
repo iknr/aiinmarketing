@@ -477,6 +477,11 @@ ${faqHtml(faq)}
     ['Where is the internship done?', 'Online, like the rest of the program. You do not need to move to a city or travel to an office.'],
     ['What work do I do in the internship?', 'Real client tasks at a partner agency, in the areas you trained in, such as SEO, content, ads and automation. A mentor checks in every week and the work goes into your portfolio.'],
     ['Do you help with jobs after the internship?', 'Yes. Placement support covers interview prep sessions, job application support and guidance, along with a CV rewrite, 3 mock interviews, a portfolio site and real work to show from the internship.'],
+    ['Is there a digital marketing internship near me?', 'You do not need one near you. The AIM internship is online, so you can do it from any city in India while the agency works with you remotely. That is useful if there is no good agency near you, or you cannot travel.'],
+    ['Can I do the internship while in college?', 'Yes. Classes are in the evening, 9 to 11 pm IST, so they fit around college hours. Plan your internship month around your timetable and talk to your mentor about it.'],
+    ['Do I get an internship certificate?', 'Yes. The certificate is issued by the agency where you worked, along with the course completion.'],
+    ['Which agency will I be placed with?', 'The agency is matched to your projects and your strongest area, so the work fits what you trained in.'],
+    ['What is the difference between a course project and an agency internship?', 'A course project is an exercise in a class. An agency internship is real client work, reviewed by a mentor every week, with a certificate from the agency. Ask any course which one it means.'],
   ].concat(COMMON_FAQ.slice(0, 3));
   const body = `
 <h2 id="what-internship-is">What the internship is</h2>
@@ -492,8 +497,33 @@ ${faqHtml(faq)}
 </ul>
 <p>Placement support is part of the program: interview prep sessions, job application support and guidance.</p>
 ${DIFF('')}
+<h2 id="week-by-week">The four internship weeks</h2>
+<div class="aimb-tablewrap"><table class="aimb-table"><thead><tr><th>Week</th><th>What happens</th></tr></thead><tbody>
+<tr><td>Week 9</td><td>You meet your mentor, get matched to an agency and take your first client tasks in your strongest area.</td></tr>
+<tr><td>Week 10</td><td>You keep working on live tasks, such as SEO work, content, ad setups or automations, with the weekly check-in.</td></tr>
+<tr><td>Week 11</td><td>You take on a bigger piece of work and start writing it up for your portfolio.</td></tr>
+<tr><td>Week 12</td><td>You finish, get feedback and receive the agency certificate. Interview prep and applications continue.</td></tr>
+</tbody></table></div>
 <h2 id="internship-vs-no-internship">Course with internship or course without: what to check</h2>
 <p>Many courses say internship and mean a project inside the class. Ask four things before you pay: Is it at a real agency? Is it on client work? Does someone review it each week? Does the certificate come from the agency? If any answer is no, it is a class project.</p>
+<div class="aimb-tablewrap"><table class="aimb-table"><thead><tr><th>Question</th><th>Class project</th><th>Agency internship at AIM</th></tr></thead><tbody>
+<tr><td>Who is it for?</td><td>A made-up brief</td><td>Real client tasks at a partner agency</td></tr>
+<tr><td>Who reviews it?</td><td>Often nobody, or the trainer once</td><td>A mentor, every week</td></tr>
+<tr><td>What certificate?</td><td>The course certificate</td><td>A certificate issued by the agency</td></tr>
+<tr><td>What can you show?</td><td>A report</td><td>Work you did, written up for your portfolio</td></tr>
+</tbody></table></div>
+<h2 id="near-me">Internship near me: why location does not matter here</h2>
+<p>Many students search for a digital marketing internship near them and find only a few agencies, often unpaid and without training. The AIM internship is online, so your city does not limit you. If you are looking for more routes, read <a href="/blogs/digital-marketing-internship-india-how-to-get-one">how to get a digital marketing internship in India</a>.</p>
+<h2 id="paid">Is it paid?</h2>
+<p>No. It is a training internship, which is why the fee covers the training and the internship together. You get real client work, a mentor and a certificate from the agency instead of a stipend. Be careful with any course that promises a paid internship or a guaranteed job.</p>
+<h2 id="make-the-most">How to make the most of it</h2>
+<ol>
+<li>Finish your portfolio site before week 9, so you have a place to publish the work.</li>
+<li>Keep a short log of tasks and what you decided.</li>
+<li>Ask your mentor for feedback each week and use it.</li>
+<li>Write up your best task as a one-page case, without client secrets.</li>
+</ol>
+<p>See <a href="/blogs/digital-marketing-portfolio-for-freshers-india">what a fresher portfolio needs</a> and the full <a href="/digital-marketing-course-syllabus">12-week syllabus</a>.</p>
 <h2 id="fee">Fee compared with other programs</h2>
 <p>The internship is in both plans. The plans differ only in tool access and live ad experience.</p>
 ${FEE_TABLE}

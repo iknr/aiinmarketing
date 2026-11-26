@@ -361,7 +361,7 @@ ${faqHtml(faq)}
 <li><a href="/vibe-marketing-course">Vibe marketing course</a></li>
 <li><a href="/digital-marketing-course-online">Online digital marketing course</a></li>
 <li><a href="/digital-marketing-course-with-internship">Digital marketing course with internship</a></li>
-<li><a href="/digital-marketing-course-syllabus">Digital marketing course syllabus</a></li>
+<li><a href="/digital-marketing-course-syllabus">Digital marketing course syllabus</a></li><li><a href="/digital-marketing-course-after-12th">Digital marketing course after 12th</a></li>
 <li><a href="/blogs/agentic-ai-marketing-work-competitors-hand-to-agents">The marketing work competitors are handing to AI agents</a></li>
 <li><a href="/blogs/ai-in-marketing-course-what-to-look-for">Seven questions to ask before paying for an AI marketing course</a></li>
 </ul>`;
@@ -417,7 +417,7 @@ ${faqHtml(faq)}
 <li><a href="/digital-marketing-course">Digital marketing course in India: the full program</a></li>
 <li><a href="/ai-digital-marketing-course">AI digital marketing course</a></li>
 <li><a href="/digital-marketing-course-with-internship">Digital marketing course with internship</a></li>
-<li><a href="/digital-marketing-course-syllabus">Digital marketing course syllabus</a></li>
+<li><a href="/digital-marketing-course-syllabus">Digital marketing course syllabus</a></li><li><a href="/digital-marketing-course-after-12th">Digital marketing course after 12th</a></li>
 <li><a href="/blogs/what-is-vibe-marketing">What vibe marketing is</a></li>
 <li><a href="/blogs/vibe-marketing-course-india-what-you-learn">What a vibe marketing course should teach</a></li>
 </ul>`;
@@ -569,7 +569,7 @@ ${faqHtml(faq)}
 <li><a href="/ai-digital-marketing-course">AI digital marketing course</a></li>
 <li><a href="/digital-marketing-course-online">Online digital marketing course</a></li>
 <li><a href="/digital-marketing-course-with-internship">Digital marketing course with internship</a></li>
-<li><a href="/digital-marketing-course-syllabus">Digital marketing course syllabus</a></li>
+<li><a href="/digital-marketing-course-syllabus">Digital marketing course syllabus</a></li><li><a href="/digital-marketing-course-after-12th">Digital marketing course after 12th</a></li>
 <li><a href="/blogs/best-digital-marketing-courses-india-2026-how-to-choose">How to choose the best digital marketing course in India</a></li>
 </ul>`;
   write('digital-marketing-course-syllabus.html', page({ theme: 'ocean', layout: 'card',
@@ -579,6 +579,88 @@ ${faqHtml(faq)}
     crumbs: [['Home', '/'], ['Digital marketing course', '/digital-marketing-course'], ['Syllabus', null]], body, faq,
     course: courseLd({ name: 'Digital Marketing Course Syllabus: AI Integrated, Live Online (AIM)', desc, path: p }),
     breadcrumb: crumbLd([['Home', '/'], ['Digital marketing course', '/digital-marketing-course'], ['Syllabus', p]]),
+  }));
+}
+
+// ---------- After 12th pillar page ----------
+{
+  const p = '/digital-marketing-course-after-12th';
+  const title = 'Digital Marketing Course After 12th: Eligibility, Fees | AIM';
+  const desc = 'Digital marketing course after 12th: who can join from any stream, what you learn, fees and careers. Live online, AI in every module, internship included.';
+  const faq = [
+    ['Can I do a digital marketing course after 12th?', 'Yes. You can start right after 12th, from any stream. AIM starts from building a website and goes step by step, so you do not need marketing experience.'],
+    ['Which stream is best for digital marketing after 12th: commerce, science or arts?', 'None is required. Commerce students find the business side familiar, science students often like the analytics, and arts students often like content and branding. The course teaches all of it from the start, so your stream does not decide whether you can join.'],
+    ['Do I need maths or coding for digital marketing?', 'No coding is needed. You use everyday numbers for budgets and reports, and you build your site with WordPress and AI tools instead of writing code from scratch.'],
+    ['Can I do the course along with college?', 'Yes. Classes are live online, Monday to Friday, 9 to 11 pm IST, so they fit around college hours. Recordings stay in the LMS if you miss a class.'],
+    ['Is a digital marketing degree better than a course?', 'A degree such as a BBA or B.Sc takes three years and costs much more, and it gives you a degree certificate. A short course teaches the working skills in weeks and gives you projects and an internship to show. Many students do both: a degree for the certificate and a course for the skills employers ask about in interviews.'],
+    ['What jobs can I get with digital marketing after 12th?', 'Common entry roles are SEO executive, social media executive, performance marketing or ads executive, content executive and e-commerce marketer. You can also freelance. Placement support is included: interview prep sessions, job application support and guidance.'],
+    ['How long does a digital marketing course after 12th take?', 'Courses run from about three months to three years depending on the type. AIM is 12 weeks: eight weeks of live classes and a 1-month agency internship.'],
+    ['Are online digital marketing courses valid?', 'Employers care about what you can show: a live website, campaign setups, an SEO audit and real client work. AIM gives you those, plus an internship certificate issued by the agency.'],
+    ['How much does it cost?', 'The AIM program costs ₹5,999 with limited tool access, or ₹9,999 with full tool access. A three-year degree costs several lakh rupees. See the fee comparison on this page.'],
+  ];
+  const body = `
+<h2 id="can-you">Can you do digital marketing after 12th?</h2>
+<p>Yes, and 12th pass is enough to start. Digital marketing is a skill you can learn in months and use to get an entry-level job, an internship or your first freelance client, while you are still in college. You do not need a particular stream. You do not need to know coding. You do need to practise on real tools, because that is what employers test.</p>
+<h2 id="streams">Digital marketing after 12th: commerce, science or arts</h2>
+<ul>
+<li><strong>Commerce:</strong> Budgets, pricing and customer behaviour will feel familiar. Ads and media planning are a natural fit.</li>
+<li><strong>Science:</strong> You are used to data and logic, so analytics, tracking, SEO and automations tend to click quickly.</li>
+<li><strong>Arts and humanities:</strong> Writing, design and storytelling matter a lot in content, social media and branding.</li>
+</ul>
+<p>The course starts from zero for everyone, so the stream you studied does not decide whether you can join. It only decides which module feels easiest at first.</p>
+<h2 id="routes">Your options after 12th: degree, diploma, short course or a mix</h2>
+<div class="aimb-tablewrap"><table class="aimb-table"><thead><tr><th>Route</th><th>Usual length</th><th>What you get</th><th>What to check</th></tr></thead><tbody>
+<tr><td>Degree (BBA or B.Sc in digital marketing)</td><td>3 years</td><td>A degree certificate and broad business subjects</td><td>How much of it is hands-on, and whether the syllabus is current</td></tr>
+<tr><td>Diploma</td><td>6 to 12 months</td><td>Structured training in the main channels</td><td>Live classes or recorded, and real projects</td></tr>
+<tr><td>Short certificate</td><td>3 to 6 months</td><td>A skill set and a certificate</td><td>Who the certificate is from and whether you work on real tools</td></tr>
+<tr><td>AIM program</td><td>12 weeks, live online</td><td>9 modules with AI in every one, 4 specialisations, a 1-month agency internship</td><td>You choose between limited and full tool access</td></tr>
+</tbody></table></div>
+<p>A common plan for students is to take a degree for the certificate and a live course alongside it for the skills. Evening classes make that possible without missing college.</p>
+<h2 id="learn">What you learn in a digital marketing course after 12th</h2>
+${PLAN}
+<p>The full week-by-week path, with what you build in each module, is on the <a href="/digital-marketing-course-syllabus">digital marketing course syllabus</a> page.</p>
+<h2 id="ai">Why AI inside every module matters when you are just starting</h2>
+<p>When you start your career, you compete with people who already use AI to do routine work faster. If you learn AI as one chapter at the end, you can describe it but not use it. If it is part of every module, you build a site, run an SEO audit, plan content and set up ads with AI from day one, and you finish with the habit employers now look for. That is why AIM builds it into every module instead of selling it as an add-on.</p>
+<h2 id="ninety">A simple 90-day plan after 12th</h2>
+<ol>
+<li><strong>Days 1 to 30:</strong> Learn the core skills and build your portfolio website. Weeks 1 to 4 of the program cover this.</li>
+<li><strong>Days 31 to 60:</strong> Pick a specialisation and build deeper projects. All four are included.</li>
+<li><strong>Days 61 to 90:</strong> Work on real client tasks in the 1-month agency internship and collect proof of work for your portfolio and CV.</li>
+</ol>
+<p>You can keep studying your degree the whole time. Read <a href="/blogs/digital-marketing-portfolio-for-freshers-india">what a fresher portfolio needs</a> and <a href="/blogs/digital-marketing-internship-india-how-to-get-one">how to get an internship</a> as you go.</p>
+<h2 id="careers">Careers and first jobs</h2>
+<p>Typical first roles are SEO executive, social media executive, ads or performance marketing executive, content executive and e-commerce marketer. Many students also start with freelance clients, then move into a role. Read the honest view in <a href="/blogs/will-ai-replace-digital-marketers-india">will AI replace digital marketers</a> and <a href="/blogs/is-digital-marketing-a-good-career-india-2026">is digital marketing a good career in India</a>. AIM includes placement support: interview prep sessions, job application support and guidance, a CV rewrite and 3 mock interviews.</p>
+<h2 id="parents">For parents: what to ask before you pay for any course</h2>
+<ul>
+<li>Is the fee listed openly, with everything that is and is not included?</li>
+<li>Is there a refund window, and what are its conditions? AIM has a 7-day money-back guarantee, and you pay only after an onboarding call.</li>
+<li>Is the internship at a real agency, on client work, with a certificate from the agency?</li>
+<li>Can you check the trainers? AIM trainers have public profiles on the <a href="/about">about page</a>.</li>
+<li>Do they promise a job? Be careful if they do. AIM offers placement support, not a guarantee.</li>
+</ul>
+${DIFF('India')}
+<h2 id="fee">Fee compared with other options</h2>
+<p>The ₹5,999 plan has limited tool access (Spectra Pro, Elementor Pro, Canva and Semrush, plus domain and hosting). The ₹9,999 plan adds full tool access and live ad experience on an agency or brand account with a real ad budget. The training and the internship are the same.</p>
+${FEE_TABLE}
+<p>See the <a href="/blogs/digital-marketing-course-fees-india-2026">digital marketing course fees in India</a> guide for the full breakdown, and the <a href="/digital-marketing-course-online">online digital marketing course</a> page for how live online classes work.</p>
+<h2 id="cities">Learn from any city</h2>
+<p>The course is live online, so you can join from any city in India. See the pages for <a href="/digital-marketing-course/delhi">Delhi NCR</a>, <a href="/digital-marketing-course/mumbai">Mumbai</a>, <a href="/digital-marketing-course/bangalore">Bangalore</a>, <a href="/digital-marketing-course/hyderabad">Hyderabad</a>, <a href="/digital-marketing-course/pune">Pune</a>, <a href="/digital-marketing-course/chennai">Chennai</a> and <a href="/digital-marketing-course/kerala">Kerala</a>, or <a href="/all-pages">all city pages</a>.</p>
+${faqHtml(faq)}
+<h2 id="more">More</h2>
+<ul>
+<li><a href="/digital-marketing-course">Digital marketing course in India: the full program</a></li>
+<li><a href="/digital-marketing-course-syllabus">Digital marketing course syllabus</a></li><li><a href="/digital-marketing-course-after-12th">Digital marketing course after 12th</a></li>
+<li><a href="/ai-digital-marketing-course">AI digital marketing course</a></li>
+<li><a href="/digital-marketing-course-with-internship">Digital marketing course with internship</a></li>
+<li><a href="/blogs/digital-marketing-course-for-beginners-india">Digital marketing course for beginners</a></li>
+</ul>`;
+  write('digital-marketing-course-after-12th.html', page({ theme: 'sunrise', layout: 'left',
+    path: p, title, desc, kicker: 'Digital marketing course after 12th', h1: 'Digital marketing course after 12th: who can join, what you learn and what it costs',
+    answer: 'You can do a digital marketing course right after 12th, from any stream, with no coding and no marketing background. AIM is a 12-week live online program with AI in every module, four specialisations and a 1-month agency internship, with evening classes that fit around college. From ₹5,999, or ₹9,999 with full tool access.',
+    lead: 'Eligibility, what to learn, how it compares with a degree, and what to ask before you pay. Live online, from ₹5,999.',
+    crumbs: [['Home', '/'], ['Digital marketing course', '/digital-marketing-course'], ['After 12th', null]], body, faq,
+    course: courseLd({ name: 'Digital Marketing Course After 12th (AIM)', desc, path: p }),
+    breadcrumb: crumbLd([['Home', '/'], ['Digital marketing course', '/digital-marketing-course'], ['After 12th', p]]),
   }));
 }
 
@@ -594,7 +676,7 @@ ${faqHtml(faq)}
 <h2 id="main-pages">Main pages</h2>
 <ul><li><a href="/">Home: the AIM program, fee and how to apply</a></li><li><a href="/about">About AIM</a></li><li><a href="/blogs">Blog</a></li><li><a href="/terms">Terms and refund policy</a></li><li><a href="/all-pages">All pages</a></li><li><a href="/privacy-policy">Privacy policy</a></li></ul>
 <h2 id="courses">Courses</h2>
-<ul><li><a href="/digital-marketing-course">Digital marketing course in India</a></li><li><a href="/ai-digital-marketing-course">AI digital marketing course</a></li><li><a href="/vibe-marketing-course">Vibe marketing course</a></li><li><a href="/digital-marketing-course-online">Online digital marketing course</a></li><li><a href="/digital-marketing-course-with-internship">Digital marketing course with internship</a></li><li><a href="/digital-marketing-course-syllabus">Digital marketing course syllabus</a></li></ul>
+<ul><li><a href="/digital-marketing-course">Digital marketing course in India</a></li><li><a href="/ai-digital-marketing-course">AI digital marketing course</a></li><li><a href="/vibe-marketing-course">Vibe marketing course</a></li><li><a href="/digital-marketing-course-online">Online digital marketing course</a></li><li><a href="/digital-marketing-course-with-internship">Digital marketing course with internship</a></li><li><a href="/digital-marketing-course-syllabus">Digital marketing course syllabus</a></li><li><a href="/digital-marketing-course-after-12th">Digital marketing course after 12th</a></li></ul>
 <h2 id="cities">Digital marketing course by city</h2>
 <ul>${CITIES.map((c) => `<li><a href="/digital-marketing-course/${c.slug}">Digital marketing course in ${esc(c.name)}</a></li>`).join('')}</ul>
 <h2 id="blog-posts">Blog posts</h2>

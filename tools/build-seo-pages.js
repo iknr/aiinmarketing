@@ -192,8 +192,10 @@ for (const c of CITIES) {
   const p = `/digital-marketing-course/${c.slug}`;
   let title = `Digital Marketing Course in ${c.name} (Live Online, AI) | AIM`;
   if (title.length > 60) title = `Digital Marketing Course in ${c.name} | AIM`;
+  if (c.title) title = c.title;
   let desc = `Live online AI digital marketing course for learners in ${c.name}. 12 weeks, agency internship, Rs 5,999 or Rs 9,999 with full tool access. Evening batches.`;
   if (desc.length > 160) desc = `Live online AI digital marketing course for ${c.name}. 12 weeks, agency internship, Rs 5,999 or Rs 9,999 with tools. Evening classes.`;
+  if (c.desc) desc = c.desc;
   const faq = [
     [`Is there a physical centre in ${c.name}?`, `No. AIM is a live online program, so there is no classroom in ${c.name} to travel to. You join the live classes from home and get the same training and internship as every other learner.`],
     c.faq,
@@ -213,7 +215,7 @@ for (const c of CITIES) {
   const workH = [`What marketing work looks like in ${N}`, `Why ${N} businesses need people who can use AI at work`, `The marketing jobs and clients around ${N}`][v];
   const projH = [`Briefs you can practise with a ${N} angle`, `Portfolio projects shaped around ${N}`, `Three real-style projects for ${N}`][v];
   const planH = [`What you do in the 12 weeks`, `Your 12 weeks, week by week`, `The 12-week path in short`][v];
-  const feeH = [`What it costs compared with other programs in India`, `Fees compared: what other live programs list`, `The fee, and how it compares`][v];
+  const feeH = [`Digital marketing course fees in ${N}, and how they compare`, `What a digital marketing course costs for learners in ${N}`, `Course fees for ${N} learners: AIM and other live programs`][v];
   const sec = {
     learn: `<h2 id="learn-from-${c.slug}">${learnH}</h2>
 <p>${[
@@ -238,6 +240,8 @@ ${PLAN}
 <p>Pick a path that suits you: <strong>freelancer</strong> (land your first clients), <strong>agency</strong> (join an agency team or run your own) or <strong>job</strong> (interview-ready for in-house roles). All three use the same nine modules and the same two fees.</p>`,
     diff: DIFF(N),
     fee: `<h2 id="fee">${feeH}</h2>
+<p>AIM costs &#8377;5,999 with limited tool access, or &#8377;9,999 with full tool access, and the fee is the same for ${N} as for any other city because the course is live online. Both plans have the same training, the same 1-month agency internship and a 7-day money-back guarantee.</p>
+<div class="aimb-tablewrap"><table class="aimb-table"><thead><tr><th>Plan</th><th>Fee</th><th>Tool access</th></tr></thead><tbody><tr><td>AIM, limited tool access</td><td>&#8377;5,999</td><td>Spectra Pro, Elementor Pro, Canva and Semrush, plus domain and hosting. No ad budget.</td></tr><tr><td>AIM, full tool access</td><td>&#8377;9,999</td><td>Claude, Semrush, Gemini Pro, Google AI Pro, Ahrefs, SpyFu, Ubersuggest and Canva, plus live ad experience with a real ad budget.</td></tr></tbody></table></div>
 <p>Course fees vary widely, and a place name on a listing does not change what you learn. Here is what live programs in India list, so you can compare before you pay anyone.</p>
 ${FEE_TABLE}`,
     faq: faqHtml(faq),
@@ -357,6 +361,8 @@ ${PLAN}
 <p>&#8377;5,999 with limited tool access, or &#8377;9,999 with full tool access. The tiers differ only in tool access and live ad experience.</p>
 ${FEE_TABLE}
 ${faqHtml(faq)}
+<h2 id="ai-cities">AI digital marketing course by city</h2>
+<p>The same live online AI course serves every city. Pick the page closest to you: ${['delhi', 'mumbai', 'bangalore', 'hyderabad', 'pune', 'chennai', 'kochi', 'kollam', 'coimbatore'].map((k) => bySlug[k]).filter(Boolean).map((x) => `<a href="/digital-marketing-course/${x.slug}">AI digital marketing course in ${esc(x.name)}</a>`).join(', ')}.</p>
 <h2 id="more">More</h2>
 <ul>
 <li><a href="/digital-marketing-course">Digital marketing course in India: the full program</a></li>
@@ -688,6 +694,7 @@ ${FEE_TABLE}
 ${faqHtml(faq)}
 <h2 id="more">More</h2>
 <ul>
+<li><a href="/blogs/best-digital-marketing-courses-india-2026-how-to-choose">Best AI digital marketing course for students in India (2026)</a></li>
 <li><a href="/digital-marketing-course">Digital marketing course in India: the full program</a></li>
 <li><a href="/digital-marketing-course-syllabus">Digital marketing course syllabus</a></li><li><a href="/digital-marketing-course-after-12th">Digital marketing course after 12th</a></li>
 <li><a href="/ai-digital-marketing-course">AI digital marketing course</a></li>
@@ -775,6 +782,7 @@ ${FEE_TABLE}
 ${faqHtml(faq)}
 <h2 id="more">More</h2>
 <ul>
+<li><a href="/blogs/best-digital-marketing-courses-india-2026-how-to-choose">Best AI digital marketing course for students in India (2026)</a></li>
 <li><a href="/digital-marketing-course">Digital marketing course in India: the full program</a></li>
 <li><a href="/digital-marketing-course-after-12th">Digital marketing course after 12th</a></li>
 <li><a href="/digital-marketing-course-syllabus">Digital marketing course syllabus</a></li>
@@ -851,6 +859,7 @@ ${DIFF('India')}
 ${faqHtml(faq)}
 <h2 id="more">More</h2>
 <ul>
+<li><a href="/blogs/best-digital-marketing-courses-india-2026-how-to-choose">Best AI digital marketing course for students in India (2026)</a></li>
 <li><a href="/digital-marketing-course">Digital marketing course in India: the full program</a></li>
 <li><a href="/digital-marketing-course-after-12th">Digital marketing course after 12th</a></li>
 <li><a href="/digital-marketing-course-syllabus">Digital marketing course syllabus</a></li>
@@ -930,6 +939,7 @@ ${DIFF('India')}
 ${faqHtml(faq)}
 <h2 id="more">More</h2>
 <ul>
+<li><a href="/blogs/best-digital-marketing-courses-india-2026-how-to-choose">Best AI digital marketing course for students in India (2026)</a></li>
 <li><a href="/digital-marketing-course">Digital marketing course in India: the full program</a></li>
 <li><a href="/digital-marketing-course-syllabus">Digital marketing course syllabus</a></li>
 <li><a href="/digital-marketing-resume">Digital marketing resume</a></li>

@@ -36,7 +36,7 @@ const JOBS = {
   await browser.close();
   fs.writeFileSync(manifestFile, JSON.stringify(manifest, null, 2) + '\n');
   if (names.includes('brochure')) {
-    const r = spawnSync('bash', ['-c', `pdftoppm -png -f 1 -l 1 -scale-to-x 540 -scale-to-y 960 "${path.join(GUIDES, JOBS.brochure.pdf)}" /tmp/aim-cover && python3 -c "from PIL import Image; Image.open('/tmp/aim-cover-01.png').convert('RGB').save('${path.join(GUIDES, 'aim-program-brochure-cover.webp')}','WEBP',quality=88)"`], { stdio: 'inherit' });
+    const r = spawnSync('bash', ['-c', `pdftoppm -png -f 1 -l 1 -scale-to-x 800 -scale-to-y 613 "${path.join(GUIDES, JOBS.brochure.pdf)}" /tmp/aim-cover && python3 -c "from PIL import Image; Image.open('/tmp/aim-cover-01.png').convert('RGB').save('${path.join(GUIDES, 'aim-program-brochure-cover.webp')}','WEBP',quality=88)"`], { stdio: 'inherit' });
     console.log(r.status === 0 ? 'cover image rebuilt' : 'cover image NOT rebuilt (pdftoppm or Pillow missing); rebuild it by hand from page 1');
   }
   console.log('manifest updated: tools/pdf-src/manifest.json. Commit the .htm, the PDFs, the cover and the manifest together.');

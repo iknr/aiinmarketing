@@ -121,7 +121,7 @@ html,body{overflow-x:clip}
 .aimp-brochure .aimp-mag{margin:0}
 html{scroll-padding-top:80px}
 @media(max-width:1000px){.aimp-brochure .aimp-lead{grid-template-columns:minmax(0,150px) minmax(0,1fr)}.aimp-brochure .aimp-mag{grid-column:1/-1}}
-@media(max-width:640px){.aimp-brochure .aimp-lead{grid-template-columns:1fr;justify-items:start}.aimp-brochure-cover{max-width:160px}.aimp-brochure .aimp-mag{width:100%}}
+@media(max-width:640px){.aimp-brochure .aimp-lead{grid-template-columns:1fr;justify-items:start}.aimp-brochure-cover{max-width:280px}.aimp-brochure .aimp-mag{width:100%}}
 
 /* one design style with the rest of the home page: ink borders, offset shadows, yellow highlights (1.5.0) */
 .aimp-full{--b:#0b4fd6;--ink:#111827;--mut:#444c5a;--line:#e7e1d4;background:#f7f3ea;border-top:2px solid #111827;border-bottom:2px solid #111827}

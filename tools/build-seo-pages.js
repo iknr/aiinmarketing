@@ -172,6 +172,7 @@ function courseLd(o) {
     ],
     hasCourseInstance: { '@type': 'CourseInstance', courseMode: 'online', courseWorkload: 'PT2H per weekday' },
   };
+  if (o.reviews) c.review = o.reviews;
   if (o.city) c.areaServed = { '@type': 'City', name: o.city };
   else c.areaServed = { '@type': 'Country', name: 'India' };
   return c;
@@ -412,6 +413,13 @@ ${faqHtml(faq)}
 <tr><td>Fee</td><td>&#8377;5,999 with limited tool access, or &#8377;9,999 with full tool access. Same training in both.</td></tr>
 <tr><td>Refund</td><td>7-day money-back guarantee</td></tr>
 </tbody></table></div>
+<p><strong>Student rating:</strong> <a href="https://share.google/klspcrG4NiSVKVm7u" target="_blank" rel="noopener">4.9 out of 5 on Google &#8599;</a>. Students from the Adsmentor program behind AIM have been placed at &#8377;5 to 15 LPA, and every profile is public: <a href="/#salary">see where they landed</a>. No course can promise a job, and we do not.</p>
+<h2 id="syllabus">Vibe marketing course syllabus</h2>
+<div class="aimb-tablewrap"><table class="aimb-table"><thead><tr><th>Weeks</th><th>What you learn</th><th>What you finish with</th></tr></thead><tbody>
+<tr><td>1 to 4</td><td>Five core modules, with AI in each: websites with WordPress, WordPress MCP and vibe coding; SEO and AI search; social media, content and automations; ads on five platforms; media planning</td><td>A live portfolio site, an SEO roadmap, a content calendar and campaign setups</td></tr>
+<tr><td>5 to 8</td><td>Four specialisations, all included: AI Generalist, Marktech, Branding and Content, Performance and Growth</td><td>Your own AI marketing assistant, a lead-to-CRM workflow with a chatbot, a brand kit and an ad-account audit</td></tr>
+<tr><td>9 to 12</td><td>A 1-month agency internship on real client tasks</td><td>An internship certificate from the agency, plus a CV rewrite and 3 mock interviews</td></tr>
+</tbody></table></div>
 <h2 id="two-meanings">Two meanings of vibe marketing: which one this course is</h2>
 <p>You will see the term used two ways. Some brands use it for building a feeling around the brand, through style, culture and tone, instead of listing product features. In AI circles it means directing AI tools to build and run marketing work from plain-language instructions. This course teaches the second meaning, the hands-on one, and the brand side comes in through the Branding and Content specialisation.</p>
 <h2 id="what-you-build">What you build with it</h2>
@@ -444,7 +452,7 @@ ${faqHtml(faq)}
     answer: 'AIM runs a live online vibe marketing course in India, open to students from any city. Vibe marketing means directing AI to build websites, content, ads and automations while you check the result and own it. AIM teaches it hands-on in 12 weeks, with an agency internship, for ₹5,999, or ₹9,999 with full tool access, and a 7-day money-back guarantee.',
     lead: 'Learn vibe marketing inside the real tools, on briefs shaped like company work, then prove it in a 1-month agency internship.',
     crumbs: [['Home', '/'], ['Digital marketing course', '/digital-marketing-course'], ['Vibe marketing course', null]], body, faq,
-    course: courseLd({ name: 'Vibe Marketing Course (AIM)', desc, path: p }),
+    course: courseLd({ name: 'Vibe Marketing Course (AIM)', desc, path: p, reviews: [{ '@type': 'Review', reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' }, author: { '@type': 'Person', name: 'Joyshree Goswami' }, reviewBody: 'Kautilya Roshan sir was our trainer! He was very helpful and we have enjoyed his class!!', publisher: { '@type': 'Organization', name: 'Google' } }] }),
     breadcrumb: crumbLd([['Home', '/'], ['Digital marketing course', '/digital-marketing-course'], ['Vibe marketing course', p]]),
   }));
 }

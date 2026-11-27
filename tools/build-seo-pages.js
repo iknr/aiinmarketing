@@ -173,6 +173,7 @@ function courseLd(o) {
     hasCourseInstance: { '@type': 'CourseInstance', courseMode: 'online', courseWorkload: 'PT2H per weekday' },
   };
   if (o.reviews) c.review = o.reviews;
+  if (o.rating) c.provider.aggregateRating = { '@type': 'AggregateRating', ratingValue: '4.9', bestRating: '5', reviewCount: '59' };
   if (o.city) c.areaServed = { '@type': 'City', name: o.city };
   else c.areaServed = { '@type': 'Country', name: 'India' };
   return c;
@@ -419,7 +420,7 @@ ${faqHtml(faq)}
 <tr><td>Fee</td><td>&#8377;5,999 with limited tool access, or &#8377;9,999 with full tool access. Same training in both.</td></tr>
 <tr><td>Refund</td><td>7-day money-back guarantee</td></tr>
 </tbody></table></div>
-<p><strong>Student rating:</strong> <a href="https://share.google/klspcrG4NiSVKVm7u" target="_blank" rel="noopener">4.9 out of 5 on Google &#8599;</a>. Students from the Adsmentor program behind AIM have been placed at &#8377;5 to 15 LPA, and every profile is public: <a href="/#salary">see where they landed</a>. No course can promise a job, and we do not.</p>
+<p><strong>Student rating:</strong> <a href="https://share.google/klspcrG4NiSVKVm7u" target="_blank" rel="noopener">4.9 out of 5 from 59 Google reviews &#8599;</a>. Students from the Adsmentor program behind AIM have been placed at &#8377;5 to 15 LPA, and every profile is public: <a href="/#salary">see where they landed</a>. No course can promise a job, and we do not.</p>
 <h2 id="syllabus">Vibe marketing course syllabus</h2>
 <div class="aimb-tablewrap"><table class="aimb-table"><thead><tr><th>Weeks</th><th>What you learn</th><th>What you finish with</th></tr></thead><tbody>
 <tr><td>1 to 4</td><td>Five core modules, with AI in each: websites with WordPress, WordPress MCP and vibe coding; SEO and AI search; social media, content and automations; ads on five platforms; media planning</td><td>A live portfolio site, an SEO roadmap, a content calendar and campaign setups</td></tr>
@@ -458,9 +459,20 @@ ${PLAN}
 <tr><td>Refund</td><td>7-day money-back guarantee, and you pay only after the onboarding call</td></tr>
 <tr><td>Real work</td><td>1-month agency internship with an agency certificate</td></tr>
 <tr><td>Trainer proof</td><td>Public LinkedIn profile for every trainer</td></tr>
-<tr><td>Student proof</td><td>4.9 out of 5 on Google, and placements at &#8377;5 to 15 LPA with public profiles</td></tr>
+<tr><td>Student proof</td><td>4.9 out of 5 from 59 Google reviews, and placements at &#8377;5 to 15 LPA with public profiles</td></tr>
 </tbody></table></div>
 <p>Ask any institute, ours included, to show the same six things in writing before you pay.</p>
+<h2 id="hindi" lang="hi">हिंदी में सारांश: भारत में वाइब मार्केटिंग कोर्स</h2>
+<p lang="hi">AIM (AI in Marketing, Adsmentor की ओर से) भारत का एक लाइव ऑनलाइन वाइब मार्केटिंग कोर्स है। इसमें आप AI टूल्स को सही निर्देश देकर वेबसाइट, कंटेंट, विज्ञापन और ऑटोमेशन बनाना सीखते हैं, और नतीजे को खुद जाँचते हैं।</p>
+<ul lang="hi">
+<li><strong>अवधि:</strong> 12 हफ्ते, 9 मॉड्यूल, और आखिर में 1 महीने की एजेंसी इंटर्नशिप, जिसका सर्टिफिकेट एजेंसी देती है।</li>
+<li><strong>क्लास:</strong> लाइव ऑनलाइन, सोमवार से शुक्रवार, रात 9 से 11 बजे (IST)। वीकेंड पर डाउट क्लियरिंग और प्रोजेक्ट रिव्यू।</li>
+<li><strong>कोडिंग:</strong> ज़रूरी नहीं। आप ज़ीरो से शुरू करते हैं।</li>
+<li><strong>फीस:</strong> &#8377;5,999 (सीमित टूल एक्सेस) या &#8377;9,999 (पूरा टूल एक्सेस)। ट्रेनिंग और इंटर्नशिप दोनों में एक जैसी है।</li>
+<li><strong>गारंटी:</strong> 7 दिन की मनी-बैक गारंटी, और भुगतान ऑनबोर्डिंग कॉल के बाद ही।</li>
+<li><strong>रेटिंग:</strong> Google पर 59 रिव्यू के साथ 4.9/5।</li>
+</ul>
+<p lang="hi">कोई भी कोर्स नौकरी की गारंटी नहीं दे सकता, और हम भी नहीं देते। शुरू करने के लिए ऊपर दी गई फीस और सिलेबस देखें।</p>
 <h2 id="fee">Fee</h2>
 <p>&#8377;5,999 with limited tool access, or &#8377;9,999 with full tool access (Claude, Semrush, Gemini Pro, Google AI Pro, Ahrefs, SpyFu, Ubersuggest and Canva). The training is the same in both.</p>
 ${faqHtml(faq)}
@@ -478,7 +490,7 @@ ${faqHtml(faq)}
     answer: 'AIM runs a live online vibe marketing course in India, open to students from any city. Vibe marketing means directing AI to build websites, content, ads and automations while you check the result and own it. AIM teaches it hands-on in 12 weeks, with an agency internship, for ₹5,999, or ₹9,999 with full tool access, and a 7-day money-back guarantee.',
     lead: 'Learn vibe marketing inside the real tools, on briefs shaped like company work, then prove it in a 1-month agency internship.',
     crumbs: [['Home', '/'], ['Digital marketing course', '/digital-marketing-course'], ['Vibe marketing course', null]], body, faq,
-    course: courseLd({ name: 'Vibe Marketing Course (AIM)', desc, path: p, reviews: [{ '@type': 'Review', reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' }, author: { '@type': 'Person', name: 'Joyshree Goswami' }, reviewBody: 'Kautilya Roshan sir was our trainer! He was very helpful and we have enjoyed his class!!', publisher: { '@type': 'Organization', name: 'Google' } }] }),
+    course: courseLd({ name: 'Vibe Marketing Course (AIM)', desc, path: p, rating: true, reviews: [{ '@type': 'Review', reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5' }, author: { '@type': 'Person', name: 'Joyshree Goswami' }, reviewBody: 'Kautilya Roshan sir was our trainer! He was very helpful and we have enjoyed his class!!', publisher: { '@type': 'Organization', name: 'Google' } }] }),
     breadcrumb: crumbLd([['Home', '/'], ['Digital marketing course', '/digital-marketing-course'], ['Vibe marketing course', p]]),
   }));
 }

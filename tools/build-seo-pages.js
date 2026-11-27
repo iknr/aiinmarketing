@@ -394,6 +394,12 @@ ${faqHtml(faq)}
     ['Is there a vibe marketing course in India?', 'Yes. AIM by Adsmentor teaches vibe marketing live online to students across India, Monday to Friday, 9 to 11 pm IST. It runs 12 weeks with a 1-month agency internship, and costs Rs 5,999, or Rs 9,999 with full tool access.'],
     ['What is vibe marketing?', 'Vibe marketing means describing the marketing outcome you want in plain language and directing AI tools to build and run it, then checking and improving the result yourself. Our guide on what vibe marketing is explains it in full.'],
     ['Do I need to code for a vibe marketing course?', 'No. Module 1 teaches vibe coding, where you describe a landing page to AI coding tools instead of writing it by hand, and you start from zero.'],
+    ['Is this vibe marketing course online or in a classroom?', 'It is live online only, so you can join from any city in India. Classes run Monday to Friday, 9 to 11 pm IST, and weekends are for doubt clearing, project reviews and interview prep. There is no campus and no travel.'],
+    ['What certificate do I get?', 'The 1-month agency internship ends with a certificate issued by the agency you worked at. You also keep the projects you did there for your portfolio, as far as the agency allows.'],
+    ['Which tools will I use in the vibe marketing course?', 'You work inside real platforms, including Claude, WordPress with WordPress MCP, Elementor, Canva, Semrush, Ahrefs, Gemini, Google Ads, Meta Ads, GA4 and Google Tag Manager. The full tool access plan covers Claude, Semrush, Gemini Pro, Google AI Pro, Ahrefs, SpyFu, Ubersuggest and Canva.'],
+    ['How many hours a day do I need?', 'Plan for about 2 hours a day on live class days, plus time for projects. If you can use a laptop and give the program 2 hours a day, you can keep up.'],
+    ['Who teaches the course?', 'Four trainers, each owning an area: Kautilya Roshan (advertising), Sumit Chaudhari (performance and growth), Kailas Nath R (agentic AI and digital marketing) and Ankita Kumari (CRM and retention). Each has a public LinkedIn profile you can check before you pay.'],
+    ['Is the course suitable for beginners, freelancers and job seekers?', 'Yes, all three take the same nine modules at the same fee. Freelancers use the portfolio and SOPs to find first clients, the agency track adds the internship, and job seekers get a CV rewrite, 3 mock interviews and placement support. No course can promise a job, and we do not.'],
   ].concat(COMMON_FAQ.slice(0, 3));
   const body = `
 <h2 id="what-it-is">What a vibe marketing course should teach</h2>
@@ -435,6 +441,26 @@ ${faqHtml(faq)}
 ${DIFF('')}
 <h2 id="plan">The 12-week path</h2>
 ${PLAN}
+<h2 id="tools">Tools you work in</h2>
+<p>You log in and use the real platforms, from week 1. The list includes Claude and Claude Code, WordPress with WordPress MCP, Elementor, Wix, Canva, Semrush, Ahrefs, SpyFu, Ubersuggest, Gemini, Perplexity, Zapier, n8n, Make, HubSpot, Shopify, Google Ads, Meta Ads, Snapchat Ads, GA4, Google Tag Manager, Looker Studio and WhatsApp automations. That is part of the 40+ tools in the program. The &#8377;5,999 plan gives limited access, and the &#8377;9,999 plan gives full access to the paid tools.</p>
+<h2 id="trainers">Who teaches it</h2>
+<ul>
+<li><a href="https://www.linkedin.com/in/kautilyaroshan/" target="_blank" rel="noopener">Kautilya Roshan</a>: advertising consultant, IIT Delhi certified, has trained 9,000+ marketers.</li>
+<li><a href="https://www.linkedin.com/in/sumitchaudhari2405/" target="_blank" rel="noopener">Sumit Chaudhari</a>: performance marketing and growth strategist for consumer apps.</li>
+<li><a href="https://www.linkedin.com/in/iamknr" target="_blank" rel="noopener">Kailas Nath R</a>: digital marketing and agentic AI consultant who delivers and audits GTM and CRM automation builds.</li>
+<li><a href="https://www.linkedin.com/in/ankita-kumari-0510/" target="_blank" rel="noopener">Ankita Kumari</a>: retention and lifecycle specialist.</li>
+</ul>
+<p>Together they have managed &#8377;9 Cr+ in media spend. Check every profile yourself before you pay.</p>
+<h2 id="online-vs-campus">Online vibe marketing course or a city campus course?</h2>
+<div class="aimb-tablewrap"><table class="aimb-table"><thead><tr><th>What to check</th><th>AIM (live online)</th></tr></thead><tbody>
+<tr><td>Where you attend</td><td>From home, any city in India</td></tr>
+<tr><td>Fee shown upfront</td><td>Yes: &#8377;5,999 or &#8377;9,999, no other add-ons</td></tr>
+<tr><td>Refund</td><td>7-day money-back guarantee, and you pay only after the onboarding call</td></tr>
+<tr><td>Real work</td><td>1-month agency internship with an agency certificate</td></tr>
+<tr><td>Trainer proof</td><td>Public LinkedIn profile for every trainer</td></tr>
+<tr><td>Student proof</td><td>4.9 out of 5 on Google, and placements at &#8377;5 to 15 LPA with public profiles</td></tr>
+</tbody></table></div>
+<p>Ask any institute, ours included, to show the same six things in writing before you pay.</p>
 <h2 id="fee">Fee</h2>
 <p>&#8377;5,999 with limited tool access, or &#8377;9,999 with full tool access (Claude, Semrush, Gemini Pro, Google AI Pro, Ahrefs, SpyFu, Ubersuggest and Canva). The training is the same in both.</p>
 ${faqHtml(faq)}

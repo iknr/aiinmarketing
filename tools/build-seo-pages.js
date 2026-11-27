@@ -387,9 +387,10 @@ ${faqHtml(faq)}
 // ---------- vibe marketing course ----------
 {
   const p = '/vibe-marketing-course';
-  const title = 'Vibe Marketing Course (Live Online, From Rs 5,999) | AIM';
-  const desc = 'A hands-on vibe marketing course: build sites, content, ads and automations by directing AI. 12 weeks, agency internship, Rs 5,999 or Rs 9,999 with tools.';
+  const title = 'Vibe Marketing Course in India: Live Online, Rs 5,999 | AIM';
+  const desc = 'A hands-on vibe marketing course in India, live online: build sites, content, ads and automations by directing AI. 12 weeks, agency internship, from Rs 5,999.';
   const faq = [
+    ['Is there a vibe marketing course in India?', 'Yes. AIM by Adsmentor teaches vibe marketing live online to students across India, Monday to Friday, 9 to 11 pm IST. It runs 12 weeks with a 1-month agency internship, and costs Rs 5,999, or Rs 9,999 with full tool access.'],
     ['What is vibe marketing?', 'Vibe marketing means describing the marketing outcome you want in plain language and directing AI tools to build and run it, then checking and improving the result yourself. Our guide on what vibe marketing is explains it in full.'],
     ['Do I need to code for a vibe marketing course?', 'No. Module 1 teaches vibe coding, where you describe a landing page to AI coding tools instead of writing it by hand, and you start from zero.'],
   ].concat(COMMON_FAQ.slice(0, 3));
@@ -439,8 +440,8 @@ ${faqHtml(faq)}
 <li><a href="/blogs/vibe-marketing-course-india-what-you-learn">What a vibe marketing course should teach</a></li>
 </ul>`;
   write('vibe-marketing-course.html', page({ theme: 'plum', layout: 'card',
-    path: p, title, desc, kicker: 'Vibe marketing course', h1: 'Vibe marketing course: direct AI to do the work, then own the result',
-    answer: 'Vibe marketing means directing AI to build websites, content, ads and automations while you check the result and own it. AIM teaches it hands-on in 12 weeks, with an agency internship, for ₹5,999, or ₹9,999 with full tool access, and a 7-day money-back guarantee.',
+    path: p, title, desc, kicker: 'Vibe marketing course', h1: 'Vibe marketing course in India: direct AI to do the work, then own the result',
+    answer: 'AIM runs a live online vibe marketing course in India, open to students from any city. Vibe marketing means directing AI to build websites, content, ads and automations while you check the result and own it. AIM teaches it hands-on in 12 weeks, with an agency internship, for ₹5,999, or ₹9,999 with full tool access, and a 7-day money-back guarantee.',
     lead: 'Learn vibe marketing inside the real tools, on briefs shaped like company work, then prove it in a 1-month agency internship.',
     crumbs: [['Home', '/'], ['Digital marketing course', '/digital-marketing-course'], ['Vibe marketing course', null]], body, faq,
     course: courseLd({ name: 'Vibe Marketing Course (AIM)', desc, path: p }),
